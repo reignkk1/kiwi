@@ -9,20 +9,21 @@ let mutedState = false;
 const container = document.createElement("div");
 container.className = "left-controls";
 
+const playButton = createIconButton(getIconClassName("play"));
+const mutedButton = createIconButton(getIconClassName("volume"));
+
 renderLeftControls();
 
 function playButtonRender() {
-  const { playIconClassName } = getIconClassName();
-  const playButton = createIconButton(playIconClassName);
   playButton.addEventListener("click", () => {
     playState = !playState;
-    const { playIconClassName } = getIconClassName();
     const icon = playButton.childNodes[0];
-    icon.className = playIconClassName;
 
     if (playState) {
+      icon.className = getIconClassName("pause");
       audio.play();
     } else {
+      icon.className = getIconClassName("play");
       audio.pause();
     }
   });
@@ -30,17 +31,15 @@ function playButtonRender() {
 }
 
 function mutedButtonRender() {
-  const { volumeIconClassName } = getIconClassName();
-  const mutedButton = createIconButton(volumeIconClassName);
   mutedButton.addEventListener("click", () => {
     mutedState = !mutedState;
-    const { volumeIconClassName } = getIconClassName();
     const icon = mutedButton.childNodes[0];
-    icon.className = volumeIconClassName;
 
     if (mutedState) {
+      icon.className = getIconClassName("muted");
       audio.muted = true;
     } else {
+      icon.className = getIconClassName("volume");
       audio.muted = false;
     }
   });
@@ -58,6 +57,10 @@ function volumeRangeRender() {
   input.max = "10";
   input.oninput = () => {
     audio.volume = input.value / 10;
+    if (input.value === "0") {
+      // 여기에 audio muted 로직
+      // 각각의 audio 함수 로직 만들기
+    }
   };
 
   span.appendChild(input);
@@ -80,21 +83,18 @@ function createIconButton(iconClassName) {
   return button;
 }
 
-function getIconClassName() {
-  let playIconClassName;
-  let volumeIconClassName;
+function getIconClassName(icon) {
+  let className;
 
-  if (playState) {
-    playIconClassName = "fas fa-pause fa-lg";
-  } else {
-    playIconClassName = "fas fa-play fa-lg";
+  if (icon === "pause") {
+    className = "fas fa-pause fa-lg";
+  } else if (icon === "play") {
+    className = "fas fa-play fa-lg";
+  } else if (icon === "muted") {
+    className = "fas fa-volume-mute fa-lg";
+  } else if (icon === "volume") {
+    className = "fas fa-volume-down fa-lg";
   }
 
-  if (mutedState) {
-    volumeIconClassName = "fas fa-volume-mute fa-lg";
-  } else {
-    volumeIconClassName = "fas fa-volume-down fa-lg";
-  }
-
-  return { playIconClassName, volumeIconClassName };
+  return className;
 }
