@@ -1,36 +1,75 @@
 const musicScreenImg = document.querySelector(".music-screen img");
 const audioController = document.querySelector(".audio-controller");
-const audio = document.querySelector(".audio");
+
+const audio = new Audio("./assets/mp3/볼빨간사춘기 - 나의 사춘기에게.mp3");
 
 let playState = false;
 let mutedState = false;
 
+const container = document.createElement("div");
+container.className = "left-controls";
+
 renderLeftControls();
 
-function renderLeftControls() {
-  const Container = document.createElement("div");
-  Container.className = "left-controls";
-
-  const { playIconClassName, volumeIconClassName } = createIconClassName();
-
+function playButtonRender() {
+  const { playIconClassName } = getIconClassName();
   const playButton = createIconButton(playIconClassName);
-  const mutedButton = createIconButton(volumeIconClassName);
-
   playButton.addEventListener("click", () => {
     playState = !playState;
-    audioController.removeChild(Container);
-    renderLeftControls();
-  });
+    const { playIconClassName } = getIconClassName();
+    const icon = playButton.childNodes[0];
+    icon.className = playIconClassName;
 
+    if (playState) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  });
+  container.appendChild(playButton);
+}
+
+function mutedButtonRender() {
+  const { volumeIconClassName } = getIconClassName();
+  const mutedButton = createIconButton(volumeIconClassName);
   mutedButton.addEventListener("click", () => {
     mutedState = !mutedState;
-    audioController.removeChild(Container);
-    renderLeftControls();
+    const { volumeIconClassName } = getIconClassName();
+    const icon = mutedButton.childNodes[0];
+    icon.className = volumeIconClassName;
+
+    if (mutedState) {
+      audio.muted = true;
+    } else {
+      audio.muted = false;
+    }
   });
 
-  Container.appendChild(playButton);
-  Container.appendChild(mutedButton);
-  audioController.appendChild(Container);
+  container.appendChild(mutedButton);
+}
+
+function volumeRangeRender() {
+  const span = document.createElement("span");
+  const input = document.createElement("input");
+  input.className = "volume-range";
+  input.type = "range";
+  input.id = "volume";
+  input.min = "0";
+  input.max = "10";
+  input.oninput = () => {
+    audio.volume = input.value / 10;
+  };
+
+  span.appendChild(input);
+  container.appendChild(span);
+}
+
+function renderLeftControls() {
+  playButtonRender();
+  mutedButtonRender();
+  volumeRangeRender();
+
+  audioController.appendChild(container);
 }
 
 function createIconButton(iconClassName) {
@@ -41,7 +80,7 @@ function createIconButton(iconClassName) {
   return button;
 }
 
-function createIconClassName() {
+function getIconClassName() {
   let playIconClassName;
   let volumeIconClassName;
 
