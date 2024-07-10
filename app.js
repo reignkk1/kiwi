@@ -31,7 +31,7 @@ function randomChoiceMusic(){
   const randomMusic = playListArray[randomNumber];
 
   audio = new Audio(`./assets/mp3/${randomMusic.title}.mp3`);
-  audio.volume = 0.5
+  audio.volume = volumeState
   musicImg.src = `./assets/img/${randomMusic.imgNumber}.png`;
 }
 
@@ -94,17 +94,25 @@ function volumeRangeRender() {
   input.id = "volume";
   input.min = "0";
   input.max = "10";
-  input.value = 5
+  input.value = "3";
+  
   input.oninput = () => {
-    audio.volume = input.value / 10;
-    volumeState = audio.volume;
-
+    volumeState = audio.volume = input.value / 10;
+    
     if (audio.volume === 0) {
       audioMutedTrue();
     } else {
       audioMutedFalse();
     }
   };
+
+  // 볼륨 초기값
+  volumeState = input.value / 10
+  if (volumeState > 0.5) {
+    mutedIcon.className = getIconClassName("volume-up");
+  } else {
+    mutedIcon.className = getIconClassName("volume");
+  }
 
   span.appendChild(input);
   container.appendChild(span);
@@ -128,6 +136,8 @@ function createIconButton(iconClassName) {
 
 function getIconClassName(icon) {
   let className;
+
+  //volumeState에 의해서 muted 아이콘을 결정하는 로직을 여기에
 
   if (icon === "pause") {
     className = "fas fa-pause fa-lg";
