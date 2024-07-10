@@ -7,7 +7,7 @@ const mutedButton = createIconButton(getIconClassName("volume-up"));
 const playIcon = playButton.childNodes[0];
 const mutedIcon = mutedButton.childNodes[0];
 
-let audio;
+let audio = new Audio();
 let playState = false;
 let mutedState = false;
 let volumeState;
@@ -23,6 +23,7 @@ randomChoiceMusic();
 audio.addEventListener('ended',()=>{
   randomChoiceMusic();
   audioPlay();
+
 })
 
 function randomChoiceMusic(){
@@ -30,7 +31,11 @@ function randomChoiceMusic(){
   const randomNumber = Math.floor(Math.random() * playListArray.length);
   const randomMusic = playListArray[randomNumber];
 
-  audio = new Audio(`./assets/mp3/${randomMusic.title}.mp3`);
+
+  // 만약 음악을 랜덤으로 뽑았는데 그 전 재생된 음악이랑 같을 경우 다시 음악을 뽑아야됌?
+  // prettier 해결해보기
+
+  audio.src = `./assets/mp3/${randomMusic.title}.mp3`
   audio.volume = volumeState
   musicImg.src = `./assets/img/${randomMusic.imgNumber}.png`;
 }
@@ -108,11 +113,7 @@ function volumeRangeRender() {
 
   // 볼륨 초기값
   volumeState = input.value / 10
-  if (volumeState > 0.5) {
-    mutedIcon.className = getIconClassName("volume-up");
-  } else {
-    mutedIcon.className = getIconClassName("volume");
-  }
+  audioMutedFalse()
 
   span.appendChild(input);
   container.appendChild(span);
