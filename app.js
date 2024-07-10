@@ -1,30 +1,72 @@
-const musicScreenImg = document.querySelector(".music-screen img");
+import playList from "./playList.json" with { type: "json" };
+
+const musicImg = document.querySelector(".music-img");
 const audioController = document.querySelector(".audio-controller");
+const playButton = createIconButton(getIconClassName("play"));
+const mutedButton = createIconButton(getIconClassName("volume-up"));
+const playIcon = playButton.childNodes[0];
+const mutedIcon = mutedButton.childNodes[0];
 
-const audio = new Audio("./assets/mp3/볼빨간사춘기 - 나의 사춘기에게.mp3");
-
+let audio;
 let playState = false;
 let mutedState = false;
+let volumeState;
 
 const container = document.createElement("div");
 container.className = "left-controls";
 
-const playButton = createIconButton(getIconClassName("play"));
-const mutedButton = createIconButton(getIconClassName("volume"));
 
+// 오디오 컨트롤러 렌더링
 renderLeftControls();
+randomChoiceMusic();
+
+audio.addEventListener('ended',()=>{
+  randomChoiceMusic();
+  audioPlay();
+})
+
+function randomChoiceMusic(){
+  const playListArray = playList.data;
+  const randomNumber = Math.floor(Math.random() * playListArray.length);
+  const randomMusic = playListArray[randomNumber];
+
+  audio = new Audio(`./assets/mp3/${randomMusic.title}.mp3`);
+  audio.volume = 0.5
+  musicImg.src = `./assets/img/${randomMusic.imgNumber}.png`;
+}
+
+function audioPlay() {
+  playIcon.className = getIconClassName("pause");
+  audio.play();
+}
+
+function audioPause() {
+  playIcon.className = getIconClassName("play");
+  audio.pause();
+}
+
+function audioMutedTrue() {
+  mutedIcon.className = getIconClassName("muted");
+  audio.muted = true;
+}
+
+function audioMutedFalse() {
+  if (volumeState > 0.5) {
+    mutedIcon.className = getIconClassName("volume-up");
+  } else {
+    mutedIcon.className = getIconClassName("volume");
+  }
+  audio.muted = false;
+}
 
 function playButtonRender() {
   playButton.addEventListener("click", () => {
     playState = !playState;
-    const icon = playButton.childNodes[0];
 
     if (playState) {
-      icon.className = getIconClassName("pause");
-      audio.play();
+      audioPlay();
     } else {
-      icon.className = getIconClassName("play");
-      audio.pause();
+      audioPause();
     }
   });
   container.appendChild(playButton);
@@ -33,14 +75,11 @@ function playButtonRender() {
 function mutedButtonRender() {
   mutedButton.addEventListener("click", () => {
     mutedState = !mutedState;
-    const icon = mutedButton.childNodes[0];
 
     if (mutedState) {
-      icon.className = getIconClassName("muted");
-      audio.muted = true;
+      audioMutedTrue();
     } else {
-      icon.className = getIconClassName("volume");
-      audio.muted = false;
+      audioMutedFalse();
     }
   });
 
@@ -55,11 +94,15 @@ function volumeRangeRender() {
   input.id = "volume";
   input.min = "0";
   input.max = "10";
+  input.value = 5
   input.oninput = () => {
     audio.volume = input.value / 10;
-    if (input.value === "0") {
-      // 여기에 audio muted 로직
-      // 각각의 audio 함수 로직 만들기
+    volumeState = audio.volume;
+
+    if (audio.volume === 0) {
+      audioMutedTrue();
+    } else {
+      audioMutedFalse();
     }
   };
 
@@ -94,6 +137,8 @@ function getIconClassName(icon) {
     className = "fas fa-volume-mute fa-lg";
   } else if (icon === "volume") {
     className = "fas fa-volume-down fa-lg";
+  } else if (icon === "volume-up") {
+    className = "fas fa-volume-up fa-lg";
   }
 
   return className;
