@@ -6,6 +6,7 @@ const playList = await import("./playList.json", {
 });
 
 const musicImg = document.querySelector(".music-img");
+const musicScreen = document.querySelector(".music-screen");
 const audioController = document.querySelector(".audio-controller");
 const playButton = createIconButton(getIconClassName("play"));
 const mutedButton = createIconButton(getIconClassName("volume-up"));
@@ -29,14 +30,28 @@ audio.addEventListener("ended", () => {
   audioPlay();
 });
 
+musicImg.addEventListener("click", () => {
+  playState = !playState;
+  if (playState) {
+    audioPlay();
+  } else {
+    audioPause();
+  }
+});
+
+musicScreen.addEventListener("mouseleave", () => {
+  if (playState) {
+    audioController.classList.add("no-show");
+  }
+});
+musicScreen.addEventListener("mouseover", () => {
+  audioController.classList.remove("no-show");
+});
+
 function randomChoiceMusic() {
   const playListArray = playList.default.data;
   const randomNumber = Math.floor(Math.random() * playListArray.length);
   const randomMusic = playListArray[randomNumber];
-
-  // prettier 해결해보기
-
-  console.log(randomMusic);
 
   audio.src = `./assets/mp3/${randomMusic.title}.mp3`;
   audio.volume = volumeState;
