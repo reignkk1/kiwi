@@ -1,53 +1,84 @@
-// 이렇게 해야하는 이유 알아보기
+// 플레이 리스트 데이터 가져오기
 const playList = await import("./playList.json", {
   with: {
     type: "json",
   },
 });
 
-const musicImg = document.querySelector(".music-img");
-const musicScreen = document.querySelector(".music-screen");
-const audioController = document.querySelector(".audio-controller");
-const playButton = createIconButton(getIconClassName("play"));
-const mutedButton = createIconButton(getIconClassName("volume-up"));
-const playIcon = playButton.childNodes[0];
-const mutedIcon = mutedButton.childNodes[0];
-
+// 뮤직 플레이어 초기 상태
 let audio = new Audio();
 let playState = false;
 let mutedState = false;
 let volumeState;
 
-const container = document.createElement("div");
-container.className = "left-controls";
+// HTML Elements
+const musicScreen = document.querySelector(".music-screen");
 
-// 오디오 컨트롤러 렌더링
-renderLeftControls();
+const playButton = createPlayButton();
+const playIcon = playButton.childNodes[0];
+
+const mutedButton = createMutedButton();
+const mutedIcon = mutedButton.childNodes[0];
+
+const volumeRange = createVolumeRange();
+
+const audioController = document.createElement("div");
+audioController.className = "audio-controller";
+
+const musicImg = document.createElement("img");
+musicImg.className = "music-img";
+
+// 실행순서
+// 컨트롤러 렌더링 -> 음악 랜덤으로 뽑기 -> 뮤직 플레이어 렌더링 -> 이벤트 리스너들 등록
+renderLeftController();
 randomChoiceMusic();
+renderMusicScreen();
+addEventListners();
 
-audio.addEventListener("ended", () => {
-  randomChoiceMusic();
-  audioPlay();
-});
-
-musicImg.addEventListener("click", () => {
-  playState = !playState;
-  if (playState) {
+// 모든 이벤트 리스너
+function addEventListners() {
+  audio.addEventListener("ended", () => {
+    randomChoiceMusic();
     audioPlay();
-  } else {
-    audioPause();
-  }
-});
+  });
 
-musicScreen.addEventListener("mouseleave", () => {
-  if (playState) {
-    audioController.classList.add("no-show");
-  }
-});
-musicScreen.addEventListener("mouseover", () => {
-  audioController.classList.remove("no-show");
-});
+  musicImg.addEventListener("click", () => {
+    playState = !playState;
+    if (playState) {
+      audioPlay();
+    } else {
+      audioPause();
+    }
+  });
 
+  musicScreen.addEventListener("mouseleave", () => {
+    if (playState) {
+      audioController.classList.add("no-show");
+    }
+  });
+  musicScreen.addEventListener("mouseover", () => {
+    audioController.classList.remove("no-show");
+  });
+}
+
+// 뮤직 플레이어 렌더링
+function renderMusicScreen() {
+  musicScreen.appendChild(musicImg);
+  musicScreen.appendChild(audioController);
+}
+
+// Audio Controller 렌더링
+function renderLeftController() {
+  const leftController = document.createElement("div");
+  leftController.className = "left-controls";
+
+  const leftControls = [playButton, mutedButton, volumeRange];
+  leftControls.forEach((control) => leftController.appendChild(control));
+
+  audioController.appendChild(leftController);
+}
+
+// 음악 랜덤뽑기
 function randomChoiceMusic() {
   const playListArray = playList.default.data;
   const randomNumber = Math.floor(Math.random() * playListArray.length);
@@ -58,27 +89,32 @@ function randomChoiceMusic() {
   musicImg.src = `./assets/img/${randomMusic.imgNumber}.png`;
 }
 
+// 음악 재생
 function audioPlay() {
   playIcon.className = getIconClassName("pause");
   audio.play();
 }
 
+// 음악 일시정지
 function audioPause() {
   playIcon.className = getIconClassName("play");
   audio.pause();
 }
 
+// 음소거
 function audioMutedTrue() {
   mutedIcon.className = getIconClassName("muted");
   audio.muted = true;
 }
-
+// 음소거 해제
 function audioMutedFalse() {
   mutedIcon.className = getIconClassName("volume");
   audio.muted = false;
 }
 
-function playButtonRender() {
+// 시작 버튼 생성
+function createPlayButton() {
+  const playButton = createIconButton(getIconClassName("play"));
   playButton.addEventListener("click", () => {
     playState = !playState;
 
@@ -88,10 +124,13 @@ function playButtonRender() {
       audioPause();
     }
   });
-  container.appendChild(playButton);
+
+  return playButton;
 }
 
-function mutedButtonRender() {
+// 음소거 버튼 생성
+function createMutedButton() {
+  const mutedButton = createIconButton(getIconClassName("volume-up"));
   mutedButton.addEventListener("click", () => {
     mutedState = !mutedState;
 
@@ -101,11 +140,11 @@ function mutedButtonRender() {
       audioMutedFalse();
     }
   });
-
-  container.appendChild(mutedButton);
+  return mutedButton;
 }
 
-function volumeRangeRender() {
+// 볼륨 바 생성
+function createVolumeRange() {
   const span = document.createElement("span");
   const input = document.createElement("input");
   input.className = "volume-range";
@@ -126,21 +165,15 @@ function volumeRangeRender() {
   };
 
   // 볼륨 초기값
+  // audio 의존성 해결하기
   volumeState = input.value / 10;
   audioMutedFalse();
 
   span.appendChild(input);
-  container.appendChild(span);
+  return span;
 }
 
-function renderLeftControls() {
-  playButtonRender();
-  mutedButtonRender();
-  volumeRangeRender();
-
-  audioController.appendChild(container);
-}
-
+// 아이콘 버튼 생성함수
 function createIconButton(iconClassName) {
   const button = document.createElement("button");
   const icon = document.createElement("i");
@@ -149,6 +182,7 @@ function createIconButton(iconClassName) {
   return button;
 }
 
+// 아이콘 ClassName 리턴함수
 function getIconClassName(icon) {
   let className;
 
