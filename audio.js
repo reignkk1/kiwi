@@ -72,8 +72,7 @@ function renderLeftController() {
   const leftController = document.createElement("div");
   leftController.className = "left-controls";
 
-  const leftControls = [playButton, mutedButton, volumeRange];
-  leftControls.forEach((control) => leftController.appendChild(control));
+  leftController.append(playButton, mutedButton, volumeRange);
 
   audioController.appendChild(leftController);
 }
