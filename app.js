@@ -1,4 +1,9 @@
 // 이렇게 해야하는 이유 알아보기
+const playList = await import("./playList.json", {
+  with: {
+    type: "json",
+  },
+});
 
 const musicImg = document.querySelector(".music-img");
 const musicScreen = document.querySelector(".music-screen");
