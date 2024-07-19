@@ -1,3 +1,5 @@
+import { createElement } from "./utils.js";
+
 // 플레이 리스트 데이터 가져오기
 const playList = await import("./playList.json", {
   with: {
@@ -22,11 +24,8 @@ const mutedIcon = mutedButton.childNodes[0];
 
 const volumeRange = createVolumeRange();
 
-const audioController = document.createElement("div");
-audioController.className = "audio-controller";
-
-const musicImg = document.createElement("img");
-musicImg.className = "music-img";
+const audioController = createElement("div", { class: "audio-controller" });
+const musicImg = createElement("img", { class: "music-img" });
 
 // 실행순서
 // 컨트롤러 렌더링 -> 음악 랜덤으로 뽑기 -> 뮤직 플레이어 렌더링 -> 이벤트 리스너들 등록
@@ -69,11 +68,9 @@ function renderMusicScreen() {
 
 // Audio Controller 렌더링
 function renderLeftController() {
-  const leftController = document.createElement("div");
-  leftController.className = "left-controls";
+  const leftController = createElement("div", { class: "left-controls" });
 
   leftController.append(playButton, mutedButton, volumeRange);
-
   audioController.appendChild(leftController);
 }
 
@@ -144,14 +141,14 @@ function createMutedButton() {
 
 // 볼륨 바 생성
 function createVolumeRange() {
-  const span = document.createElement("span");
-  const input = document.createElement("input");
-  input.className = "volume-range";
-  input.type = "range";
-  input.id = "volume";
-  input.min = "0";
-  input.max = "10";
-  input.value = "3";
+  const span = createElement("span");
+  const input = createElement("input", {
+    class: "volume-range",
+    type: "range",
+    min: "0",
+    max: "10",
+    value: "3",
+  });
 
   input.oninput = () => {
     volumeState = audio.volume = input.value / 10;
@@ -174,9 +171,8 @@ function createVolumeRange() {
 
 // 아이콘 버튼 생성함수
 function createIconButton(iconClassName) {
-  const button = document.createElement("button");
-  const icon = document.createElement("i");
-  icon.className = iconClassName;
+  const button = createElement("button");
+  const icon = createElement("i", { class: iconClassName });
   button.appendChild(icon);
   return button;
 }
