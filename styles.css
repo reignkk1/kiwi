@@ -68,3 +68,60 @@ body {
 .no-show {
   display: none;
 }
+
+.textarea-container {
+  margin-top: 50px;
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  color: white;
+  background: none;
+  padding: 10px 0px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.4s ease-in-out;
+  font-size: 15px;
+  resize: none;
+  overflow: hidden;
+}
+
+.textarea-container .textarea:focus {
+  border-bottom: 1px solid white;
+}
+
+.buttons-container {
+  text-align: end;
+  position: relative;
+  top: 10px;
+}
+
+.button-cancel,
+.button-submit {
+  color: white;
+  border-radius: 20px;
+  margin-left: 15px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button-cancel:hover {
+  background-color: #3f3f3f;
+}
+
+.submit-active {
+  background-color: #539ee0;
+  color: black;
+}
+
+.submit-active:hover {
+  background-color: #65b8ff;
+}
+
+.submit-disabled {
+  cursor: default;
+  background-color: #272727;
+  color: #666666;
+}

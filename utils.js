@@ -1,4 +1,5 @@
 export function createElement(tag, attr) {
+  /** @type {Element|null} */
   const element = document.createElement(tag);
 
   if (attr) {
