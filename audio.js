@@ -16,12 +16,8 @@ let volumeState;
 // HTML Elements
 const musicScreen = createElement("section", { class: "music-screen" });
 
-const playButton = createPlayButton();
-const playIcon = playButton.childNodes[0];
-
-const mutedButton = createMutedButton();
-const mutedIcon = mutedButton.childNodes[0];
-
+const { playButton, playIcon } = createPlayButton();
+const { mutedButton, mutedIcon } = createMutedButton();
 const volumeRange = createVolumeRange();
 
 const audioController = createElement("div", { class: "audio-controller" });
@@ -111,6 +107,7 @@ function audioMutedFalse() {
 // 시작 버튼 생성
 function createPlayButton() {
   const playButton = createIconButton(getIconClassName("play"));
+  const playIcon = playButton.childNodes[0];
   playButton.addEventListener("click", () => {
     playState = !playState;
 
@@ -121,12 +118,13 @@ function createPlayButton() {
     }
   });
 
-  return playButton;
+  return { playButton, playIcon };
 }
 
 // 음소거 버튼 생성
 function createMutedButton() {
   const mutedButton = createIconButton(getIconClassName("volume-up"));
+  const mutedIcon = mutedButton.childNodes[0];
   mutedButton.addEventListener("click", () => {
     mutedState = !mutedState;
 
@@ -136,7 +134,7 @@ function createMutedButton() {
       audioMutedFalse();
     }
   });
-  return mutedButton;
+  return { mutedButton, mutedIcon };
 }
 
 // 볼륨 바 생성

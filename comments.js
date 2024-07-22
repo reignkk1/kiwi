@@ -1,8 +1,10 @@
 import { createElement } from "./utils.js";
 
 const commentsContainer = createElement("section", { class: "comments" });
+
 const commentWrite = createElement("div", { class: "comment-write" });
 const commentsList = createElement("ul", { class: "comments-list" });
+
 const { buttonsContainer, cancelButton, submitButton } = createButtonsComment();
 const { textareaContainer, textarea } = createTextAreaComment();
 const { inputContainer, nicknameInput, passWordInput } = createInputs();
@@ -12,7 +14,7 @@ renderCommentWrite();
 renderCommentsList();
 addEventListeners();
 
-// 닉넴 input 구현
+// input 렌더링
 function renderInputs() {
   commentsContainer.appendChild(inputContainer);
 }
@@ -23,7 +25,7 @@ function renderCommentWrite() {
   commentsContainer.appendChild(commentWrite);
 }
 
-// 초기 댓글 리스트 렌더링
+// 초기 댓글 리스트 렌더링 => ajax
 function renderCommentsList() {
   createComment("김민겸", "노래가 너무 좋습니다!");
 }
@@ -52,8 +54,6 @@ function addEventListeners() {
   });
 
   submitButton.addEventListener("click", () => {
-    console.log(nicknameInput.value, passWordInput.value);
-
     if (!nicknameInput.value || !passWordInput.value) {
       return alert("아이디 또는 비밀번호를 입력해주세요!");
     }
@@ -114,9 +114,7 @@ function createInputs() {
 
   return {
     inputContainer,
-    nicknameLabel,
     nicknameInput,
-    passWordLabel,
     passWordInput,
   };
 }
