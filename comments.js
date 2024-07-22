@@ -5,16 +5,30 @@ const commentWrite = createElement("div", { class: "comment-write" });
 const commentsList = createElement("ul", { class: "comments-list" });
 const { buttonsContainer, cancelButton, submitButton } = createButtonsComment();
 const { textareaContainer, textarea } = createTextAreaComment();
+const { inputContainer, nicknameInput, passWordInput } = createInputs();
 
+let nickNameValue;
+let passWordValue;
+
+renderInputs();
 renderCommentWrite();
 renderCommentsList();
 addEventListeners();
 
 // 닉넴 input 구현
+function renderInputs() {
+  commentsContainer.appendChild(inputContainer);
+}
 
+// 댓글 쓰기 렌더링
 function renderCommentWrite() {
   commentWrite.append(textareaContainer, buttonsContainer);
   commentsContainer.appendChild(commentWrite);
+}
+
+// 초기 댓글 리스트 렌더링
+function renderCommentsList() {
+  createComment("김민겸", "노래가 너무 좋습니다!");
 }
 
 // 이벤트 리스너들
@@ -41,7 +55,17 @@ function addEventListeners() {
   });
 
   submitButton.addEventListener("click", () => {
-    createComment("김민겸", textarea.value);
+    console.log(nicknameInput.value, passWordInput.value);
+
+    if (!nicknameInput.value || !passWordInput.value) {
+      return alert("아이디 또는 비밀번호를 입력해주세요!");
+    }
+
+    // 초기화 로직 짜기 따로 모듈로
+    createComment(nicknameInput.value, textarea.value);
+    nicknameInput.value = "";
+    passWordInput.value = "";
+
     textarea.value = "";
     textarea.style.height = "auto";
     activeSubmitButton(false);
@@ -59,6 +83,45 @@ function activeSubmitButton(active) {
     submitButton.classList.add("submit-disabled");
     submitButton.disabled = true;
   }
+}
+
+// 닉네임, 비밀번호 input 생성
+function createInputs() {
+  const inputContainer = createElement("div", { class: "input-container" });
+  const nicknameContainer = createElement("div");
+  const nicknameLabel = createElement("span", {
+    class: "nickname-label",
+    innerText: "닉네임: ",
+  });
+  const nicknameInput = createElement("input", {
+    class: "nickname-input",
+    type: "text",
+    maxlength: "20",
+  });
+
+  const passWordContainer = createElement("div");
+  const passWordLabel = createElement("span", {
+    class: "passWord-label",
+    innerText: "비밀번호: ",
+  });
+  const passWordInput = createElement("input", {
+    class: "passWord-input",
+    type: "password",
+    maxlength: "6",
+  });
+
+  nicknameContainer.append(nicknameLabel, nicknameInput);
+  passWordContainer.append(passWordLabel, passWordInput);
+
+  inputContainer.append(nicknameContainer, passWordContainer);
+
+  return {
+    inputContainer,
+    nicknameLabel,
+    nicknameInput,
+    passWordLabel,
+    passWordInput,
+  };
 }
 
 // 댓글 쓰는 TextArea 생성
@@ -93,11 +156,6 @@ function createButtonsComment() {
   });
   buttonsContainer.append(cancelButton, submitButton);
   return { buttonsContainer, cancelButton, submitButton };
-}
-
-// 초기 댓글 리스트 렌더링
-function renderCommentsList() {
-  createComment("김민겸", "노래가 너무 좋습니다!");
 }
 
 // 댓글 생성

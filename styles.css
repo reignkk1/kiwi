@@ -67,7 +67,7 @@
   margin-bottom: 100px;
 }
 .textarea-container {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .textarea {
@@ -132,10 +132,33 @@
   color: white;
 }
 .nickname {
-  font-size: 13 px;
+  font-size: 13px;
   margin-bottom: 5px;
 }
 
 .comment {
   margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  margin-top: 50px;
+}
+.input-container span {
+  color: white;
+  margin-right: 5px;
+}
+.input-container input {
+  background: none;
+  outline: none;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-right: 20px;
+  padding: 4px 8px;
+  line-height: 1.5;
+  transition: all 0.4s ease-in-out;
+}
+
+.input-container input:focus {
+  border: 1px solid white;
 }
