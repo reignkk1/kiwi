@@ -1,14 +1,11 @@
 import { createElement } from "./utils.js";
 
-const commentsContainer = document.querySelector(".comments");
+const commentsContainer = createElement("section", { class: "comments" });
 const commentWrite = createElement("div", { class: "comment-write" });
 const commentsList = createElement("ul", { class: "comments-list" });
 const { buttonsContainer, cancelButton, submitButton } = createButtonsComment();
 const { textareaContainer, textarea } = createTextAreaComment();
 const { inputContainer, nicknameInput, passWordInput } = createInputs();
-
-let nickNameValue;
-let passWordValue;
 
 renderInputs();
 renderCommentWrite();
@@ -174,3 +171,5 @@ function createComment(nickname, content) {
   commentsList.appendChild(comment);
   commentsContainer.appendChild(commentsList);
 }
+
+export default commentsContainer;

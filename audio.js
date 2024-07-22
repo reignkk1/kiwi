@@ -14,7 +14,7 @@ let mutedState = false;
 let volumeState;
 
 // HTML Elements
-const musicScreen = document.querySelector(".music-screen");
+const musicScreen = createElement("section", { class: "music-screen" });
 
 const playButton = createPlayButton();
 const playIcon = playButton.childNodes[0];
@@ -196,3 +196,5 @@ function getIconClassName(icon) {
   }
   return className;
 }
+
+export default musicScreen;
