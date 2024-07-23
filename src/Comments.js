@@ -55,7 +55,7 @@ function addEventListeners() {
 
   submitButton.addEventListener("click", () => {
     if (!nicknameInput.value || !passWordInput.value) {
-      return alert("아이디 또는 비밀번호를 입력해주세요!");
+      return alert("닉네임 또는 비밀번호를 입력해주세요!");
     }
 
     // 초기화 로직 짜기 따로 모듈로
