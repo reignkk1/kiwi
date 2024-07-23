@@ -1,7 +1,7 @@
 import { createElement } from "./utils.js";
 
-// 플레이 리스트 데이터 가져오기
-const playList = await import("./playList.json", {
+//플레이 리스트 데이터 가져오기
+const playList = await import("../playList.json", {
   with: {
     type: "json",
   },
