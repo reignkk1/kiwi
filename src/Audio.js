@@ -22,6 +22,7 @@ const volumeRange = createVolumeRange();
 
 const audioController = createElement("div", { class: "audio-controller" });
 const musicImg = createElement("img", { class: "music-img" });
+const musicTitle = createElement("span", { class: "music-title" });
 
 // 실행순서
 // 컨트롤러 렌더링 -> 음악 랜덤으로 뽑기 -> 뮤직 플레이어 렌더링 -> 이벤트 리스너들 등록
@@ -56,10 +57,9 @@ function addEventListners() {
   });
 }
 
-// 뮤직 플레이어 렌더링
+// 뮤직 화면 렌더링
 function renderMusicScreen() {
-  musicScreen.appendChild(musicImg);
-  musicScreen.appendChild(audioController);
+  musicScreen.append(musicImg, musicTitle, audioController);
 }
 
 // Audio Controller 렌더링
@@ -77,6 +77,7 @@ function randomChoiceMusic() {
   const randomMusic = playListArray[randomNumber];
 
   audio.src = `./assets/mp3/${randomMusic.title}.mp3`;
+  musicTitle.innerText = randomMusic.title;
   audio.volume = volumeState;
   musicImg.src = `./assets/img/${randomMusic.imgNumber}.png`;
 }
