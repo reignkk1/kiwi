@@ -1,6 +1,11 @@
 import { createElement } from "./utils.js";
 
+const commentsWrapper = createElement("div", {
+  class: "comments-wrapper",
+  innerText: "댓글 기능 준비중",
+});
 const commentsContainer = createElement("section", { class: "comments" });
+commentsContainer.append(commentsWrapper);
 
 const commentWrite = createElement("div", { class: "comment-write" });
 const commentsList = createElement("ul", { class: "comments-list" });
@@ -26,9 +31,7 @@ function renderCommentWrite() {
 }
 
 // 초기 댓글 리스트 렌더링 => ajax
-function renderCommentsList() {
-  createComment("김민겸", "노래가 너무 좋습니다!");
-}
+function renderCommentsList() {}
 
 // 이벤트 리스너들
 function addEventListeners() {
