@@ -1,3 +1,6 @@
-import app from "./App.js";
+import AudioScreen from "./components/AudioScreen.js";
+import Comment from "./components/Comment.js";
+import "./reset.css";
 
-document.getElementById("root").appendChild(app);
+customElements.define("audio-screen", AudioScreen);
+customElements.define("comment-screen", Comment);
