@@ -1,6 +1,6 @@
-const playList = await import("../../playList.json", {
+const playList = await import('../../playList.json', {
   with: {
-    type: "json",
+    type: 'json',
   },
 });
 
@@ -126,8 +126,8 @@ class AudioScreen extends HTMLElement {
     this.audio = new Audio();
     this.audio.volume = 0.3;
 
-    this.imgSrc = "";
-    this.musicTitle = "";
+    this.imgSrc = '';
+    this.musicTitle = '';
     this.play = false;
     this.muted = false;
 
@@ -144,20 +144,20 @@ class AudioScreen extends HTMLElement {
   }
 
   addEvents() {
-    this.audio.addEventListener("ended", () => {
+    this.audio.addEventListener('ended', () => {
       this.randomChoiceMusic();
       this.audio.play();
       this.render();
     });
-    this.querySelector(".play-button").addEventListener("click", () => {
+    this.querySelector('.play-button').addEventListener('click', () => {
       this.togglePlay();
       this.render();
     });
-    this.querySelector(".volume-button").addEventListener("click", () => {
+    this.querySelector('.volume-button').addEventListener('click', () => {
       this.toggleMuted();
       this.render();
     });
-    this.querySelector(".volume-range").oninput = (e) => {
+    this.querySelector('.volume-range').oninput = (e) => {
       this.audio.volume = e.target.value;
 
       if (this.audio.volume === 0) {
@@ -165,26 +165,26 @@ class AudioScreen extends HTMLElement {
       } else {
         this.muted = false;
       }
-      this.querySelector(".volume-icon").className = this.getVolumeIcon();
+      this.querySelector('.volume-icon').className = this.getVolumeIcon();
     };
-    this.querySelector(".music-screen").addEventListener("mouseleave", () => {
+    this.querySelector('.music-screen').addEventListener('mouseleave', () => {
       if (this.play) this.hideAudioController();
     });
-    this.querySelector(".music-screen").addEventListener("mouseover", () => {
+    this.querySelector('.music-screen').addEventListener('mouseover', () => {
       if (this.play) this.showAudioController();
     });
-    this.querySelector(".music-img").addEventListener("click", () => {
+    this.querySelector('.music-img').addEventListener('click', () => {
       this.togglePlay();
       this.render();
     });
   }
 
   showAudioController() {
-    this.querySelector(".audio-controller").style = "display:block";
+    this.querySelector('.audio-controller').style = 'display:block';
   }
 
   hideAudioController() {
-    this.querySelector(".audio-controller").style = "display:none";
+    this.querySelector('.audio-controller').style = 'display:none';
   }
 
   togglePlay() {
@@ -209,19 +209,19 @@ class AudioScreen extends HTMLElement {
 
   getVolumeIcon() {
     if (this.muted) {
-      return "fas fa-volume-mute fa-lg volume-icon";
+      return 'fas fa-volume-mute fa-lg volume-icon';
     } else if (this.audio.volume >= 0.5) {
-      return "fas fa-volume-up fa-lg volume-icon";
+      return 'fas fa-volume-up fa-lg volume-icon';
     } else {
-      return "fas fa-volume-down fa-lg volume-icon";
+      return 'fas fa-volume-down fa-lg volume-icon';
     }
   }
 
   getPlayIcon() {
     if (this.play) {
-      return "fas fa-pause fa-lg";
+      return 'fas fa-pause fa-lg';
     } else {
-      return "fas fa-play fa-lg";
+      return 'fas fa-play fa-lg';
     }
   }
 

@@ -144,7 +144,7 @@ class Comment extends HTMLElement {
             <ul class='comment-list'>
                 ${this.comments
                   .map(
-                    ({ ip, nickname, content }) =>
+                    ({ip, nickname, content}) =>
                       `
                     <li>
                         <span>@${nickname}(${ip})</span>
@@ -152,7 +152,7 @@ class Comment extends HTMLElement {
                     </li>
                     `
                   )
-                  .join("")}
+                  .join('')}
             </ul>
         </div>
     </div>
@@ -176,72 +176,72 @@ class Comment extends HTMLElement {
   }
 
   addEvents() {
-    this.querySelector(".textarea").oninput = (e) => {
+    this.querySelector('.textarea').oninput = (e) => {
       const text = e.target.value;
-      if (text === "") {
+      if (text === '') {
         this.disabledSubmitButton();
       } else {
         this.activeSubmitButton();
       }
     };
 
-    this.querySelector(".textarea").addEventListener("focus", () => {
+    this.querySelector('.textarea').addEventListener('focus', () => {
       this.toggleShowButtons(true);
     });
 
-    this.querySelector(".button-cancel").addEventListener("click", () => {
+    this.querySelector('.button-cancel').addEventListener('click', () => {
       this.toggleShowButtons(false);
       this.clearAllInput();
       this.disabledSubmitButton();
     });
 
-    this.querySelector(".button-submit").addEventListener("click", () => {
-      const { nickname, password, content } = this.getInputData();
+    this.querySelector('.button-submit').addEventListener('click', () => {
+      const {nickname, password, content} = this.getInputData();
 
-      if (nickname === "" || password === "") {
-        return alert("아이디 또는 비밀번호를 입력해주세요.");
+      if (nickname === '' || password === '') {
+        return alert('아이디 또는 비밀번호를 입력해주세요.');
       }
 
       // 서버로 post 요청 날려서 댓글 생성
       // response로 comments 배열에 push
-      this.comments.push({ id: new Date(), nickname, content, password });
+      this.comments.push({id: new Date(), nickname, content, password});
       this.render();
     });
   }
 
   toggleShowButtons(boolean) {
     if (boolean) {
-      this.querySelector(".buttons-container").style = "display: block";
+      this.querySelector('.buttons-container').style = 'display: block';
     } else {
-      this.querySelector(".buttons-container").style = "display: none";
+      this.querySelector('.buttons-container').style = 'display: none';
     }
   }
 
   clearAllInput() {
-    this.querySelector(".textarea").value = "";
-    this.querySelector(".nickname-input").value = "";
-    this.querySelector(".password-input").value = "";
+    this.querySelector('.textarea').value = '';
+    this.querySelector('.nickname-input').value = '';
+    this.querySelector('.password-input').value = '';
   }
 
   getInputData() {
-    const content = this.querySelector(".textarea").value;
-    const nickname = this.querySelector(".nickname-input").value;
-    const password = this.querySelector(".password-input").value;
+    const content = this.querySelector('.textarea').value;
+    const nickname = this.querySelector('.nickname-input').value;
+    const password = this.querySelector('.password-input').value;
 
-    return { nickname, password, content };
+    return {nickname, password, content};
   }
 
   activeSubmitButton() {
-    const submitButton = this.querySelector(".button-submit");
-    submitButton.classList.remove("disabled");
-    submitButton.classList.add("active");
+    const submitButton = this.querySelector('.button-submit');
+    submitButton.classList.remove('disabled');
+    submitButton.classList.add('active');
     submitButton.disabled = false;
   }
 
   disabledSubmitButton() {
-    const submitButton = this.querySelector(".button-submit");
-    submitButton.classList.remove("active");
-    submitButton.classList.add("disabled");
+    const submitButton = this.querySelector('.button-submit');
+    submitButton.classList.remove('active');
+    submitButton.classList.add('disabled');
     submitButton.disabled = true;
   }
 }
