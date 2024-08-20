@@ -115,7 +115,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -137,4 +137,10 @@ section {
   width: 65%;
   height: 100%;
   margin: 0 auto;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
