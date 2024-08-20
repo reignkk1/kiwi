@@ -72,9 +72,6 @@ class Comment extends HTMLElement {
         margin-left: 15px;
         padding: 8px 15px;
         font-size: 16px;
-        background: none;
-        outline: none;
-        border: none;
     }
 
     .button-cancel {
@@ -111,11 +108,30 @@ class Comment extends HTMLElement {
     }
 
     .comment-list li {
-        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 45px;
+        position: relative;
     }
 
-    .comment-list li span {
-        margin-bottom: 5px;
+    .comment-list li p {
+        margin-top: 5px;
+    }
+
+    .comment-modal-button {
+        cursor: pointer;
+        color: white;
+      
+    }
+
+    .comment-modal {
+        display: none;
+        position: absolute;
+        width: 80px;
+        height: 40px;
+        background-color: red;
+        right: 0;
+        top: 30px;
     }
 
   `;
@@ -144,11 +160,22 @@ class Comment extends HTMLElement {
             <ul class='comment-list'>
                 ${this.comments
                   .map(
-                    ({ip, nickname, content}) =>
+                    ({nickname, text, reqIp}) =>
                       `
                     <li>
-                        <span>@${nickname}(${ip})</span>
-                        <p>${content}</p>
+                        <div>
+                            <span>@${nickname} (${reqIp})</span>
+                            <p>${text}</p>
+                        </div>
+                        <button class='comment-modal-button'>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div class='comment-modal'>
+                            <div>
+                                <button>삭제</button>
+                                <button>수정</button>
+                            </div>
+                        </div>
                     </li>
                     `
                   )
@@ -160,11 +187,19 @@ class Comment extends HTMLElement {
   `;
   };
 
+  // 댓글 id 값 활용해서 ... 부호 클릭시 모달창 토글기능
+  // 삭제 기능 만들기
+  // 백엔드 서버 배포하기 => 클라우드타입
+
   constructor() {
     super();
     this.comments = [];
 
     this.render();
+  }
+
+  connectedCallback() {
+    this.getComments();
   }
 
   render() {
@@ -196,17 +231,41 @@ class Comment extends HTMLElement {
     });
 
     this.querySelector('.button-submit').addEventListener('click', () => {
-      const {nickname, password, content} = this.getInputData();
-
+      const {nickname, password, text} = this.getInputData();
       if (nickname === '' || password === '') {
         return alert('아이디 또는 비밀번호를 입력해주세요.');
+      } else {
+        this.createComment(nickname, password, text);
       }
-
-      // 서버로 post 요청 날려서 댓글 생성
-      // response로 comments 배열에 push
-      this.comments.push({id: new Date(), nickname, content, password});
-      this.render();
     });
+  }
+
+  async getComments() {
+    const res = await fetch('http://localhost:8080/comments');
+    const data = await res.json();
+    this.comments = data;
+    this.render();
+  }
+
+  async createComment(nickname, password, text) {
+    const res = await fetch('http://localhost:8080/comment', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        nickname,
+        password,
+        text,
+      }),
+    });
+    const data = await res.json();
+
+    this.comments.push({
+      nickname: data.nickname,
+      text: data.text,
+      password: data.password,
+      reqIp: data.reqIp,
+    });
+    this.render();
   }
 
   toggleShowButtons(boolean) {
@@ -224,11 +283,11 @@ class Comment extends HTMLElement {
   }
 
   getInputData() {
-    const content = this.querySelector('.textarea').value;
+    const text = this.querySelector('.textarea').value;
     const nickname = this.querySelector('.nickname-input').value;
     const password = this.querySelector('.password-input').value;
 
-    return {nickname, password, content};
+    return {nickname, password, text};
   }
 
   activeSubmitButton() {
