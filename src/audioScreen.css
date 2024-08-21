@@ -1,0 +1,88 @@
+.music-screen {
+  height: 600px;
+  margin-top: 70px;
+  position: relative;
+
+  @media screen and (max-width: 1270px) {
+    height: 450px;
+  }
+  @media screen and (max-width: 1170px) {
+    height: 400px;
+  }
+  @media screen and (max-width: 1000px) {
+    height: 350px;
+  }
+  @media screen and (max-width: 600px) {
+    height: 300px;
+  }
+  @media screen and (max-width: 455px) {
+    height: 200px;
+  }
+}
+.music-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 15px;
+}
+
+.audio-controller {
+  width: 100%;
+  height: 40px;
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  box-shadow: 0px 0px 500px black;
+  @media screen and (max-width: 600px) {
+    zoom: 0.7;
+  }
+}
+
+.left-controls {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left-controls button {
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+}
+
+.volume-range {
+  height: 5px;
+  width: 70px;
+  cursor: pointer;
+  accent-color: white;
+  background: white;
+  border: 0px;
+  margin-bottom: 8px;
+}
+
+.volume-range:focus {
+  outline: none;
+}
+
+.music-title {
+  text-align: center;
+  width: 100%;
+  color: white;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: black;
+
+  @media screen and (max-width: 600px) {
+    zoom: 0.5;
+  }
+}

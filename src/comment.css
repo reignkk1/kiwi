@@ -1,0 +1,132 @@
+.comment-section {
+  margin-bottom: 100px;
+  color: white;
+}
+
+.input-container {
+  display: flex;
+  margin-top: 50px;
+
+  @media screen and (max-width: 1050px) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.input-container div {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.input-container input {
+  font-size: 16px;
+  background: none;
+  outline: none;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 4px 8px;
+  line-height: 1.5;
+  transition: all 0.4s ease-in-out;
+  border-radius: 8px;
+}
+
+.input-container input:focus {
+  border: 1px solid white;
+}
+
+.textarea-container {
+  margin-top: 40px;
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  color: white;
+  background: none;
+  padding: 10px 0px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.4s ease-in-out;
+  font-size: 15px;
+  resize: none;
+  overflow: hidden;
+}
+
+.textarea-container .textarea:focus {
+  border-bottom: 1px solid white;
+}
+
+.buttons-container {
+  text-align: end;
+  position: relative;
+  top: 10px;
+}
+
+.buttons-container button {
+  border-radius: 20px;
+  margin-left: 15px;
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+.button-cancel {
+  color: white;
+  cursor: pointer;
+}
+
+.button-cancel:hover {
+  background-color: #3f3f3f;
+}
+
+.buttons-container {
+  display: none;
+}
+
+.disabled {
+  cursor: default;
+  background-color: #272727;
+  color: #666666;
+}
+
+.active {
+  background-color: #539ee0 !important;
+  color: black;
+  cursor: pointer;
+}
+
+.active:hover {
+  background-color: #65b8ff !important;
+}
+
+.comment-list {
+  margin-top: 80px;
+}
+
+.comment-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 45px;
+  position: relative;
+}
+
+.comment-list li p {
+  margin-top: 5px;
+}
+
+.comment-modal-button {
+  cursor: pointer;
+  color: white;
+}
+
+.comment-modal {
+  display: none;
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background-color: red;
+  right: 0;
+  top: 30px;
+}
