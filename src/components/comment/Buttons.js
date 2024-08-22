@@ -1,11 +1,11 @@
 import {
   clearAllInput,
   disabledSubmitButton,
-  fetchCreateComment,
   getInputData,
   renderCommentList,
   toggleShowButtons,
 } from './hooks';
+import {fetchCreateComment} from '../../http';
 import state from '../../store';
 
 class Buttons extends HTMLElement {

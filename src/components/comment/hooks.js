@@ -37,23 +37,3 @@ export function clearAllInput() {
 export function renderCommentList() {
   document.querySelector('comment-list').render();
 }
-
-export async function fetchCreateComment(nickname, password, text) {
-  const res = await fetch('http://localhost:8080/comment', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      nickname,
-      password,
-      text,
-    }),
-  });
-  const data = await res.json();
-  return data;
-}
-
-export async function fetchGetComments() {
-  const res = await fetch('http://localhost:8080/comments');
-  const data = await res.json();
-  return data;
-}
