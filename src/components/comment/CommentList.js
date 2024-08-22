@@ -1,4 +1,4 @@
-import {fetchGetComments} from '../../hooks';
+import {fetchGetComments} from './hooks';
 import state from '../../store';
 
 class CommentList extends HTMLElement {

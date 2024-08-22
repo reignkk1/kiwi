@@ -5,7 +5,7 @@ import {
   getInputData,
   renderCommentList,
   toggleShowButtons,
-} from '../../hooks';
+} from './hooks';
 import state from '../../store';
 
 class Buttons extends HTMLElement {

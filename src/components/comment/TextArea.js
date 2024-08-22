@@ -2,7 +2,7 @@ import {
   activeSubmitButton,
   disabledSubmitButton,
   toggleShowButtons,
-} from '../../hooks';
+} from './hooks';
 
 class TextArea extends HTMLElement {
   constructor() {
