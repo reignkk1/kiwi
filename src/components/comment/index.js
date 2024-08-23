@@ -32,7 +32,5 @@ class Comment extends HTMLElement {
 
 export default Comment;
 
-// 댓글 id 값 활용해서 ... 부호 클릭시 모달창 토글기능
+// 모달창, 버튼 밖 클릭 시 모달창 닫기
 // 삭제 기능 만들기
-// 백엔드 서버 배포하기 => 클라우드타입
-// 컴포넌트 모듈화 진행
