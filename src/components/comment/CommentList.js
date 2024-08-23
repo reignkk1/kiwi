@@ -14,10 +14,9 @@ class CommentList extends HTMLElement {
     this.innerHTML = `
             <ul class='comment-list'>
                 ${state.comments
-                  .map(({nickname, text, reqIp}) => {
-                    console.log(nickname, text, reqIp);
+                  .map(({id, nickname, text, reqIp}) => {
                     return `
-                      <li>
+                      <li id=${id}>
                           <div>
                               <span>@${nickname} (${reqIp})</span>
                               <p>${text}</p>
@@ -26,10 +25,8 @@ class CommentList extends HTMLElement {
                               <i class="fas fa-ellipsis-v"></i>
                           </button>
                           <div class='comment-modal'>
-                              <div>
-                                  <button>삭제</button>
-                                  <button>수정</button>
-                              </div>
+                              <button class='delete-button'>삭제</button>
+                              <button class='edit-button'>수정</button>
                           </div>
                       </li>
                       `;
@@ -37,6 +34,25 @@ class CommentList extends HTMLElement {
                   .join('')}
             </ul>
     `;
+    this.addEvents();
+  }
+
+  addEvents() {
+    this.querySelectorAll('.comment-modal-button').forEach((button) => {
+      const parent = button.parentElement;
+      const commentModal = parent.querySelector('.comment-modal');
+
+      button.addEventListener('click', () => {
+        if (commentModal.style.display === 'flex') {
+          commentModal.style.display = 'none';
+        } else {
+          this.querySelectorAll('.comment-modal').forEach((modal) => {
+            modal.style.display = 'none';
+          });
+          commentModal.style.display = 'flex';
+        }
+      });
+    });
   }
 
   async getCommentsAndRender() {
