@@ -50,6 +50,7 @@ class Buttons extends HTMLElement {
     const data = await fetchCreateComment(nickname, password, text);
 
     state.comments.push({
+      id: data.id,
       nickname: data.nickname,
       text: data.text,
       password: data.password,
