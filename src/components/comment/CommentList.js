@@ -1,4 +1,4 @@
-import {fetchGetComments} from '../../http';
+import {fetchDeleteComment, fetchGetComments} from '../../http';
 import state from '../../store';
 
 class CommentList extends HTMLElement {
@@ -26,7 +26,16 @@ class CommentList extends HTMLElement {
                           </button>
                           <div class='comment-modal'>
                               <button class='delete-button'>삭제</button>
-                              <button class='edit-button'>수정</button>
+                          </div>
+                          <div class='modal-wrapper'>
+                            <div class='password-modal'>
+                              <span>비밀번호</span>
+                              <input type='password' maxlength='6' />
+                              <div class='password-modal-buttons'>
+                                <button>확인</button>
+                                <button class='password-modal-cancle-button'>취소</button>
+                              </div>
+                            </div>
                           </div>
                       </li>
                       `;
@@ -36,22 +45,37 @@ class CommentList extends HTMLElement {
     `;
     this.addEvents();
   }
+  // <button class="edit-button">수정</button>
 
+  // 이제 비밀번호 입력후 삭제 버튼 누를 시 삭제 되게 구현
   addEvents() {
-    this.querySelectorAll('.comment-modal-button').forEach((button) => {
-      const parent = button.parentElement;
-      const commentModal = parent.querySelector('.comment-modal');
-
-      button.addEventListener('click', () => {
-        if (commentModal.style.display === 'flex') {
-          commentModal.style.display = 'none';
-        } else {
-          this.querySelectorAll('.comment-modal').forEach((modal) => {
-            modal.style.display = 'none';
-          });
-          commentModal.style.display = 'flex';
+    this.querySelectorAll('li').forEach((li) => {
+      li.querySelector('.comment-modal-button').addEventListener(
+        'click',
+        () => {
+          const commentModal = li.querySelector('.comment-modal');
+          if (commentModal.style.display === 'flex') {
+            commentModal.style.display = 'none';
+          } else {
+            this.querySelectorAll('.comment-modal').forEach((modal) => {
+              modal.style.display = 'none';
+            });
+            commentModal.style.display = 'flex';
+          }
         }
+      );
+
+      li.querySelector('.delete-button').addEventListener('click', () => {
+        li.querySelector('.modal-wrapper').style.display = 'flex';
+        li.querySelector('.comment-modal').style.display = 'none';
       });
+
+      li.querySelector('.password-modal-cancle-button').addEventListener(
+        'click',
+        () => {
+          li.querySelector('.modal-wrapper').style.display = 'none';
+        }
+      );
     });
   }
 
