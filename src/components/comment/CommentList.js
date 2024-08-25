@@ -1,13 +1,16 @@
-import {fetchDeleteComment, fetchGetComments} from '../../http';
+import {fetchGetComments} from '../../http';
 import state from '../../store';
+import {createListHooks} from './hooks';
 
 class CommentList extends HTMLElement {
   constructor() {
     super();
   }
 
-  connectedCallback() {
-    this.getCommentsAndRender();
+  async connectedCallback() {
+    const data = await fetchGetComments();
+    state.comments = data;
+    this.render();
   }
 
   render() {
@@ -29,10 +32,11 @@ class CommentList extends HTMLElement {
                           </div>
                           <div class='modal-wrapper'>
                             <div class='password-modal'>
-                              <span>비밀번호</span>
-                              <input type='password' maxlength='6' />
+                              <div>비밀번호</div>
+                              <input class='password-input' type='password' maxlength='6' />
+                              <span class='password-error-message'>다시 입력해주세요.</span>
                               <div class='password-modal-buttons'>
-                                <button>확인</button>
+                                <button class='password-modal-submit-button'>확인</button>
                                 <button class='password-modal-cancle-button'>취소</button>
                               </div>
                             </div>
@@ -47,42 +51,44 @@ class CommentList extends HTMLElement {
   }
   // <button class="edit-button">수정</button>
 
-  // 이제 비밀번호 입력후 삭제 버튼 누를 시 삭제 되게 구현
   addEvents() {
     this.querySelectorAll('li').forEach((li) => {
+      const {
+        toggleCommentModal,
+        showPasswordConfirmModal,
+        closePasswordConfirmModal,
+        clearPasswordInput,
+        deleteCommentSubmit,
+      } = createListHooks(li);
+
+      const clickModalButton = () => toggleCommentModal();
+      const clickDeleteButton = () => showPasswordConfirmModal();
+      const clickModalSubmitButton = async () => deleteCommentSubmit();
+      const clickModalCancleButton = () => {
+        closePasswordConfirmModal();
+        clearPasswordInput();
+      };
+
       li.querySelector('.comment-modal-button').addEventListener(
         'click',
-        () => {
-          const commentModal = li.querySelector('.comment-modal');
-          if (commentModal.style.display === 'flex') {
-            commentModal.style.display = 'none';
-          } else {
-            this.querySelectorAll('.comment-modal').forEach((modal) => {
-              modal.style.display = 'none';
-            });
-            commentModal.style.display = 'flex';
-          }
-        }
+        clickModalButton
       );
 
-      li.querySelector('.delete-button').addEventListener('click', () => {
-        li.querySelector('.modal-wrapper').style.display = 'flex';
-        li.querySelector('.comment-modal').style.display = 'none';
-      });
+      li.querySelector('.delete-button').addEventListener(
+        'click',
+        clickDeleteButton
+      );
 
       li.querySelector('.password-modal-cancle-button').addEventListener(
         'click',
-        () => {
-          li.querySelector('.modal-wrapper').style.display = 'none';
-        }
+        clickModalCancleButton
+      );
+
+      li.querySelector('.password-modal-submit-button').addEventListener(
+        'click',
+        clickModalSubmitButton
       );
     });
-  }
-
-  async getCommentsAndRender() {
-    const data = await fetchGetComments();
-    state.comments = data;
-    this.render();
   }
 }
 
