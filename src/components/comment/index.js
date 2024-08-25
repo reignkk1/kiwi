@@ -33,4 +33,3 @@ class Comment extends HTMLElement {
 export default Comment;
 
 // 모달창, 버튼 밖 클릭 시 모달창 닫기
-// 삭제 기능 만들기
