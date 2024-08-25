@@ -1,3 +1,6 @@
+import {fetchDeleteComment} from '../../http';
+import state from '../../store';
+
 export function toggleShowButtons(boolean) {
   if (boolean) {
     document.querySelector('.buttons-container').style = 'display: block';
@@ -36,4 +39,73 @@ export function clearAllInput() {
 
 export function renderCommentList() {
   document.querySelector('comment-list').render();
+}
+
+export function createListHooks(list) {
+  const passwordErrorMessage = list.querySelector('.password-error-message');
+  const commentModal = list.querySelector('.comment-modal');
+  const passwordInput = list.querySelector('.password-input');
+  const modalWrapper = list.querySelector('.modal-wrapper');
+  const id = list.id;
+
+  const showPasswordError = (show) => {
+    if (show) {
+      passwordErrorMessage.style.display = 'block';
+    } else {
+      passwordErrorMessage.style.display = 'none';
+    }
+  };
+
+  const toggleCommentModal = () => {
+    if (commentModal.style.display === 'flex') {
+      commentModal.style.display = 'none';
+    } else {
+      document
+        .querySelectorAll('.comment-modal')
+        .forEach((modal) => (modal.style.display = 'none'));
+      commentModal.style.display = 'flex';
+    }
+  };
+
+  const showPasswordConfirmModal = () => {
+    modalWrapper.style.display = 'flex';
+    commentModal.style.display = 'none';
+    passwordErrorMessage.style.display = 'none';
+  };
+
+  const closePasswordConfirmModal = () => {
+    modalWrapper.style.display = 'none';
+  };
+
+  const clearPasswordInput = () => {
+    passwordInput.value = '';
+  };
+
+  const filterCommentsWithDifferentId = () => {
+    state.comments = state.comments.filter(
+      (comment) => comment.id !== Number(id)
+    );
+  };
+
+  const deleteCommentSubmit = async () => {
+    const result = await fetchDeleteComment(id, passwordInput.value);
+
+    clearPasswordInput();
+    if (result === 'success') {
+      closePasswordConfirmModal();
+      filterCommentsWithDifferentId();
+      renderCommentList();
+    } else {
+      showPasswordError(true);
+    }
+  };
+
+  return {
+    showPasswordError,
+    toggleCommentModal,
+    showPasswordConfirmModal,
+    closePasswordConfirmModal,
+    clearPasswordInput,
+    deleteCommentSubmit,
+  };
 }
