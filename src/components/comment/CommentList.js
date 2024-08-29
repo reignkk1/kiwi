@@ -25,7 +25,7 @@ class CommentList extends HTMLElement {
                               <p>${text}</p>
                           </div>
                           <button class='comment-modal-button'>
-                              <i class="fas fa-ellipsis-v"></i>
+                              <i class="fas fa-ellipsis-v"></i> 
                           </button>
                           <div class='comment-modal'>
                               <button class='delete-button'>삭제</button>
