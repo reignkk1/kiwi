@@ -109,3 +109,9 @@ export function createListHooks(list) {
     deleteCommentSubmit,
   };
 }
+
+export function maskingReqIp(reqIp) {
+  reqIp = reqIp.split('.');
+  reqIp.splice(2, 1, '♡');
+  return reqIp.join('.');
+}
