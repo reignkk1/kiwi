@@ -1,5 +1,5 @@
 .music-screen {
-  height: 600px;
+  height: 720px;
   margin-top: 70px;
   position: relative;
 
@@ -16,7 +16,7 @@
     height: 300px;
   }
   @media screen and (max-width: 455px) {
-    height: 200px;
+    height: 245px;
   }
 }
 .music-screen img {
