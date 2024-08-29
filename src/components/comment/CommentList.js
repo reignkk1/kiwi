@@ -1,6 +1,6 @@
 import {fetchGetComments} from '../../http';
 import state from '../../store';
-import {createListHooks} from './hooks';
+import {createListHooks, maskingReqIp} from './hooks';
 
 class CommentList extends HTMLElement {
   constructor() {
@@ -21,7 +21,7 @@ class CommentList extends HTMLElement {
                     return `
                       <li id=${id}>
                           <div>
-                              <span>@${nickname} (${reqIp})</span>
+                              <span>@${nickname} (${maskingReqIp(reqIp)})</span>
                               <p>${text}</p>
                           </div>
                           <button class='comment-modal-button'>
