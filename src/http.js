@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:8080';
+const API_URL =
+  'https://port-0-comfort-server-m010bhal948caa02.sel4.cloudtype.app';
 
 /*
 server API_URL = https://port-0-comfort-server-m010bhal948caa02.sel4.cloudtype.app
