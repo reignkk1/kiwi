@@ -1,18 +1,16 @@
-import AudioScreen from './components/audio/index.js';
-import Comment from './components/comment/index.js';
-import Buttons from './components/comment/Buttons.js';
-import TextArea from './components/comment/TextArea.js';
-import CommentList from './components/comment/CommentList.js';
-import AudioController from './components/audio/AudioController.js';
+import Layout from './components/layout/index.js';
+import Home from './components/home/index.js';
+import Header from './components/home/Header.js';
+import Main from './components/home/Main.js';
+import Footer from './components/home/Footer.js';
 
 import './styles/reset.css';
-import './styles/comment.css';
-import './styles/audioScreen.css';
+import './styles/layout.css';
+import './styles/home.css';
 
-customElements.define('audio-screen', AudioScreen);
-customElements.define('audio-controller', AudioController);
+customElements.define('layout-root', Layout);
 
-customElements.define('comment-screen', Comment);
-customElements.define('text-area', TextArea);
-customElements.define('button-container', Buttons);
-customElements.define('comment-list', CommentList);
+customElements.define('home-content', Home);
+customElements.define('home-header', Header);
+customElements.define('home-main', Main);
+customElements.define('home-footer', Footer);
