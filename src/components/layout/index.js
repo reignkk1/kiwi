@@ -1,9 +1,12 @@
+import {choiceRandomMusic} from '../home/utils';
+
 class Layout extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
+    choiceRandomMusic();
     this.render();
   }
 
