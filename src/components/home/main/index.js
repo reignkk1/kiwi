@@ -1,3 +1,5 @@
+import {audioStore} from '../../../store';
+
 class Main extends HTMLElement {
   constructor() {
     super();
@@ -11,7 +13,7 @@ class Main extends HTMLElement {
     this.innerHTML = `
             <main class='home-main'>
                 <div class='music-img'>
-                    <img src='./assets/img/2.png'/>
+                    <img src='${audioStore.img}'/>
                 </div>
             </main>
           `;
