@@ -5,6 +5,7 @@ export const audioStore = {
   play: false,
   loop: false,
   shuffle: false,
+  muted: false,
 };
 
 export const modalMessageStore = {
