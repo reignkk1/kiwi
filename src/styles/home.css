@@ -1,0 +1,120 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-header .header-left h1 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.home-header .header-left span {
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right button {
+  margin-left: 20px;
+}
+
+.header-right i {
+  font-size: 20px;
+  color: white;
+}
+
+.music-img {
+  width: 100%;
+  height: 300px;
+}
+
+.music-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.home-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+}
+
+.home-footer input[type='range'] {
+  width: 100%;
+}
+
+.time-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-wrap,
+.bottom-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-wrap {
+  margin-top: 10px;
+}
+
+.footer-bottom i {
+  color: white;
+}
+
+.toggle-play-button {
+  font-size: 40px;
+}
+.step-backward-button,
+.step-forward-button {
+  font-size: 25px;
+}
+
+.fa-redo-alt,
+.fa-random,
+.volume-button,
+.fa-bars {
+  font-size: 22px;
+}
+
+.modal-message-box {
+  text-align: center;
+  animation: fadein 3s;
+  opacity: 0;
+}
+
+@keyframes fadein {
+  /* 효과를 동작시간 동안 0 ~ 1까지 */
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.modal-message-box span {
+  background-color: rgba(63, 56, 56, 0.4);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.active {
+  color: black !important;
+}
+
+.volume-wrap {
+  display: flex;
+  align-items: center;
+}

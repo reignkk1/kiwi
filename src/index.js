@@ -1,18 +1,24 @@
-import AudioScreen from './components/audio/index.js';
-import Comment from './components/comment/index.js';
-import Buttons from './components/comment/Buttons.js';
-import TextArea from './components/comment/TextArea.js';
-import CommentList from './components/comment/CommentList.js';
-import AudioController from './components/audio/AudioController.js';
+import Layout from './components/layout';
+import Home from './components/home';
+import Header from './components/home/header';
+import Main from './components/home/main';
+import Footer from './components/home/footer';
+
+import TimeLine from './components/home/footer/TimeLine.js';
+import AudioController from './components/home/footer/AudioController.js';
+import ModalMessage from './components/home/footer/ModalMessage.js';
 
 import './styles/reset.css';
-import './styles/comment.css';
-import './styles/audioScreen.css';
+import './styles/layout.css';
+import './styles/home.css';
 
-customElements.define('audio-screen', AudioScreen);
+customElements.define('layout-root', Layout);
+customElements.define('home-content', Home);
+
+customElements.define('home-header', Header);
+customElements.define('home-main', Main);
+customElements.define('home-footer', Footer);
+
+customElements.define('time-line', TimeLine);
+customElements.define('modal-message', ModalMessage);
 customElements.define('audio-controller', AudioController);
-
-customElements.define('comment-screen', Comment);
-customElements.define('text-area', TextArea);
-customElements.define('button-container', Buttons);
-customElements.define('comment-list', CommentList);
