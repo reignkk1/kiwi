@@ -12,7 +12,7 @@ class TimeLine extends HTMLElement {
     this.innerHTML = `
             <div class='footer-top'>
                 <div class='time-range'>
-                    <input class='input-range' type='range'/>
+                    <input class='input-range' type='range' value='0'/>
                 </div>
                 <div class='time-line'>
                     <span class='current-time'>0:00</span>
