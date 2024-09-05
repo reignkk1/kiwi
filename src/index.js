@@ -13,8 +13,8 @@ import './styles/layout.css';
 import './styles/home.css';
 
 customElements.define('layout-root', Layout);
-
 customElements.define('home-content', Home);
+
 customElements.define('home-header', Header);
 customElements.define('home-main', Main);
 customElements.define('home-footer', Footer);
