@@ -10,7 +10,7 @@ export function audioEndEvent() {
     } else {
       choiceNextMusic();
     }
-    audioStore.audio.oncanplaythrough = () => audioStore.audio.play();
+    audioStore.audio.play();
     audioStore.play = true;
     modalMessageStore.show = false;
 
@@ -120,6 +120,19 @@ export function buttonEvent() {
     audioStore.audio.loop = audioStore.loop;
 
     document.querySelector('modal-message').render();
+    document.querySelector('audio-controller').render();
+  });
+
+  document.querySelector('.volume-range').oninput = (e) => {
+    audioStore.audio.volume = e.target.value;
+  };
+
+  document.querySelector('.volume-button').addEventListener('click', () => {
+    audioStore.muted = !audioStore.muted;
+
+    // muted 로직 더 짜보기
+
+    audioStore.audio.muted = audioStore.muted;
     document.querySelector('audio-controller').render();
   });
 }
