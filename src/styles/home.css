@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 140px;
+  height: 180px;
 }
 
 .home-footer input[type='range'] {
@@ -56,9 +56,14 @@
   justify-content: space-between;
 }
 
-.footer-bottom {
+.top-wrap,
+.bottom-wrap {
   display: flex;
   justify-content: space-between;
+}
+
+.bottom-wrap {
+  margin-top: 10px;
 }
 
 .footer-bottom i {
@@ -74,7 +79,9 @@
 }
 
 .fa-redo-alt,
-.fa-random {
+.fa-random,
+.volume-button,
+.fa-bars {
   font-size: 22px;
 }
 
@@ -105,4 +112,9 @@
 
 .active {
   color: black !important;
+}
+
+.volume-wrap {
+  display: flex;
+  align-items: center;
 }
