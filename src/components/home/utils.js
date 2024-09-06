@@ -1,21 +1,20 @@
-import {audioStore} from '../../store';
+import {audioStore, playListStore} from '../../store';
 
-const playList = await import('../../../playList.json', {
-  with: {type: 'json'},
-});
-
-export function choiceRandomMusic() {
-  const musicData = playList.data;
+export function choiceRandomMusicPlay() {
+  const musicData = playListStore.music.data;
   const {title, imgNumber} =
     musicData[Math.floor(Math.random() * musicData.length)];
 
   audioStore.title = title;
   audioStore.img = `./assets/img/${imgNumber}.png`;
   audioStore.audio.src = `./assets/mp3/${title}.mp3`;
+
+  audioStore.play = true;
+  audioStore.audio.play();
 }
 
-export function choiceNextMusic() {
-  const musicData = playList.data;
+export function choiceNextMusicPlay() {
+  const musicData = playListStore.music.data;
   let currentMusicIndex = musicData.findIndex(
     ({title}) => audioStore.title === title
   );
@@ -29,10 +28,23 @@ export function choiceNextMusic() {
   audioStore.title = title;
   audioStore.img = `./assets/img/${imgNumber}.png`;
   audioStore.audio.src = `./assets/mp3/${title}.mp3`;
+
+  audioStore.play = true;
+  audioStore.audio.play();
 }
 
-export function getMusicInfo() {
-  const [singer, musicTitle] = audioStore.title.split(' - ');
+export function choiceMusicPlay(title, imgNumber) {
+  console.log(title, imgNumber);
+  audioStore.title = title;
+  audioStore.img = `./assets/img/${imgNumber}.png`;
+  audioStore.audio.src = `./assets/mp3/${title}.mp3`;
+
+  audioStore.play = true;
+  audioStore.audio.play();
+}
+
+export function getMusicInfo(title) {
+  const [singer, musicTitle] = title.split(' - ');
   return {singer, musicTitle};
 }
 
