@@ -1,3 +1,4 @@
+import {audioStore} from '../../../store';
 import {getMusicInfo} from '../utils';
 
 class Header extends HTMLElement {
@@ -13,8 +14,8 @@ class Header extends HTMLElement {
     this.innerHTML = `
             <header class='home-header'>
                 <div class='header-left'>
-                    <h1>${getMusicInfo().musicTitle}</h1>
-                    <span>${getMusicInfo().singer}</span>
+                    <h1>${getMusicInfo(audioStore.title).musicTitle}</h1>
+                    <span>${getMusicInfo(audioStore.title).singer}</span>
                 </div>
                 <div class='header-right'>
                     <button>
