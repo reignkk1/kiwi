@@ -34,7 +34,6 @@ export function choiceNextMusicPlay() {
 }
 
 export function choiceMusicPlay(title, imgNumber) {
-  console.log(title, imgNumber);
   audioStore.title = title;
   audioStore.img = `./assets/img/${imgNumber}.png`;
   audioStore.audio.src = `./assets/mp3/${title}.mp3`;

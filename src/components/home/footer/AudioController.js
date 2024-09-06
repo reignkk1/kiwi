@@ -37,7 +37,7 @@ class AudioController extends HTMLElement {
                   <i class="fas ${audioStore.muted ? 'fa-volume-mute' : 'fa-volume-down'}"></i>
                 </button>
                 <input class='volume-range' type='range' max='1' step='0.01' value='${audioStore.audio.volume}'  />
-              </div>
+              </div>  
               <div>
                 <button>
                   <i class="fas fa-bars"></i>
