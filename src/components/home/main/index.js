@@ -15,6 +15,7 @@ class Main extends HTMLElement {
                 <div class='music-img'>
                     <img src='${audioStore.img}'/>
                 </div>
+                <play-list></play-list>
             </main>
           `;
   }
