@@ -1,17 +1,20 @@
 import {audioStore, modalMessageStore} from '../../store';
-import {choiceNextMusic, choiceRandomMusic} from './utils';
+import {
+  choiceMusicPlay,
+  choiceNextMusicPlay,
+  choiceRandomMusicPlay,
+} from './utils';
 
 export function audioEndEvent() {
   audioStore.audio.addEventListener('ended', () => {
     // loop 일 경우 ended 이벤트는 실행이 안됌
 
     if (audioStore.shuffle) {
-      choiceRandomMusic();
+      choiceRandomMusicPlay();
     } else {
-      choiceNextMusic();
+      choiceNextMusicPlay();
     }
-    audioStore.audio.play();
-    audioStore.play = true;
+
     modalMessageStore.show = false;
 
     document.querySelector('home-content').render();
@@ -97,12 +100,11 @@ export function buttonEvent() {
         audioStore.audio.currentTime = 0;
         audioStore.audio.load();
       } else if (audioStore.shuffle) {
-        choiceRandomMusic();
+        choiceRandomMusicPlay();
       } else {
-        choiceNextMusic();
+        choiceNextMusicPlay();
       }
 
-      audioStore.audio.play();
       audioStore.play = true;
       modalMessageStore.show = false;
       document.querySelector('home-content').render();
@@ -136,3 +138,27 @@ export function buttonEvent() {
     document.querySelector('audio-controller').render();
   });
 }
+
+export function playListEvent() {
+  document.querySelectorAll('.list-wrap').forEach((list) => {
+    list.addEventListener('click', () => {
+      const title = list.querySelector('.list-title span').innerText;
+      const singer = list.querySelector('.list-singer span').innerText;
+      const imgNumber = list
+        .querySelector('.list-img')
+        .src.slice(0, -4)
+        .split('/')
+        .pop();
+
+      choiceMusicPlay(singer + ' - ' + title, imgNumber);
+      document.querySelector('home-content').render();
+    });
+  });
+}
+
+// playList data를 title, singer 따로 분류해서 json 형태로 작성하는게 좋아보임
+// 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
+// 첫렌더링 시 음량 초기값 0.5로 변경
+// playList Scroll 스타일 변경
+// playList button toggle on/off 상태관리
+// 제목 길어지면 옆으로 애니메이션 슬라이드
