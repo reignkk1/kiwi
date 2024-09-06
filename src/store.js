@@ -1,3 +1,9 @@
+export const playListStore = {
+  music: await import('../playList.json', {
+    with: {type: 'json'},
+  }),
+};
+
 export const audioStore = {
   audio: new Audio(),
   img: '',
@@ -11,6 +17,10 @@ export const audioStore = {
 export const modalMessageStore = {
   show: false,
   text: '',
+};
+
+export const modalPlayListStore = {
+  show: false,
 };
 
 // setState 함수 객체를 따로 만들어보기 set함수를 실행하면 자동 렌더링
