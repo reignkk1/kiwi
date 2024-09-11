@@ -14,13 +14,18 @@
   font-weight: bold;
   margin-bottom: 10px;
   white-space: nowrap;
-  animation: marquee 10s linear infinite;
+  animation: marquee 12s linear infinite;
   animation-delay: 2s;
+  animation-play-state: paused;
 }
 
 @keyframes marquee {
   0% {
     transform: translateX(0%);
+  }
+
+  80% {
+    transform: translateX(-100%);
   }
 
   100% {
@@ -199,7 +204,4 @@
 ::-webkit-scrollbar-thumb {
   background-color: white;
   border-radius: 10px;
-}
-
-.header-left h1 {
 }
