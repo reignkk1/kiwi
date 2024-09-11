@@ -39,7 +39,7 @@ class AudioController extends HTMLElement {
                 <input class='volume-range' type='range' max='1' step='0.01' value='${audioStore.audio.volume}'  />
               </div>  
               <div>
-                <button>
+                <button class='toggle-modal-playlist-button'>
                   <i class="fas fa-bars"></i>
                 </button>
               </div>
