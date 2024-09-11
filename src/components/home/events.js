@@ -1,4 +1,4 @@
-import {audioStore, modalMessageStore} from '../../store';
+import {audioStore, modalMessageStore, modalPlayListStore} from '../../store';
 import {
   choiceMusicPlay,
   choiceNextMusicPlay,
@@ -99,6 +99,7 @@ export function buttonEvent() {
       if (audioStore.loop) {
         audioStore.audio.currentTime = 0;
         audioStore.audio.load();
+        audioStore.audio.play();
       } else if (audioStore.shuffle) {
         choiceRandomMusicPlay();
       } else {
@@ -137,6 +138,13 @@ export function buttonEvent() {
     audioStore.audio.muted = audioStore.muted;
     document.querySelector('audio-controller').render();
   });
+
+  document
+    .querySelector('.toggle-modal-playlist-button')
+    .addEventListener('click', () => {
+      modalPlayListStore.show = !modalPlayListStore.show;
+      document.querySelector('play-list').render();
+    });
 }
 
 export function playListEvent() {
@@ -158,7 +166,4 @@ export function playListEvent() {
 
 // playList data를 title, singer 따로 분류해서 json 형태로 작성하는게 좋아보임
 // 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
-// 첫렌더링 시 음량 초기값 0.5로 변경
-// playList Scroll 스타일 변경
-// playList button toggle on/off 상태관리
-// 제목 길어지면 옆으로 애니메이션 슬라이드
+// 글자 수 많아서 넘어갈때만 슬라이드 애니메이션 적용 => 애니메이션 2초 딜레이 연구
