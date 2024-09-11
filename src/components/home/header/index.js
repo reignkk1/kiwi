@@ -1,4 +1,4 @@
-import {audioStore} from '../../../store';
+import {audioStore, musicTitleStore} from '../../../store';
 import {getMusicInfo} from '../utils';
 
 class Header extends HTMLElement {
@@ -7,7 +7,16 @@ class Header extends HTMLElement {
   }
 
   connectedCallback() {
-    this.render();
+    if (getMusicInfo(audioStore.title).musicTitle.length > 10) {
+      musicTitleStore.animation = true;
+      this.render();
+      document
+        .querySelectorAll('.title-track h1')
+        .forEach((title) => (title.style.animationPlayState = 'running'));
+    } else {
+      musicTitleStore.animation = false;
+      this.render();
+    }
   }
 
   render() {
@@ -16,7 +25,7 @@ class Header extends HTMLElement {
                 <div class='header-left'>
                     <div class='title-track'>
                       <h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
-                      <h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      ${musicTitleStore.animation ? `<h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>` : ``}
                     </div>
                     <span>${getMusicInfo(audioStore.title).singer}</span>
                 </div>
@@ -30,7 +39,10 @@ class Header extends HTMLElement {
                 </div>
             </header>
         `;
+    this.addEvents();
   }
+
+  addEvents() {}
 }
 
 export default Header;
