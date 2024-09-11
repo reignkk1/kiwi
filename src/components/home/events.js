@@ -166,4 +166,3 @@ export function playListEvent() {
 
 // playList data를 title, singer 따로 분류해서 json 형태로 작성하는게 좋아보임
 // 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
-// 글자 수 많아서 넘어갈때만 슬라이드 애니메이션 적용 => 애니메이션 2초 딜레이 연구
