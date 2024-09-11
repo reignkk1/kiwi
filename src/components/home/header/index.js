@@ -14,7 +14,10 @@ class Header extends HTMLElement {
     this.innerHTML = `
             <header class='home-header'>
                 <div class='header-left'>
-                    <h1>${getMusicInfo(audioStore.title).musicTitle}</h1>
+                    <div class='title-track'>
+                      <h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      <h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                    </div>
                     <span>${getMusicInfo(audioStore.title).singer}</span>
                 </div>
                 <div class='header-right'>
