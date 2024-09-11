@@ -3,10 +3,29 @@
   justify-content: space-between;
 }
 
+.title-track {
+  display: flex;
+  width: 250px;
+  overflow: hidden;
+}
+
 .home-header .header-left h1 {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 10px;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .home-header .header-left span {
@@ -170,4 +189,17 @@
 .modal-playlist .list-singer span {
   font-size: 14px;
   opacity: 0.5;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 100%;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.header-left h1 {
 }
