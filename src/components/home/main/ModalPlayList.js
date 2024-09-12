@@ -12,7 +12,11 @@ class ModalPlayList extends HTMLElement {
   }
 
   render() {
-    if (modalPlayListStore.show) {
+    const {getState} = modalPlayListStore;
+    const {getState: audioState} = audioStore;
+    const audioTitle = audioState().title;
+
+    if (getState().show) {
       this.innerHTML = `
       <div class='modal-playlist'>
           <ul>
@@ -25,7 +29,7 @@ class ModalPlayList extends HTMLElement {
                   </div>
                   <div>
                       <div class='list-title'>
-                          <span style='${audioStore.title === title ? 'color: #cd93c9' : ''}'>${getMusicInfo(title).musicTitle}</span>
+                          <span style='${audioTitle === title ? 'color: #cd93c9' : ''}'>${getMusicInfo(title).musicTitle}</span>
                       </div>
                       <div class='list-singer'>
                           <span>${getMusicInfo(title).singer}</span>

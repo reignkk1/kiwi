@@ -7,7 +7,9 @@ class Header extends HTMLElement {
   }
 
   connectedCallback() {
-    if (getMusicInfo(audioStore.title).musicTitle.length > 10) {
+    const {getState} = audioStore;
+    const {title} = getState();
+    if (getMusicInfo(title).musicTitle.length > 10) {
       musicTitleStore.animation = true;
       this.render();
       document
@@ -20,14 +22,18 @@ class Header extends HTMLElement {
   }
 
   render() {
+    const {getState} = audioStore;
+    const {title} = getState();
+    const {musicTitle, singer} = getMusicInfo(title);
+
     this.innerHTML = `
             <header class='home-header'>
                 <div class='header-left'>
                     <div class='title-track'>
-                      <h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
-                      ${musicTitleStore.animation ? `<h1>${getMusicInfo(audioStore.title).musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>` : ``}
+                      <h1>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      ${musicTitleStore.animation ? `<h1>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>` : ``}
                     </div>
-                    <span>${getMusicInfo(audioStore.title).singer}</span>
+                    <span>${singer}</span>
                 </div>
                 <div class='header-right'>
                     <button>

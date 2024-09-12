@@ -10,10 +10,13 @@ class Main extends HTMLElement {
   }
 
   render() {
+    const {getState} = audioStore;
+    const {img} = getState();
+
     this.innerHTML = `
             <main class='home-main'>
                 <div class='music-img'>
-                    <img src='${audioStore.img}'/>
+                    <img src='${img}'/>
                 </div>
                 <play-list></play-list>
             </main>

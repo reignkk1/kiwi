@@ -4,42 +4,59 @@ export const playListStore = {
   }),
 };
 
-export const audioStore = {
-  audio: new Audio(),
-  img: '',
-  title: '',
-  play: false,
-  loop: false,
-  shuffle: false,
-  muted: false,
-};
+export const audio = new Audio();
+
+export const musicInfoStore = createStore({img: '', title: ''}, [
+  'home-header',
+  'home-main',
+]);
+
+export const audioControllerStore = createStore(
+  {
+    play: false,
+    loop: false,
+    shuffle: false,
+    muted: false,
+  },
+  ['audio-controller']
+);
 
 export const modalMessageStore = {
   show: false,
   text: '',
 };
 
-export const modalPlayListStore = {
-  show: false,
-};
-
 export const musicTitleStore = {
   animation: false,
 };
 
-const modalMessage = createStore(
+export const modalPlayListStore = createStore(
   {
     show: false,
-    text: '',
   },
-  ['home-main']
+  ['play-list']
 );
-export function createStore(state, components) {
-  return {};
+
+// 상태관리 하기위한 Store 개념의 모듈
+// 첫번째 인자로 state 객체를 넣습니다.
+// 두번째 인자로 state가 변할때마다 재렌더링 될 컴포넌트를 넣습니다.
+function createStore(state, components) {
+  let currentState = state;
+  let setState;
+  let getState;
+
+  // setStae 인자로 함수가 들어올 때 return 값을 state로 바꿈
+  // 함수 인자로 prevState 리턴되게 연구
+  setState = (newState) => {
+    currentState = newState;
+    components.forEach((component) => {
+      document.querySelector(component).render();
+    });
+  };
+
+  getState = () => {
+    return currentState;
+  };
+
+  return {getState, setState};
 }
-
-createStore();
-
-// 컴포넌트 Class가 상태를 구독했다면 상태가 변경됬을 때 구독한 컴포넌트 Class들은 this.render() 실행
-// 인자로 상태와 상태가 변경되면 재렌더링 될 class 컴포넌트를 배열의 형태로 받는다.
-// state 객체를 기반으로 set함수들을 만들고 배열에 담긴 컴포넌트들을 재렌더링 시킨다.
