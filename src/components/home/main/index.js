@@ -1,4 +1,4 @@
-import {audioStore} from '../../../store';
+import {musicInfoStore} from '../../../store';
 
 class Main extends HTMLElement {
   constructor() {
@@ -10,7 +10,7 @@ class Main extends HTMLElement {
   }
 
   render() {
-    const {getState} = audioStore;
+    const {getState} = musicInfoStore;
     const {img} = getState();
 
     this.innerHTML = `

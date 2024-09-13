@@ -1,6 +1,5 @@
-import {audio, audioStore} from '../../../store';
+import {audio, audioControllerStore} from '../../../store';
 import {buttonEvent} from '../events';
-import {getPlayButtonClassName} from '../utils';
 
 class AudioController extends HTMLElement {
   constructor() {
@@ -12,7 +11,7 @@ class AudioController extends HTMLElement {
   }
 
   render() {
-    const {getState} = audioStore;
+    const {getState} = audioControllerStore;
     const {shuffle, loop, muted, play} = getState();
 
     this.innerHTML = `
@@ -25,7 +24,7 @@ class AudioController extends HTMLElement {
                     <i class="fas fa-step-backward"></i>
                 </button>
                 <button class='toggle-play-button'>
-                    <i class='${getPlayButtonClassName()}'></i>
+                    <i class='${play ? 'fas fa-pause' : 'fas fa-play'}'></i>
                 </button>
                 <button class='step-forward-button'>
                     <i class="fas fa-step-forward"></i>

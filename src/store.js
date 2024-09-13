@@ -7,8 +7,7 @@ export const playListStore = {
 export const audio = new Audio();
 
 export const musicInfoStore = createStore({img: '', title: ''}, [
-  'home-header',
-  'home-main',
+  'home-content',
 ]);
 
 export const audioControllerStore = createStore(
@@ -49,8 +48,10 @@ function createStore(state, components) {
   // 함수 인자로 prevState 리턴되게 연구
   setState = (newState) => {
     currentState = newState;
-    components.forEach((component) => {
-      document.querySelector(component).render();
+    setTimeout(() => {
+      components.forEach((component) => {
+        document.querySelector(component).render();
+      });
     });
   };
 

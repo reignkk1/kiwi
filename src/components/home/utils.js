@@ -1,31 +1,32 @@
-import {audio, audioStore, playListStore} from '../../store';
+import {
+  audio,
+  audioControllerStore,
+  musicInfoStore,
+  playListStore,
+} from '../../store';
 
 export function choiceRandomMusicPlay() {
+  // playList music json 갖고 오는게 비동기로 처리해야함.
   const musicData = playListStore.music.data;
-  const {getState, setState} = audioStore;
+
+  const {setState: setMusicInfo} = musicInfoStore;
 
   const {title, imgNumber} =
     musicData[Math.floor(Math.random() * musicData.length)];
 
-  setState({
-    ...getState(),
-    title,
-    img: `./assets/img/${imgNumber}.png`,
-    play: true,
-  });
-
-  console.log(getState());
+  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
 
   audio.src = `./assets/mp3/${title}.mp3`;
-  audio.play();
 }
 
 export function choiceNextMusicPlay() {
   const musicData = playListStore.music.data;
-  const {getState, setState} = audioStore;
+  const {getState: getMusicInfo, setState: setMusicInfo} = musicInfoStore;
+  const {getState: getAudioController, setState: setAudioController} =
+    audioControllerStore;
 
   let currentMusicIndex = musicData.findIndex(
-    ({title}) => audioStore.title === title
+    ({title}) => getMusicInfo().title === title
   );
 
   if (currentMusicIndex === musicData.length - 1) {
@@ -34,26 +35,20 @@ export function choiceNextMusicPlay() {
 
   const {title, imgNumber} = musicData[currentMusicIndex + 1];
 
-  setState({
-    ...getState(),
-    title,
-    img: `./assets/img/${imgNumber}.png`,
-    play: true,
-  });
+  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
+  setAudioController({...getAudioController(), play: true});
 
   audio.src = `./assets/mp3/${title}.mp3`;
   audio.play();
 }
 
 export function choiceMusicPlay(title, imgNumber) {
-  const {getState, setState} = audioStore;
+  const {getState: getMusicInfo, setState: setMusicInfo} = musicInfoStore;
+  const {getState: getAudioController, setState: setAudioController} =
+    audioControllerStore;
 
-  setState({
-    ...getState(),
-    title,
-    img: `./assets/img/${imgNumber}.png`,
-    play: true,
-  });
+  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
+  setAudioController({...getAudioController(), play: true});
 
   audio.src = `./assets/mp3/${title}.mp3`;
   audio.play();
@@ -63,14 +58,4 @@ export function choiceMusicPlay(title, imgNumber) {
 export function getMusicInfo(title) {
   const [singer, musicTitle] = title.split(' - ');
   return {singer, musicTitle};
-}
-
-export function getPlayButtonClassName() {
-  const {getState} = audioStore;
-  const {play} = getState();
-  if (play) {
-    return 'fas fa-pause';
-  } else {
-    return 'fas fa-play';
-  }
 }

@@ -1,4 +1,8 @@
-import {audioStore, modalPlayListStore, playListStore} from '../../../store';
+import {
+  modalPlayListStore,
+  musicInfoStore,
+  playListStore,
+} from '../../../store';
 import {playListEvent} from '../events';
 import {getMusicInfo} from '../utils';
 
@@ -13,8 +17,8 @@ class ModalPlayList extends HTMLElement {
 
   render() {
     const {getState} = modalPlayListStore;
-    const {getState: audioState} = audioStore;
-    const audioTitle = audioState().title;
+    const {getState: musicInfo} = musicInfoStore;
+    const audioTitle = musicInfo().title;
 
     if (getState().show) {
       this.innerHTML = `

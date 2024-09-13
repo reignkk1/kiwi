@@ -1,6 +1,6 @@
 import {
   audio,
-  audioStore,
+  audioControllerStore,
   modalMessageStore,
   modalPlayListStore,
 } from '../../store';
@@ -11,8 +11,9 @@ import {
 } from './utils';
 
 export function audioEndEvent() {
-  const {getState} = audioStore;
+  const {getState} = audioControllerStore;
   const {shuffle} = getState();
+
   audio.addEventListener('ended', () => {
     // loop 일 경우 ended 이벤트는 실행이 안됌
 
@@ -59,7 +60,7 @@ export function timeUpdateEvent() {
 }
 
 export function inputChangeEvent() {
-  const {getState, setState} = audioStore;
+  const {getState, setState} = audioControllerStore;
 
   document.querySelector('.input-range').addEventListener('input', (e) => {
     audio.pause();
@@ -68,15 +69,14 @@ export function inputChangeEvent() {
   document.querySelector('.input-range').addEventListener('change', () => {
     audio.play();
     setState({...getState(), play: true});
-    document.querySelector('audio-controller').render();
   });
 }
 
 export function buttonEvent() {
-  const {getState, setState} = audioStore;
+  const {getState, setState} = audioControllerStore;
   const {shuffle, play, loop} = getState();
   document.querySelector('.shuffle-button').addEventListener('click', () => {
-    shuffle = !shuffle;
+    setState({...getState(), shuffle: !getState().shuffle});
 
     if (shuffle) {
       modalMessageStore.text = '셔플을 사용합니다.';
@@ -86,7 +86,6 @@ export function buttonEvent() {
 
     modalMessageStore.show = true;
     document.querySelector('modal-message').render();
-    document.querySelector('audio-controller').render();
   });
   document
     .querySelector('.toggle-play-button')
@@ -94,11 +93,9 @@ export function buttonEvent() {
       if (play) {
         audio.pause();
         setState({...getState(), play: false});
-        document.querySelector('audio-controller').render();
       } else {
         audio.play();
         setState({...getState(), play: true});
-        document.querySelector('audio-controller').render();
       }
     });
 
@@ -116,8 +113,9 @@ export function buttonEvent() {
       }
 
       setState({...getState(), play: true});
-      play = true;
+
       modalMessageStore.show = false;
+      // 전체 렌더링 할 필요가 있을까?
       document.querySelector('home-content').render();
     });
 
@@ -134,7 +132,6 @@ export function buttonEvent() {
     audio.loop = loop;
 
     document.querySelector('modal-message').render();
-    document.querySelector('audio-controller').render();
   });
 
   document.querySelector('.volume-range').oninput = (e) => {
@@ -147,7 +144,6 @@ export function buttonEvent() {
     // muted 로직 더 짜보기
 
     audio.muted = muted;
-    document.querySelector('audio-controller').render();
   });
 
   document
@@ -174,6 +170,10 @@ export function playListEvent() {
     });
   });
 }
+
+// header, main 부분을 같은 컴포넌트로 묶어서 노래가 load 될때마다 해당 컴포넌트를 같이 렌더링 해야함.
+// 현재 문제점은 노래 제목이 바뀔때 header부분을 렌더링 시키면 connectedCallback이 실행이 안되고 render 함수가 실행되어
+// 애니메이션이 작동을 안함. 그래서 상위 컴포넌트를 만들어서 상위 컴포넌트를 렌더링 해줘야함. 그러면 connectedCallback이 실행됌
 
 // playList data를 title, singer 따로 분류해서 json 형태로 작성하는게 좋아보임
 // 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
