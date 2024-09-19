@@ -3,30 +3,29 @@ import {
   audioControllerStore,
   modalMessageStore,
   modalPlayListStore,
-  musicInfoStore,
 } from '../../store';
 import {
-  choiceMusicPlay,
-  choiceNextMusicPlay,
-  choiceRandomMusicPlay,
+  audioPause,
+  audioPlay,
+  choiceMusic,
+  choiceNextMusic,
+  choiceRandomMusic,
 } from './utils';
 
 export function audioEndEvent() {
-  const {getState} = audioControllerStore;
-  const {shuffle} = getState();
-
   audio.addEventListener('ended', () => {
-    // loop 일 경우 ended 이벤트는 실행이 안됌
+    const {getState: getAudioController} = audioControllerStore;
+    const {setState: setModalMessage} = modalMessageStore;
+    const {shuffle} = getAudioController();
 
     if (shuffle) {
-      choiceRandomMusicPlay();
+      choiceRandomMusic();
     } else {
-      choiceNextMusicPlay();
+      choiceNextMusic();
     }
 
-    modalMessageStore.show = false;
-
-    document.querySelector('home-content').render();
+    setModalMessage({show: false});
+    audioPlay();
   });
 }
 
@@ -61,81 +60,65 @@ export function timeUpdateEvent() {
 }
 
 export function inputChangeEvent() {
-  const {getState, setState} = audioControllerStore;
-
   document.querySelector('.input-range').addEventListener('input', (e) => {
-    audio.pause();
+    audioPause();
     audio.currentTime = e.target.value;
   });
   document.querySelector('.input-range').addEventListener('change', () => {
-    audio.play();
-    setState({play: true});
+    audioPlay();
   });
 }
 
 export function buttonEvent() {
-  const {getState, setState} = audioControllerStore;
-  const {} = modalMessageStore;
-  const {} = musicInfoStore;
-  const {shuffle, play, loop} = getState();
+  const {getState: getAudioController, setState: setAudioController} =
+    audioControllerStore;
+  const {setState: setModalMessage} = modalMessageStore;
 
   document.querySelector('.shuffle-button').addEventListener('click', () => {
-    setState({...getState(), shuffle: !getState().shuffle});
-
-    if (shuffle) {
-      modalMessageStore.text = '셔플을 사용합니다.';
-    } else {
-      modalMessageStore.text = '셔플을 사용하지 않습니다.';
-    }
-
-    modalMessageStore.show = true;
-    document.querySelector('modal-message').render();
+    setAudioController({shuffle: !getAudioController().shuffle});
+    setModalMessage({
+      show: true,
+      text: getAudioController().shuffle
+        ? '셔플을 사용합니다.'
+        : '셔플을 사용하지 않습니다.',
+    });
   });
   document
     .querySelector('.toggle-play-button')
     .addEventListener('click', () => {
+      const {play} = getAudioController();
       if (play) {
-        audio.pause();
-        setState({...getState(), play: false});
+        audioPause();
       } else {
-        audio.play();
-        setState({...getState(), play: true});
+        audioPlay();
       }
     });
 
   document
     .querySelector('.step-forward-button')
     .addEventListener('click', () => {
+      const {loop, shuffle} = getAudioController();
       if (loop) {
         audio.currentTime = 0;
-        audio.load();
-        audio.play();
       } else if (shuffle) {
-        choiceRandomMusicPlay();
+        choiceRandomMusic();
       } else {
-        choiceNextMusicPlay();
+        choiceNextMusic();
       }
 
-      setState({play: true});
-
-      modalMessageStore.show = false;
-      // 전체 렌더링 할 필요가 있을까?
-      document.querySelector('home-content').render();
+      audioPlay();
     });
 
   document.querySelector('.redo-alt-button').addEventListener('click', () => {
-    if (loop) {
-      modalMessageStore.text = '반복을 사용하지 않습니다.';
-    } else {
-      modalMessageStore.text = '현재 음악을 반복합니다.';
-    }
+    setAudioController({loop: !getAudioController().loop});
+    setModalMessage({
+      show: true,
+      text: getAudioController().loop
+        ? '현재 음악을 반복합니다.'
+        : '반복을 사용하지 않습니다.',
+    });
 
-    modalMessageStore.show = true;
-    setState({loop: !getState().loop});
-
-    audio.loop = getState().loop;
-
-    document.querySelector('modal-message').render();
+    audio.loop = getAudioController().loop;
   });
 
   document.querySelector('.volume-range').oninput = (e) => {
@@ -143,22 +126,20 @@ export function buttonEvent() {
   };
 
   document.querySelector('.volume-button').addEventListener('click', () => {
-    setState({muted: !getState().muted});
-
-    // muted 로직 더 짜보기
-
-    audio.muted = getState().muted;
+    setAudioController({muted: !getAudioController().muted});
+    audio.muted = getAudioController().muted;
   });
 
   document
     .querySelector('.toggle-modal-playlist-button')
     .addEventListener('click', () => {
-      const {setState, getState} = modalPlayListStore;
-      setState({show: !getState().show});
+      const {setState: setModalPlayList, getState: getModalPlayList} =
+        modalPlayListStore;
+      setModalPlayList({show: !getModalPlayList().show});
     });
 }
 
-export function playListEvent() {
+export function playListButtonEvent() {
   document.querySelectorAll('.list-wrap').forEach((list) => {
     list.addEventListener('click', () => {
       const title = list.querySelector('.list-title span').innerText;
@@ -169,15 +150,14 @@ export function playListEvent() {
         .split('/')
         .pop();
 
-      choiceMusicPlay(singer + ' - ' + title, imgNumber);
-      document.querySelector('home-content').render();
+      choiceMusic(title, singer, imgNumber);
+      audioPlay();
     });
   });
 }
 
-// header, main 부분을 같은 컴포넌트로 묶어서 노래가 load 될때마다 해당 컴포넌트를 같이 렌더링 해야함.
-// 현재 문제점은 노래 제목이 바뀔때 header부분을 렌더링 시키면 connectedCallback이 실행이 안되고 render 함수가 실행되어
-// 애니메이션이 작동을 안함. 그래서 상위 컴포넌트를 만들어서 상위 컴포넌트를 렌더링 해줘야함. 그러면 connectedCallback이 실행됌
-
-// playList data를 title, singer 따로 분류해서 json 형태로 작성하는게 좋아보임
 // 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
+// 재생중인 곡은 이미지에 재생 표시하기 제목 색깔 다시 선정
+// 볼륨바 디자인 어떻게 할지 ...
+// 노래 가사 넣기
+// back step 버튼 이벤트 만들기 => playList history
