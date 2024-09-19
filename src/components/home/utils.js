@@ -36,7 +36,7 @@ export function choiceNextMusicPlay() {
   const {title, imgNumber} = musicData[currentMusicIndex + 1];
 
   setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
-  setAudioController({...getAudioController(), play: true});
+  setAudioController({play: true});
 
   audio.src = `./assets/mp3/${title}.mp3`;
   audio.play();
@@ -48,7 +48,7 @@ export function choiceMusicPlay(title, imgNumber) {
     audioControllerStore;
 
   setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
-  setAudioController({...getAudioController(), play: true});
+  setAudioController({play: true});
 
   audio.src = `./assets/mp3/${title}.mp3`;
   audio.play();

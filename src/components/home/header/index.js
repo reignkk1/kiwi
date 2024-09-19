@@ -7,18 +7,13 @@ class Header extends HTMLElement {
   }
 
   connectedCallback() {
-    const {getState} = musicInfoStore;
+    const {getState, setState} = musicInfoStore;
     const {title} = getState();
 
     if (getMusicInfo(title).musicTitle.length > 10) {
-      musicTitleStore.animation = true;
-      this.render();
-      document.querySelectorAll('.title-track h1').forEach((title) => {
-        title.style.animationPlayState = 'running';
-      });
+      setState({slide: true});
     } else {
-      musicTitleStore.animation = false;
-      this.render();
+      setState({slide: false});
     }
   }
 
@@ -31,8 +26,8 @@ class Header extends HTMLElement {
             <header class='home-header'>
                 <div class='header-left'>
                     <div class='title-track'>
-                      <h1>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
-                      ${musicTitleStore.animation ? `<h1>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>` : ``}
+                      <h1 style='animation-play-state:${getState().slide ? 'running' : 'pause'}'>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>
+                      ${getState().slide ? `<h1 style='animation-play-state:${getState().slide ? 'running' : 'pause'}'>${musicTitle} &nbsp;&nbsp;&nbsp;&nbsp;</h1>` : ``}
                     </div>
                     <span>${singer}</span>
                 </div>

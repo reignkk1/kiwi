@@ -3,6 +3,7 @@ import {
   audioControllerStore,
   modalMessageStore,
   modalPlayListStore,
+  musicInfoStore,
 } from '../../store';
 import {
   choiceMusicPlay,
@@ -68,13 +69,16 @@ export function inputChangeEvent() {
   });
   document.querySelector('.input-range').addEventListener('change', () => {
     audio.play();
-    setState({...getState(), play: true});
+    setState({play: true});
   });
 }
 
 export function buttonEvent() {
   const {getState, setState} = audioControllerStore;
+  const {} = modalMessageStore;
+  const {} = musicInfoStore;
   const {shuffle, play, loop} = getState();
+
   document.querySelector('.shuffle-button').addEventListener('click', () => {
     setState({...getState(), shuffle: !getState().shuffle});
 
@@ -112,7 +116,7 @@ export function buttonEvent() {
         choiceNextMusicPlay();
       }
 
-      setState({...getState(), play: true});
+      setState({play: true});
 
       modalMessageStore.show = false;
       // 전체 렌더링 할 필요가 있을까?
@@ -127,9 +131,9 @@ export function buttonEvent() {
     }
 
     modalMessageStore.show = true;
-    setState({...getState(), loop: !getState().loop});
+    setState({loop: !getState().loop});
 
-    audio.loop = loop;
+    audio.loop = getState().loop;
 
     document.querySelector('modal-message').render();
   });
@@ -139,11 +143,11 @@ export function buttonEvent() {
   };
 
   document.querySelector('.volume-button').addEventListener('click', () => {
-    setState({...getState(), muted: !getState().muted});
+    setState({muted: !getState().muted});
 
     // muted 로직 더 짜보기
 
-    audio.muted = muted;
+    audio.muted = getState().muted;
   });
 
   document
