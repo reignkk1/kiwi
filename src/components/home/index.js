@@ -1,5 +1,5 @@
 import {audioEndEvent, audioLoadedDataEvent, timeUpdateEvent} from './events';
-import {choiceRandomMusicPlay} from './utils';
+import {choiceRandomMusic} from './utils';
 
 class Home extends HTMLElement {
   constructor() {
@@ -8,7 +8,7 @@ class Home extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    choiceRandomMusicPlay();
+    choiceRandomMusic();
   }
 
   render() {
