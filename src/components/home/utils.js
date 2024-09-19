@@ -5,25 +5,25 @@ import {
   playListStore,
 } from '../../store';
 
-export function choiceRandomMusicPlay() {
-  // playList music json 갖고 오는게 비동기로 처리해야함.
+export function choiceRandomMusic() {
   const musicData = playListStore.music.data;
-
   const {setState: setMusicInfo} = musicInfoStore;
-
-  const {title, imgNumber} =
+  const {title, singer, imgNumber} =
     musicData[Math.floor(Math.random() * musicData.length)];
 
-  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
+  setMusicInfo({
+    title,
+    singer,
+    imgSrc: `./assets/img/${imgNumber}.png`,
+    slide: title.length > 10 ? true : false,
+  });
 
-  audio.src = `./assets/mp3/${title}.mp3`;
+  audio.src = `./assets/mp3/${singer + ' - ' + title}.mp3`;
 }
 
-export function choiceNextMusicPlay() {
+export function choiceNextMusic() {
   const musicData = playListStore.music.data;
   const {getState: getMusicInfo, setState: setMusicInfo} = musicInfoStore;
-  const {getState: getAudioController, setState: setAudioController} =
-    audioControllerStore;
 
   let currentMusicIndex = musicData.findIndex(
     ({title}) => getMusicInfo().title === title
@@ -33,29 +33,39 @@ export function choiceNextMusicPlay() {
     currentMusicIndex = -1;
   }
 
-  const {title, imgNumber} = musicData[currentMusicIndex + 1];
+  const {title, imgNumber, singer} = musicData[currentMusicIndex + 1];
 
-  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
+  setMusicInfo({
+    title,
+    singer,
+    imgSrc: `./assets/img/${imgNumber}.png`,
+    slide: title.length > 10 ? true : false,
+  });
+
+  audio.src = `./assets/mp3/${singer + ' - ' + title}.mp3`;
+}
+
+export function choiceMusic(title, singer, imgNumber) {
+  const {setState: setMusicInfo} = musicInfoStore;
+
+  setMusicInfo({
+    title,
+    singer,
+    imgSrc: `./assets/img/${imgNumber}.png`,
+    slide: title.length > 10 ? true : false,
+  });
+
+  audio.src = `./assets/mp3/${singer + ' - ' + title}.mp3`;
+}
+
+export function audioPlay() {
+  const {setState: setAudioController} = audioControllerStore;
   setAudioController({play: true});
-
-  audio.src = `./assets/mp3/${title}.mp3`;
   audio.play();
 }
 
-export function choiceMusicPlay(title, imgNumber) {
-  const {getState: getMusicInfo, setState: setMusicInfo} = musicInfoStore;
-  const {getState: getAudioController, setState: setAudioController} =
-    audioControllerStore;
-
-  setMusicInfo({title, img: `./assets/img/${imgNumber}.png`});
-  setAudioController({play: true});
-
-  audio.src = `./assets/mp3/${title}.mp3`;
-  audio.play();
-}
-
-// json 파일 가수, 제목 형태로 다시 만들면 해당 모듈은 필요없음
-export function getMusicInfo(title) {
-  const [singer, musicTitle] = title.split(' - ');
-  return {singer, musicTitle};
+export function audioPause() {
+  const {setState: setAudioController} = audioControllerStore;
+  setAudioController({play: false});
+  audio.pause();
 }
