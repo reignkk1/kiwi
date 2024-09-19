@@ -6,10 +6,10 @@ export const playListStore = {
 
 export const audio = new Audio();
 
-export const musicInfoStore = createStore({img: '', title: '', slide: false}, [
-  'home-header',
-  'home-main',
-]);
+export const musicInfoStore = createStore(
+  {title: '', singer: '', imgSrc: '', slide: false},
+  ['music-info', 'music-img']
+);
 
 export const audioControllerStore = createStore(
   {
@@ -21,9 +21,7 @@ export const audioControllerStore = createStore(
   ['audio-controller']
 );
 
-export const modalMessageStore = createStore({show: false, text: ''}, [
-  'modal-message',
-]);
+export const modalMessageStore = createStore({show: false}, ['modal-message']);
 
 export const modalPlayListStore = createStore(
   {
