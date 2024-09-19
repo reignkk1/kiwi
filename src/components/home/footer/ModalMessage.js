@@ -10,10 +10,12 @@ class ModalMessage extends HTMLElement {
   }
 
   render() {
-    if (modalMessageStore.show) {
+    const {getState} = modalMessageStore;
+    const {show, text} = getState();
+    if (show) {
       this.innerHTML = `
             <div class='modal-message-box'>
-                <span>${modalMessageStore.text}</span>
+                <span>${text}</span>
             </div>
         `;
     } else {

@@ -1,5 +1,3 @@
-import {getMusicInfo} from '../utils';
-
 class Header extends HTMLElement {
   constructor() {
     super();
@@ -12,18 +10,8 @@ class Header extends HTMLElement {
   render() {
     this.innerHTML = `
             <header class='home-header'>
-                <div class='header-left'>
-                    <h1>${getMusicInfo().musicTitle}</h1>
-                    <span>${getMusicInfo().singer}</span>
-                </div>
-                <div class='header-right'>
-                    <button>
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <button>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                </div>
+              <music-info></music-info>
+              <menu-buttons></menu-buttons>
             </header>
         `;
   }

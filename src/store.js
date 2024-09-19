@@ -1,18 +1,59 @@
-export const audioStore = {
-  audio: new Audio(),
-  img: '',
-  title: '',
-  play: false,
-  loop: false,
-  shuffle: false,
-  muted: false,
+export const playListStore = {
+  music: await import('../playList.json', {
+    with: {type: 'json'},
+  }),
 };
 
-export const modalMessageStore = {
-  show: false,
-  text: '',
-};
+export const audio = new Audio();
 
-// setState 함수 객체를 따로 만들어보기 set함수를 실행하면 자동 렌더링
-export function useStore() {}
-// 컴포넌트 Class가 상태를 구독했다면 상태가 변경됬을 때 구독한 컴포넌트 Class들은 this.render() 실행
+export const musicInfoStore = createStore(
+  {title: '', singer: '', imgSrc: '', slide: false},
+  ['music-info', 'music-img']
+);
+
+export const audioControllerStore = createStore(
+  {
+    play: false,
+    loop: false,
+    shuffle: false,
+    muted: false,
+  },
+  ['audio-controller']
+);
+
+export const modalMessageStore = createStore({show: false}, ['modal-message']);
+
+export const modalPlayListStore = createStore(
+  {
+    show: false,
+  },
+  ['play-list']
+);
+
+// 상태관리 하기위한 Store 개념의 모듈
+// 첫번째 인자로 state 객체를 넣습니다.
+// 두번째 인자로 state가 변할때마다 재렌더링 될 컴포넌트를 넣습니다.
+function createStore(state = {}, components = ['']) {
+  let currentState = state;
+  let setState;
+  let getState;
+
+  // setStae 인자로 함수가 들어올 때 return 값을 state로 바꿈
+  // 함수 인자로 prevState 리턴되게 연구
+  setState = (newState) => {
+    currentState = {...currentState, ...newState};
+    // setTimeout을 안쓰면 컴포넌트 render부분이 오류남
+    // render가 비동기로
+    setTimeout(() => {
+      components.forEach((component) => {
+        document.querySelector(component).render();
+      });
+    });
+  };
+
+  getState = () => {
+    return currentState;
+  };
+
+  return {getState, setState};
+}

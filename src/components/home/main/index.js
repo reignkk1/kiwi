@@ -1,5 +1,3 @@
-import {audioStore} from '../../../store';
-
 class Main extends HTMLElement {
   constructor() {
     super();
@@ -12,9 +10,8 @@ class Main extends HTMLElement {
   render() {
     this.innerHTML = `
             <main class='home-main'>
-                <div class='music-img'>
-                    <img src='${audioStore.img}'/>
-                </div>
+                <music-img></music-img>
+                <play-list></play-list>
             </main>
           `;
   }

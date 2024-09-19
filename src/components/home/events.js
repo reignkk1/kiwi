@@ -1,26 +1,37 @@
-import {audioStore, modalMessageStore} from '../../store';
-import {choiceNextMusic, choiceRandomMusic} from './utils';
+import {
+  audio,
+  audioControllerStore,
+  modalMessageStore,
+  modalPlayListStore,
+} from '../../store';
+import {
+  audioPause,
+  audioPlay,
+  choiceMusic,
+  choiceNextMusic,
+  choiceRandomMusic,
+} from './utils';
 
 export function audioEndEvent() {
-  audioStore.audio.addEventListener('ended', () => {
-    // loop 일 경우 ended 이벤트는 실행이 안됌
+  audio.addEventListener('ended', () => {
+    const {getState: getAudioController} = audioControllerStore;
+    const {setState: setModalMessage} = modalMessageStore;
+    const {shuffle} = getAudioController();
 
-    if (audioStore.shuffle) {
+    if (shuffle) {
       choiceRandomMusic();
     } else {
       choiceNextMusic();
     }
-    audioStore.audio.play();
-    audioStore.play = true;
-    modalMessageStore.show = false;
 
-    document.querySelector('home-content').render();
+    setModalMessage({show: false});
+    audioPlay();
   });
 }
 
 export function audioLoadedDataEvent() {
-  audioStore.audio.onloadeddata = () => {
-    const audioDuration = audioStore.audio.duration;
+  audio.onloadeddata = () => {
+    const audioDuration = audio.duration;
 
     document.querySelector('.input-range').value = 0;
     document.querySelector('.input-range').min = 0;
@@ -35,8 +46,8 @@ export function audioLoadedDataEvent() {
 }
 
 export function timeUpdateEvent() {
-  audioStore.audio.addEventListener('timeupdate', () => {
-    const audioCurrentTime = audioStore.audio.currentTime;
+  audio.addEventListener('timeupdate', () => {
+    const audioCurrentTime = audio.currentTime;
 
     let minute = Math.floor(audioCurrentTime / 60);
     let second = Math.floor(audioCurrentTime % 60);
@@ -49,90 +60,104 @@ export function timeUpdateEvent() {
 }
 
 export function inputChangeEvent() {
-  // input-range를 움직였을 때 노래가 안 멈춤
-
   document.querySelector('.input-range').addEventListener('input', (e) => {
-    audioStore.audio.pause();
-    audioStore.audio.currentTime = e.target.value;
+    audioPause();
+    audio.currentTime = e.target.value;
   });
   document.querySelector('.input-range').addEventListener('change', () => {
-    audioStore.audio.play();
-    audioStore.play = true;
-    document.querySelector('audio-controller').render();
+    audioPlay();
   });
 }
 
 export function buttonEvent() {
+  const {getState: getAudioController, setState: setAudioController} =
+    audioControllerStore;
+  const {setState: setModalMessage} = modalMessageStore;
+
   document.querySelector('.shuffle-button').addEventListener('click', () => {
-    audioStore.shuffle = !audioStore.shuffle;
-
-    if (audioStore.shuffle) {
-      modalMessageStore.text = '셔플을 사용합니다.';
-    } else {
-      modalMessageStore.text = '셔플을 사용하지 않습니다.';
-    }
-
-    modalMessageStore.show = true;
-    document.querySelector('modal-message').render();
-    document.querySelector('audio-controller').render();
+    setAudioController({shuffle: !getAudioController().shuffle});
+    setModalMessage({
+      show: true,
+      text: getAudioController().shuffle
+        ? '셔플을 사용합니다.'
+        : '셔플을 사용하지 않습니다.',
+    });
   });
   document
     .querySelector('.toggle-play-button')
     .addEventListener('click', () => {
-      if (audioStore.play) {
-        audioStore.audio.pause();
-        audioStore.play = false;
-        document.querySelector('audio-controller').render();
+      const {play} = getAudioController();
+      if (play) {
+        audioPause();
       } else {
-        audioStore.audio.play();
-        audioStore.play = true;
-        document.querySelector('audio-controller').render();
+        audioPlay();
       }
     });
 
   document
     .querySelector('.step-forward-button')
     .addEventListener('click', () => {
-      if (audioStore.loop) {
-        audioStore.audio.currentTime = 0;
-        audioStore.audio.load();
-      } else if (audioStore.shuffle) {
+      const {loop, shuffle} = getAudioController();
+      if (loop) {
+        audio.currentTime = 0;
+      } else if (shuffle) {
         choiceRandomMusic();
       } else {
         choiceNextMusic();
       }
 
-      audioStore.audio.play();
-      audioStore.play = true;
-      modalMessageStore.show = false;
-      document.querySelector('home-content').render();
+      audioPlay();
     });
 
   document.querySelector('.redo-alt-button').addEventListener('click', () => {
-    if (audioStore.loop) {
-      modalMessageStore.text = '반복을 사용하지 않습니다.';
-    } else {
-      modalMessageStore.text = '현재 음악을 반복합니다.';
-    }
+    setAudioController({loop: !getAudioController().loop});
+    setModalMessage({
+      show: true,
+      text: getAudioController().loop
+        ? '현재 음악을 반복합니다.'
+        : '반복을 사용하지 않습니다.',
+    });
 
-    modalMessageStore.show = true;
-    audioStore.loop = !audioStore.loop;
-    audioStore.audio.loop = audioStore.loop;
-
-    document.querySelector('modal-message').render();
-    document.querySelector('audio-controller').render();
+    audio.loop = getAudioController().loop;
   });
 
   document.querySelector('.volume-range').oninput = (e) => {
-    audioStore.audio.volume = e.target.value;
+    audio.volume = e.target.value;
   };
 
   document.querySelector('.volume-button').addEventListener('click', () => {
-    audioStore.muted = !audioStore.muted;
+    setAudioController({muted: !getAudioController().muted});
+    audio.muted = getAudioController().muted;
+  });
 
-    // muted 로직 더 짜보기
+  document
+    .querySelector('.toggle-modal-playlist-button')
+    .addEventListener('click', () => {
+      const {setState: setModalPlayList, getState: getModalPlayList} =
+        modalPlayListStore;
+      setModalPlayList({show: !getModalPlayList().show});
+    });
+}
 
-    audioStore.audio.muted = audioStore.muted;
-    document.querySelector('audio-controller').render();
+export function playListButtonEvent() {
+  document.querySelectorAll('.list-wrap').forEach((list) => {
+    list.addEventListener('click', () => {
+      const title = list.querySelector('.list-title span').innerText;
+      const singer = list.querySelector('.list-singer span').innerText;
+      const imgNumber = list
+        .querySelector('.list-img')
+        .src.slice(0, -4)
+        .split('/')
+        .pop();
+
+      choiceMusic(title, singer, imgNumber);
+      audioPlay();
+    });
   });
 }
+
+// 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
+// 재생중인 곡은 이미지에 재생 표시하기 제목 색깔 다시 선정
+// 볼륨바 디자인 어떻게 할지 ...
+// 노래 가사 넣기
+// back step 버튼 이벤트 만들기 => playList history

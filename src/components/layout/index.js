@@ -1,4 +1,4 @@
-import {choiceRandomMusic} from '../home/utils';
+import {audio} from '../../store';
 
 class Layout extends HTMLElement {
   constructor() {
@@ -6,7 +6,7 @@ class Layout extends HTMLElement {
   }
 
   connectedCallback() {
-    choiceRandomMusic();
+    audio.volume = 0.5;
     this.render();
   }
 

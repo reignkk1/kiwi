@@ -1,0 +1,78 @@
+.home-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+}
+
+.home-footer input[type='range'] {
+  width: 100%;
+}
+
+.home-footer .time-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-footer .top-wrap,
+.home-footer .bottom-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-footer .bottom-wrap {
+  margin-top: 10px;
+}
+
+.home-footer .footer-bottom i {
+  color: white;
+}
+
+.home-footer .toggle-play-button {
+  font-size: 40px;
+}
+.home-footer .step-backward-button,
+.home-footer .step-forward-button {
+  font-size: 25px;
+}
+
+.home-footer .fa-redo-alt,
+.home-footer .fa-random,
+.home-footer .volume-button,
+.home-footer .fa-bars {
+  font-size: 22px;
+}
+
+.home-footer .modal-message-box {
+  text-align: center;
+  animation: fadein 3s;
+  opacity: 0;
+}
+
+@keyframes fadein {
+  /* 효과를 동작시간 동안 0 ~ 1까지 */
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.home-footer .modal-message-box span {
+  background-color: rgba(63, 56, 56, 0.4);
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.home-footer .active {
+  color: black !important;
+}
+
+.home-footer .volume-wrap {
+  display: flex;
+  align-items: center;
+}
