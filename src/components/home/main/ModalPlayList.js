@@ -3,8 +3,7 @@ import {
   musicInfoStore,
   playListStore,
 } from '../../../store';
-import {playListEvent} from '../events';
-import {getMusicInfo} from '../utils';
+import {playListButtonEvent} from '../events';
 
 class ModalPlayList extends HTMLElement {
   constructor() {
@@ -16,27 +15,29 @@ class ModalPlayList extends HTMLElement {
   }
 
   render() {
-    const {getState} = modalPlayListStore;
-    const {getState: musicInfo} = musicInfoStore;
-    const audioTitle = musicInfo().title;
+    const {getState: getModalPlayList} = modalPlayListStore;
+    const {getState: getMusicInfo} = musicInfoStore;
 
-    if (getState().show) {
+    const {title: currentTitle} = getMusicInfo();
+    const {show} = getModalPlayList();
+
+    if (show) {
       this.innerHTML = `
       <div class='modal-playlist'>
           <ul>
               ${playListStore.music.data
                 .map(
-                  ({title, imgNumber}) => `
+                  ({title, singer, imgNumber}) => `
               <li class='list-wrap'>
                   <div>
                       <img class='list-img' src='./assets/img/${imgNumber}.png' />
                   </div>
                   <div>
                       <div class='list-title'>
-                          <span style='${audioTitle === title ? 'color: #cd93c9' : ''}'>${getMusicInfo(title).musicTitle}</span>
+                          <span style='${currentTitle === title ? 'color: #cd93c9' : ''}'>${title}</span>
                       </div>
                       <div class='list-singer'>
-                          <span>${getMusicInfo(title).singer}</span>
+                          <span>${singer}</span>
                       </div>
                   </div>
               </li>
@@ -55,7 +56,7 @@ class ModalPlayList extends HTMLElement {
   }
 
   addEvents() {
-    playListEvent();
+    playListButtonEvent();
   }
 }
 
