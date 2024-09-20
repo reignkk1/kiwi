@@ -20,6 +20,7 @@ import './styles/home/footer.css';
 
 import './styles/reset.css';
 import './styles/layout.css';
+import ModalPlayListWrap from './components/home/main/ModalPlayListWrap.js';
 
 customElements.define('layout-root', Layout);
 customElements.define('home-content', Home);
@@ -30,6 +31,7 @@ customElements.define('menu-buttons', MenuButtons);
 
 customElements.define('home-main', Main);
 customElements.define('music-img', MusicImg);
+customElements.define('play-list-wrap', ModalPlayListWrap);
 customElements.define('play-list', ModalPlayList);
 
 customElements.define('home-footer', Footer);

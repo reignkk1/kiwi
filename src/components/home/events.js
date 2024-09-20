@@ -156,8 +156,6 @@ export function playListButtonEvent() {
   });
 }
 
-// 현재 재생중인 곡에 따라서 playList scroll 위치를 변경
-// 재생중인 곡은 이미지에 재생 표시하기 제목 색깔 다시 선정
 // 볼륨바 디자인 어떻게 할지 ...
 // 노래 가사 넣기
 // back step 버튼 이벤트 만들기 => playList history

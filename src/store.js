@@ -8,7 +8,7 @@ export const audio = new Audio();
 
 export const musicInfoStore = createStore(
   {title: '', singer: '', imgSrc: '', slide: false},
-  ['music-info', 'music-img']
+  ['music-info', 'music-img', 'play-list']
 );
 
 export const audioControllerStore = createStore(
@@ -27,7 +27,7 @@ export const modalPlayListStore = createStore(
   {
     show: false,
   },
-  ['play-list']
+  ['play-list-wrap']
 );
 
 // 상태관리 하기위한 Store 개념의 모듈
