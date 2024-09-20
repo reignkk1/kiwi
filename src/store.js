@@ -8,7 +8,7 @@ export const audio = new Audio();
 
 export const musicInfoStore = createStore(
   {title: '', singer: '', imgSrc: '', slide: false},
-  ['music-info', 'music-img']
+  ['music-info', 'music-img', 'play-list']
 );
 
 export const audioControllerStore = createStore(
