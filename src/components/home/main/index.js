@@ -11,7 +11,7 @@ class Main extends HTMLElement {
     this.innerHTML = `
             <main class='home-main'>
                 <music-img></music-img>
-                <play-list></play-list>
+                <play-list-wrap></play-list-wrap>
             </main>
           `;
   }
