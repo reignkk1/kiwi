@@ -6,6 +6,8 @@ export const playListStore = {
 
 export const audio = new Audio();
 
+export const historyMusicStore = createStore({locationIndex: 0, history: []});
+
 export const musicInfoStore = createStore(
   {title: '', singer: '', imgSrc: '', slide: false},
   ['music-info', 'music-img', 'play-list']
@@ -33,7 +35,7 @@ export const modalPlayListStore = createStore(
 // 상태관리 하기위한 Store 개념의 모듈
 // 첫번째 인자로 state 객체를 넣습니다.
 // 두번째 인자로 state가 변할때마다 재렌더링 될 컴포넌트를 넣습니다.
-function createStore(state = {}, components = ['']) {
+function createStore(state, components) {
   let currentState = state;
   let setState;
   let getState;
@@ -44,11 +46,13 @@ function createStore(state = {}, components = ['']) {
     currentState = {...currentState, ...newState};
     // setTimeout을 안쓰면 컴포넌트 render부분이 오류남
     // render가 비동기로
-    setTimeout(() => {
-      components.forEach((component) => {
-        document.querySelector(component).render();
+    if (components) {
+      setTimeout(() => {
+        components.forEach((component) => {
+          document.querySelector(component).render();
+        });
       });
-    });
+    }
   };
 
   getState = () => {

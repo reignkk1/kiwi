@@ -1,8 +1,10 @@
 import {
   audio,
   audioControllerStore,
+  historyMusicStore,
   modalMessageStore,
   modalPlayListStore,
+  musicInfoStore,
 } from '../../store';
 import {
   audioPause,
@@ -101,7 +103,36 @@ export function buttonEvent() {
       if (loop) {
         audio.currentTime = 0;
       } else if (shuffle) {
-        choiceRandomMusic();
+        const {getState: getHistoryMusic, setState: setHistoryMusic} =
+          historyMusicStore;
+        const {getState: getMusicInfo} = musicInfoStore;
+
+        // 노래 히스토리, 현재 위치 인덱스, 현재 음악 정보, 현재 위치 인덱스에서 다음곡
+        const history = getHistoryMusic().history;
+        const locationIndex = getHistoryMusic().locationIndex;
+        const musicInfo = getMusicInfo();
+        const historyNextMusic = history[locationIndex + 1];
+
+        // 만약 다음곡이 없다면
+        if (!historyNextMusic) {
+          let newLocationIndex = locationIndex;
+          // 현재 곡의 정보를 히스토리에 추가
+          // 현재 위치 인덱스를 +1 하여 앞으로 이동
+
+          // 로직 다시 짜기
+
+          if (history[0]) {
+            newLocationIndex++;
+          }
+
+          history.push(musicInfo);
+          setHistoryMusic({locationIndex: newLocationIndex, history});
+          console.log(getHistoryMusic());
+          choiceRandomMusic();
+        } else {
+          const {title, singer, imgNumber} = historyNextMusic;
+          choiceMusic(title, singer, imgNumber);
+        }
       } else {
         choiceNextMusic();
       }
@@ -159,3 +190,14 @@ export function playListButtonEvent() {
 // 볼륨바 디자인 어떻게 할지 ...
 // 노래 가사 넣기
 // back step 버튼 이벤트 만들기 => playList history
+
+// 현재 위치 index를 변수로 할당
+// 페이지 처음 로드 시 history[]에 현재 곡 push 그리고 현재 위치 index = 0
+// next step 버튼 눌렀을 때 현재 위치 index + 1이 존재 하지 않으면
+// 랜덤 재생 한 후 해당 곡을 history[]에 push 그리고 현재 위치 index 업뎃
+// back step 버튼 눌렀을 때 현재 위치 index - 1에 곡이 존재 하면 해당 곡을 실행
+// 만약 곡이 존재 하지 않으면 랜덤 재생 한 곡을 history[]배열 앞에 unshift
+
+// 셔플 ON(랜덤재생) 일 때 backstep 버튼 누를 시
+// 현재 노래 재생 시간이 2초가 넘어 갔을 때 back step 버튼 누르면 현재 노래 반복 재생!
+// 현재 노래 재생 시간이 2초 미만일 때 back step 버튼 누르면 이전 곡 재생!
