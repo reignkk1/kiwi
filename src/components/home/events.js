@@ -4,14 +4,14 @@ import {
   historyMusicStore,
   modalMessageStore,
   modalPlayListStore,
-  musicInfoStore,
 } from '../../store';
+
 import {
-  audioPause,
-  audioPlay,
+  choiceSelectMusic,
+  handleHistory,
+  handleLocationIndex,
   choiceMusic,
-  choiceNextMusic,
-  choiceRandomMusic,
+  handleAudio,
 } from './utils';
 
 export function audioEndEvent() {
@@ -21,13 +21,13 @@ export function audioEndEvent() {
     const {shuffle} = getAudioController();
 
     if (shuffle) {
-      choiceRandomMusic();
+      choiceMusic('random');
     } else {
-      choiceNextMusic();
+      choiceMusic('next');
     }
 
     setModalMessage({show: false});
-    audioPlay();
+    handleAudio('play');
   });
 }
 
@@ -63,11 +63,11 @@ export function timeUpdateEvent() {
 
 export function inputChangeEvent() {
   document.querySelector('.input-range').addEventListener('input', (e) => {
-    audioPause();
+    handleAudio('pause');
     audio.currentTime = e.target.value;
   });
   document.querySelector('.input-range').addEventListener('change', () => {
-    audioPlay();
+    handleAudio('play');
   });
 }
 
@@ -90,9 +90,9 @@ export function buttonEvent() {
     .addEventListener('click', () => {
       const {play} = getAudioController();
       if (play) {
-        audioPause();
+        handleAudio('pause');
       } else {
-        audioPlay();
+        handleAudio('play');
       }
     });
 
@@ -103,41 +103,67 @@ export function buttonEvent() {
       if (loop) {
         audio.currentTime = 0;
       } else if (shuffle) {
-        const {getState: getHistoryMusic, setState: setHistoryMusic} =
-          historyMusicStore;
-        const {getState: getMusicInfo} = musicInfoStore;
+        const {getState: getHistoryMusic} = historyMusicStore;
 
         // 노래 히스토리, 현재 위치 인덱스, 현재 음악 정보, 현재 위치 인덱스에서 다음곡
         const history = getHistoryMusic().history;
         const locationIndex = getHistoryMusic().locationIndex;
-        const musicInfo = getMusicInfo();
         const historyNextMusic = history[locationIndex + 1];
 
         // 만약 다음곡이 없다면
         if (!historyNextMusic) {
-          let newLocationIndex = locationIndex;
-          // 현재 곡의 정보를 히스토리에 추가
-          // 현재 위치 인덱스를 +1 하여 앞으로 이동
-
-          // 로직 다시 짜기
-
-          if (history[0]) {
-            newLocationIndex++;
-          }
-
-          history.push(musicInfo);
-          setHistoryMusic({locationIndex: newLocationIndex, history});
-          console.log(getHistoryMusic());
-          choiceRandomMusic();
+          choiceMusic('random');
+          handleLocationIndex('next');
+          handleHistory('push');
         } else {
-          const {title, singer, imgNumber} = historyNextMusic;
-          choiceMusic(title, singer, imgNumber);
+          const {title, singer, imgSrc} = historyNextMusic;
+          choiceSelectMusic(title, singer, imgSrc);
+          handleLocationIndex('next');
         }
       } else {
-        choiceNextMusic();
+        choiceMusic('next');
       }
 
-      audioPlay();
+      handleAudio('play');
+    });
+
+  document
+    .querySelector('.step-backward-button')
+    .addEventListener('click', () => {
+      const {loop, shuffle} = getAudioController();
+      if (loop) {
+        audio.currentTime = 0;
+      } else if (shuffle) {
+        if (audio.currentTime > 3) {
+          audio.currentTime = 0;
+        } else {
+          const {getState: getHistoryMusic} = historyMusicStore;
+
+          // 노래 히스토리, 현재 위치 인덱스, 현재 음악 정보, 현재 위치 인덱스에서 다음곡
+          const history = getHistoryMusic().history;
+          const locationIndex = getHistoryMusic().locationIndex;
+          const historyPrevMusic = history[locationIndex - 1];
+
+          // 만약 이전곡이 없다면
+          if (!historyPrevMusic) {
+            choiceMusic('random');
+            handleLocationIndex('prev');
+            handleHistory('unshift');
+          } else {
+            const {title, singer, imgSrc} = historyPrevMusic;
+            choiceSelectMusic(title, singer, imgSrc);
+            handleLocationIndex('prev');
+          }
+        }
+      } else {
+        if (audio.currentTime > 3) {
+          audio.currentTime = 0;
+        } else {
+          choiceMusic('prev');
+        }
+      }
+
+      handleAudio('play');
     });
 
   document.querySelector('.redo-alt-button').addEventListener('click', () => {
@@ -175,29 +201,15 @@ export function playListButtonEvent() {
     list.addEventListener('click', () => {
       const title = list.querySelector('.list-title span').innerText;
       const singer = list.querySelector('.list-singer span').innerText;
-      const imgNumber = list
-        .querySelector('.list-img')
-        .src.slice(0, -4)
-        .split('/')
-        .pop();
+      const imgSrc = list.querySelector('.list-img').src;
 
-      choiceMusic(title, singer, imgNumber);
-      audioPlay();
+      choiceSelectMusic(title, singer, imgSrc);
+      handleAudio('play');
     });
   });
 }
 
-// 볼륨바 디자인 어떻게 할지 ...
+// 볼륨바, 재생바 디자인 어떻게 할지 ...
 // 노래 가사 넣기
-// back step 버튼 이벤트 만들기 => playList history
-
-// 현재 위치 index를 변수로 할당
-// 페이지 처음 로드 시 history[]에 현재 곡 push 그리고 현재 위치 index = 0
-// next step 버튼 눌렀을 때 현재 위치 index + 1이 존재 하지 않으면
-// 랜덤 재생 한 후 해당 곡을 history[]에 push 그리고 현재 위치 index 업뎃
-// back step 버튼 눌렀을 때 현재 위치 index - 1에 곡이 존재 하면 해당 곡을 실행
-// 만약 곡이 존재 하지 않으면 랜덤 재생 한 곡을 history[]배열 앞에 unshift
-
-// 셔플 ON(랜덤재생) 일 때 backstep 버튼 누를 시
-// 현재 노래 재생 시간이 2초가 넘어 갔을 때 back step 버튼 누르면 현재 노래 반복 재생!
-// 현재 노래 재생 시간이 2초 미만일 때 back step 버튼 누르면 이전 곡 재생!
+// events 모듈들 리팩토링 하기 => 가독성
+// 랜덤 재생일 때 노래가 다 끝나고 history에 다음곡이 있으면 그 곡 재생 없으면 랜덤 재생!
