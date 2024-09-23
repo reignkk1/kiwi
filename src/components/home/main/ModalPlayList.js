@@ -18,10 +18,10 @@ class ModalPlayList extends HTMLElement {
           <ul>
               ${playListStore.music.data
                 .map(
-                  ({title, singer, imgNumber}) => `
+                  ({title, singer, imgSrc}) => `
               <li class='list-wrap'>
                   <div class='list-cover'>
-                      <img class='list-img' src='./assets/img/${imgNumber}.png' />
+                      <img class='list-img' src=${imgSrc} />
                       ${currentTitle === title ? `<img class='music-bar' src='./assets/img/music-bar.gif' />` : ''}
                   </div>
                   <div>
