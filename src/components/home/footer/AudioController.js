@@ -1,5 +1,5 @@
 import {audio, audioControllerStore} from '../../../store';
-import {buttonEvent} from '../events';
+import {audioControllerButtonEvent} from '../events';
 
 class AudioController extends HTMLElement {
   constructor() {
@@ -52,7 +52,7 @@ class AudioController extends HTMLElement {
   }
 
   addEvents() {
-    buttonEvent();
+    audioControllerButtonEvent();
   }
 }
 
