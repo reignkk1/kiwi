@@ -73,7 +73,7 @@ export function choiceMusic(action) {
       break;
     case 'prev':
       if (currentMusicIndex === 0) {
-        currentMusicIndex = musicData.length - 1;
+        currentMusicIndex = musicData.length;
       }
       newMusicInfo = createMusicInfo(musicData[currentMusicIndex - 1]);
       break;
@@ -83,13 +83,14 @@ export function choiceMusic(action) {
   setMusicInfo(newMusicInfo);
 }
 
-export function choiceSelectMusic(title, singer, imgSrc) {
+export function choiceSelectMusic(title, singer, imgSrc, backGroundColor) {
   const {setState: setMusicInfo} = musicInfoStore;
 
   setMusicInfo({
     title,
     singer,
     imgSrc,
+    backGroundColor,
     slide: title.length > 10 ? true : false,
   });
 
