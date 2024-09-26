@@ -3,137 +3,286 @@
     {
       "title": "나의 사춘기에게",
       "singer": "볼빨간사춘기",
-      "imgSrc": "./assets/img/1.jpg"
+      "imgSrc": "./assets/img/1.jpg",
+      "backGroundColor": "rgba(174, 24, 23, 0.5)",
+      "lyrics": [
+        {
+          "text": "볼빨간사춘기 - 나의 사춘기에게",
+          "startTime": "0"
+        },
+        {
+          "text": "나는 한때 내가 이 세상에 사라지길 바랬어",
+          "startTime": "26"
+        },
+        {
+          "text": "온 세상이 너무나 캄캄해 매일 밤을 울던 날",
+          "startTime": "33"
+        },
+        {
+          "text": "차라리 내가 사라지면 마음이 편할까",
+          "startTime": "38"
+        },
+        {
+          "text": "모두가 날 바라보는 시선이 너무나 두려워",
+          "startTime": "44"
+        },
+        {
+          "text": "아름답게 아름답던 그 시절을 난 아파서",
+          "startTime": "49"
+        },
+        {
+          "text": "사랑받을 수 없었던 내가 너무나 싫어서",
+          "startTime": "54"
+        },
+        {
+          "text": "엄마는 아빠는 다 나만 바라보는데",
+          "startTime": "60"
+        },
+        {
+          "text": "내 마음은 그런 게 아닌데 자꾸만 멀어만 가",
+          "startTime": "65"
+        },
+        {
+          "text": "어떡해, 어떡해, 어떡해, 어떡해",
+          "startTime": "70"
+        },
+        {
+          "text": "시간이 약이라는 말이 내게 정말 맞더라고",
+          "startTime": "84"
+        },
+        {
+          "text": "하루가 지나면 지날수록 더 나아지더라고",
+          "startTime": "91"
+        },
+        {
+          "text": "근데 가끔은 너무 행복하면 또 아파올까 봐",
+          "startTime": "96"
+        },
+        {
+          "text": "내가 가진 이 행복들을 누군가가 가져갈까 봐",
+          "startTime": "101"
+        },
+        {
+          "text": "아름다운 아름답던 그 기억이 난 아파서",
+          "startTime": "106"
+        },
+        {
+          "text": "아픈 만큼 아파해도 사라지지를 않아서",
+          "startTime": "112"
+        },
+        {
+          "text": "친구들은 사람들은 다 나만 바라보는데",
+          "startTime": "118"
+        },
+        {
+          "text": "내 모습은 그런 게 아닌데 자꾸만 멀어만 가",
+          "startTime": "123"
+        },
+        {
+          "text": "그래도 난 어쩌면 내가",
+          "startTime": "131"
+        },
+        {
+          "text": "이 세상에 밝은 빛이라도 될까 봐",
+          "startTime": "136"
+        },
+        {
+          "text": "어쩌면 그 모든 아픔을 내딛고서라도 짧게 빛을 내볼까 봐",
+          "startTime": "142"
+        },
+        {
+          "text": "포기할 수가 없어",
+          "startTime": "154"
+        },
+        {
+          "text": "하루도 맘 편히 잠들 수가 없던 내가",
+          "startTime": "157"
+        },
+        {
+          "text": "이렇게라도 일어서 보려고 하면 내가",
+          "startTime": "165"
+        },
+        {
+          "text": "날 찾아줄까 봐",
+          "startTime": "172"
+        },
+        {
+          "text": "아아아아아아아 아아아아아아아",
+          "startTime": "177"
+        },
+        {
+          "text": "아아아아아아아 아아아아아아아",
+          "startTime": "187"
+        },
+        {
+          "text": "얼마나, 얼마나 아팠을까?",
+          "startTime": "198"
+        },
+        {
+          "text": "얼마나, 얼마나 아팠을까?",
+          "startTime": "203"
+        },
+        {
+          "text": "얼마나, 얼마나, 얼마나 바랬을까?",
+          "startTime": "209"
+        }
+      ]
     },
     {
       "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
       "singer": "사야 (SAya), 재연",
-      "imgSrc": "./assets/img/2.jpg"
+      "imgSrc": "./assets/img/2.jpg",
+      "backGroundColor": "rgba(53, 67, 82, 0.5)"
     },
     {
       "title": "네 옆에 그 사람은 내가 아닌 다른사람",
       "singer": "TOIL, Kid Wine",
-      "imgSrc": "./assets/img/3.jpg"
+      "imgSrc": "./assets/img/3.jpg",
+      "backGroundColor": "rgba(26, 35, 41, 0.5)"
     },
     {
       "title": "너를 사랑하지 않는 맘이 아냐 (Feat. 유주)",
       "singer": "Kid Wine",
-      "imgSrc": "./assets/img/4.jpg"
+      "imgSrc": "./assets/img/4.jpg",
+      "backGroundColor": "rgba(253, 81, 31, 0.5)"
     },
     {
       "title": "그대만 있다면",
       "singer": "너드커넥션",
-      "imgSrc": "./assets/img/5.jpg"
+      "imgSrc": "./assets/img/5.jpg",
+      "backGroundColor": "rgba(186, 153, 131, 0.5)"
     },
     {
       "title": "소녀",
       "singer": "오혁",
-      "imgSrc": "./assets/img/6.jpg"
+      "imgSrc": "./assets/img/6.jpg",
+      "backGroundColor": "rgba(211, 188, 154, 0.5)"
     },
     {
       "title": "얼음꽃",
       "singer": "보이스메모리",
-      "imgSrc": "./assets/img/7.jpg"
+      "imgSrc": "./assets/img/7.jpg",
+      "backGroundColor": "rgba(78, 52, 150, 0.5)"
     },
     {
       "title": "잘 지내자, 우리",
       "singer": "로이킴",
-      "imgSrc": "./assets/img/8.jpg"
+      "imgSrc": "./assets/img/8.jpg",
+      "backGroundColor": "rgba(53, 81, 96, 0.5)"
     },
     {
       "title": "봄 내음보다 너를",
       "singer": "김나영",
-      "imgSrc": "./assets/img/9.jpg"
+      "imgSrc": "./assets/img/9.jpg",
+      "backGroundColor": "rgba(171, 182, 110, 0.5)"
     },
     {
       "title": "묘해, 너와",
       "singer": "태일",
-      "imgSrc": "./assets/img/10.jpg"
+      "imgSrc": "./assets/img/10.jpg",
+      "backGroundColor": "rgba(90, 65, 28, 0.5)"
     },
     {
       "title": "좋아해",
       "singer": "죠지",
-      "imgSrc": "./assets/img/11.jpg"
+      "imgSrc": "./assets/img/11.jpg",
+      "backGroundColor": "rgba(81, 91, 103, 0.5)"
     },
     {
       "title": "아무렇지 않은 사람",
       "singer": "카더가든",
-      "imgSrc": "./assets/img/12.jpg"
+      "imgSrc": "./assets/img/12.jpg",
+      "backGroundColor": "rgba(175, 150, 106, 0.5)"
     },
     {
       "title": "처음이니까",
       "singer": "오왠",
-      "imgSrc": "./assets/img/13.jpg"
+      "imgSrc": "./assets/img/13.jpg",
+      "backGroundColor": "rgba(110, 124, 123, 0.5)"
     },
     {
       "title": "이젠 안녕",
       "singer": "투모로우바이투게더",
-      "imgSrc": "./assets/img/14.jpg"
+      "imgSrc": "./assets/img/14.jpg",
+      "backGroundColor": "rgba(114, 151, 120, 0.5)"
     },
     {
       "title": "세월의 흔적 다 버리고",
       "singer": "오왠",
-      "imgSrc": "./assets/img/15.jpg"
+      "imgSrc": "./assets/img/15.jpg",
+      "backGroundColor": "rgba(97, 130, 171, 0.5)"
     },
     {
       "title": "가까운 듯 먼 그대여",
       "singer": "카더가든",
-      "imgSrc": "./assets/img/16.jpg"
+      "imgSrc": "./assets/img/16.jpg",
+      "backGroundColor": "rgba(36, 49, 76, 0.5)"
     },
     {
       "title": "사라지나요",
       "singer": "PATEKO, Jayci yucca, Kid Wine",
-      "imgSrc": "./assets/img/17.jpg"
+      "imgSrc": "./assets/img/17.jpg",
+      "backGroundColor": "rgba(96, 41, 35, 0.5)"
     },
     {
       "title": "숙면",
       "singer": "오왠",
-      "imgSrc": "./assets/img/18.jpg"
+      "imgSrc": "./assets/img/18.jpg",
+      "backGroundColor": "rgba(237, 118, 168, 0.5)"
     },
     {
       "title": "혼자 사랑하면 되니까",
       "singer": "TOIL, Kid Wine",
-      "imgSrc": "./assets/img/19.jpg"
+      "imgSrc": "./assets/img/19.jpg",
+      "backGroundColor": "rgba(114, 102, 98, 0.5)"
     },
     {
       "title": "나에게 그대만이",
       "singer": "탑현",
-      "imgSrc": "./assets/img/20.jpg"
+      "imgSrc": "./assets/img/20.jpg",
+      "backGroundColor": "rgba(174, 160, 125, 0.5)"
     },
     {
       "title": "작은 날",
       "singer": "PATEKO, Jayci yucca, Kid Wine",
-      "imgSrc": "./assets/img/21.jpg"
+      "imgSrc": "./assets/img/21.jpg",
+      "backGroundColor": "rgba(71, 89, 171, 0.5)"
     },
     {
       "title": "널 떠올리는 중이야",
       "singer": "PATEKO, Jayci yucca, Kid Wine",
-      "imgSrc": "./assets/img/17.jpg"
+      "imgSrc": "./assets/img/17.jpg",
+      "backGroundColor": "rgba(220, 108, 108, 0.5)"
     },
     {
       "title": "있어주라 (Feat. Leellamarz, 뱃사공, The Quiett)",
       "singer": "Kid Wine",
-      "imgSrc": "./assets/img/22.jpg"
+      "imgSrc": "./assets/img/22.jpg",
+      "backGroundColor": "rgba(246, 119, 134, 0.5)"
     },
     {
       "title": "우린 그렇게 사랑해서",
       "singer": "강민경, 잔나비",
-      "imgSrc": "./assets/img/23.jpg"
+      "imgSrc": "./assets/img/23.jpg",
+      "backGroundColor": "rgba(53, 30, 16, 0.5)"
     },
     {
       "title": "사실말야내가말야그게그러니까말이야",
       "singer": "케이시",
-      "imgSrc": "./assets/img/24.jpg"
+      "imgSrc": "./assets/img/24.jpg",
+      "backGroundColor": "rgba(164, 127, 134, 0.5)"
     },
     {
       "title": "칵테일 사랑 (feat. 유연)",
       "singer": "로키드",
-      "imgSrc": "./assets/img/25.jpg"
+      "imgSrc": "./assets/img/25.jpg",
+      "backGroundColor": "rgba(208, 129, 73, 0.5)"
     },
     {
       "title": "참 다행이야",
       "singer": "아일",
-      "imgSrc": "./assets/img/26.jpg"
+      "imgSrc": "./assets/img/26.jpg",
+      "backGroundColor": "rgba(76, 65, 35, 0.5)"
     }
   ]
 }
