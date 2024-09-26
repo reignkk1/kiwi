@@ -1,3 +1,5 @@
+import {chevronDownButtonEvent} from '../events';
+
 class MenuButtons extends HTMLElement {
   constructor() {
     super();
@@ -19,6 +21,11 @@ class MenuButtons extends HTMLElement {
             </div>
 
           `;
+    this.addEvents();
+  }
+
+  addEvents() {
+    chevronDownButtonEvent();
   }
 }
 
