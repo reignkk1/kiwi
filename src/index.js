@@ -1,4 +1,5 @@
 import Layout from './components/layout';
+import BackGorund from './components/layout/BackGorund.js';
 import Home from './components/home';
 
 import Header from './components/home/header';
@@ -6,6 +7,7 @@ import MusicInfo from './components/home/header/MusicInfo.js';
 import MenuButtons from './components/home/header/MenuButtons.js';
 
 import Main from './components/home/main';
+import ModalPlayListWrap from './components/home/main/ModalPlayListWrap.js';
 import MusicImg from './components/home/main/MusicImg.js';
 import ModalPlayList from './components/home/main/ModalPlayList.js';
 
@@ -20,9 +22,9 @@ import './styles/home/footer.css';
 
 import './styles/reset.css';
 import './styles/layout.css';
-import ModalPlayListWrap from './components/home/main/ModalPlayListWrap.js';
 
 customElements.define('layout-root', Layout);
+customElements.define('back-ground', BackGorund);
 customElements.define('home-content', Home);
 
 customElements.define('home-header', Header);
