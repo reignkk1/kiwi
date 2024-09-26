@@ -9,8 +9,8 @@ export const audio = new Audio();
 export const historyMusicStore = createStore({locationIndex: 0, history: []});
 
 export const musicInfoStore = createStore(
-  {title: '', singer: '', imgSrc: '', slide: false},
-  ['music-info', 'music-img', 'play-list']
+  {title: '', singer: '', imgSrc: '', backGroundColor: '', slide: false},
+  ['back-ground', 'music-info', 'music-img', 'play-list']
 );
 
 export const audioControllerStore = createStore(
@@ -49,7 +49,10 @@ function createStore(state, components) {
     if (components) {
       setTimeout(() => {
         components.forEach((component) => {
-          document.querySelector(component).render();
+          const selectComponent = document.querySelector(component);
+          if (selectComponent) {
+            selectComponent.render();
+          }
         });
       });
     }
