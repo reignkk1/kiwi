@@ -1,5 +1,4 @@
 import {audioEndEvent, audioLoadedDataEvent, timeUpdateEvent} from './events';
-import {choiceMusic, handleHistory} from './utils';
 
 class Home extends HTMLElement {
   constructor() {
@@ -8,11 +7,6 @@ class Home extends HTMLElement {
 
   connectedCallback() {
     this.render();
-
-    // 첫 화면 렌더링 시 음악 랜덤으로 뽑고
-    // 뽑은 음악 history에 넣기
-    choiceMusic('random');
-    handleHistory('push');
   }
 
   render() {
