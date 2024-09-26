@@ -4,6 +4,7 @@ import {
   historyMusicStore,
   modalMessageStore,
   modalPlayListStore,
+  playListStore,
 } from '../../store';
 
 import {
@@ -71,7 +72,7 @@ export function inputChangeEvent() {
   });
 }
 
-export function buttonEvent() {
+export function audioControllerButtonEvent() {
   const {getState: getAudioController, setState: setAudioController} =
     audioControllerStore;
   const {setState: setModalMessage} = modalMessageStore;
@@ -116,8 +117,9 @@ export function buttonEvent() {
           handleLocationIndex('next');
           handleHistory('push');
         } else {
-          const {title, singer, imgSrc} = historyNextMusic;
-          choiceSelectMusic(title, singer, imgSrc);
+          const {title, singer, imgSrc, backGroundColor} = historyNextMusic;
+          console.log(title, singer, imgSrc, backGroundColor);
+          choiceSelectMusic(title, singer, imgSrc, backGroundColor);
           handleLocationIndex('next');
         }
       } else {
@@ -150,8 +152,8 @@ export function buttonEvent() {
             handleLocationIndex('prev');
             handleHistory('unshift');
           } else {
-            const {title, singer, imgSrc} = historyPrevMusic;
-            choiceSelectMusic(title, singer, imgSrc);
+            const {title, singer, imgSrc, backGroundColor} = historyPrevMusic;
+            choiceSelectMusic(title, singer, imgSrc, backGroundColor);
             handleLocationIndex('prev');
           }
         }
@@ -197,15 +199,27 @@ export function buttonEvent() {
 }
 
 export function playListButtonEvent() {
+  const musicData = playListStore.music.data;
   document.querySelectorAll('.list-wrap').forEach((list) => {
     list.addEventListener('click', () => {
       const title = list.querySelector('.list-title span').innerText;
-      const singer = list.querySelector('.list-singer span').innerText;
-      const imgSrc = list.querySelector('.list-img').src;
+      const musicInfo = musicData.find((music) => music.title === title);
 
-      choiceSelectMusic(title, singer, imgSrc);
+      choiceSelectMusic(
+        musicInfo.title,
+        musicInfo.singer,
+        musicInfo.imgSrc,
+        musicInfo.backGroundColor
+      );
       handleAudio('play');
     });
+  });
+}
+
+export function chevronDownButtonEvent() {
+  document.querySelector('.fa-chevron-down').addEventListener('click', () => {
+    const {setState: setModalPlayList} = modalPlayListStore;
+    setModalPlayList({show: false});
   });
 }
 
