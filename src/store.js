@@ -9,8 +9,8 @@ export const audio = new Audio();
 export const historyMusicStore = createStore({locationIndex: 0, history: []});
 
 export const musicInfoStore = createStore(
-  {title: '', singer: '', imgSrc: '', backGroundColor: '', slide: false},
-  ['back-ground', 'music-info', 'music-img', 'play-list']
+  {title: '', singer: '', imgSrc: '', backGroundColor: '', lyrics: [{}]},
+  ['back-ground', 'music-info', 'music-img', 'play-list', 'lyrics-wrap']
 );
 
 export const audioControllerStore = createStore(
@@ -31,6 +31,10 @@ export const modalPlayListStore = createStore(
   },
   ['play-list-wrap']
 );
+
+export const currentLyricsPointStore = createStore({text: '', startTime: 0}, [
+  'lyrics-wrap',
+]);
 
 // 상태관리 하기위한 Store 개념의 모듈
 // 첫번째 인자로 state 객체를 넣습니다.

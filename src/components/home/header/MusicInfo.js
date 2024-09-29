@@ -11,7 +11,8 @@ class MusicInfo extends HTMLElement {
 
   render() {
     const {getState} = musicInfoStore;
-    const {title, singer, slide} = getState();
+    const {title, singer} = getState();
+    const slide = title.length > 10;
 
     this.innerHTML = `
         <div class='header-left'>

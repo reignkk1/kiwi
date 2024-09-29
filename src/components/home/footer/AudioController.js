@@ -41,6 +41,7 @@ class AudioController extends HTMLElement {
                 <input class='volume-range' type='range' max='1' step='0.01' value='${audio.volume}'  />
               </div>  
               <div>
+              
                 <button class='toggle-modal-playlist-button'>
                   <i class="fas fa-bars"></i>
                 </button>
@@ -57,3 +58,5 @@ class AudioController extends HTMLElement {
 }
 
 export default AudioController;
+
+// 반복 사용합니다 모달 메세지 리팩토링 fix

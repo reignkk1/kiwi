@@ -7,8 +7,9 @@ import MusicInfo from './components/home/header/MusicInfo.js';
 import MenuButtons from './components/home/header/MenuButtons.js';
 
 import Main from './components/home/main';
-import ModalPlayListWrap from './components/home/main/ModalPlayListWrap.js';
 import MusicImg from './components/home/main/MusicImg.js';
+import LyricsWrap from './components/home/main/LyricsWrap.js';
+import ModalPlayListWrap from './components/home/main/ModalPlayListWrap.js';
 import ModalPlayList from './components/home/main/ModalPlayList.js';
 
 import Footer from './components/home/footer';
@@ -33,6 +34,7 @@ customElements.define('menu-buttons', MenuButtons);
 
 customElements.define('home-main', Main);
 customElements.define('music-img', MusicImg);
+customElements.define('lyrics-wrap', LyricsWrap);
 customElements.define('play-list-wrap', ModalPlayListWrap);
 customElements.define('play-list', ModalPlayList);
 

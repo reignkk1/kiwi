@@ -1,10 +1,11 @@
 import {
   audio,
   audioControllerStore,
+  currentLyricsPointStore,
   historyMusicStore,
   modalMessageStore,
   modalPlayListStore,
-  playListStore,
+  musicInfoStore,
 } from '../../store';
 
 import {
@@ -50,6 +51,7 @@ export function audioLoadedDataEvent() {
 
 export function timeUpdateEvent() {
   audio.addEventListener('timeupdate', () => {
+    const {setState: setCurrentLyricsPoint} = currentLyricsPointStore;
     const audioCurrentTime = audio.currentTime;
 
     let minute = Math.floor(audioCurrentTime / 60);
@@ -59,6 +61,19 @@ export function timeUpdateEvent() {
 
     document.querySelector('.input-range').value = audioCurrentTime;
     document.querySelector('.current-time').innerText = `${minute}:${second}`;
+
+    const {getState: getMusicInfo} = musicInfoStore;
+    const {lyrics} = getMusicInfo();
+    const currentLyricsPoint = lyrics.find(
+      ({startTime}) => startTime === Math.floor(audioCurrentTime)
+    );
+
+    if (currentLyricsPoint) {
+      setCurrentLyricsPoint({
+        text: currentLyricsPoint.text,
+        startTime: currentLyricsPoint.startTime,
+      });
+    }
   });
 }
 
@@ -199,18 +214,11 @@ export function audioControllerButtonEvent() {
 }
 
 export function playListButtonEvent() {
-  const musicData = playListStore.music.data;
   document.querySelectorAll('.list-wrap').forEach((list) => {
     list.addEventListener('click', () => {
       const title = list.querySelector('.list-title span').innerText;
-      const musicInfo = musicData.find((music) => music.title === title);
 
-      choiceSelectMusic(
-        musicInfo.title,
-        musicInfo.singer,
-        musicInfo.imgSrc,
-        musicInfo.backGroundColor
-      );
+      choiceSelectMusic(title);
       handleAudio('play');
     });
   });
@@ -224,6 +232,10 @@ export function chevronDownButtonEvent() {
 }
 
 // 볼륨바, 재생바 디자인 어떻게 할지 ...
-// 노래 가사 넣기
 // events 모듈들 리팩토링 하기 => 가독성
 // 랜덤 재생일 때 노래가 다 끝나고 history에 다음곡이 있으면 그 곡 재생 없으면 랜덤 재생!
+// 다른 노래들 가사 json 작성하기!
+// 재생바를 다른 곳으로 클릭했을 때 가사 업뎃 안됌 => 재생바를 잡고 끌면 업뎃 됌
+
+// 현재 재생 시간이 starTime과 endTime 사이면 해당 가사를 띄어줌
+// 가사가 바뀔때마다 재렌더링이 왜 4번 일어날까?

@@ -55,27 +55,22 @@ export function choiceMusic(action) {
     (music) => music.title === getMusicInfo().title
   );
 
-  const createMusicInfo = (musicInfo) => {
-    return {...musicInfo, slide: musicInfo.title.length > 10 ? true : false};
-  };
-
   switch (action) {
     case 'random':
-      newMusicInfo = createMusicInfo(
-        musicData[Math.floor(Math.random() * musicData.length)]
-      );
+      newMusicInfo = musicData[Math.floor(Math.random() * musicData.length)];
+
       break;
     case 'next':
       if (currentMusicIndex === musicData.length - 1) {
         currentMusicIndex = -1;
       }
-      newMusicInfo = createMusicInfo(musicData[currentMusicIndex + 1]);
+      newMusicInfo = musicData[currentMusicIndex + 1];
       break;
     case 'prev':
       if (currentMusicIndex === 0) {
         currentMusicIndex = musicData.length;
       }
-      newMusicInfo = createMusicInfo(musicData[currentMusicIndex - 1]);
+      newMusicInfo = musicData[currentMusicIndex - 1];
       break;
   }
 
@@ -83,18 +78,13 @@ export function choiceMusic(action) {
   setMusicInfo(newMusicInfo);
 }
 
-export function choiceSelectMusic(title, singer, imgSrc, backGroundColor) {
+export function choiceSelectMusic(title) {
   const {setState: setMusicInfo} = musicInfoStore;
+  const musicData = playListStore.music.data;
+  const musicInfo = musicData.find((music) => music.title === title);
 
-  setMusicInfo({
-    title,
-    singer,
-    imgSrc,
-    backGroundColor,
-    slide: title.length > 10 ? true : false,
-  });
-
-  audio.src = `./assets/mp3/${singer + ' - ' + title}.mp3`;
+  setMusicInfo(musicInfo);
+  audio.src = `./assets/mp3/${musicInfo.singer + ' - ' + musicInfo.title}.mp3`;
 }
 
 export function handleAudio(action) {
