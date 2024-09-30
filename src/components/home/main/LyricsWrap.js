@@ -14,7 +14,8 @@ class LyricsWrap extends HTMLElement {
     const {getState: getCurrentLyricsPoint} = currentLyricsPointStore;
 
     const {lyrics} = getMusicInfo();
-    const {startTime: currentStartTime} = getCurrentLyricsPoint();
+    const {startTime: currentStartTime, endTime: currentEndTime} =
+      getCurrentLyricsPoint();
 
     this.innerHTML = `
              <div class='lyrics-wrap'>
@@ -27,12 +28,12 @@ class LyricsWrap extends HTMLElement {
                   .join('')}
              </div>
             `;
-    this.scrollIntoViewCurrentTitle(currentStartTime);
+    this.scrollIntoViewCurrentTitle(currentStartTime, currentEndTime);
   }
 
-  scrollIntoViewCurrentTitle(startTime) {
+  scrollIntoViewCurrentTitle(startTime, endTime) {
     this.querySelectorAll('.lyrics-text').forEach((lyrics) => {
-      if (lyrics.id == startTime) {
+      if (startTime <= lyrics.id && lyrics.id <= endTime) {
         lyrics.scrollIntoView({block: 'start'});
       }
     });
