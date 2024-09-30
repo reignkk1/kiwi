@@ -23,7 +23,24 @@ export function audioEndEvent() {
     const {shuffle} = getAudioController();
 
     if (shuffle) {
-      choiceMusic('random');
+      const {getState: getHistoryMusic} = historyMusicStore;
+
+      // 노래 히스토리, 현재 위치 인덱스, 현재 음악 정보, 현재 위치 인덱스에서 다음곡
+      const history = getHistoryMusic().history;
+      const locationIndex = getHistoryMusic().locationIndex;
+      const historyNextMusic = history[locationIndex + 1];
+
+      // 만약 다음곡이 없다면
+      if (!historyNextMusic) {
+        choiceMusic('random');
+        handleLocationIndex('next');
+        handleHistory('push');
+      } else {
+        const {title, singer, imgSrc, backGroundColor} = historyNextMusic;
+        console.log(title, singer, imgSrc, backGroundColor);
+        choiceSelectMusic(title, singer, imgSrc, backGroundColor);
+        handleLocationIndex('next');
+      }
     } else {
       choiceMusic('next');
     }
@@ -65,13 +82,16 @@ export function timeUpdateEvent() {
     const {getState: getMusicInfo} = musicInfoStore;
     const {lyrics} = getMusicInfo();
     const currentLyricsPoint = lyrics.find(
-      ({startTime}) => startTime === Math.floor(audioCurrentTime)
+      ({startTime, endTime}) =>
+        startTime <= Math.floor(audioCurrentTime) &&
+        Math.floor(audioCurrentTime) <= endTime
     );
 
     if (currentLyricsPoint) {
       setCurrentLyricsPoint({
         text: currentLyricsPoint.text,
         startTime: currentLyricsPoint.startTime,
+        endTime: currentLyricsPoint.endTime,
       });
     }
   });
@@ -233,9 +253,7 @@ export function chevronDownButtonEvent() {
 
 // 볼륨바, 재생바 디자인 어떻게 할지 ...
 // events 모듈들 리팩토링 하기 => 가독성
-// 랜덤 재생일 때 노래가 다 끝나고 history에 다음곡이 있으면 그 곡 재생 없으면 랜덤 재생!
-// 다른 노래들 가사 json 작성하기!
-// 재생바를 다른 곳으로 클릭했을 때 가사 업뎃 안됌 => 재생바를 잡고 끌면 업뎃 됌
 
-// 현재 재생 시간이 starTime과 endTime 사이면 해당 가사를 띄어줌
+// 다른 노래들 가사 json 작성하기!
 // 가사가 바뀔때마다 재렌더링이 왜 4번 일어날까?
+// CSS 반응형 손보기
