@@ -51,7 +51,9 @@ class ModalPlayList extends HTMLElement {
   scrollIntoViewCurrentTitle(currentTitle) {
     this.querySelectorAll('.list-title span').forEach((title) => {
       if (title.innerText === currentTitle) {
-        title.scrollIntoView({behavior: 'smooth', block: 'center'});
+        document
+          .querySelector('.modal-playlist')
+          .scrollTo({top: title.offsetTop - 150, behavior: 'smooth'});
       }
     });
   }
