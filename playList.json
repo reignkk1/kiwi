@@ -716,19 +716,550 @@
       "title": "그대만 있다면",
       "singer": "너드커넥션",
       "imgSrc": "./assets/img/5.jpg",
-      "backGroundColor": "rgba(186, 153, 131, 0.5)"
+      "backGroundColor": "rgba(186, 153, 131, 0.5)",
+      "lyrics": [
+        {
+          "text": "너드커넥션 - 그대만 있다면",
+          "startTime": 0,
+          "endTime": 14
+        },
+        {
+          "text": "날 사랑해서 떠난다며",
+          "startTime": 15,
+          "endTime": 19
+        },
+        {
+          "text": "눈물짓던 그대의 말을 믿을 수 없죠",
+          "startTime": 20,
+          "endTime": 29
+        },
+        {
+          "text": "하지만 나의 전부였던",
+          "startTime": 30,
+          "endTime": 32
+        },
+        {
+          "text": "그대가 힘들어하기에 잡을 수 없었죠",
+          "startTime": 33,
+          "endTime": 42
+        },
+        {
+          "text": "온통 너와의 기억뿐인",
+          "startTime": 43,
+          "endTime": 45
+        },
+        {
+          "text": "나를 위해서였다면",
+          "startTime": 46,
+          "endTime": 50
+        },
+        {
+          "text": "조금씩 무너져가는 날",
+          "startTime": 51,
+          "endTime": 53
+        },
+        {
+          "text": "날 위한다면",
+          "startTime": 54,
+          "endTime": 57
+        },
+        {
+          "text": "이대로 내 곁에 있어야 해요",
+          "startTime": 58,
+          "endTime": 64
+        },
+        {
+          "text": "나를 떠나면 안 돼요",
+          "startTime": 65,
+          "endTime": 69
+        },
+        {
+          "text": "세상의 모든 걸 잃어도 괜찮아요",
+          "startTime": 70,
+          "endTime": 77
+        },
+        {
+          "text": "그대만 있다면 그대만 있다면",
+          "startTime": 78,
+          "endTime": 86
+        },
+        {
+          "text": "함께 웃던 시간들을",
+          "startTime": 87,
+          "endTime": 90
+        },
+        {
+          "text": "함께했던 약속들을",
+          "startTime": 91,
+          "endTime": 93
+        },
+        {
+          "text": "지금 또 영원히 기억하겠어요",
+          "startTime": 94,
+          "endTime": 100
+        },
+        {
+          "text": "다시 한번 생각해요",
+          "startTime": 101,
+          "endTime": 104
+        },
+        {
+          "text": "무엇이 날 위한 건지",
+          "startTime": 105,
+          "endTime": 107
+        },
+        {
+          "text": "그대는 알고 있어요",
+          "startTime": 108,
+          "endTime": 114
+        },
+        {
+          "text": "영원히 내 곁을 지켜주세요",
+          "startTime": 115,
+          "endTime": 122
+        },
+        {
+          "text": "나를 떠나지 말아요",
+          "startTime": 123,
+          "endTime": 128
+        },
+        {
+          "text": "세상의 모든 걸 잃어도 난 좋아요",
+          "startTime": 129,
+          "endTime": 135
+        },
+        {
+          "text": "그대만 있다면 그대만 있다면",
+          "startTime": 136,
+          "endTime": 155
+        },
+        {
+          "text": "온통 그대의 생각뿐인",
+          "startTime": 156,
+          "endTime": 158
+        },
+        {
+          "text": "나를 위해서였다면",
+          "startTime": 159,
+          "endTime": 163
+        },
+        {
+          "text": "초라하게 쓰러지는 날",
+          "startTime": 164,
+          "endTime": 166
+        },
+        {
+          "text": "날 위한다면",
+          "startTime": 167,
+          "endTime": 173
+        },
+        {
+          "text": "이대로 내 곁에 있어야 해요",
+          "startTime": 174,
+          "endTime": 181
+        },
+        {
+          "text": "나를 떠나면 안 돼요",
+          "startTime": 182,
+          "endTime": 187
+        },
+        {
+          "text": "세상의 모든 걸 잃어도 괜찮아요",
+          "startTime": 188,
+          "endTime": 194
+        },
+        {
+          "text": "그대만 있다면 그대만 있다면",
+          "startTime": 195,
+          "endTime": 201
+        },
+        {
+          "text": "영원히 내 곁을 지켜주세요",
+          "startTime": 202,
+          "endTime": 209
+        },
+        {
+          "text": "나를 떠나지 말아요",
+          "startTime": 210,
+          "endTime": 215
+        },
+        {
+          "text": "세상의 모든 걸 잃어도 난 좋아요",
+          "startTime": 216,
+          "endTime": 222
+        },
+        {
+          "text": "그대만 있다면 그대만 있다면",
+          "startTime": 223,
+          "endTime": 250
+        }
+      ]
     },
     {
       "title": "소녀",
       "singer": "오혁",
       "imgSrc": "./assets/img/6.jpg",
-      "backGroundColor": "rgba(211, 188, 154, 0.5)"
+      "backGroundColor": "rgba(211, 188, 154, 0.5)",
+      "lyrics": [
+        {
+          "text": "오혁 - 소녀",
+          "startTime": 0,
+          "endTime": 2
+        },
+        {
+          "text": "내 곁에만 머물러요 떠나면 안돼요",
+          "startTime": 0,
+          "endTime": 16
+        },
+        {
+          "text": "그리움 두고 머나먼 길",
+          "startTime": 17,
+          "endTime": 23
+        },
+        {
+          "text": "그대 무지개를 찾아올 순 없어요",
+          "startTime": 24,
+          "endTime": 32
+        },
+        {
+          "text": "노을 진 창가에 앉아",
+          "startTime": 33,
+          "endTime": 37
+        },
+        {
+          "text": "멀리 떠가는 구름을 보면",
+          "startTime": 38,
+          "endTime": 46
+        },
+        {
+          "text": "찾고 싶은 옛 생각들 하늘에 그려요",
+          "startTime": 47,
+          "endTime": 61
+        },
+        {
+          "text": "음 불어오는 차가운 바람 속에",
+          "startTime": 62,
+          "endTime": 68
+        },
+        {
+          "text": "그대 외로워 울지만",
+          "startTime": 69,
+          "endTime": 75
+        },
+        {
+          "text": "나 항상 그대 곁에 머물겠어요",
+          "startTime": 76,
+          "endTime": 83
+        },
+        {
+          "text": "떠나지 않아요",
+          "startTime": 84,
+          "endTime": 120
+        },
+        {
+          "text": "노을 진 창가에 앉아",
+          "startTime": 121,
+          "endTime": 126
+        },
+        {
+          "text": "멀리 떠가는 구름을 보면",
+          "startTime": 127,
+          "endTime": 135
+        },
+        {
+          "text": "찾고 싶은 옛 생각들 하늘에 그려요",
+          "startTime": 136,
+          "endTime": 149
+        },
+        {
+          "text": "음 불어오는 차가운 바람 속에",
+          "startTime": 150,
+          "endTime": 157
+        },
+        {
+          "text": "그대 외로워 울지만",
+          "startTime": 158,
+          "endTime": 164
+        },
+        {
+          "text": "나 항상 그대 곁에 머물겠어요",
+          "startTime": 165,
+          "endTime": 172
+        },
+        {
+          "text": "떠나지 않아요",
+          "startTime": 173,
+          "endTime": 194
+        },
+        {
+          "text": "내 곁에만 머물러요 떠나면 안돼요",
+          "startTime": 195,
+          "endTime": 214
+        }
+      ]
     },
     {
       "title": "얼음꽃",
       "singer": "보이스메모리",
       "imgSrc": "./assets/img/7.jpg",
-      "backGroundColor": "rgba(78, 52, 150, 0.5)"
+      "backGroundColor": "rgba(78, 52, 150, 0.5)",
+      "lyrics": [
+        {
+          "text": "보이스메모리 - 얼음꽃",
+          "startTime": 0,
+          "endTime": 15
+        },
+        {
+          "text": "내게 사랑이란 걸",
+          "startTime": 16,
+          "endTime": 19
+        },
+        {
+          "text": "알게 해 준 그녀는",
+          "startTime": 20,
+          "endTime": 24
+        },
+        {
+          "text": "어느 한 동화 속 소녀랍니다",
+          "startTime": 25,
+          "endTime": 29
+        },
+        {
+          "text": "볼 수도 없고 만날 수도 없지만",
+          "startTime": 30,
+          "endTime": 36
+        },
+        {
+          "text": "나는 그녈 사랑했었어요",
+          "startTime": 37,
+          "endTime": 48
+        },
+        {
+          "text": "그녀를 처음 본 순간",
+          "startTime": 49,
+          "endTime": 50
+        },
+        {
+          "text": "난 마법에 걸렸죠",
+          "startTime": 51,
+          "endTime": 55
+        },
+        {
+          "text": "동화 속에 온 듯 벅차고 설렜어요",
+          "startTime": 56,
+          "endTime": 62
+        },
+        {
+          "text": "새하얀 눈꽃송일 닮은 그녀",
+          "startTime": 63,
+          "endTime": 68
+        },
+        {
+          "text": "함부로 다가갈 수 없는",
+          "startTime": 69,
+          "endTime": 71
+        },
+        {
+          "text": "난 초록 모자 난쟁이",
+          "startTime": 72,
+          "endTime": 76
+        },
+        {
+          "text": "왜 날 보지 않나요",
+          "startTime": 77,
+          "endTime": 79
+        },
+        {
+          "text": "보이지 않는 건가요",
+          "startTime": 80,
+          "endTime": 83
+        },
+        {
+          "text": "너무도 작은 나라서",
+          "startTime": 84,
+          "endTime": 86
+        },
+        {
+          "text": "보기도 싫은 건가요",
+          "startTime": 87,
+          "endTime": 90
+        },
+        {
+          "text": "사실은 알고 있어요",
+          "startTime": 91,
+          "endTime": 93
+        },
+        {
+          "text": "그대 눈에 차지 않을 나란 걸",
+          "startTime": 94,
+          "endTime": 98
+        },
+        {
+          "text": "그래서 그댄 백마 탄 왕잘",
+          "startTime": 99,
+          "endTime": 102
+        },
+        {
+          "text": "기다리는 거겠죠",
+          "startTime": 103,
+          "endTime": 141
+        },
+        {
+          "text": "많이 슬픈가 봐요",
+          "startTime": 142,
+          "endTime": 144
+        },
+        {
+          "text": "그 사람이 떠난 게",
+          "startTime": 145,
+          "endTime": 148
+        },
+        {
+          "text": "그 따스했던 그녀가",
+          "startTime": 149,
+          "endTime": 151
+        },
+        {
+          "text": "금세 얼어 가네요",
+          "startTime": 152,
+          "endTime": 156
+        },
+        {
+          "text": "새하얀 눈꽃송일 닮아 버린 너",
+          "startTime": 157,
+          "endTime": 161
+        },
+        {
+          "text": "알고 있잖아요 나에겐",
+          "startTime": 162,
+          "endTime": 165
+        },
+        {
+          "text": "당신만이 전부란 걸",
+          "startTime": 166,
+          "endTime": 169
+        },
+        {
+          "text": "왜 날 못 본 척하죠",
+          "startTime": 170,
+          "endTime": 172
+        },
+        {
+          "text": "그 아님 안 되는가요",
+          "startTime": 173,
+          "endTime": 176
+        },
+        {
+          "text": "동화 속 그대의 왕자",
+          "startTime": 177,
+          "endTime": 179
+        },
+        {
+          "text": "대신할 순 없는 건가요",
+          "startTime": 180,
+          "endTime": 183
+        },
+        {
+          "text": "사실은 알고 있어요",
+          "startTime": 184,
+          "endTime": 187
+        },
+        {
+          "text": "얼마만큼 그리워하는지를",
+          "startTime": 188,
+          "endTime": 191
+        },
+        {
+          "text": "그래서 그댄 백마 탄 왕잘",
+          "startTime": 192,
+          "endTime": 195
+        },
+        {
+          "text": "기다리는 거겠죠",
+          "startTime": 196,
+          "endTime": 199
+        },
+        {
+          "text": "내 몸이 다 얼어도",
+          "startTime": 200,
+          "endTime": 201
+        },
+        {
+          "text": "난 정말 괜찮으니",
+          "startTime": 202,
+          "endTime": 205
+        },
+        {
+          "text": "힘들거든 나에게 안겨",
+          "startTime": 206,
+          "endTime": 209
+        },
+        {
+          "text": "쉬다 가세요",
+          "startTime": 210,
+          "endTime": 215
+        },
+        {
+          "text": "왜 날 보지 않나요",
+          "startTime": 216,
+          "endTime": 223
+        },
+        {
+          "text": "왜 날 보지 않나요",
+          "startTime": 224,
+          "endTime": 226
+        },
+        {
+          "text": "보이지 않는 건가요",
+          "startTime": 227,
+          "endTime": 229
+        },
+        {
+          "text": "한 발짝 뒤에서 항상",
+          "startTime": 230,
+          "endTime": 233
+        },
+        {
+          "text": "그대만 바라보는 나죠",
+          "startTime": 234,
+          "endTime": 237
+        },
+        {
+          "text": "한 번만 나를 봐 줘요",
+          "startTime": 238,
+          "endTime": 241
+        },
+        {
+          "text": "그대 없음 살 수 없을 나인데",
+          "startTime": 242,
+          "endTime": 246
+        },
+        {
+          "text": "그래요 나는 너 하나",
+          "startTime": 247,
+          "endTime": 248
+        },
+        {
+          "text": "기다리는 바보라구요",
+          "startTime": 249,
+          "endTime": 255
+        },
+        {
+          "text": "내게 사랑이란 걸",
+          "startTime": 256,
+          "endTime": 259
+        },
+        {
+          "text": "알게 해 준 그녀는",
+          "startTime": 260,
+          "endTime": 264
+        },
+        {
+          "text": "어느 한 동화 속 소녀랍니다",
+          "startTime": 265,
+          "endTime": 276
+        }
+      ]
     },
     {
       "title": "잘 지내자, 우리",
