@@ -101,7 +101,7 @@
   height: 60px;
   font-size: 17px;
 
-  overflow: scroll;
+  overflow: hidden;
   overflow-block: none;
   text-align: center;
   margin-top: 30px;
