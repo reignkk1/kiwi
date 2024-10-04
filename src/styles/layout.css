@@ -44,6 +44,7 @@
   position: absolute;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    height: 85%;
     transform: translate(-50%, -50%);
   }
 }
