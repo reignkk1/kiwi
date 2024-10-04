@@ -44,6 +44,10 @@
   font-size: 22px;
 }
 
+.home-footer .volume-button {
+  width: 40px;
+}
+
 .home-footer .modal-message-box {
   width: 100%;
   height: 20px;
