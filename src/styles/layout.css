@@ -44,11 +44,7 @@
   position: absolute;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    transform: translate(-50%, -55%);
-  }
-
-  @media only screen and (max-device-width: 800px) {
-    transform: translate(-50%, -49%);
+    transform: translate(-50%, -50%);
   }
 }
 
