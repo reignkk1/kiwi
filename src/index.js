@@ -44,6 +44,7 @@ customElements.define('modal-message', ModalMessage);
 customElements.define('audio-controller', AudioController);
 
 let vh = window.innerHeight * 0.01;
+console.log(window.innerWidth, window.innerHeight);
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
