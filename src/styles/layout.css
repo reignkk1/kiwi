@@ -1,11 +1,14 @@
 #wrap {
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   background: linear-gradient(-45deg, #fff6b7, #f092bc, #8795e6, #c2ffd8);
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    height: calc(var(--vh, 1vh) * 100);
+  }
 }
 
 #root {
