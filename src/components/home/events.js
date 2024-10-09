@@ -253,7 +253,5 @@ export function chevronDownButtonEvent() {
 
 // 볼륨바, 재생바 디자인 어떻게 할지 ...
 // events 모듈들 리팩토링 하기 => 가독성
-
-// 다른 노래들 가사 json 작성하기!
 // 가사가 바뀔때마다 재렌더링이 왜 4번 일어날까?
-// CSS 반응형 손보기
+// CSS 반응형 손보기 => height 높이에 따라서 zoom down 하기
