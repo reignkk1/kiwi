@@ -152,9 +152,8 @@ export function audioControllerButtonEvent() {
           handleLocationIndex('next');
           handleHistory('push');
         } else {
-          const {title, singer, imgSrc, backGroundColor} = historyNextMusic;
-          console.log(title, singer, imgSrc, backGroundColor);
-          choiceSelectMusic(title, singer, imgSrc, backGroundColor);
+          const {title} = historyNextMusic;
+          choiceSelectMusic(title);
           handleLocationIndex('next');
         }
       } else {
@@ -187,8 +186,8 @@ export function audioControllerButtonEvent() {
             handleLocationIndex('prev');
             handleHistory('unshift');
           } else {
-            const {title, singer, imgSrc, backGroundColor} = historyPrevMusic;
-            choiceSelectMusic(title, singer, imgSrc, backGroundColor);
+            const {title} = historyPrevMusic;
+            choiceSelectMusic(title);
             handleLocationIndex('prev');
           }
         }
@@ -254,4 +253,5 @@ export function chevronDownButtonEvent() {
 // 볼륨바, 재생바 디자인 어떻게 할지 ...
 // events 모듈들 리팩토링 하기 => 가독성
 // 가사가 바뀔때마다 재렌더링이 왜 4번 일어날까?
-// CSS 반응형 손보기 => height 높이에 따라서 zoom down 하기
+
+// 폴더 구조 리팩토링
