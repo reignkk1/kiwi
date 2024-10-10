@@ -1,7 +1,6 @@
 .home-main {
-  height: 400px;
   position: relative;
-  margin-bottom: 30px;
+  margin: 15px 0px;
 }
 
 @keyframes fadeIn {
@@ -16,7 +15,6 @@
 .home-main .music-img {
   width: 100%;
   height: 330px;
-  margin-top: 20px;
   animation: fadeIn 1s;
 }
 
