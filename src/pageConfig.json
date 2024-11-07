@@ -1,7 +1,7 @@
 {
   "home": {
     "headTitle": "홈",
-    "headerTitle": "Comfort Player",
+    "headerTitle": "님 어서오세요!",
     "contentTitle": "장르",
     "contentMenu": [
       { "id": "entire", "text": "전체" },
