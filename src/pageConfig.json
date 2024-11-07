@@ -1,0 +1,13 @@
+{
+  "home": {
+    "headTitle": "홈",
+    "headerTitle": "Comfort Player",
+    "contentTitle": "장르",
+    "contentMenu": [
+      { "id": "entire", "text": "전체" },
+      { "id": "ballad", "text": "발라드" },
+      { "id": "indie", "text": "인디음악" },
+      { "id": "hiphop", "text": "랩/힙합" }
+    ]
+  }
+}
