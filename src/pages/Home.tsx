@@ -1,3 +1,5 @@
+import AlbumList from "../components/pages/home/AlbumList";
+
 export default function Home() {
-  return <div>home</div>;
+  return <AlbumList />;
 }
