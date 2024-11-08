@@ -3,24 +3,35 @@ import {
   faBars,
   faForwardStep,
   faHome,
+  faPause,
   faPlay,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { useAudioStore } from "../../store";
 
 export function Footer() {
+  const { isPlay, musicInfo, togglePlay } = useAudioStore();
+
+  const togglePlayButton = () => {
+    togglePlay();
+  };
+
   return (
     <Container>
       <ProgressBar />
       <MiniPlayer>
         <MusicInfo>
-          <Title>나의 사춘기에게</Title>
-          <Singer>볼빨간사춘기</Singer>
+          <Title>{musicInfo.title}</Title>
+          <Singer>{musicInfo.singer}</Singer>
         </MusicInfo>
         <MusicContorller>
           <FontAwesomeIcon icon={faBackwardStep} />
-          <FontAwesomeIcon icon={faPlay} />
+          <FontAwesomeIcon
+            onClick={togglePlayButton}
+            icon={isPlay ? faPause : faPlay}
+          />
           <FontAwesomeIcon icon={faForwardStep} />
         </MusicContorller>
       </MiniPlayer>
@@ -71,6 +82,10 @@ const MusicInfo = styled.div`
   margin-left: 20px;
 `;
 const Title = styled.div`
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: white;
   margin-bottom: 5px;
   font-size: 14px;
