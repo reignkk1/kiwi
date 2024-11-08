@@ -5,21 +5,18 @@ import { MusicType } from "../../../types";
 import pageConfig from "../../../pageConfig.json";
 
 export default function AlbumList() {
-  const musicInfo = musicData as { [key: string]: MusicType[] };
-
+  const musicInfo = musicData.data;
   const [music, setMusic] = useState<MusicType[]>([]);
   const [activeMenu, setActiveMenu] = useState<string>("entire");
   const { contentMenu, contentTitle } = pageConfig.home;
 
   useEffect(() => {
-    let music = [] as MusicType[];
+    let music: MusicType[];
 
     if (activeMenu === "entire") {
-      Object.values(musicData).forEach((genre) =>
-        genre.forEach((data) => music.push(data))
-      );
+      music = musicInfo;
     } else {
-      music = musicInfo[activeMenu];
+      music = musicInfo.filter(({ genre }) => genre === activeMenu);
     }
 
     setMusic(music);
