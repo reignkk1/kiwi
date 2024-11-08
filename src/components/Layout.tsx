@@ -2,14 +2,16 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 import { Footer } from "./layout/Footer";
 import Header from "./layout/Header";
+import Entry from "./layout/Entry";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <BackGroundFilter />
       <Edge>
+        <Entry />
         <Content>
-          <Header title="민겸님 어서오세요!" />
+          <Header />
           {children}
         </Content>
         <Footer />
@@ -51,7 +53,7 @@ const Edge = styled.div`
   height: 830px;
   background: url("./img/phone.png") no-repeat;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   & ::-webkit-scrollbar {
     width: 0px;
   }
