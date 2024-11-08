@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import { getPageConfig } from "../../utils";
+import { useLocation } from "react-router-dom";
+import { parserLocalStorage } from "parser-storages";
+import { useUserNameStore } from "../../store";
 
-export default function Header({ title }: { title: string }) {
+export default function Header() {
+  const { pathname } = useLocation();
+  const config = getPageConfig(pathname);
+  const { userName } = useUserNameStore();
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title>{userName + config?.headerTitle}</Title>
     </Container>
   );
 }
