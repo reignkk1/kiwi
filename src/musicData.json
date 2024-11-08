@@ -1,12 +1,12 @@
 {
-  "indie": [
+  "data": [
     {
       "id": 1,
       "title": "나의 사춘기에게",
       "singer": "볼빨간사춘기",
       "imgSrc": "./img/1.jpg",
       "backGroundColor": "rgba(174, 24, 23, 0.5)",
-      "genre": "인디음악",
+      "genre": "indie",
       "lyrics": [
         {
           "text": "볼빨간사춘기 - 나의 사춘기에게",
@@ -166,7 +166,7 @@
       "singer": "Kid Wine",
       "imgSrc": "./img/4.jpg",
       "backGroundColor": "rgba(253, 81, 31, 0.5)",
-      "genre": "인디음악",
+      "genre": "indie",
       "lyrics": [
         {
           "text": "참 웃긴 것 같아",
@@ -379,16 +379,14 @@
           "endTime": 183
         }
       ]
-    }
-  ],
-  "ballad": [
+    },
     {
       "id": 2,
       "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
       "singer": "사야 (SAya), 재연",
       "imgSrc": "./img/2.jpg",
       "backGroundColor": "rgba(53, 67, 82, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "사야 (SAya), 재연 - 흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
@@ -578,7 +576,7 @@
       "singer": "TOIL, Kid Wine",
       "imgSrc": "./img/3.jpg",
       "backGroundColor": "rgba(26, 35, 41, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "TOIL, Kid Wine - 네 옆에 그 사람은 내가 아닌 다른사람",
@@ -728,7 +726,7 @@
       "singer": "너드커넥션",
       "imgSrc": "./img/5.jpg",
       "backGroundColor": "rgba(186, 153, 131, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "너드커넥션 - 그대만 있다면",
@@ -913,7 +911,7 @@
       "singer": "오혁",
       "imgSrc": "./img/6.jpg",
       "backGroundColor": "rgba(211, 188, 154, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "오혁 - 소녀",
@@ -1018,7 +1016,7 @@
       "singer": "보이스메모리",
       "imgSrc": "./img/7.jpg",
       "backGroundColor": "rgba(78, 52, 150, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "보이스메모리 - 얼음꽃",
@@ -1283,7 +1281,7 @@
       "singer": "로이킴",
       "imgSrc": "./img/8.jpg",
       "backGroundColor": "rgba(53, 81, 96, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "마음을 다 보여줬던 너와는 다르게",
@@ -1473,7 +1471,7 @@
       "singer": "김나영",
       "imgSrc": "./img/9.jpg",
       "backGroundColor": "rgba(171, 182, 110, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "너의 이름을 부르면",
@@ -1603,7 +1601,7 @@
       "singer": "태일",
       "imgSrc": "./img/10.jpg",
       "backGroundColor": "rgba(90, 65, 28, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "태일 - 묘해, 너와",
@@ -1863,7 +1861,7 @@
       "singer": "죠지",
       "imgSrc": "./img/11.jpg",
       "backGroundColor": "rgba(81, 91, 103, 0.5)",
-      "genre": "발라드",
+      "genre": "ballad",
       "lyrics": [
         {
           "text": "죠지 - 좋아해",
@@ -2042,6 +2040,5 @@
         }
       ]
     }
-  ],
-  "hiphop": []
+  ]
 }
