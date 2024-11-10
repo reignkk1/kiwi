@@ -75,8 +75,6 @@ export function Footer() {
 
 // footer config 데이터 만들기
 // navbar 따로 컴포넌트 분리
-// 그냥 getPageConfig 모듈 만들지 말고
-// pageConfig['home'] 이런식으로 하기
 
 const Container = styled.footer`
   width: 87%;
