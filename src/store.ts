@@ -1,5 +1,6 @@
 import { parserLocalStorage } from "parser-storages";
 import { create } from "zustand";
+import musicData from "./musicData.json";
 
 interface AudioStore {
   audio: HTMLAudioElement;
@@ -14,6 +15,21 @@ interface UserNameStore {
   userName: string;
   setUserName: (name: string) => void;
 }
+
+const music = musicData.data;
+
+export const musicStore = {
+  getAllMusic: () => {
+    return music;
+  },
+  getIncludedMusic: (keyword: string) => {
+    return music.filter(({ title, singer }) => {
+      const isIncludesKeyword = (letter: string) =>
+        letter.replaceAll(" ", "").includes(keyword);
+      return isIncludesKeyword(title) || isIncludesKeyword(singer);
+    });
+  },
+};
 
 export const useAudioStore = create<AudioStore>((set) => ({
   audio: new Audio(),
