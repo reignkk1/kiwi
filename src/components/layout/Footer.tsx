@@ -10,9 +10,26 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useAudioStore } from "../../store";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useActiveSection } from "../../utils";
 
 export function Footer() {
   const { isPlay, musicInfo, togglePlay } = useAudioStore();
+  const { pathname } = useLocation();
+  const activeSection = useActiveSection();
+
+  const initialState = {
+    home: false,
+    search: false,
+    list: false,
+  };
+
+  const [active, setActive] = useState(initialState);
+
+  useEffect(() => {
+    setActive(() => ({ ...initialState, [activeSection]: true }));
+  }, [pathname]);
 
   const togglePlayButton = () => {
     togglePlay();
@@ -36,13 +53,30 @@ export function Footer() {
         </MusicContorller>
       </MiniPlayer>
       <NavBar>
-        <FontAwesomeIcon icon={faHome} />
-        <FontAwesomeIcon icon={faSearch} />
-        <FontAwesomeIcon icon={faBars} />
+        <NavIcon active={active.home}>
+          <Link to={"/"}>
+            <FontAwesomeIcon icon={faHome} />
+          </Link>
+        </NavIcon>
+        <NavIcon active={active.search}>
+          <Link to={"/search"}>
+            <FontAwesomeIcon icon={faSearch} />
+          </Link>
+        </NavIcon>
+        <NavIcon active={active.list}>
+          <Link to={"/list"}>
+            <FontAwesomeIcon icon={faBars} />
+          </Link>
+        </NavIcon>
       </NavBar>
     </Container>
   );
 }
+
+// footer config 데이터 만들기
+// navbar 따로 컴포넌트 분리
+// 그냥 getPageConfig 모듈 만들지 말고
+// pageConfig['home'] 이런식으로 하기
 
 const Container = styled.footer`
   width: 87%;
@@ -74,9 +108,15 @@ const NavBar = styled.nav`
   padding: 0px 30px;
 `;
 
+const NavIcon = styled.div<{ active: boolean }>`
+  svg {
+    color: ${({ active }) => (active ? "var(--signature-color)" : null)};
+  }
+`;
+
 const ProgressBar = styled.div`
   height: 1px;
-  background-color: #0ceb0c;
+  background-color: var(--signature-color);
 `;
 const MusicInfo = styled.div`
   margin-left: 20px;
