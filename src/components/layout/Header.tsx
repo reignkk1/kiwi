@@ -1,16 +1,27 @@
 import styled from "styled-components";
-import { getPageConfig } from "../../utils";
-import { useLocation } from "react-router-dom";
-import { parserLocalStorage } from "parser-storages";
 import { useUserNameStore } from "../../store";
+import pageConfig from "../../pageConfig.json";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const config = getPageConfig(pathname);
   const { userName } = useUserNameStore();
+
+  const config = Object.values(pageConfig).filter(
+    (key) => key.path === pathname
+  )[0];
+
+  let title = "";
+
+  if (pathname === "/") {
+    title = userName + config.headerTitle;
+  } else {
+    title = config.headerTitle;
+  }
+
   return (
     <Container>
-      <Title>{userName + config?.headerTitle}</Title>
+      <Title>{title}</Title>
     </Container>
   );
 }
