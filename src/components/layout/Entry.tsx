@@ -2,11 +2,13 @@ import { parserLocalStorage } from "parser-storages";
 import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useUserNameStore } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 export default function Entry() {
   const [name, setName] = useState<string>("");
   const [show, setShow] = useState<boolean>(true);
 
+  const navigate = useNavigate();
   const { setUserName } = useUserNameStore();
 
   useEffect(() => {
@@ -20,9 +22,13 @@ export default function Entry() {
   };
 
   const onClick = () => {
+    if (!name) {
+      return alert("이름을 입력해주세요.");
+    }
     parserLocalStorage.set("name", name);
     setUserName(name);
     setShow(false);
+    navigate("/");
   };
 
   return show ? (
