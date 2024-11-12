@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     ${reset}
     :root{
         --signature-color:#0ceb0c;
+        --singer-color:rgba(255,255,255,0.5)
     }
 
     * {
