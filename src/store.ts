@@ -1,6 +1,7 @@
-import { parserLocalStorage } from "parser-storages";
 import { create } from "zustand";
+import { MusicType } from "./types";
 import musicData from "./musicData.json";
+import { parserLocalStorage } from "parser-storages";
 
 interface AudioStore {
   audio: HTMLAudioElement;
@@ -16,20 +17,12 @@ interface UserNameStore {
   setUserName: (name: string) => void;
 }
 
-const music = musicData.data;
-
-export const musicStore = {
-  getAllMusic: () => {
-    return music;
-  },
-  getIncludedMusic: (keyword: string) => {
-    return music.filter(({ title, singer }) => {
-      const isIncludesKeyword = (letter: string) =>
-        letter.replaceAll(" ", "").includes(keyword);
-      return isIncludesKeyword(title) || isIncludesKeyword(singer);
-    });
-  },
-};
+interface SearchStore {
+  searchKeyWord: string;
+  searchResultMusic: MusicType[];
+  setSearchKeyWord: (keyWord: string) => void;
+  searchMusic: () => void;
+}
 
 export const useAudioStore = create<AudioStore>((set) => ({
   audio: new Audio(),
@@ -66,5 +59,34 @@ export const useUserNameStore = create<UserNameStore>((set) => ({
   setUserName: (name) =>
     set(() => {
       return { userName: name };
+    }),
+}));
+
+export const useSearchStore = create<SearchStore>((set) => ({
+  searchKeyWord: "",
+  searchResultMusic: [],
+  setSearchKeyWord: (keyWord) =>
+    set(() => {
+      return { searchKeyWord: keyWord };
+    }),
+  searchMusic: () =>
+    set((state) => {
+      if (!state.searchKeyWord) {
+        return { searchResultMusic: [] };
+      }
+
+      const result = musicData.data.filter(({ title, singer }) => {
+        const getCleanedString = (letter: string) =>
+          letter.replaceAll(" ", "").toLowerCase();
+
+        const isIncludesKeyword = (letter: string) =>
+          getCleanedString(letter).includes(
+            getCleanedString(state.searchKeyWord)
+          );
+
+        return isIncludesKeyword(title) || isIncludesKeyword(singer);
+      });
+
+      return { searchResultMusic: result };
     }),
 }));
