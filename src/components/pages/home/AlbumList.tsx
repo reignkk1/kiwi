@@ -3,9 +3,9 @@ import musicData from "../../../musicData.json";
 import { useEffect, useState } from "react";
 import { MusicType } from "../../../types";
 import pageConfig from "../../../pageConfig.json";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useAudioStore } from "../../../store";
+import { ButtonIcon } from "../../shared/ButtonIcon";
 
 export default function AlbumList() {
   const musicInfo = musicData.data;
@@ -69,9 +69,12 @@ function Album({
     <AlbumTemplate>
       <AlbumImg>
         <img src={imgSrc} />
-        <PlayButton onClick={onClickPlayButton}>
-          <FontAwesomeIcon icon={faPlay} />
-        </PlayButton>
+        <ButtonIcon
+          icon={faPlay}
+          size="18px"
+          color="white"
+          onClick={onClickPlayButton}
+        />
       </AlbumImg>
       <AlbumInfo>
         <Title>{title}</Title>
@@ -142,18 +145,14 @@ const AlbumImg = styled.div`
     width: 100%;
     object-fit: fill;
   }
-`;
-
-const PlayButton = styled.div`
-  svg {
+  button {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
-    color: white;
-    font-size: 18px;
   }
 `;
+
 const AlbumInfo = styled.div`
   margin-top: 10px;
   font-size: 14px;
@@ -167,5 +166,5 @@ const Title = styled.div`
   margin-bottom: 5px;
 `;
 const Singer = styled.div`
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--singer-color);
 `;
