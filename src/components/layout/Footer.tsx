@@ -7,18 +7,47 @@ import {
   faPlay,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import { useAudioStore } from "../../store";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useActiveSection } from "../../utils";
+import { ButtonIcon } from "../shared/ButtonIcon";
 
 export function Footer() {
-  const { isPlay, musicInfo, togglePlay } = useAudioStore();
-  const { pathname } = useLocation();
-  const activeSection = useActiveSection();
+  return (
+    <Footer.Container>
+      <ProgressBar />
+      <Player />
+      <NavBar />
+    </Footer.Container>
+  );
+}
 
+function Player() {
+  const { isPlay, musicInfo, togglePlay } = useAudioStore();
+
+  const togglePlayButton = () => togglePlay();
+
+  return (
+    <Player.Container>
+      <MusicInfo>
+        <Title>{musicInfo.title}</Title>
+        <Singer>{musicInfo.singer}</Singer>
+      </MusicInfo>
+      <MusicContorller>
+        <ButtonIcon icon={faBackwardStep} />
+        <ButtonIcon
+          icon={isPlay ? faPause : faPlay}
+          onClick={togglePlayButton}
+        />
+        <ButtonIcon icon={faForwardStep} />
+      </MusicContorller>
+    </Player.Container>
+  );
+}
+
+function NavBar() {
   const initialState = {
     home: false,
     search: false,
@@ -26,90 +55,50 @@ export function Footer() {
   };
 
   const [active, setActive] = useState(initialState);
+  const { pathname } = useLocation();
+  const activeSection = useActiveSection();
 
   useEffect(() => {
     setActive(() => ({ ...initialState, [activeSection]: true }));
   }, [pathname]);
 
-  const togglePlayButton = () => {
-    togglePlay();
-  };
-
   return (
-    <Container>
-      <ProgressBar />
-      <MiniPlayer>
-        <MusicInfo>
-          <Title>{musicInfo.title}</Title>
-          <Singer>{musicInfo.singer}</Singer>
-        </MusicInfo>
-        <MusicContorller>
-          <FontAwesomeIcon icon={faBackwardStep} />
-          <FontAwesomeIcon
-            onClick={togglePlayButton}
-            icon={isPlay ? faPause : faPlay}
-          />
-          <FontAwesomeIcon icon={faForwardStep} />
-        </MusicContorller>
-      </MiniPlayer>
-      <NavBar>
-        <NavIcon active={active.home}>
-          <Link to={"/"}>
-            <FontAwesomeIcon icon={faHome} />
-          </Link>
-        </NavIcon>
-        <NavIcon active={active.search}>
-          <Link to={"/search"}>
-            <FontAwesomeIcon icon={faSearch} />
-          </Link>
-        </NavIcon>
-        <NavIcon active={active.list}>
-          <Link to={"/list"}>
-            <FontAwesomeIcon icon={faBars} />
-          </Link>
-        </NavIcon>
-      </NavBar>
-    </Container>
+    <NavBar.Container>
+      <ButtonIcon icon={faHome} href="/" active={active.home} />
+      <ButtonIcon icon={faSearch} href="/search" active={active.search} />
+      <ButtonIcon icon={faBars} href="/list" active={active.list} />
+    </NavBar.Container>
   );
 }
 
-// footer config 데이터 만들기
-// navbar 따로 컴포넌트 분리
-
-const Container = styled.footer`
-  width: 87%;
-  height: 120px;
+Footer.Container = styled.footer`
   background-color: black;
   position: absolute;
+  width: 87%;
+  height: 120px;
   left: 6.375%;
   bottom: 4%;
   border-radius: 0px 0px 36px 36px;
   svg {
     cursor: pointer;
     font-size: 22px;
-    color: rgba(255, 255, 255, 0.6);
   }
 `;
 
-const MiniPlayer = styled.div`
+Player.Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 49%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;
-const NavBar = styled.nav`
-  height: 49%;
+
+NavBar.Container = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 49%;
   padding: 0px 30px;
-`;
-
-const NavIcon = styled.div<{ active: boolean }>`
-  svg {
-    color: ${({ active }) => (active ? "var(--signature-color)" : null)};
-  }
 `;
 
 const ProgressBar = styled.div`
@@ -120,24 +109,21 @@ const MusicInfo = styled.div`
   margin-left: 20px;
 `;
 const Title = styled.div`
-  width: 200px;
+  color: white;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: white;
+  width: 200px;
   margin-bottom: 5px;
   font-size: 14px;
 `;
 const Singer = styled.div`
-  color: rgba(255, 255, 255, 0.5);
   font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
 `;
 const MusicContorller = styled.div`
-  width: 140px;
   display: flex;
   justify-content: space-between;
-  margin-right: 30px;
-  svg {
-    margin-left: 30px;
-  }
+  width: 130px;
+  margin-right: 20px;
 `;
