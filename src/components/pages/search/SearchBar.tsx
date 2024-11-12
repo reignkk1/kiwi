@@ -1,80 +1,43 @@
-import {
-  faEllipsisV,
-  faPlay,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import { musicStore } from "../../../store";
-import { MusicType } from "../../../types";
+import { ChangeEvent, useEffect } from "react";
+import { useSearchStore } from "../../../store";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { ButtonIcon } from "../../shared/ButtonIcon";
 
 export default function SearchBar() {
-  const [keyWord, setKeyWord] = useState("");
-  const [result, setResult] = useState<MusicType[]>();
-  const { getIncludedMusic } = musicStore;
+  const { searchKeyWord, setSearchKeyWord, searchMusic } = useSearchStore();
 
   useEffect(() => {
-    if (keyWord) {
-      setResult(getIncludedMusic(keyWord.replaceAll(" ", "")));
-    } else {
-      setResult([]);
-    }
-  }, [keyWord]);
+    searchMusic();
+  }, [searchKeyWord]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setKeyWord(e.currentTarget.value);
-  };
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setSearchKeyWord(e.currentTarget.value);
 
-  const onClickClearButton = () => {
-    setKeyWord("");
-  };
   return (
-    <>
-      <Container>
-        <InnerWrap>
-          <Input onChange={onChange} value={keyWord} />
-          {keyWord ? (
-            <ClearButton onClick={onClickClearButton}>x</ClearButton>
-          ) : null}
-          <SearchButton>
-            <FontAwesomeIcon icon={faSearch} />
-          </SearchButton>
-        </InnerWrap>
-      </Container>
-      <ul>
-        {result?.map(({ title, singer, imgSrc }) => (
-          <List>
-            <MusicInfo>
-              <div>
-                <Img src={imgSrc} />
-              </div>
-              <Info>
-                <Title>{title}</Title>
-                <Singer>{singer}</Singer>
-              </Info>
-            </MusicInfo>
-            <div>
-              <button>
-                <FontAwesomeIcon icon={faPlay} />
-              </button>
-              <button>
-                <FontAwesomeIcon icon={faEllipsisV} />
-              </button>
-            </div>
-          </List>
-        ))}
-      </ul>
-    </>
+    <Container>
+      <InputWrap>
+        <Input
+          placeholder="검색어를 입력하세요."
+          onChange={onChange}
+          value={searchKeyWord}
+        />
+        {searchKeyWord ? (
+          <ClearButton onClick={() => setSearchKeyWord("")}>x</ClearButton>
+        ) : null}
+        <ButtonIcon icon={faSearch} size="18px" />
+      </InputWrap>
+    </Container>
   );
 }
 
 const Container = styled.div`
   width: 100%;
   border-bottom: 2px solid white;
+  margin-bottom: 50px;
 `;
 
-const InnerWrap = styled.div`
+const InputWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,31 +52,8 @@ const Input = styled.input`
   color: white;
 `;
 
-const List = styled.li`
-  display: flex;
-`;
-
-const MusicInfo = styled.div`
-  display: flex;
-`;
-
-// 재생버튼, 메뉴버튼 스타일링
-
 const ClearButton = styled.button`
   color: rgba(255, 255, 255, 0.3);
   font-size: 18px;
   font-weight: bold;
 `;
-
-const SearchButton = styled.button`
-  font-size: 20px;
-`;
-
-const Img = styled.img`
-  width: 30px;
-  height: 30px;
-`;
-
-const Info = styled.div``;
-const Title = styled.div``;
-const Singer = styled.div``;
