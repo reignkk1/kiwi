@@ -1,15 +1,27 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 import { Footer } from "./layout/Footer";
 import Header from "./layout/Header";
 import Entry from "./layout/Entry";
+import { useEntryStore } from "../store";
+import { parserLocalStorage } from "parser-storages";
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const { show, hiddenEntry, showEntry } = useEntryStore();
+
+  useEffect(() => {
+    if (parserLocalStorage.get("name")) {
+      hiddenEntry();
+    } else {
+      showEntry();
+    }
+  }, []);
+
   return (
     <Container>
       <BackGroundFilter />
       <Edge>
-        <Entry />
+        {show && <Entry />}
         <Content>
           <Header />
           {children}
