@@ -1,51 +1,54 @@
 import { parserLocalStorage } from "parser-storages";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import styled from "styled-components";
-import { useUserNameStore } from "../../store";
+import { useEntryStore, useUserNameStore } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 export default function Entry() {
-  const [name, setName] = useState<string>("");
-  const [show, setShow] = useState<boolean>(true);
-
   const navigate = useNavigate();
-  const { setUserName } = useUserNameStore();
+  const { hiddenEntry } = useEntryStore();
+  const { userName, setUserName } = useUserNameStore();
 
-  useEffect(() => {
-    if (parserLocalStorage.get("name")) {
-      setShow(false);
-    }
-  }, []);
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
-  };
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setUserName(e.currentTarget.value);
 
   const onClick = () => {
-    if (!name) {
+    if (!userName) {
       return alert("이름을 입력해주세요.");
     }
-    parserLocalStorage.set("name", name);
-    setUserName(name);
-    setShow(false);
+    parserLocalStorage.set("name", userName);
+    hiddenEntry();
     navigate("/");
   };
 
-  return show ? (
+  return (
     <Container>
-      <div>
-        <input onChange={onChange} type="text" />
+      <LogoContainer>
+        <Title>음악이 필요한 순간</Title>
+        <Logo>
+          <span>Melon</span>
+        </Logo>
+      </LogoContainer>
+      <InputContainer>
+        <InputWrap>
+          <input
+            onChange={onChange}
+            type="text"
+            maxLength={4}
+            value={userName}
+          />
+        </InputWrap>
         <span>님, 안녕하세요</span>
-      </div>
+      </InputContainer>
       <button onClick={onClick}>입장하기</button>
     </Container>
-  ) : null;
+  );
 }
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: white;
   width: 89%;
@@ -56,5 +59,49 @@ const Container = styled.div`
   top: 3%;
   z-index: 99;
   border-radius: 30px;
-  opacity: 0.9;
+  button {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    width: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+`;
+
+const InputWrap = styled.div`
+  border-bottom: 1px solid white;
+
+  width: 90px;
+  input {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+  }
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+`;
+
+const Title = styled.h1`
+  font-size: 20px;
+`;
+
+const Logo = styled.div`
+  color: #00ea00;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+const LogoContainer = styled.div`
+  text-align: center;
 `;
