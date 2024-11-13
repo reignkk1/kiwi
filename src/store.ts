@@ -24,6 +24,12 @@ interface SearchStore {
   searchMusic: () => void;
 }
 
+interface EntryStore {
+  show: boolean;
+  showEntry: () => void;
+  hiddenEntry: () => void;
+}
+
 export const useAudioStore = create<AudioStore>((set) => ({
   audio: new Audio(),
   isPlay: false,
@@ -58,7 +64,7 @@ export const useUserNameStore = create<UserNameStore>((set) => ({
   userName: parserLocalStorage.get("name"),
   setUserName: (name) =>
     set(() => {
-      return { userName: name };
+      return { userName: name.slice(0, 4) };
     }),
 }));
 
@@ -88,5 +94,17 @@ export const useSearchStore = create<SearchStore>((set) => ({
       });
 
       return { searchResultMusic: result };
+    }),
+}));
+
+export const useEntryStore = create<EntryStore>((set) => ({
+  show: false,
+  showEntry: () =>
+    set(() => {
+      return { show: true };
+    }),
+  hiddenEntry: () =>
+    set(() => {
+      return { show: false };
     }),
 }));
