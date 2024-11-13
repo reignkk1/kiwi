@@ -45,6 +45,7 @@ const InputWrap = styled.div`
 `;
 const Input = styled.input`
   width: 80%;
+  height: 25px;
   border: none;
   background: none;
   outline: none;
