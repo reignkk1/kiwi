@@ -3,7 +3,9 @@ import { useAudioStore } from "../../store";
 import { useEffect } from "react";
 
 export function ProgressBar() {
-  const { audio, progressPercent, setProgressPercent } = useAudioStore();
+  const audio = useAudioStore((state) => state.audio);
+  const progressPercent = useAudioStore((state) => state.progressPercent);
+  const setProgressPercent = useAudioStore((state) => state.setProgressPercent);
 
   useEffect(() => {
     audio.ontimeupdate = () => setProgressPercent();
