@@ -19,4 +19,11 @@ export function getProgressPercent(currentTime: number, duration: number) {
   return Number(((currentTime / duration) * 100).toFixed(1));
 }
 
-// 숫자 데이터를 넣었을 때 => 0:00, 2:23 이런식으로 변환해주는 모듈 개발
+export function convertTime(time: number) {
+  time = Math.floor(time);
+
+  const minute = Math.floor(time / 60);
+  const second = String(time % 60).padStart(2, "0");
+
+  return `${minute}:${second}`;
+}
