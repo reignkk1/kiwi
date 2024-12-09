@@ -12,8 +12,6 @@ export default function SearchList() {
     ({ searchResultMusic }) => searchResultMusic
   );
 
-  console.log("searchlist render");
-
   return (
     <List>
       {searchResultMusic?.map((musicInfo) => (

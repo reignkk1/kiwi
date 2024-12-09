@@ -1,12 +1,4 @@
-import {
-  faBackwardStep,
-  faBars,
-  faForwardStep,
-  faHome,
-  faPause,
-  faPlay,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import { useAudioStore } from "../../store";
 import { Link, useLocation } from "react-router-dom";
@@ -14,10 +6,12 @@ import { useEffect, useState } from "react";
 import { useActiveSection } from "../../utils";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import { ProgressBar } from "../shared/ProgressBar";
+import Controller from "../shared/Controller";
 
 export function Footer() {
   const section = useActiveSection();
   const isPlayerPage = section == "player";
+
   return (
     <Footer.Container>
       {!isPlayerPage && <ProgressBar />}
@@ -40,14 +34,8 @@ function Player() {
           <Singer>{musicInfo.singer}</Singer>
         </MusicInfo>
       </Link>
-      <MusicContorller>
-        <ButtonIcon icon={faBackwardStep} />
-        <ButtonIcon
-          icon={isPlay ? faPause : faPlay}
-          onClick={togglePlayButton}
-        />
-        <ButtonIcon icon={faForwardStep} />
-      </MusicContorller>
+
+      <Controller width={120} />
     </Player.Container>
   );
 }
@@ -122,10 +110,4 @@ const Title = styled.div`
 const Singer = styled.div`
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
-`;
-const MusicContorller = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 130px;
-  margin-right: 20px;
 `;

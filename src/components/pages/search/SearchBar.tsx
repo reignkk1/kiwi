@@ -18,8 +18,6 @@ export default function SearchBar() {
     searchMusic();
   }, [searchKeyWord]);
 
-  console.log("searchBar render");
-
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearchKeyWord(e.currentTarget.value);
 

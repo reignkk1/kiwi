@@ -121,5 +121,5 @@ const Container = styled.div`
   }
 `;
 
-// progressbar, controller, 가사 구현하기
+// controller, 가사 구현하기
 // 플레이 리스트 구현
