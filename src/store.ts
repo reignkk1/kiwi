@@ -9,6 +9,7 @@ interface AudioStore {
   isPlay: boolean;
   musicInfo: MusicType;
   progressPercent: number;
+  currentTime: number;
   play: (musicInfo: MusicType) => void;
   pause: () => void;
   togglePlay: () => void;
@@ -38,6 +39,7 @@ export const useAudioStore = create<AudioStore>((set) => ({
   isPlay: false,
   musicInfo: {} as MusicType,
   progressPercent: 0,
+  currentTime: 0,
   play: (newMusicInfo) =>
     set((state) => {
       if (newMusicInfo) {
@@ -69,6 +71,7 @@ export const useAudioStore = create<AudioStore>((set) => ({
           state.audio.currentTime,
           state.audio.duration
         ),
+        currentTime: state.audio.currentTime,
       };
     }),
 }));
