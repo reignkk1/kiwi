@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useAudioStore } from "../store";
 import { useEffect, useState } from "react";
 import { ButtonIcon } from "../components/shared/ButtonIcon";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faShuffle } from "@fortawesome/free-solid-svg-icons";
 import { ProgressBar } from "../components/shared/ProgressBar";
+import TimeStamp from "../components/pages/player/TimeStamp";
+import Controller from "../components/shared/Controller";
 
 export default function Player() {
-  const { musicInfo } = useAudioStore();
+  const musicInfo = useAudioStore((state) => state.musicInfo);
   const [animation, setAnymation] = useState(false);
 
   useEffect(() => {
@@ -14,8 +16,6 @@ export default function Player() {
       setAnymation(true);
     }
   }, []);
-
-  console.log("render");
 
   return (
     <Container>
@@ -37,13 +37,14 @@ export default function Player() {
         <img src={musicInfo.imgSrc} />
       </MusicInfo>
       <div>
-        {/* <ProgressBar /> */}
-        <TimeStamp>
-          <span></span>
-          <span>{}</span>
-        </TimeStamp>
+        <ProgressBar />
+        <TimeStamp />
       </div>
-      <Controller></Controller>
+      <div>
+        <ButtonIcon icon={faShuffle} />
+        <Controller width={130} />
+        <ButtonIcon icon={faShuffle} />
+      </div>
     </Container>
   );
 }
@@ -96,14 +97,4 @@ const MusicInfo = styled.div`
     width: 100%;
     border-radius: 10px;
   }
-`;
-
-const Controller = styled.div``;
-
-const TimeStamp = styled.div`
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  margin-top: 10px;
-  font-size: 14px;
 `;
