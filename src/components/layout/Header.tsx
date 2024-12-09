@@ -11,6 +11,10 @@ export default function Header() {
     (key) => key.path === pathname
   )[0];
 
+  if (!config) {
+    return null;
+  }
+
   let title = "";
 
   if (pathname === "/") {

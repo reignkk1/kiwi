@@ -1,13 +1,16 @@
 import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
-import { Footer } from "./layout/Footer";
-import Header from "./layout/Header";
-import Entry from "./layout/Entry";
-import { useEntryStore } from "../store";
 import { parserLocalStorage } from "parser-storages";
+import { useAudioStore, useEntryStore } from "../../store";
+import Entry from "./Entry";
+import Header from "./Header";
+import { Footer } from "./Footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { show, hiddenEntry, showEntry } = useEntryStore();
+  const {
+    musicInfo: { backGroundColor = "#000" },
+  } = useAudioStore();
 
   useEffect(() => {
     if (parserLocalStorage.get("name")) {
@@ -19,7 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <Container>
-      <BackGroundFilter />
+      <BackGroundFilter backGroundColor={backGroundColor} />
       <Edge>
         {show && <Entry />}
         <Content>
@@ -34,9 +37,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 
 const Content = styled.div`
   height: 100%;
-  margin-top: 100px;
+  margin-top: 80px;
   overflow: auto;
-  padding: 0px 50px 0px 50px;
+  padding: 0px 60px;
   & ::-webkit-scrollbar {
     background-color: black;
     height: 3px;
@@ -48,15 +51,35 @@ const Content = styled.div`
   }
 `;
 
-const BackGroundFilter = styled.div`
+const BackGroundFilter = styled.div<{ backGroundColor: string }>`
   width: 430px;
   height: 785px;
   border-radius: 40px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background: ${({ backGroundColor }) => `linear-gradient(
+    180deg,
+    ${backGroundColor},
+    ${backGroundColor},
+    #111111,
+    #121213
+  );`};
+  background-size: 400% 400%;
+  animation: gradient 12s linear infinite;
   position: absolute;
   z-index: 1;
   @media only screen and (max-height: 825px) {
     zoom: 0.8;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 100% 70%;
+    }
+    50% {
+      background-position: 100% 75%;
+    }
+    100% {
+      background-position: 100% 70%;
+    }
   }
 `;
 
@@ -97,3 +120,6 @@ const Container = styled.div`
     height: calc(var(--vh, 1vh) * 100);
   }
 `;
+
+// progressbar, controller, 가사 구현하기
+// 플레이 리스트 구현

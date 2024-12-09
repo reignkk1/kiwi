@@ -5,7 +5,8 @@ export const GlobalStyles = createGlobalStyle`
     ${reset}
     :root{
         --signature-color:#0ceb0c;
-        --singer-color:rgba(255,255,255,0.5)
+        --title-color:rgba(255,255,255,1);
+        --singer-color:rgba(255,255,255,0.5);
     }
 
     * {
@@ -16,5 +17,9 @@ export const GlobalStyles = createGlobalStyle`
         background:none;
         border:none;
         cursor: pointer;
+    }
+
+    a {
+        text-decoration:none;
     }
 `;

@@ -44,31 +44,23 @@ export default function AlbumList() {
         </Menu>
       </Header>
       <MusicList>
-        {music.map(({ title, singer, imgSrc }) => (
-          <Album title={title} singer={singer} imgSrc={imgSrc} />
+        {music.map((musicInfo) => (
+          <Album musicInfo={musicInfo} />
         ))}
       </MusicList>
     </Container>
   );
 }
 
-function Album({
-  title,
-  singer,
-  imgSrc,
-}: {
-  title: string;
-  singer: string;
-  imgSrc: string;
-}) {
+function Album({ musicInfo }: { musicInfo: MusicType }) {
   const { play } = useAudioStore();
 
-  const onClickPlayButton = () => play({ title, singer });
+  const onClickPlayButton = () => play(musicInfo);
 
   return (
     <AlbumTemplate>
       <AlbumImg>
-        <img src={imgSrc} />
+        <img src={musicInfo.imgSrc} />
         <ButtonIcon
           icon={faPlay}
           size="18px"
@@ -77,8 +69,8 @@ function Album({
         />
       </AlbumImg>
       <AlbumInfo>
-        <Title>{title}</Title>
-        <Singer>{singer}</Singer>
+        <Title>{musicInfo.title}</Title>
+        <Singer>{musicInfo.singer}</Singer>
       </AlbumInfo>
     </AlbumTemplate>
   );

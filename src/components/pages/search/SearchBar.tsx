@@ -3,13 +3,22 @@ import { ChangeEvent, useEffect } from "react";
 import { useSearchStore } from "../../../store";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { ButtonIcon } from "../../shared/ButtonIcon";
+import { useShallow } from "zustand/react/shallow";
 
 export default function SearchBar() {
-  const { searchKeyWord, setSearchKeyWord, searchMusic } = useSearchStore();
+  const searchKeyWord = useSearchStore(
+    useShallow(({ searchKeyWord }) => searchKeyWord)
+  );
+  const setSearchKeyWord = useSearchStore(
+    ({ setSearchKeyWord }) => setSearchKeyWord
+  );
+  const searchMusic = useSearchStore(({ searchMusic }) => searchMusic);
 
   useEffect(() => {
     searchMusic();
   }, [searchKeyWord]);
+
+  console.log("searchBar render");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setSearchKeyWord(e.currentTarget.value);

@@ -3,30 +3,36 @@ import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useSearchStore } from "../../../store";
 import { faEllipsisV, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
+import { useShallow } from "zustand/react/shallow";
 
 export default function SearchList() {
-  const { play } = useAudioStore();
-  const { searchResultMusic, searchKeyWord } = useSearchStore();
+  const play = useAudioStore(({ play }) => play);
+  const searchKeyWord = useSearchStore((state) => state.searchKeyWord);
+  const searchResultMusic = useSearchStore(
+    ({ searchResultMusic }) => searchResultMusic
+  );
+
+  console.log("searchlist render");
 
   return (
     <List>
-      {searchResultMusic?.map(({ title, singer, imgSrc }) => (
+      {searchResultMusic?.map((musicInfo) => (
         <Item>
           <MusicInfo>
-            <Img src={imgSrc} />
+            <Img src={musicInfo.imgSrc} />
             <Info>
               <Title>
-                <span>{markKeyword(title, searchKeyWord)}</span>
+                <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>
               </Title>
               <Singer>
-                <span>{markKeyword(singer, searchKeyWord)}</span>
+                <span>{markKeyword(musicInfo.singer, searchKeyWord)}</span>
               </Singer>
             </Info>
           </MusicInfo>
           <ItemButtons>
             <ButtonIcon
               icon={faPlay}
-              onClick={() => play({ title, singer })}
+              onClick={() => play(musicInfo)}
               size="18px"
             />
             <ButtonIcon icon={faEllipsisV} size="18px" />

@@ -2,14 +2,17 @@ import { create } from "zustand";
 import { MusicType } from "./types";
 import musicData from "./musicData.json";
 import { parserLocalStorage } from "parser-storages";
+import { getProgressPercent } from "./utils";
 
 interface AudioStore {
   audio: HTMLAudioElement;
   isPlay: boolean;
-  musicInfo: { title: string; singer: string };
-  play: (musicInfo: { title: string; singer: string }) => void;
+  musicInfo: MusicType;
+  progressPercent: number;
+  play: (musicInfo: MusicType) => void;
   pause: () => void;
   togglePlay: () => void;
+  setProgressPercent: () => void;
 }
 
 interface UserNameStore {
@@ -33,15 +36,15 @@ interface EntryStore {
 export const useAudioStore = create<AudioStore>((set) => ({
   audio: new Audio(),
   isPlay: false,
-  musicInfo: { title: "", singer: "" },
+  musicInfo: {} as MusicType,
+  progressPercent: 0,
   play: (newMusicInfo) =>
     set((state) => {
       if (newMusicInfo) {
-        state.musicInfo = newMusicInfo;
         state.audio.src = `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`;
       }
       state.audio.play();
-      return { isPlay: true };
+      return { isPlay: true, musicInfo: newMusicInfo };
     }),
   pause: () =>
     set((state) => {
@@ -57,6 +60,16 @@ export const useAudioStore = create<AudioStore>((set) => ({
         state.audio.play();
       }
       return { isPlay: !state.isPlay };
+    }),
+
+  setProgressPercent: () =>
+    set((state) => {
+      return {
+        progressPercent: getProgressPercent(
+          state.audio.currentTime,
+          state.audio.duration
+        ),
+      };
     }),
 }));
 
