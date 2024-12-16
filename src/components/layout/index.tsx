@@ -8,9 +8,9 @@ import { Footer } from "./Footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { show, hiddenEntry, showEntry } = useEntryStore();
-  const {
-    musicInfo: { backGroundColor = "#000" },
-  } = useAudioStore();
+  const backGroundColor =
+    useAudioStore((state) => state.musicInfo.backGroundColor) ||
+    "rgba(0,0,0,0.5)";
 
   useEffect(() => {
     if (parserLocalStorage.get("name")) {

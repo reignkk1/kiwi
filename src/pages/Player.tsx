@@ -31,7 +31,7 @@ export default function Player() {
             <span>{musicInfo.singer}</span>
           </Singer>
         </div>
-        <ButtonIcon icon={faChevronDown} size="20px" />
+        <ButtonIcon icon={faChevronDown} size={20} />
       </Header>
       <MusicInfo>
         <img src={musicInfo.imgSrc} />
@@ -40,14 +40,18 @@ export default function Player() {
         <ProgressBar />
         <TimeStamp />
       </div>
-      <div>
+      <ControlContainer>
         <ButtonIcon icon={faShuffle} />
-        <Controller width={130} />
+        <Controller width={170} size={[30, 40, 30]} />
         <ButtonIcon icon={faShuffle} />
-      </div>
+      </ControlContainer>
     </Container>
   );
 }
+const ControlContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 const Container = styled.div``;
 

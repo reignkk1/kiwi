@@ -3,7 +3,6 @@ import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useSearchStore } from "../../../store";
 import { faEllipsisV, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
-import { useShallow } from "zustand/react/shallow";
 
 export default function SearchList() {
   const play = useAudioStore(({ play }) => play);
@@ -28,12 +27,8 @@ export default function SearchList() {
             </Info>
           </MusicInfo>
           <ItemButtons>
-            <ButtonIcon
-              icon={faPlay}
-              onClick={() => play(musicInfo)}
-              size="18px"
-            />
-            <ButtonIcon icon={faEllipsisV} size="18px" />
+            <ButtonIcon icon={faPlay} onClick={() => play(musicInfo)} />
+            <ButtonIcon icon={faEllipsisV} />
           </ItemButtons>
         </Item>
       ))}

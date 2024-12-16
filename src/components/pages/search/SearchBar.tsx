@@ -32,7 +32,7 @@ export default function SearchBar() {
         {searchKeyWord ? (
           <ClearButton onClick={() => setSearchKeyWord("")}>x</ClearButton>
         ) : null}
-        <ButtonIcon icon={faSearch} size="18px" />
+        <ButtonIcon icon={faSearch} />
       </InputWrap>
     </Container>
   );

@@ -61,12 +61,7 @@ function Album({ musicInfo }: { musicInfo: MusicType }) {
     <AlbumTemplate>
       <AlbumImg>
         <img src={musicInfo.imgSrc} />
-        <ButtonIcon
-          icon={faPlay}
-          size="18px"
-          color="white"
-          onClick={onClickPlayButton}
-        />
+        <ButtonIcon icon={faPlay} color="white" onClick={onClickPlayButton} />
       </AlbumImg>
       <AlbumInfo>
         <Title>{musicInfo.title}</Title>

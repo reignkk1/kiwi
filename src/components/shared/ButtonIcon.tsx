@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 interface ButtonIconProps {
   icon: IconProp;
-  size?: string;
+  size?: number;
   color?: string;
   onClick?: () => void;
   href?: string;
@@ -13,7 +13,7 @@ interface ButtonIconProps {
 
 export function ButtonIcon({
   icon,
-  size,
+  size = 18,
   onClick,
   href,
   active,
@@ -24,7 +24,7 @@ export function ButtonIcon({
         <Link to={href}>
           <FontAwesomeIcon
             icon={icon}
-            fontSize="18px"
+            fontSize={size}
             color={
               active ? "var(--signature-color)" : "rgba(255, 255, 255, 0.6)"
             }

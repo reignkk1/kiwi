@@ -22,9 +22,7 @@ export function Footer() {
 }
 
 function Player() {
-  const { isPlay, musicInfo, togglePlay } = useAudioStore();
-
-  const togglePlayButton = () => togglePlay();
+  const musicInfo = useAudioStore((state) => state.musicInfo);
 
   return (
     <Player.Container>
@@ -35,7 +33,7 @@ function Player() {
         </MusicInfo>
       </Link>
 
-      <Controller width={120} />
+      <Controller width={130} />
     </Player.Container>
   );
 }
@@ -82,7 +80,7 @@ Player.Container = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 49%;
-  padding: 10px 0px;
+  padding: 10px 25px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
@@ -96,7 +94,6 @@ NavBar.Container = styled.nav`
 
 const MusicInfo = styled.div`
   cursor: pointer;
-  margin-left: 20px;
 `;
 const Title = styled.div`
   color: white;

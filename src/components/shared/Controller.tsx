@@ -8,18 +8,30 @@ import { ButtonIcon } from "./ButtonIcon";
 import { useAudioStore } from "../../store";
 import styled from "styled-components";
 
-export default function Controller({ width }: { width: number }) {
+interface ControllerProps {
+  width: number;
+  size?: [number, number, number] | number;
+}
+
+export default function Controller({ width, size = 18 }: ControllerProps) {
   const isPlay = useAudioStore((state) => state.isPlay);
   const togglePlay = useAudioStore((state) => state.togglePlay);
 
   return (
     <Container width={width}>
-      <ButtonIcon icon={faBackwardStep} />
+      <ButtonIcon
+        icon={faBackwardStep}
+        size={typeof size === "number" ? size : size[0]}
+      />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
         onClick={() => togglePlay()}
+        size={typeof size === "number" ? size : size[1]}
       />
-      <ButtonIcon icon={faForwardStep} />
+      <ButtonIcon
+        icon={faForwardStep}
+        size={typeof size === "number" ? size : size[2]}
+      />
     </Container>
   );
 }
