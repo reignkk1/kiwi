@@ -3,6 +3,7 @@ import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useSearchStore } from "../../../store";
 import { faEllipsisV, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
+import AlbumImg from "../../shared/AlbumImg";
 
 export default function SearchList() {
   const play = useAudioStore(({ play }) => play);
@@ -16,7 +17,7 @@ export default function SearchList() {
       {searchResultMusic?.map((musicInfo) => (
         <Item>
           <MusicInfo>
-            <Img src={musicInfo.imgSrc} />
+            <AlbumImg width={50} height={50} musicInfo={musicInfo} />
             <Info>
               <Title>
                 <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>
@@ -54,13 +55,6 @@ const ItemButtons = styled.div`
 const MusicInfo = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const Img = styled.img`
-  width: 45px;
-  height: 45px;
-  border-radius: 5px;
-  margin-right: 10px;
 `;
 
 const Info = styled.div`

@@ -27,3 +27,7 @@ export function convertTime(time: number) {
 
   return `${minute}:${second}`;
 }
+
+export function convertFromPercentToTime(duration: number, percent: number) {
+  return Math.floor(Math.floor(duration) * (percent / 100));
+}

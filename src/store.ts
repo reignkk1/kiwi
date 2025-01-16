@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { MusicType } from "./types";
 import musicData from "./musicData.json";
 import { parserLocalStorage } from "parser-storages";
-import { getProgressPercent } from "./utils";
 
 interface AudioStore {
   audio: HTMLAudioElement;
@@ -13,7 +12,7 @@ interface AudioStore {
   play: (musicInfo: MusicType) => void;
   pause: () => void;
   togglePlay: () => void;
-  setProgressPercent: () => void;
+  setProgressPercent: (progressPercent: number) => void;
 }
 
 interface UserNameStore {
@@ -32,6 +31,33 @@ interface EntryStore {
   show: boolean;
   showEntry: () => void;
   hiddenEntry: () => void;
+}
+
+interface ActiveGenreMenuStore {
+  activeGenreMenu: string;
+  setActiveGenreMenu: (genreMenu: string) => void;
+}
+
+interface AlbumMusicListStore {
+  albumMusicList: MusicType[];
+  setAlbumMusicListAll: () => void;
+  filterAlbumMusicList: (activeGenreMenu: string) => void;
+}
+
+interface IsExpandStore {
+  isExpand: boolean;
+  setIsExpand: (isExpand: boolean) => void;
+}
+
+interface ProgressInputValueStore {
+  progressInputValue: number;
+  setProgressInputValue: (progressInputValue: number) => void;
+}
+
+interface IsExpandLyricsStore {
+  isExpandLyrics: boolean;
+  setIsExpandLyrics: (isExpandLyrics: boolean) => void;
+  toggleExpandLyrics: () => void;
 }
 
 export const useAudioStore = create<AudioStore>((set) => ({
@@ -64,13 +90,10 @@ export const useAudioStore = create<AudioStore>((set) => ({
       return { isPlay: !state.isPlay };
     }),
 
-  setProgressPercent: () =>
+  setProgressPercent: (progressPercent) =>
     set((state) => {
       return {
-        progressPercent: getProgressPercent(
-          state.audio.currentTime,
-          state.audio.duration
-        ),
+        progressPercent,
         currentTime: state.audio.currentTime,
       };
     }),
@@ -122,5 +145,66 @@ export const useEntryStore = create<EntryStore>((set) => ({
   hiddenEntry: () =>
     set(() => {
       return { show: false };
+    }),
+}));
+
+export const useActiveGenreMenu = create<ActiveGenreMenuStore>((set) => ({
+  activeGenreMenu: "all",
+  setActiveGenreMenu: (genreMenu) => {
+    set(() => {
+      return { activeGenreMenu: genreMenu };
+    });
+  },
+}));
+
+export const useAlbumMusicList = create<AlbumMusicListStore>((set) => ({
+  albumMusicList: [],
+  setAlbumMusicListAll: () => {
+    set(() => {
+      return { albumMusicList: musicData.data };
+    });
+  },
+  filterAlbumMusicList: (activeGenreMenu) => {
+    set(() => {
+      return {
+        albumMusicList: musicData.data.filter(
+          ({ genre }) => genre === activeGenreMenu
+        ),
+      };
+    });
+  },
+}));
+
+// 잡고 끌었는지 ?
+export const useIsExpandStore = create<IsExpandStore>((set) => ({
+  isExpand: false,
+  setIsExpand: (isExpand) => {
+    set(() => {
+      return { isExpand };
+    });
+  },
+}));
+
+// expand 됬을 때 input의 value 퍼센트
+export const useProgressInputStore = create<ProgressInputValueStore>((set) => ({
+  progressInputValue: 0,
+  setProgressInputValue: (progressInputValue) => {
+    set(() => {
+      return { progressInputValue };
+    });
+  },
+}));
+
+// 가사 클릭시 확대
+export const useIsExpandLyricsStore = create<IsExpandLyricsStore>((set) => ({
+  isExpandLyrics: false,
+  setIsExpandLyrics: (isExpandLyrics) => {
+    set(() => {
+      return { isExpandLyrics };
+    });
+  },
+  toggleExpandLyrics: () =>
+    set((state) => {
+      return { isExpandLyrics: !state.isExpandLyrics };
     }),
 }));

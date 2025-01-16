@@ -5,7 +5,7 @@
       "title": "나의 사춘기에게",
       "singer": "볼빨간사춘기",
       "imgSrc": "./img/1.jpg",
-      "backGroundColor": "#ae1817",
+      "backGroundColor": ["#AE1817", "#AE1817", "#AE1817"],
       "genre": "indie",
       "lyrics": [
         {
@@ -165,7 +165,7 @@
       "title": "너를 사랑하지 않는 맘이 아냐 (Feat. 유주)",
       "singer": "Kid Wine",
       "imgSrc": "./img/4.jpg",
-      "backGroundColor": "#fd511f",
+      "backGroundColor": ["#FB4F37", "#B43C2C", "#F0BFBA"],
       "genre": "indie",
       "lyrics": [
         {
@@ -385,7 +385,7 @@
       "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
       "singer": "사야 (SAya), 재연",
       "imgSrc": "./img/2.jpg",
-      "backGroundColor": "#354352",
+      "backGroundColor": ["#364354", "#7D686F", "#9E8A8C"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -575,7 +575,7 @@
       "title": "네 옆에 그 사람은 내가 아닌 다른사람",
       "singer": "TOIL, Kid Wine",
       "imgSrc": "./img/3.jpg",
-      "backGroundColor": "#1a2329",
+      "backGroundColor": ["#241B1E", "#A59E74", "#96968C"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -725,7 +725,7 @@
       "title": "그대만 있다면",
       "singer": "너드커넥션",
       "imgSrc": "./img/5.jpg",
-      "backGroundColor": "#ba9983",
+      "backGroundColor": ["#70665D", "#9D6C4C", "#DBBFA9"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -910,7 +910,7 @@
       "title": "소녀",
       "singer": "오혁",
       "imgSrc": "./img/6.jpg",
-      "backGroundColor": "#d3bc9a",
+      "backGroundColor": ["#E7E4DD", "#7D8063", "#ECDFCC"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -1015,7 +1015,7 @@
       "title": "얼음꽃",
       "singer": "보이스메모리",
       "imgSrc": "./img/7.jpg",
-      "backGroundColor": "#4e3496",
+      "backGroundColor": ["#07133B", "#7A4EA5", "#F3F2F7"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -1280,7 +1280,7 @@
       "title": "잘 지내자, 우리",
       "singer": "로이킴",
       "imgSrc": "./img/8.jpg",
-      "backGroundColor": "#355160",
+      "backGroundColor": ["#405661", "#C49A82", "#CDC0BA"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -1470,7 +1470,7 @@
       "title": "봄 내음보다 너를",
       "singer": "김나영",
       "imgSrc": "./img/9.jpg",
-      "backGroundColor": "#abb66e",
+      "backGroundColor": ["#7B9357", "#AAAD9A", "#414A37"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -1600,7 +1600,7 @@
       "title": "묘해, 너와",
       "singer": "태일",
       "imgSrc": "./img/10.jpg",
-      "backGroundColor": "#5a411c",
+      "backGroundColor": ["#594018", "#AB7F52", "#B59D71"],
       "genre": "ballad",
       "lyrics": [
         {
@@ -1860,7 +1860,7 @@
       "title": "좋아해",
       "singer": "죠지",
       "imgSrc": "./img/11.jpg",
-      "backGroundColor": "#515b67",
+      "backGroundColor": ["#72825D", "#E8DBD3", "#3A3A42"],
       "genre": "ballad",
       "lyrics": [
         {

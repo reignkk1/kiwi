@@ -5,9 +5,12 @@ import { useAudioStore, useEntryStore } from "../../store";
 import Entry from "./Entry";
 import Header from "./Header";
 import { Footer } from "./Footer";
+import { useShallow } from "zustand/react/shallow";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { show, hiddenEntry, showEntry } = useEntryStore();
+  const [show, hiddenEntry, showEntry] = useEntryStore(
+    useShallow((state) => [state.show, state.hiddenEntry, state.showEntry])
+  );
   const backGroundColor =
     useAudioStore((state) => state.musicInfo.backGroundColor) ||
     "rgba(0,0,0,0.5)";
@@ -22,7 +25,8 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <Container>
-      <BackGroundFilter backGroundColor={backGroundColor} />
+      <BackGroundFilter />
+      <Burn backGroundColor={backGroundColor} />
       <Edge>
         {show && <Entry />}
         <Content>
@@ -35,11 +39,35 @@ export default function Layout({ children }: { children: ReactNode }) {
   );
 }
 
+const Burn = styled.div<{ backGroundColor: string[] }>`
+  width: 430px;
+  height: 250px;
+  position: absolute;
+  top: 120px;
+  z-index: 3;
+  background-size: 200% 200%;
+  animation: gradientAnimation 100s linear infinite;
+  background-position: 190% 190%;
+  background: ${({ backGroundColor }) =>
+    `linear-gradient(${backGroundColor[0]},${backGroundColor[1]},${backGroundColor[2]})`};
+  filter: blur(150px);
+
+  @keyframes gradientAnimation {
+    40% {
+      transform: translateX(150px);
+    }
+    60% {
+      transform: translateY(100px);
+    }
+    75% {
+      transform: translateX(-200px);
+    }
+  }
+`;
+
 const Content = styled.div`
   height: 100%;
-  margin-top: 80px;
-  overflow: auto;
-  padding: 0px 60px;
+  padding: 80px 60px;
   & ::-webkit-scrollbar {
     background-color: black;
     height: 3px;
@@ -51,35 +79,16 @@ const Content = styled.div`
   }
 `;
 
-const BackGroundFilter = styled.div<{ backGroundColor: string }>`
+const BackGroundFilter = styled.div`
   width: 430px;
   height: 785px;
   border-radius: 40px;
-  background: ${({ backGroundColor }) => `linear-gradient(
-    180deg,
-    ${backGroundColor},
-    ${backGroundColor},
-    #111111,
-    #121213
-  );`};
-  background-size: 400% 400%;
-  animation: gradient 12s linear infinite;
+  top: 65 px;
+  background-color: #121212;
   position: absolute;
   z-index: 1;
   @media only screen and (max-height: 825px) {
     zoom: 0.8;
-  }
-
-  @keyframes gradient {
-    0% {
-      background-position: 100% 70%;
-    }
-    50% {
-      background-position: 100% 75%;
-    }
-    100% {
-      background-position: 100% 70%;
-    }
   }
 `;
 
@@ -89,9 +98,6 @@ const Edge = styled.div`
   background: url("./img/phone.png") no-repeat;
   position: relative;
   z-index: 3;
-  & ::-webkit-scrollbar {
-    width: 0px;
-  }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     width: 100%;
@@ -116,10 +122,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   user-select: none;
+  position: relative;
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: calc(var(--vh, 1vh) * 100);
   }
 `;
-
-// controller, 가사 구현하기
-// 플레이 리스트 구현

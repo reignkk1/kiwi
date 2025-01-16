@@ -7,14 +7,16 @@ import { useActiveSection } from "../../utils";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import { ProgressBar } from "../shared/ProgressBar";
 import Controller from "../shared/Controller";
+import { Progress } from "../shared/Progress";
 
 export function Footer() {
   const section = useActiveSection();
   const isPlayerPage = section == "player";
+  const progressPercent = useAudioStore((state) => state.progressPercent);
 
   return (
     <Footer.Container>
-      {!isPlayerPage && <ProgressBar />}
+      {!isPlayerPage && <Progress progressPercent={progressPercent} />}
       {!isPlayerPage && <Player />}
       <NavBar />
     </Footer.Container>
