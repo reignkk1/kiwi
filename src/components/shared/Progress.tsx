@@ -1,15 +1,24 @@
 import styled from "styled-components";
+import { useAudioStore } from "./../../store";
 
 export function Progress({
   isExpand = false,
   progressPercent,
 }: {
-  progressPercent: number;
   isExpand?: boolean;
+  progressPercent?: number;
 }) {
+  let progressPercentValue: number;
+
+  if (!progressPercent) {
+    progressPercentValue = useAudioStore((state) => state.progressPercent);
+  } else {
+    progressPercentValue = progressPercent;
+  }
+
   return (
     <Container isExpand={isExpand}>
-      <Percent progressPercent={progressPercent} />
+      <Percent progressPercent={progressPercentValue} />
     </Container>
   );
 }

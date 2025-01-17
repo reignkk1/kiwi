@@ -3,9 +3,9 @@ import SearchList from "../components/pages/search/SearchList";
 
 export default function Search() {
   return (
-    <>
+    <div>
       <SearchBar />
       <SearchList />
-    </>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import { ButtonIcon } from "../../shared/ButtonIcon";
 import Controller from "../../shared/Controller";
 import styled from "styled-components";
 
-export default function Control() {
+export default function ControllerButtons() {
   return (
     <Container>
       <ButtonIcon icon={faShuffle} />

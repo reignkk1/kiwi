@@ -1,14 +1,11 @@
-import styled from "styled-components";
 import AlbumList from "../components/pages/home/AlbumList";
 import GenreMenu from "../components/pages/home/GenreMenu";
 
 export default function Home() {
   return (
-    <Container>
+    <div>
       <GenreMenu />
       <AlbumList />
-    </Container>
+    </div>
   );
 }
-
-const Container = styled.div``;

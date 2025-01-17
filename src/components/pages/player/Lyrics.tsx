@@ -40,7 +40,6 @@ export default function Lyrics() {
   return (
     <Container clicked={clicked} isExpandLyrics={isExpandLyrics}>
       <AlbumImg height={320} musicInfo={musicInfo} />
-
       <LyricsContainer
         isExpandLyrics={isExpandLyrics}
         onClick={() => {
