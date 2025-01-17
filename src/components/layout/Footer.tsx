@@ -3,20 +3,20 @@ import styled from "styled-components";
 import { useAudioStore } from "../../store";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useActiveSection } from "../../utils";
 import { ButtonIcon } from "../shared/ButtonIcon";
-import { ProgressBar } from "../shared/ProgressBar";
 import Controller from "../shared/Controller";
 import { Progress } from "../shared/Progress";
+import { useCurrentPage } from "../../utils";
 
 export function Footer() {
-  const section = useActiveSection();
-  const isPlayerPage = section == "player";
-  const progressPercent = useAudioStore((state) => state.progressPercent);
+  const currentPage = useCurrentPage();
+  const isPlayerPage = currentPage == "player";
+
+  console.log("footer");
 
   return (
     <Footer.Container>
-      {!isPlayerPage && <Progress progressPercent={progressPercent} />}
+      {!isPlayerPage && <Progress />}
       {!isPlayerPage && <Player />}
       <NavBar />
     </Footer.Container>
@@ -49,10 +49,10 @@ function NavBar() {
 
   const [active, setActive] = useState(initialState);
   const { pathname } = useLocation();
-  const activeSection = useActiveSection();
+  const currentPage = useCurrentPage();
 
   useEffect(() => {
-    setActive(() => ({ ...initialState, [activeSection]: true }));
+    setActive(() => ({ ...initialState, [currentPage]: true }));
   }, [pathname]);
 
   return (
