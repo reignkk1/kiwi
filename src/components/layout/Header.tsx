@@ -1,26 +1,23 @@
 import styled from "styled-components";
 import { useUserNameStore } from "../../store";
-import pageConfig from "../../pageConfig.json";
 import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
   const { userName } = useUserNameStore();
 
-  const config = Object.values(pageConfig).filter(
-    (key) => key.path === pathname
-  )[0];
-
-  if (!config) {
+  if (pathname === "/player") {
     return null;
   }
 
   let title = "";
 
   if (pathname === "/") {
-    title = userName + config.headerTitle;
-  } else {
-    title = config.headerTitle;
+    title = userName + "님 어서오세요!";
+  } else if (pathname === "/search") {
+    title = "나에게 맞춘 탐색";
+  } else if (pathname === "/list") {
+    title = "음악서랍";
   }
 
   return (
