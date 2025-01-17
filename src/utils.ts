@@ -1,13 +1,19 @@
-import { useLocation } from "react-router-dom";
 import parse from "html-react-parser";
+import { useLocation } from "react-router-dom";
 
-export function useActiveSection() {
+export function useCurrentPage() {
   const { pathname } = useLocation();
 
   if (pathname === "/") {
     return "home";
+  } else if (pathname === "/search") {
+    return "search";
+  } else if (pathname === "/list") {
+    return "list";
+  } else if (pathname === "/player") {
+    return "player";
   } else {
-    return pathname.split("/")[1];
+    return "unknown";
   }
 }
 
