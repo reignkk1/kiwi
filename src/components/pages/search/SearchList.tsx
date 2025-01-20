@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useSearchStore } from "../../../store";
-import { faEllipsisV, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
 import AlbumImg from "../../shared/AlbumImg";
 
@@ -18,7 +18,7 @@ export default function SearchList() {
         <Item>
           <MusicInfo>
             <AlbumImg width={50} height={50} musicInfo={musicInfo} />
-            <Info>
+            <Info onClick={() => play(musicInfo)}>
               <Title>
                 <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>
               </Title>
@@ -28,7 +28,6 @@ export default function SearchList() {
             </Info>
           </MusicInfo>
           <ItemButtons>
-            <ButtonIcon icon={faPlay} onClick={() => play(musicInfo)} />
             <ButtonIcon icon={faEllipsisV} />
           </ItemButtons>
         </Item>
@@ -44,9 +43,21 @@ const Item = styled.li`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  animation: ItemAnimation 0.5s linear;
+
+  @keyframes ItemAnimation {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const ItemButtons = styled.div`
+  display: flex;
   button {
     margin-left: 10px;
   }
@@ -58,6 +69,8 @@ const MusicInfo = styled.div`
 `;
 
 const Info = styled.div`
+  margin-left: 10px;
+  cursor: pointer;
   mark {
     background: none;
     color: var(--signature-color);
