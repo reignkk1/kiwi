@@ -3,22 +3,26 @@ import { useAudioStore } from "./../../store";
 
 export function Progress({
   isExpand = false,
-  progressPercent,
+  value,
 }: {
   isExpand?: boolean;
-  progressPercent?: number;
+  value?: number;
 }) {
-  let progressPercentValue: number;
+  const currentProgressPercent = useAudioStore(
+    (state) => state.progressPercent
+  );
 
-  if (!progressPercent) {
-    progressPercentValue = useAudioStore((state) => state.progressPercent);
+  let progressPercent: number;
+
+  if (!value) {
+    progressPercent = currentProgressPercent;
   } else {
-    progressPercentValue = progressPercent;
+    progressPercent = value;
   }
 
   return (
     <Container isExpand={isExpand}>
-      <Percent progressPercent={progressPercentValue} />
+      <Percent progressPercent={progressPercent} />
     </Container>
   );
 }
