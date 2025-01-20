@@ -8,8 +8,8 @@ export function useCurrentPage() {
     return "home";
   } else if (pathname === "/search") {
     return "search";
-  } else if (pathname === "/list") {
-    return "list";
+  } else if (pathname === "/storage") {
+    return "storage";
   } else if (pathname === "/player") {
     return "player";
   } else {

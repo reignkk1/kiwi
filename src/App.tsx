@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Player from "./pages/Player";
 import Layout from "./components/layout";
+import Storage from "./pages/Storage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/player" element={<Player />} />
+          <Route path="/storage" element={<Storage />} />
         </Routes>
       </Layout>
     </BrowserRouter>
