@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useIsExpandLyricsStore } from "../../../store";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import AlbumImg from "../../shared/AlbumImg";
 
 export default function PlayerHeader() {
@@ -13,9 +13,9 @@ export default function PlayerHeader() {
 
   return (
     <Container>
-      {isExpandLyrics && <AlbumImg musicInfo={musicInfo} />}
+      {isExpandLyrics && <AlbumImg width={50} musicInfo={musicInfo} />}
       <Info>
-        <Title isAnimation={isAnimation}>
+        <Title isExpandLyrics={isExpandLyrics} isAnimation={isAnimation}>
           <h1>{musicInfo.title} &nbsp; &nbsp; &nbsp; &nbsp;</h1>
           {isAnimation && (
             <h1>{musicInfo.title} &nbsp; &nbsp; &nbsp; &nbsp;</h1>
@@ -25,7 +25,10 @@ export default function PlayerHeader() {
           <span>{musicInfo.singer}</span>
         </Singer>
       </Info>
-      <ButtonIcon icon={faChevronDown} size={20} />
+      <Buttons>
+        <ButtonIcon icon={faEllipsisV} size={20} />
+        <ButtonIcon icon={faChevronDown} size={20} />
+      </Buttons>
     </Container>
   );
 }
@@ -38,14 +41,12 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const Info = styled.div`
-  margin-left: 10px;
-`;
+const Info = styled.div``;
 
-const Title = styled.div<{ isAnimation: boolean }>`
+const Title = styled.div<{ isAnimation: boolean; isExpandLyrics: boolean }>`
   display: flex;
   overflow: hidden;
-  width: 250px;
+  width: ${({ isExpandLyrics }) => (isExpandLyrics ? "225px" : "250px")};
   h1 {
     white-space: nowrap;
     font-size: 18px;
@@ -75,4 +76,10 @@ const Singer = styled.div`
   color: var(--singer-color);
   font-size: 15px;
   margin-top: 10px;
+`;
+
+const Buttons = styled.div`
+  button:first-child {
+    margin-right: 10px;
+  }
 `;
