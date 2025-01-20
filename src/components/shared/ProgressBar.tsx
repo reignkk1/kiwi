@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import {
-  useAudioStore,
-  useIsExpandStore,
-  useProgressInputStore,
-} from "../../store";
+import { Progress } from "./Progress";
 import { useEffect, useRef } from "react";
 import { useShallow } from "zustand/react/shallow";
 import {
@@ -11,7 +7,11 @@ import {
   convertTime,
   getProgressPercent,
 } from "../../utils";
-import { Progress } from "./Progress";
+import {
+  useAudioStore,
+  useIsExpandStore,
+  useProgressInputStore,
+} from "../../store";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   const [audio, progressPercent, setProgressPercent] = useAudioStore(
@@ -89,14 +89,11 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
 
       <Progress
         isExpand={isExpand}
-        progressPercent={isExpand ? progressInputValue : progressPercent}
+        value={isExpand ? progressInputValue : progressPercent}
       />
     </Container>
   );
 }
-
-// 리팩토링 하기 => 공통되는 것들 다시 뽑기, 변수명, 추상화
-// 새로고침하고 재생하면 레이아웃이 약간 올라가는 현상
 
 const Container = styled.div`
   height: 40px;
