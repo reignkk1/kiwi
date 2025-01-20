@@ -16,7 +16,7 @@ export default function Header() {
     title = userName + "님 어서오세요!";
   } else if (pathname === "/search") {
     title = "나에게 맞춘 탐색";
-  } else if (pathname === "/list") {
+  } else if (pathname === "/storage") {
     title = "음악서랍";
   }
 
