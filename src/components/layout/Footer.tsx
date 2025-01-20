@@ -12,8 +12,6 @@ export function Footer() {
   const currentPage = useCurrentPage();
   const isPlayerPage = currentPage == "player";
 
-  console.log("footer");
-
   return (
     <Footer.Container>
       {!isPlayerPage && <Progress />}
@@ -44,7 +42,7 @@ function NavBar() {
   const initialState = {
     home: false,
     search: false,
-    list: false,
+    storage: false,
   };
 
   const [active, setActive] = useState(initialState);
@@ -59,7 +57,7 @@ function NavBar() {
     <NavBar.Container>
       <ButtonIcon icon={faHome} href="/" active={active.home} />
       <ButtonIcon icon={faSearch} href="/search" active={active.search} />
-      <ButtonIcon icon={faBars} href="/list" active={active.list} />
+      <ButtonIcon icon={faBars} href="/storage" active={active.storage} />
     </NavBar.Container>
   );
 }
