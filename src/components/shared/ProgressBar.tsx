@@ -14,13 +14,15 @@ import {
 } from "../../store";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
-  const [audio, progressPercent, setProgressPercent] = useAudioStore(
-    useShallow((state) => [
-      state.audio,
-      state.progressPercent,
-      state.setProgressPercent,
-    ])
-  );
+  const [audio, progressPercent, updateProgressPercent, setProgressPercent] =
+    useAudioStore(
+      useShallow((state) => [
+        state.audio,
+        state.progressPercent,
+        state.updateProgressPercent,
+        state.setProgressPercent,
+      ])
+    );
 
   const [isExpand, setIsExpand] = useIsExpandStore(
     useShallow((state) => [state.isExpand, state.setIsExpand])
@@ -34,15 +36,6 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   );
 
   const isClicked = useRef<boolean>(false);
-
-  const updateProgressPercent = () =>
-    setProgressPercent(
-      getProgressPercent(audio.currentTime, audio.duration) || 0
-    );
-
-  useEffect(() => {
-    audio.ontimeupdate = updateProgressPercent;
-  }, []);
 
   return (
     <Container>
