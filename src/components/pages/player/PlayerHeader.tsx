@@ -3,13 +3,16 @@ import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useAudioStore, useIsExpandLyricsStore } from "../../../store";
 import { faChevronDown, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import AlbumImg from "../../shared/AlbumImg";
+import { useNavigate } from "react-router-dom";
 
 export default function PlayerHeader() {
+  const navigate = useNavigate();
   const musicInfo = useAudioStore((state) => state.musicInfo);
-  const isAnimation = musicInfo.title?.length > 20;
   const isExpandLyrics = useIsExpandLyricsStore(
     (state) => state.isExpandLyrics
   );
+
+  const isAnimation = musicInfo.title?.length > 20;
 
   return (
     <Container>
@@ -27,7 +30,11 @@ export default function PlayerHeader() {
       </Info>
       <Buttons>
         <ButtonIcon icon={faEllipsisV} size={20} />
-        <ButtonIcon icon={faChevronDown} size={20} />
+        <ButtonIcon
+          icon={faChevronDown}
+          size={20}
+          onClick={() => navigate(-1)}
+        />
       </Buttons>
     </Container>
   );
@@ -46,7 +53,7 @@ const Info = styled.div``;
 const Title = styled.div<{ isAnimation: boolean; isExpandLyrics: boolean }>`
   display: flex;
   overflow: hidden;
-  width: ${({ isExpandLyrics }) => (isExpandLyrics ? "225px" : "250px")};
+  width: ${({ isExpandLyrics }) => (isExpandLyrics ? "200px" : "250px")};
   h1 {
     white-space: nowrap;
     font-size: 18px;
