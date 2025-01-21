@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useAudioStore } from "./../../store";
+import { useShallow } from "zustand/react/shallow";
+import { useEffect } from "react";
 
 export function Progress({
   isExpand = false,
@@ -8,8 +10,12 @@ export function Progress({
   isExpand?: boolean;
   value?: number;
 }) {
-  const currentProgressPercent = useAudioStore(
-    (state) => state.progressPercent
+  const [audio, currentProgressPercent, updateProgressPercent] = useAudioStore(
+    useShallow((state) => [
+      state.audio,
+      state.progressPercent,
+      state.updateProgressPercent,
+    ])
   );
 
   let progressPercent: number;
@@ -19,6 +25,10 @@ export function Progress({
   } else {
     progressPercent = value;
   }
+
+  useEffect(() => {
+    audio.ontimeupdate = updateProgressPercent;
+  }, []);
 
   return (
     <Container isExpand={isExpand}>
