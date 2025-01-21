@@ -20,7 +20,8 @@ export interface AudioAction {
   play: (musicInfo: AudioState["musicInfo"]) => void;
   pause: () => void;
   togglePlay: () => void;
-  setProgressPercent: (progressPercent: AudioState["progressPercent"]) => void;
+  updateProgressPercent: () => void;
+  setProgressPercent: (value?: AudioState["progressPercent"]) => void;
 }
 
 export interface UserNameState {
