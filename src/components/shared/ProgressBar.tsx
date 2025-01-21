@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { Progress } from "./Progress";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useShallow } from "zustand/react/shallow";
-import {
-  convertFromPercentToTime,
-  convertTime,
-  getProgressPercent,
-} from "../../utils";
+import { convertFromPercentToTime, convertTime } from "../../utils";
 import {
   useAudioStore,
   useIsExpandStore,
@@ -14,15 +10,13 @@ import {
 } from "../../store";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
-  const [audio, progressPercent, updateProgressPercent, setProgressPercent] =
-    useAudioStore(
-      useShallow((state) => [
-        state.audio,
-        state.progressPercent,
-        state.updateProgressPercent,
-        state.setProgressPercent,
-      ])
-    );
+  const [audio, progressPercent, setProgressPercent] = useAudioStore(
+    useShallow((state) => [
+      state.audio,
+      state.progressPercent,
+      state.setProgressPercent,
+    ])
+  );
 
   const [isExpand, setIsExpand] = useIsExpandStore(
     useShallow((state) => [state.isExpand, state.setIsExpand])
