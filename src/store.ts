@@ -22,6 +22,7 @@ import {
   UserNameAction,
   UserNameState,
 } from "./types";
+import { getProgressPercent } from "./utils";
 
 export const useAudioStore = create<AudioState & AudioAction>((set) => ({
   audio: new Audio(),
@@ -52,14 +53,23 @@ export const useAudioStore = create<AudioState & AudioAction>((set) => ({
       }
       return { isPlay: !state.isPlay };
     }),
-
-  setProgressPercent: (progressPercent) =>
+  updateProgressPercent: () =>
     set((state) => {
       return {
-        progressPercent,
+        progressPercent:
+          getProgressPercent(state.audio.currentTime, state.audio.duration) ||
+          0,
         currentTime: state.audio.currentTime,
       };
     }),
+
+  setProgressPercent: (value) => {
+    set(() => {
+      return {
+        progressPercent: value,
+      };
+    });
+  },
 }));
 
 export const useUserNameStore = create<UserNameState & UserNameAction>(
