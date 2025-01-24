@@ -73,12 +73,13 @@ export interface AlbumMusicListAction {
 }
 
 export interface IsExpandState {
-  isExpand: boolean;
+  isExpandProgressBar: boolean;
 }
 
 export interface IsExpandAction {
-  isExpand: boolean;
-  setIsExpand: (isExpand: IsExpandState["isExpand"]) => void;
+  setIsExpandProgressBar: (
+    isExpand: IsExpandState["isExpandProgressBar"]
+  ) => void;
 }
 
 export interface ProgressInputValueState {
@@ -100,4 +101,21 @@ export interface IsExpandLyricsAction {
     isExpandLyrics: IsExpandLyricsState["isExpandLyrics"]
   ) => void;
   toggleExpandLyrics: () => void;
+}
+
+export interface IsPlayerMenuState {
+  isPlayerMenu: boolean;
+}
+
+export interface IsPlayerMenuAction {
+  openPlayerMenu: () => void;
+  closePlayerMenu: () => void;
+}
+
+export interface IsLyricsClickedState {
+  isLyricsClicked: boolean;
+}
+
+export interface IsLyricsClickedAction {
+  clickLyrics: () => void;
 }
