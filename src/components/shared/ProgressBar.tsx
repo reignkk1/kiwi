@@ -5,7 +5,7 @@ import { useShallow } from "zustand/react/shallow";
 import { convertFromPercentToTime, convertTime } from "../../utils";
 import {
   useAudioStore,
-  useIsExpandStore,
+  useIsExpandProgressBarStore,
   useProgressInputStore,
 } from "../../store";
 
@@ -18,9 +18,13 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
     ])
   );
 
-  const [isExpand, setIsExpand] = useIsExpandStore(
-    useShallow((state) => [state.isExpand, state.setIsExpand])
-  );
+  const [isExpandProgressBar, setIsExpandProgressBar] =
+    useIsExpandProgressBarStore(
+      useShallow((state) => [
+        state.isExpandProgressBar,
+        state.setIsExpandProgressBar,
+      ])
+    );
 
   const [progressInputValue, setProgressInputValue] = useProgressInputStore(
     useShallow((state) => [
@@ -35,7 +39,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
     <Container>
       {!disabled && (
         <ExpandTime>
-          {isExpand && (
+          {isExpandProgressBar && (
             <span>
               {convertTime(
                 convertFromPercentToTime(audio.duration, progressInputValue)
@@ -64,19 +68,19 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         }}
         onMouseMove={() => {
           if (isClicked.current) {
-            setIsExpand(true);
+            setIsExpandProgressBar(true);
           }
         }}
         onMouseUp={() => {
           isClicked.current = false;
-          setIsExpand(false);
+          setIsExpandProgressBar(false);
           setProgressPercent(0);
         }}
       />
 
       <Progress
-        isExpand={isExpand}
-        value={isExpand ? progressInputValue : progressPercent}
+        isExpand={isExpandProgressBar}
+        value={isExpandProgressBar ? progressInputValue : progressPercent}
       />
     </Container>
   );
