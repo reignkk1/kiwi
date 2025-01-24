@@ -1,16 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useShallow } from "zustand/react/shallow";
+import { useIsLyricsClicked } from "./store";
+import AlbumImg from "../../shared/AlbumImg";
 import {
   useAudioStore,
   useIsExpandLyricsStore,
-  useIsExpandStore,
+  useIsExpandProgressBarStore,
 } from "../../../store";
-import { useShallow } from "zustand/react/shallow";
-import AlbumImg from "../../shared/AlbumImg";
 
-export default function Lyrics() {
+export default function LyricsAndImage() {
   const musicInfo = useAudioStore((state) => state.musicInfo);
-  const isExpand = useIsExpandStore((state) => state.isExpand);
+  // input Expand
+  const isExpandProgressBar = useIsExpandProgressBarStore(
+    (state) => state.isExpandProgressBar
+  );
   const [isExpandLyrics, toggleExpandLyrics, setIsExpandLyrics] =
     useIsExpandLyricsStore(
       useShallow((state) => [
@@ -19,8 +23,8 @@ export default function Lyrics() {
         state.setIsExpandLyrics,
       ])
     );
-
-  const [clicked, setClicked] = useState<boolean>(false);
+  const clickLyrics = useIsLyricsClicked((state) => state.clickLyrics);
+  const isLyricsClicked = useIsLyricsClicked((state) => state.isLyricsClicked);
 
   const currentTime = Math.floor(useAudioStore((state) => state.currentTime));
   const activeLyricsText = useRef<HTMLDivElement>(null);
@@ -38,12 +42,15 @@ export default function Lyrics() {
   }, []);
 
   return (
-    <Container clicked={clicked} isExpandLyrics={isExpandLyrics}>
-      <AlbumImg height={320} musicInfo={musicInfo} />
+    <Container
+      isExpandLyrics={isExpandLyrics}
+      isLyricsClicked={isLyricsClicked}
+    >
+      <AlbumImg type="large" musicInfo={musicInfo} />
       <LyricsContainer
         isExpandLyrics={isExpandLyrics}
         onClick={() => {
-          setClicked(true);
+          clickLyrics();
           toggleExpandLyrics();
         }}
       >
@@ -53,7 +60,7 @@ export default function Lyrics() {
             <LyricsText
               ref={isActive ? activeLyricsText : null}
               active={isActive}
-              isExpand={isExpand}
+              isExpandProgressBar={isExpandProgressBar}
             >
               <span>{text}</span>
             </LyricsText>
@@ -64,16 +71,19 @@ export default function Lyrics() {
   );
 }
 
-const Container = styled.div<{ isExpandLyrics: boolean; clicked: boolean }>`
-  height: 440px;
+const Container = styled.div<{
+  isExpandLyrics: boolean;
+  isLyricsClicked: boolean;
+}>`
   width: 340px;
-
+  height: 450px;
   img {
-    animation: ${({ isExpandLyrics, clicked }) =>
-        isExpandLyrics || !clicked ? "hide" : "show"}
+    animation: ${({ isExpandLyrics, isLyricsClicked }) =>
+        isExpandLyrics || !isLyricsClicked ? "hide" : "show"}
       0.3s forwards;
 
-    animation-play-state: ${({ clicked }) => (clicked ? "running" : "paused")};
+    animation-play-state: ${({ isLyricsClicked }) =>
+      isLyricsClicked ? "running" : "paused"};
   }
   @keyframes hide {
     0% {
@@ -98,8 +108,11 @@ const Container = styled.div<{ isExpandLyrics: boolean; clicked: boolean }>`
   }
 `;
 
+// 각각 스타일을 객체 형태로 만들어서 props로 내려주도록?
+// 각각의 페이지별로 store를 만들어서 상태를 관리
+// 페이지를 넘어 공유하는 상태는 shared 폴더에 store 만들어서 관리
+
 const LyricsContainer = styled.div<{ isExpandLyrics: boolean }>`
-  width: 100%;
   height: ${({ isExpandLyrics }) => (isExpandLyrics ? "100%" : "100px")};
   text-align: ${({ isExpandLyrics }) => (isExpandLyrics ? "start" : "center")};
   overflow-y: ${({ isExpandLyrics }) => (isExpandLyrics ? "auto" : "hidden")};
@@ -115,11 +128,15 @@ const LyricsContainer = styled.div<{ isExpandLyrics: boolean }>`
     display: none;
   }
   position: relative;
+  transition: all 0.3s;
 `;
 
-const LyricsText = styled.div<{ active: boolean; isExpand: boolean }>`
-  color: ${({ active, isExpand }) =>
-    isExpand
+const LyricsText = styled.div<{
+  active: boolean;
+  isExpandProgressBar: boolean;
+}>`
+  color: ${({ active, isExpandProgressBar }) =>
+    isExpandProgressBar
       ? "rgba(255, 255, 255, 0.2)"
       : active
       ? "white"

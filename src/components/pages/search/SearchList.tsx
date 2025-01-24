@@ -17,7 +17,7 @@ export default function SearchList() {
       {searchResultMusic?.map((musicInfo) => (
         <Item>
           <MusicInfo>
-            <AlbumImg width={50} height={50} musicInfo={musicInfo} />
+            <AlbumImg type="small" musicInfo={musicInfo} />
             <Info onClick={() => play(musicInfo)}>
               <Title>
                 <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>

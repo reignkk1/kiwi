@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
-import { useAudioStore, useIsExpandLyricsStore } from "../../../store";
+import {
+  useAudioStore,
+  useIsExpandLyricsStore,
+  useIsPlayerMenu,
+} from "../../../store";
 import { faChevronDown, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
+import { useShallow } from "zustand/react/shallow";
+import { useEffect } from "react";
 
 export default function PlayerHeader() {
   const navigate = useNavigate();
@@ -11,12 +17,23 @@ export default function PlayerHeader() {
   const isExpandLyrics = useIsExpandLyricsStore(
     (state) => state.isExpandLyrics
   );
+  const [isPlayerMenu, openPlayerMenu, closePlayerMenu] = useIsPlayerMenu(
+    useShallow(({ isPlayerMenu, openPlayerMenu, closePlayerMenu }) => [
+      isPlayerMenu,
+      openPlayerMenu,
+      closePlayerMenu,
+    ])
+  );
+
+  useEffect(() => {
+    closePlayerMenu();
+  }, []);
 
   const isAnimation = musicInfo.title?.length > 20;
 
-  return (
+  return !isPlayerMenu ? (
     <Container>
-      {isExpandLyrics && <AlbumImg width={50} musicInfo={musicInfo} />}
+      {isExpandLyrics && <AlbumImg type="small" musicInfo={musicInfo} />}
       <Info>
         <Title isExpandLyrics={isExpandLyrics} isAnimation={isAnimation}>
           <h1>{musicInfo.title} &nbsp; &nbsp; &nbsp; &nbsp;</h1>
@@ -29,7 +46,11 @@ export default function PlayerHeader() {
         </Singer>
       </Info>
       <Buttons>
-        <ButtonIcon icon={faEllipsisV} size={20} />
+        <ButtonIcon
+          onClick={() => openPlayerMenu()}
+          icon={faEllipsisV}
+          size={20}
+        />
         <ButtonIcon
           icon={faChevronDown}
           size={20}
@@ -37,7 +58,7 @@ export default function PlayerHeader() {
         />
       </Buttons>
     </Container>
-  );
+  ) : null;
 }
 
 const Container = styled.div`

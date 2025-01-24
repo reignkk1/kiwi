@@ -5,7 +5,7 @@ import AlbumImg from "../../shared/AlbumImg";
 export default function Album({ musicInfo }: { musicInfo: MusicType }) {
   return (
     <AlbumTemplate>
-      <AlbumImg width={130} musicInfo={musicInfo} isActiveButton={true} />
+      <AlbumImg type="middle" musicInfo={musicInfo} isActiveButton={true} />
       <AlbumInfo>
         <Title>{musicInfo.title}</Title>
         <Singer>{musicInfo.singer}</Singer>

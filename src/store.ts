@@ -14,6 +14,8 @@ import {
   IsExpandLyricsAction,
   IsExpandLyricsState,
   IsExpandState,
+  IsPlayerMenuAction,
+  IsPlayerMenuState,
   MusicType,
   ProgressInputValueAction,
   ProgressInputValueState,
@@ -155,16 +157,16 @@ export const useAlbumMusicList = create<
 }));
 
 // 잡고 끌었는지 ?
-export const useIsExpandStore = create<IsExpandState & IsExpandAction>(
-  (set) => ({
-    isExpand: false,
-    setIsExpand: (isExpand) => {
-      set(() => {
-        return { isExpand };
-      });
-    },
-  })
-);
+export const useIsExpandProgressBarStore = create<
+  IsExpandState & IsExpandAction
+>((set) => ({
+  isExpandProgressBar: false,
+  setIsExpandProgressBar: (isExpandProgressBar) => {
+    set(() => {
+      return { isExpandProgressBar };
+    });
+  },
+}));
 
 // expand 됬을 때 input의 value 퍼센트
 export const useProgressInputStore = create<
@@ -193,3 +195,19 @@ export const useIsExpandLyricsStore = create<
       return { isExpandLyrics: !state.isExpandLyrics };
     }),
 }));
+
+export const useIsPlayerMenu = create<IsPlayerMenuState & IsPlayerMenuAction>(
+  (set) => ({
+    isPlayerMenu: false,
+    openPlayerMenu: () => {
+      set(() => {
+        return { isPlayerMenu: true };
+      });
+    },
+    closePlayerMenu: () => {
+      set(() => {
+        return { isPlayerMenu: false };
+      });
+    },
+  })
+);
