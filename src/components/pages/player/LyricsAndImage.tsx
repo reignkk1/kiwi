@@ -12,10 +12,17 @@ export default function LyricsAndImage() {
       isExpandProgressBar,
       isLyricsClicked,
     },
-    action: { setIsExpandLyrics, toggleExpandLyrics, clickLyrics },
+    action: {
+      setIsExpandLyrics,
+      toggleExpandLyrics,
+      clickLyrics,
+      unclickedLyrics,
+    },
   } = useLyricsAndImageStore();
 
   const activeLyricsText = useRef<HTMLDivElement>(null);
+
+  const cleanedCurrentTime = Math.floor(currentTime);
 
   useEffect(() => {
     if (!isExpandLyrics) {
@@ -26,8 +33,9 @@ export default function LyricsAndImage() {
   useEffect(() => {
     return () => {
       setIsExpandLyrics(false);
+      unclickedLyrics();
     };
-  }, [setIsExpandLyrics]);
+  }, []);
 
   return (
     <Container
@@ -43,7 +51,8 @@ export default function LyricsAndImage() {
         }}
       >
         {musicInfo.lyrics.map(({ text, startTime, endTime }) => {
-          const isActive = startTime <= currentTime && currentTime <= endTime;
+          const isActive =
+            startTime <= cleanedCurrentTime && cleanedCurrentTime <= endTime;
           return (
             <LyricsText
               ref={isActive ? activeLyricsText : null}
@@ -95,10 +104,6 @@ const Container = styled.div<{
     }
   }
 `;
-
-// 각각 스타일을 객체 형태로 만들어서 props로 내려주도록?
-// 각각의 페이지별로 store를 만들어서 상태를 관리
-// 페이지를 넘어 공유하는 상태는 shared 폴더에 store 만들어서 관리
 
 const LyricsContainer = styled.div<{ isExpandLyrics: boolean }>`
   height: ${({ isExpandLyrics }) => (isExpandLyrics ? "100%" : "100px")};
