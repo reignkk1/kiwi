@@ -19,9 +19,14 @@ export function useLyricsAndImageStore() {
     (state) => state.isExpandProgressBar
   );
 
-  const [isLyricsClicked, clickLyrics] = createIsLyricsClickedStore(
-    useShallow((state) => [state.isLyricsClicked, state.clickLyrics])
-  );
+  const [isLyricsClicked, clickLyrics, unclickedLyrics] =
+    createIsLyricsClickedStore(
+      useShallow((state) => [
+        state.isLyricsClicked,
+        state.clickLyrics,
+        state.unclickedLyrics,
+      ])
+    );
 
   const [isExpandLyrics, setIsExpandLyrics, toggleExpandLyrics] =
     createIsExpandLyricsStore(
@@ -40,7 +45,12 @@ export function useLyricsAndImageStore() {
       isExpandProgressBar,
       isLyricsClicked,
     },
-    action: { setIsExpandLyrics, toggleExpandLyrics, clickLyrics },
+    action: {
+      setIsExpandLyrics,
+      toggleExpandLyrics,
+      clickLyrics,
+      unclickedLyrics,
+    },
   };
 }
 
