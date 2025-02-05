@@ -9,6 +9,7 @@ interface IsPlayerMenuStore {
 interface IsLyricsClickedStore {
   isLyricsClicked: boolean;
   clickLyrics: () => void;
+  unclickedLyrics: () => void;
 }
 
 export interface IsExpandLyricsStore {
@@ -30,6 +31,7 @@ export const createIsLyricsClickedStore = create<IsLyricsClickedStore>(
   (set) => ({
     isLyricsClicked: false,
     clickLyrics: () => set(() => ({ isLyricsClicked: true })),
+    unclickedLyrics: () => set(() => ({ isLyricsClicked: false })),
   })
 );
 
