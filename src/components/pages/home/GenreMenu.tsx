@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { useActiveGenreMenu } from "../../../store";
+import { useGenreMenuStore } from "./hooks";
 
 export default function GenreMenu() {
-  const activeGenreMenu = useActiveGenreMenu((state) => state.activeGenreMenu);
-  const setActiveGenreMenu = useActiveGenreMenu(
-    (state) => state.setActiveGenreMenu
-  );
+  const {
+    state: { activeGenreMenu },
+    action: { setActiveGenreMenu },
+  } = useGenreMenuStore();
 
   const menu = [
     { id: "all", text: "전체" },

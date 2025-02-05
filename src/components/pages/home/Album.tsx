@@ -1,8 +1,12 @@
 import styled from "styled-components";
-import { MusicType } from "../../../types";
 import AlbumImg from "../../shared/AlbumImg";
+import { MusicType } from "../../shared/types";
 
-export default function Album({ musicInfo }: { musicInfo: MusicType }) {
+interface AlbumProps {
+  musicInfo: MusicType;
+}
+
+export default function Album({ musicInfo }: AlbumProps) {
   return (
     <AlbumTemplate>
       <AlbumImg type="middle" musicInfo={musicInfo} isActiveButton={true} />

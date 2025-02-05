@@ -1,25 +1,24 @@
 import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 import { parserLocalStorage } from "parser-storages";
-import { useAudioStore, useEntryStore } from "../../store";
 import Entry from "./Entry";
 import Header from "./Header";
 import { Footer } from "./Footer";
-import { useShallow } from "zustand/react/shallow";
+import { useLayoutStore } from "./hooks";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const [show, hiddenEntry, showEntry] = useEntryStore(
-    useShallow((state) => [state.show, state.hiddenEntry, state.showEntry])
-  );
-  const backGroundColor =
-    useAudioStore((state) => state.musicInfo.backGroundColor) ||
-    "rgba(0,0,0,0.5)";
+  const {
+    state: { isModal, musicBackGroundColor },
+    action: { hiddenModal, showModal },
+  } = useLayoutStore();
+
+  const backGroundColor = musicBackGroundColor || "rgba(0,0,0,0.5)";
 
   useEffect(() => {
     if (parserLocalStorage.get("name")) {
-      hiddenEntry();
+      hiddenModal();
     } else {
-      showEntry();
+      showModal();
     }
   }, []);
 
@@ -28,7 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <BackGroundFilter />
       <Burn backGroundColor={backGroundColor} />
       <Edge>
-        {show && <Entry />}
+        {isModal && <Entry />}
         <Content>
           <Header />
           {children}

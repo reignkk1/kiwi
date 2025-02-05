@@ -1,32 +1,20 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useShallow } from "zustand/react/shallow";
-import { useIsLyricsClicked } from "./store";
 import AlbumImg from "../../shared/AlbumImg";
-import {
-  useAudioStore,
-  useIsExpandLyricsStore,
-  useIsExpandProgressBarStore,
-} from "../../../store";
+import { useLyricsAndImageStore } from "./hooks";
 
 export default function LyricsAndImage() {
-  const musicInfo = useAudioStore((state) => state.musicInfo);
-  // input Expand
-  const isExpandProgressBar = useIsExpandProgressBarStore(
-    (state) => state.isExpandProgressBar
-  );
-  const [isExpandLyrics, toggleExpandLyrics, setIsExpandLyrics] =
-    useIsExpandLyricsStore(
-      useShallow((state) => [
-        state.isExpandLyrics,
-        state.toggleExpandLyrics,
-        state.setIsExpandLyrics,
-      ])
-    );
-  const clickLyrics = useIsLyricsClicked((state) => state.clickLyrics);
-  const isLyricsClicked = useIsLyricsClicked((state) => state.isLyricsClicked);
+  const {
+    state: {
+      musicInfo,
+      currentTime,
+      isExpandLyrics,
+      isExpandProgressBar,
+      isLyricsClicked,
+    },
+    action: { setIsExpandLyrics, toggleExpandLyrics, clickLyrics },
+  } = useLyricsAndImageStore();
 
-  const currentTime = Math.floor(useAudioStore((state) => state.currentTime));
   const activeLyricsText = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,7 +27,7 @@ export default function LyricsAndImage() {
     return () => {
       setIsExpandLyrics(false);
     };
-  }, []);
+  }, [setIsExpandLyrics]);
 
   return (
     <Container

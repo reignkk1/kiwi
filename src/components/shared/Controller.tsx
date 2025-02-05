@@ -5,8 +5,8 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { ButtonIcon } from "./ButtonIcon";
-import { useAudioStore } from "../../store";
 import styled from "styled-components";
+import { useControllerStore } from "./hooks";
 
 interface ControllerProps {
   width: number;
@@ -14,8 +14,10 @@ interface ControllerProps {
 }
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
-  const isPlay = useAudioStore((state) => state.isPlay);
-  const togglePlay = useAudioStore((state) => state.togglePlay);
+  const {
+    state: { isPlay },
+    action: { togglePlay },
+  } = useControllerStore();
 
   return (
     <Container width={width}>
@@ -25,7 +27,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
       />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
-        onClick={() => togglePlay()}
+        onClick={togglePlay}
         size={typeof size === "number" ? size : size[1]}
       />
       <ButtonIcon

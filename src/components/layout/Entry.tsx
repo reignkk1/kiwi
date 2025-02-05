@@ -1,13 +1,15 @@
 import { parserLocalStorage } from "parser-storages";
 import { ChangeEvent } from "react";
 import styled from "styled-components";
-import { useEntryStore, useUserNameStore } from "../../store";
 import { useNavigate } from "react-router-dom";
+import { useEntryStore } from "./hooks";
 
 export default function Entry() {
   const navigate = useNavigate();
-  const { hiddenEntry } = useEntryStore();
-  const { userName, setUserName } = useUserNameStore();
+  const {
+    state: { userName },
+    action: { hiddenModal, setUserName },
+  } = useEntryStore();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUserName(e.currentTarget.value);
@@ -17,7 +19,7 @@ export default function Entry() {
       return alert("이름을 입력해주세요.");
     }
     parserLocalStorage.set("name", userName);
-    hiddenEntry();
+    hiddenModal();
     navigate("/");
   };
 

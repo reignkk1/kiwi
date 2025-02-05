@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useUserNameStore } from "../../store";
 import { useLocation } from "react-router-dom";
+import { useHeaderStore } from "./hooks";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const { userName } = useUserNameStore();
+  const {
+    state: { userName },
+  } = useHeaderStore();
 
   if (pathname === "/player") {
     return null;

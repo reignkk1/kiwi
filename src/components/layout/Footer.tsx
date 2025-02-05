@@ -1,12 +1,12 @@
 import { faBars, faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import { useAudioStore } from "../../store";
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import Controller from "../shared/Controller";
 import { Progress } from "../shared/Progress";
 import { useCurrentPage } from "../../utils";
+import { useNavBarStore, usePlayerStore } from "./hooks";
 
 export function Footer() {
   const currentPage = useCurrentPage();
@@ -22,7 +22,9 @@ export function Footer() {
 }
 
 function Player() {
-  const musicInfo = useAudioStore((state) => state.musicInfo);
+  const {
+    state: { musicInfo },
+  } = usePlayerStore();
 
   return (
     <Player.Container>
@@ -39,28 +41,26 @@ function Player() {
 }
 
 function NavBar() {
-  const initialState = {
-    home: false,
-    search: false,
-    storage: false,
-  };
+  const {
+    state: { activeMenu },
+    action: { setActiveMenu },
+  } = useNavBarStore();
 
-  const [active, setActive] = useState(initialState);
-  const { pathname } = useLocation();
   const currentPage = useCurrentPage();
 
   useEffect(() => {
-    setActive(() => ({ ...initialState, [currentPage]: true }));
-  }, [pathname]);
+    setActiveMenu(currentPage);
+  }, [currentPage]);
 
   return (
     <NavBar.Container>
-      <ButtonIcon icon={faHome} href="/" active={active.home} />
-      <ButtonIcon icon={faSearch} href="/search" active={active.search} />
-      <ButtonIcon icon={faBars} href="/storage" active={active.storage} />
+      <ButtonIcon icon={faHome} href="/" active={activeMenu.home} />
+      <ButtonIcon icon={faSearch} href="/search" active={activeMenu.search} />
+      <ButtonIcon icon={faBars} href="/storage" active={activeMenu.storage} />
     </NavBar.Container>
   );
 }
+
 
 Footer.Container = styled.footer`
   background-color: black;

@@ -1,35 +1,23 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
-import {
-  useAudioStore,
-  useIsExpandLyricsStore,
-  useIsPlayerMenu,
-} from "../../../store";
 import { faChevronDown, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
-import { useShallow } from "zustand/react/shallow";
 import { useEffect } from "react";
+import { usePlayerHeaderStore } from "./hooks";
 
 export default function PlayerHeader() {
+  const {
+    state: { musicInfo, isExpandLyrics, isPlayerMenu },
+    action: { openPlayerMenu, closePlayerMenu },
+  } = usePlayerHeaderStore();
+
   const navigate = useNavigate();
-  const musicInfo = useAudioStore((state) => state.musicInfo);
-  const isExpandLyrics = useIsExpandLyricsStore(
-    (state) => state.isExpandLyrics
-  );
-  const [isPlayerMenu, openPlayerMenu, closePlayerMenu] = useIsPlayerMenu(
-    useShallow(({ isPlayerMenu, openPlayerMenu, closePlayerMenu }) => [
-      isPlayerMenu,
-      openPlayerMenu,
-      closePlayerMenu,
-    ])
-  );
+  const isAnimation = musicInfo.title?.length > 20;
 
   useEffect(() => {
     closePlayerMenu();
   }, []);
-
-  const isAnimation = musicInfo.title?.length > 20;
 
   return !isPlayerMenu ? (
     <Container>

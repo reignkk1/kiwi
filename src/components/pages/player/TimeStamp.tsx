@@ -1,23 +1,11 @@
 import styled from "styled-components";
 import { convertFromPercentToTime, convertTime } from "../../../utils";
-import { useShallow } from "zustand/react/shallow";
-import {
-  useAudioStore,
-  useIsExpandProgressBarStore,
-  useProgressInputStore,
-} from "../../../store";
+import { useTimeStampStore } from "./hooks";
 
 export default function TimeStamp() {
-  const [audio, currentTime] = useAudioStore(
-    useShallow((state) => [state.audio, state.currentTime])
-  );
-
-  const isExpandProgressBar = useIsExpandProgressBarStore(
-    (state) => state.isExpandProgressBar
-  );
-  const progressInputValue = useProgressInputStore(
-    (state) => state.progressInputValue
-  );
+  const {
+    state: { audio, currentTime, isExpandProgressBar, progressInputValue },
+  } = useTimeStampStore();
 
   return (
     <Container>

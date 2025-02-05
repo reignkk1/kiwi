@@ -1,19 +1,13 @@
 import Album from "./Album";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useShallow } from "zustand/react/shallow";
-import { useActiveGenreMenu, useAlbumMusicList } from "../../../store";
+import { useAlbumListStore } from "./hooks";
 
 export default function AlbumList() {
-  const activeGenreMenu = useActiveGenreMenu((state) => state.activeGenreMenu);
-  const [albumMusicList, setAlbumMusicListAll, filterAlbumMusicList] =
-    useAlbumMusicList(
-      useShallow((state) => [
-        state.albumMusicList,
-        state.setAlbumMusicListAll,
-        state.filterAlbumMusicList,
-      ])
-    );
+  const {
+    state: { activeGenreMenu, albumMusicList },
+    action: { setAlbumMusicListAll, filterAlbumMusicList },
+  } = useAlbumListStore();
 
   useEffect(() => {
     if (activeGenreMenu === "all") {

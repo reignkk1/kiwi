@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
-import { useAudioStore, useSearchStore } from "../../../store";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
 import AlbumImg from "../../shared/AlbumImg";
+import { useSearchListStore } from "./hooks";
 
 export default function SearchList() {
-  const play = useAudioStore(({ play }) => play);
-  const searchKeyWord = useSearchStore((state) => state.searchKeyWord);
-  const searchResultMusic = useSearchStore(
-    ({ searchResultMusic }) => searchResultMusic
-  );
+  const {
+    state: { searchKeyWord, searchResultMusic },
+    action: { musicPlay },
+  } = useSearchListStore();
 
   return (
     <List>
@@ -18,7 +17,7 @@ export default function SearchList() {
         <Item>
           <MusicInfo>
             <AlbumImg type="small" musicInfo={musicInfo} />
-            <Info onClick={() => play(musicInfo)}>
+            <Info onClick={() => musicPlay(musicInfo)}>
               <Title>
                 <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>
               </Title>

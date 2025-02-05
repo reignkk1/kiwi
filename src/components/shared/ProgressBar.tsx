@@ -1,37 +1,18 @@
 import styled from "styled-components";
 import { Progress } from "./Progress";
 import { useRef } from "react";
-import { useShallow } from "zustand/react/shallow";
 import { convertFromPercentToTime, convertTime } from "../../utils";
-import {
-  useAudioStore,
-  useIsExpandProgressBarStore,
-  useProgressInputStore,
-} from "../../store";
+import { useProgressBarStore } from "./hooks";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
-  const [audio, progressPercent, setProgressPercent] = useAudioStore(
-    useShallow((state) => [
-      state.audio,
-      state.progressPercent,
-      state.setProgressPercent,
-    ])
-  );
-
-  const [isExpandProgressBar, setIsExpandProgressBar] =
-    useIsExpandProgressBarStore(
-      useShallow((state) => [
-        state.isExpandProgressBar,
-        state.setIsExpandProgressBar,
-      ])
-    );
-
-  const [progressInputValue, setProgressInputValue] = useProgressInputStore(
-    useShallow((state) => [
-      state.progressInputValue,
-      state.setProgressInputValue,
-    ])
-  );
+  const {
+    state: { audio, isExpandProgressBar, progressInputValue, progressPercent },
+    action: {
+      setIsExpandProgressBar,
+      setProgressInputValue,
+      setProgressPercent,
+    },
+  } = useProgressBarStore();
 
   const isClicked = useRef<boolean>(false);
 

@@ -4,17 +4,14 @@ import { useLocation } from "react-router-dom";
 export function useCurrentPage() {
   const { pathname } = useLocation();
 
-  if (pathname === "/") {
-    return "home";
-  } else if (pathname === "/search") {
-    return "search";
-  } else if (pathname === "/storage") {
-    return "storage";
-  } else if (pathname === "/player") {
-    return "player";
-  } else {
-    return "unknown";
-  }
+  const pageMap: { [key: string]: string } = {
+    "/": "home",
+    "/search": "search",
+    "/storage": "storage",
+    "/player": "player",
+  };
+
+  return pageMap[pathname] || "unknown";
 }
 
 export function markKeyword(letter: string, keyWord: string) {
