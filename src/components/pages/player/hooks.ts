@@ -11,12 +11,14 @@ import {
 } from "./store";
 
 export function useLyricsAndImageStore() {
-  const [musicInfo, currentTime] = createAudioStore(
-    useShallow((state) => [state.musicInfo, state.currentTime])
-  );
-
   const isExpandProgressBar = createIsExpandProgressBarStore(
     (state) => state.isExpandProgressBar
+  );
+
+  const isPlayerMenu = createIsPlayerMenuStore((state) => state.isPlayerMenu);
+
+  const [musicInfo, currentTime] = createAudioStore(
+    useShallow((state) => [state.musicInfo, state.currentTime])
   );
 
   const [isLyricsClicked, clickLyrics, unclickedLyrics] =
@@ -44,6 +46,7 @@ export function useLyricsAndImageStore() {
       isExpandLyrics,
       isExpandProgressBar,
       isLyricsClicked,
+      isPlayerMenu,
     },
     action: {
       setIsExpandLyrics,
@@ -92,4 +95,12 @@ export function useTimeStampStore() {
   return {
     state: { audio, currentTime, isExpandProgressBar, progressInputValue },
   };
+}
+
+export function usePlayerMenuStore() {
+  const musicInfo = createAudioStore((state) => state.musicInfo);
+  const closePlayerMenu = createIsPlayerMenuStore(
+    (state) => state.closePlayerMenu
+  );
+  return { state: { musicInfo }, action: { closePlayerMenu } };
 }
