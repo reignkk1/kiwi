@@ -7,6 +7,7 @@ import Controller from "../shared/Controller";
 import { Progress } from "../shared/Progress";
 import { useCurrentPage } from "../../utils";
 import { useNavBarStore, usePlayerStore } from "./hooks";
+import { TitleAndSinger } from "../shared/TitleAndSinger";
 
 export function Footer() {
   const currentPage = useCurrentPage();
@@ -23,18 +24,21 @@ export function Footer() {
 
 function Player() {
   const {
-    state: { musicInfo },
+    state: {
+      musicInfo: { title, singer },
+    },
   } = usePlayerStore();
 
   return (
     <Player.Container>
       <Link to="/player">
-        <MusicInfo>
-          <Title>{musicInfo.title}</Title>
-          <Singer>{musicInfo.singer}</Singer>
-        </MusicInfo>
+        <TitleAndSinger
+          title={title}
+          singer={singer}
+          size="small"
+          width="200px"
+        />
       </Link>
-
       <Controller width={130} />
     </Player.Container>
   );
@@ -60,7 +64,6 @@ function NavBar() {
     </NavBar.Container>
   );
 }
-
 
 Footer.Container = styled.footer`
   background-color: black;
