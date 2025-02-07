@@ -4,6 +4,7 @@ import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { markKeyword } from "../../../utils";
 import AlbumImg from "../../shared/AlbumImg";
 import { useSearchListStore } from "./hooks";
+import { TitleAndSinger } from "../../shared/TitleAndSinger";
 
 export default function SearchList() {
   const {
@@ -18,11 +19,17 @@ export default function SearchList() {
           <MusicInfo>
             <AlbumImg type="small" musicInfo={musicInfo} />
             <Info onClick={() => musicPlay(musicInfo)}>
+              <TitleAndSinger
+                title={markKeyword(musicInfo.title, searchKeyWord)}
+                singer={markKeyword(musicInfo.singer, searchKeyWord)}
+                size="middle"
+                width="250px"
+              />
               <Title>
-                <span>{markKeyword(musicInfo.title, searchKeyWord)}</span>
+                <span>{}</span>
               </Title>
               <Singer>
-                <span>{markKeyword(musicInfo.singer, searchKeyWord)}</span>
+                <span>{}</span>
               </Singer>
             </Info>
           </MusicInfo>
