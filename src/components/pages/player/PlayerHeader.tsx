@@ -5,6 +5,7 @@ import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePlayerHeaderStore } from "./hooks";
+import PlayerMenu from "./PlayerMenu";
 
 export default function PlayerHeader() {
   const {
@@ -19,7 +20,7 @@ export default function PlayerHeader() {
     closePlayerMenu();
   }, []);
 
-  return !isPlayerMenu ? (
+  return (
     <Container>
       {isExpandLyrics && <AlbumImg type="small" musicInfo={musicInfo} />}
       <Info>
@@ -46,7 +47,7 @@ export default function PlayerHeader() {
         />
       </Buttons>
     </Container>
-  ) : null;
+  );
 }
 
 const Container = styled.div`
