@@ -12,7 +12,7 @@ export default function Album({ musicInfo }: AlbumProps) {
   return (
     <AlbumTemplate>
       <AlbumImg type="middle" musicInfo={musicInfo} isActiveButton={true} />
-      <TitleAndSinger title={title} singer={singer} size="small" />
+      <TitleAndSinger width="100%" title={title} singer={singer} size="small" />
     </AlbumTemplate>
   );
 }
