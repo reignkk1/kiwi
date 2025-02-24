@@ -54,43 +54,6 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const Info = styled.div``;
-
-const Title = styled.div<{ isAnimation: boolean; isExpandLyrics: boolean }>`
-  display: flex;
-  overflow: hidden;
-  width: ${({ isExpandLyrics }) => (isExpandLyrics ? "200px" : "250px")};
-  h1 {
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--title-color);
-    animation: marquee 15s linear infinite;
-    animation-play-state: ${({ isAnimation }) =>
-      isAnimation ? "running" : "paused"};
-    animation-delay: 3s;
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(0%);
-      }
-
-      30% {
-        transform: translateX(0%);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-  }
-`;
-const Singer = styled.div`
-  color: var(--singer-color);
-  font-size: 15px;
-  margin-top: 10px;
-`;
-
 const Buttons = styled.div`
   button:first-child {
     margin-right: 20px;
