@@ -5,11 +5,11 @@ import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { usePlayerHeaderStore } from "./hooks";
-import PlayerMenu from "./PlayerMenu";
+import { TitleAndSinger } from "../../shared/TitleAndSinger";
 
 export default function PlayerHeader() {
   const {
-    state: { musicInfo, isExpandLyrics, isPlayerMenu },
+    state: { musicInfo, isExpandLyrics },
     action: { openPlayerMenu, closePlayerMenu },
   } = usePlayerHeaderStore();
 
@@ -23,17 +23,13 @@ export default function PlayerHeader() {
   return (
     <Container>
       {isExpandLyrics && <AlbumImg type="small" musicInfo={musicInfo} />}
-      <Info>
-        <Title isExpandLyrics={isExpandLyrics} isAnimation={isAnimation}>
-          <h1>{musicInfo.title} &nbsp; &nbsp; &nbsp; &nbsp;</h1>
-          {isAnimation && (
-            <h1>{musicInfo.title} &nbsp; &nbsp; &nbsp; &nbsp;</h1>
-          )}
-        </Title>
-        <Singer>
-          <span>{musicInfo.singer}</span>
-        </Singer>
-      </Info>
+      <TitleAndSinger
+        width={isExpandLyrics ? "174px" : "245px"}
+        size="large"
+        title={musicInfo.title}
+        singer={musicInfo.singer}
+        isAnimation={isAnimation}
+      />
       <Buttons>
         <ButtonIcon
           onClick={() => openPlayerMenu()}
@@ -97,6 +93,6 @@ const Singer = styled.div`
 
 const Buttons = styled.div`
   button:first-child {
-    margin-right: 10px;
+    margin-right: 20px;
   }
 `;
