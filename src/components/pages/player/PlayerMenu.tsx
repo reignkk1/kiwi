@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { usePlayerMenuStore } from "./hooks";
 import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
+import { TitleAndSinger } from "../../shared/TitleAndSinger";
 
 export default function PlayerMenu() {
   const {
@@ -19,24 +20,57 @@ export default function PlayerMenu() {
     <Container>
       <MusicInfo>
         <AlbumImg type="smallLarge" musicInfo={musicInfo} />
-        <div>{musicInfo.title}</div>
-        <div>{musicInfo.singer}</div>
+        <TitleAndSinger
+          title={musicInfo.title}
+          singer={musicInfo.singer}
+          size="middle"
+        />
       </MusicInfo>
-      <ul>
-        <li>곡 정보</li>
-        <li>앨범 정보</li>
-        <li>담기</li>
-      </ul>
+      <div>
+        <Menu>
+          <MenuList>곡 정보</MenuList>
+          <MenuList>앨범 정보</MenuList>
+          <MenuList>음악서랍에 담기</MenuList>
+        </Menu>
+        <CloseButton onClick={() => closePlayerMenu()}>
+          <button>닫기</button>
+        </CloseButton>
+      </div>
     </Container>
   );
 }
 
 const Container = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 64px;
+  color: white;
 `;
 
 const MusicInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  gap: 30px;
 `;
 
-// 애니메이션, list menu 구현
+const Menu = styled.ul``;
+const MenuList = styled.li`
+  margin-bottom: 40px;
+`;
+
+const CloseButton = styled.div`
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    color: white;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    padding: 30px 0px;
+    font-size: 16px;
+  }
+`;
