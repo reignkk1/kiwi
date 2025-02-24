@@ -25,12 +25,6 @@ export default function SearchList() {
                 size="middle"
                 width="250px"
               />
-              <Title>
-                <span>{}</span>
-              </Title>
-              <Singer>
-                <span>{}</span>
-              </Singer>
             </Info>
           </MusicInfo>
           <ItemButtons>
@@ -81,17 +75,4 @@ const Info = styled.div`
     background: none;
     color: var(--signature-color);
   }
-`;
-
-const Title = styled.div`
-  width: 240px;
-  color: white;
-  margin-bottom: 5px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
-const Singer = styled.div`
-  font-size: 14px;
-  color: var(--singer-color);
 `;
