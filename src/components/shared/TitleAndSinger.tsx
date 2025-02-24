@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface TitleAndSingerProps {
-  title: string | React.ReactNode;
-  singer: string | React.ReactNode;
-  animation?: boolean;
+  title: React.ReactNode;
+  singer: React.ReactNode;
+  isAnimation?: boolean;
   size: "small" | "middle" | "large";
   onClick?: () => void;
   width?: string;
@@ -16,17 +16,31 @@ const sizeMap = {
 };
 
 export function TitleAndSinger({
-  animation = false,
+  isAnimation = false,
+  width = "auto",
   size,
   onClick,
   title,
   singer,
-  width,
 }: TitleAndSingerProps) {
   const { titleSize, singerSize } = sizeMap[size];
+
+  const titleContent = (
+    <>
+      <span>{title}</span>
+      {isAnimation && (
+        <span>
+          &nbsp; &nbsp; &nbsp; &nbsp; {title} &nbsp; &nbsp; &nbsp; &nbsp;
+        </span>
+      )}
+    </>
+  );
+
   return (
     <Container width={width} onClick={onClick}>
-      <Title size={titleSize}>{title}</Title>
+      <Title size={titleSize} isAnimation={isAnimation}>
+        {titleContent}
+      </Title>
       <Singer size={singerSize}>{singer}</Singer>
     </Container>
   );
@@ -34,14 +48,44 @@ export function TitleAndSinger({
 
 const Container = styled.div<{ width?: string }>`
   width: ${({ width }) => width};
+  overflow: hidden;
 `;
-const Title = styled.div<{ size: string }>`
+const Title = styled.div<{
+  size: string;
+  isAnimation: boolean;
+}>`
+  display: inline-block;
   font-size: ${({ size }) => size};
   color: white;
+  margin-bottom: 5px;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: 5px;
+
+  ${({ isAnimation }) =>
+    isAnimation
+      ? css`
+          animation: marquee 15s linear infinite;
+          animation-play-state: running;
+          animation-delay: 3s;
+        `
+      : css`
+          width: 100%;
+          text-overflow: ellipsis;
+        `}
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    30% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 `;
 const Singer = styled.div<{ size: string }>`
   font-size: ${({ size }) => size};
