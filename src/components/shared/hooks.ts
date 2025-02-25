@@ -64,3 +64,8 @@ export function useProgressBarStore() {
     },
   };
 }
+
+export function useMusicCardStore() {
+  const musicPlay = createAudioStore((state) => state.play);
+  return { action: { musicPlay } };
+}
