@@ -3,6 +3,7 @@ import { usePlayerMenuStore } from "./hooks";
 import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
+import { parserLocalStorage } from "parser-storages";
 
 export default function PlayerMenu() {
   const {
@@ -15,6 +16,17 @@ export default function PlayerMenu() {
       closePlayerMenu();
     };
   }, []);
+
+  const onClick = () => {
+    if (parserLocalStorage.get("musicDrawer")) {
+      parserLocalStorage.set("musicDrawer", [
+        ...parserLocalStorage.get("musicDrawer"),
+        musicInfo.id,
+      ]);
+    } else {
+      parserLocalStorage.set("musicDrawer", [musicInfo.id]);
+    }
+  };
 
   return (
     <Container>
@@ -30,7 +42,7 @@ export default function PlayerMenu() {
         <Menu>
           <MenuList>곡 정보</MenuList>
           <MenuList>앨범 정보</MenuList>
-          <MenuList>음악서랍에 담기</MenuList>
+          <MenuList onClick={onClick}>음악서랍에 담기</MenuList>
         </Menu>
         <CloseButton onClick={() => closePlayerMenu()}>
           <button>닫기</button>
@@ -59,6 +71,7 @@ const MusicInfo = styled.div`
 const Menu = styled.ul``;
 const MenuList = styled.li`
   margin-bottom: 40px;
+  cursor: pointer;
 `;
 
 const CloseButton = styled.div`
