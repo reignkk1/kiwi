@@ -1,6 +1,9 @@
-export default function Storage() {
-  return <div></div>;
-}
+import MusicList from "../components/pages/storage/MusicList";
 
-// Storage 컴포넌트 제작
-// Player Ellip 아이콘 클릭시 모달창
+export default function Storage() {
+  return (
+    <div>
+      <MusicList />
+    </div>
+  );
+}
