@@ -1,42 +1,27 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { markKeyword } from "../../../utils";
-import AlbumImg from "../../shared/AlbumImg";
 import { useSearchListStore } from "./hooks";
-import { TitleAndSinger } from "../../shared/TitleAndSinger";
+import MusicCard from "../../shared/MusicCard";
 
 export default function SearchList() {
   const {
     state: { searchKeyWord, searchResultMusic },
-    action: { musicPlay },
   } = useSearchListStore();
 
   return (
-    <List>
+    <ul>
       {searchResultMusic?.map((musicInfo) => (
         <Item>
-          <MusicInfo>
-            <AlbumImg type="small" musicInfo={musicInfo} />
-            <Info onClick={() => musicPlay(musicInfo)}>
-              <TitleAndSinger
-                title={markKeyword(musicInfo.title, searchKeyWord)}
-                singer={markKeyword(musicInfo.singer, searchKeyWord)}
-                size="middle"
-                width="250px"
-              />
-            </Info>
-          </MusicInfo>
+          <MusicCard musicInfo={musicInfo} mark={searchKeyWord} />
           <ItemButtons>
             <ButtonIcon icon={faEllipsisV} />
           </ItemButtons>
         </Item>
       ))}
-    </List>
+    </ul>
   );
 }
-
-const List = styled.ul``;
 
 const Item = styled.li`
   display: flex;
@@ -60,19 +45,5 @@ const ItemButtons = styled.div`
   display: flex;
   button {
     margin-left: 10px;
-  }
-`;
-
-const MusicInfo = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Info = styled.div`
-  margin-left: 10px;
-  cursor: pointer;
-  mark {
-    background: none;
-    color: var(--signature-color);
   }
 `;
