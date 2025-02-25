@@ -78,7 +78,7 @@ const Container = styled.div<{
   width: 340px;
   height: 450px;
   img {
-    animation: ${({ isExpandLyrics, isLyricsClicked, isPlayerMenu }) =>
+    animation: ${({ isExpandLyrics, isLyricsClicked }) =>
         isExpandLyrics || !isLyricsClicked ? "hide" : "show"}
       0.3s forwards;
 
