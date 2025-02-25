@@ -17,9 +17,8 @@ export function useSearchBarStore() {
 }
 
 export function useSearchListStore() {
-  const musicPlay = createAudioStore((state) => state.play);
   const [searchKeyWord, searchResultMusic] = createSearchStore(
     useShallow((state) => [state.searchKeyWord, state.searchResultMusic])
   );
-  return { state: { searchKeyWord, searchResultMusic }, action: { musicPlay } };
+  return { state: { searchKeyWord, searchResultMusic } };
 }
