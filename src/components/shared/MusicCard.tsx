@@ -8,16 +8,21 @@ import { useMusicCardStore } from "./hooks";
 interface MusicCardProps {
   musicInfo: MusicType;
   mark: string;
+  isMusicBar?: boolean;
 }
 
-export default function MusicCard({ musicInfo, mark }: MusicCardProps) {
+export default function MusicCard({
+  musicInfo,
+  mark,
+  isMusicBar = false,
+}: MusicCardProps) {
   const {
     action: { musicPlay },
   } = useMusicCardStore();
 
   return (
     <Container>
-      <AlbumImg type="small" musicInfo={musicInfo} />
+      <AlbumImg type="small" musicInfo={musicInfo} isMusicBar={isMusicBar} />
       <Info>
         <TitleAndSinger
           title={markKeyword(musicInfo.title, mark)}
