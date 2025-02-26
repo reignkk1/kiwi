@@ -2,6 +2,7 @@ import musicData from "../../../musicData.json";
 import { parserLocalStorage } from "parser-storages";
 import MusicCard from "../../shared/MusicCard";
 import { useMusicListStore } from "./hooks";
+import styled from "styled-components";
 
 export default function MusicList() {
   const {
@@ -11,18 +12,35 @@ export default function MusicList() {
   } = useMusicListStore();
 
   const musicList = musicData.data.filter((music) =>
-    parserLocalStorage.get("musicDrawer").some((id: number) => music.id === id)
+    parserLocalStorage.get("musicDrawer")?.some((id: number) => music.id === id)
   );
 
   return (
-    <ul>
+    <Container>
       {musicList.map((musicInfo) => {
         return (
-          <li>
-            <MusicCard musicInfo={musicInfo} mark={title} />
-          </li>
+          <List>
+            <MusicCard
+              musicInfo={musicInfo}
+              mark={title}
+              isMusicBar={musicInfo.title === title}
+            />
+          </List>
         );
       })}
-    </ul>
+    </Container>
   );
 }
+
+const Container = styled.ul`
+  height: 560px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+`;
+
+const List = styled.div`
+  margin-bottom: 20px;
+`;
