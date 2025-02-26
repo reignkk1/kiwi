@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ButtonIcon } from "./ButtonIcon";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useAlbumImgStore } from "./hooks";
@@ -27,12 +27,14 @@ interface AlbumImgProps {
   type: "small" | "middle" | "smallLarge" | "large";
   musicInfo: MusicType;
   isActiveButton?: boolean;
+  isMusicBar?: boolean;
 }
 
 export default function AlbumImg({
   type,
   musicInfo,
   isActiveButton = false,
+  isMusicBar = false,
 }: AlbumImgProps) {
   const {
     action: { playMusic },
@@ -42,7 +44,13 @@ export default function AlbumImg({
 
   return (
     <Container>
-      <Img width={width} height={height} src={musicInfo.imgSrc} />
+      {isMusicBar && <MusicBarImg src="/img/music-bar.gif" />}
+      <BackGroundImg
+        width={width}
+        height={height}
+        src={musicInfo.imgSrc}
+        isMusicBar={isMusicBar}
+      />
       {isActiveButton && (
         <ButtonIcon
           icon={faPlay}
@@ -64,7 +72,20 @@ const Container = styled.div`
   }
 `;
 
-const Img = styled.img`
+const BackGroundImg = styled.img<{ isMusicBar: boolean }>`
   border-radius: 5px;
   object-fit: fill;
+  ${({ isMusicBar }) =>
+    isMusicBar &&
+    css`
+      filter: brightness(40%);
+    `}
+`;
+
+const MusicBarImg = styled.img`
+  width: 30px;
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  z-index: 3;
 `;
