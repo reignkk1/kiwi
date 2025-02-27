@@ -1,5 +1,6 @@
 import { useShallow } from "zustand/react/shallow";
 import {
+  createAlertMessageStore,
   createAudioStore,
   createIsExpandProgressBarStore,
   createProgressInputStore,
@@ -68,4 +69,11 @@ export function useProgressBarStore() {
 export function useMusicCardStore() {
   const musicPlay = createAudioStore((state) => state.play);
   return { action: { musicPlay } };
+}
+
+export function useAlertStore() {
+  const [alertMessageText, setAlertMessageText] = createAlertMessageStore(
+    useShallow((state) => [state.alertMessageText, state.setAlertMessageText])
+  );
+  return { state: { alertMessageText }, action: { setAlertMessageText } };
 }
