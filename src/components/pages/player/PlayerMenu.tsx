@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { usePlayerMenuStore } from "./hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { parserLocalStorage } from "parser-storages";
@@ -18,6 +18,13 @@ export default function PlayerMenu() {
   }, []);
 
   const onClick = () => {
+    const isIncluded = parserLocalStorage
+      .get("musicDrawer")
+      .some((id: number) => id === musicInfo.id);
+
+    if (isIncluded) {
+    }
+
     if (parserLocalStorage.get("musicDrawer")) {
       parserLocalStorage.set("musicDrawer", [
         ...parserLocalStorage.get("musicDrawer"),
