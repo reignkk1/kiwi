@@ -5,6 +5,7 @@ import Entry from "./Entry";
 import Header from "./Header";
 import { Footer } from "./Footer";
 import { useLayoutStore } from "./hooks";
+import Alert from "../shared/Alert";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
@@ -31,6 +32,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Content>
           <Header />
           {children}
+          <Alert />
         </Content>
         <Footer />
       </Edge>
