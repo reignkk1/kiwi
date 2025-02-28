@@ -8,13 +8,11 @@ import { parserLocalStorage } from "parser-storages";
 export default function PlayerMenu() {
   const {
     state: { musicInfo },
-    action: { closePlayerMenu },
+    action: { closePlayerMenu, toggleShowAlertMessage },
   } = usePlayerMenuStore();
 
   useEffect(() => {
-    return () => {
-      closePlayerMenu();
-    };
+    return () => closePlayerMenu();
   }, []);
 
   const onClick = () => {
@@ -23,6 +21,7 @@ export default function PlayerMenu() {
       .some((id: number) => id === musicInfo.id);
 
     if (isIncluded) {
+      toggleShowAlertMessage("이미 담긴 곡 입니다.");
     }
 
     if (parserLocalStorage.get("musicDrawer")) {
