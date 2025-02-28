@@ -3,13 +3,14 @@ import { useAlertStore } from "./hooks";
 
 export default function Alert() {
   const {
-    state: { alertMessageText },
+    state: { alertMessageText, show },
   } = useAlertStore();
-  return (
+
+  return show ? (
     <Container>
-      <span>{alertMessageText}현재 곡을 반복합니다.</span>
+      <span>{alertMessageText}</span>
     </Container>
-  );
+  ) : null;
 }
 
 const Container = styled.div`
@@ -18,8 +19,9 @@ const Container = styled.div`
   bottom: 110px;
   transform: translateX(-50%);
   text-align: center;
-  animation: 3s flicker infinite;
-
+  animation: 2s flicker forwards;
+  pointer-events: none;
+  z-index: 99;
   span {
     background-color: rgb(124, 124, 124, 0.9);
     padding: 10px 25px;
@@ -30,10 +32,10 @@ const Container = styled.div`
 
   @keyframes flicker {
     0% {
-      opacity: 1;
+      opacity: 0;
     }
 
-    30% {
+    50% {
       opacity: 1;
     }
 
@@ -42,5 +44,3 @@ const Container = styled.div`
     }
   }
 `;
-
-// 알림 애니메이션 만들고 뒤에 있는 버튼 클릭할 수 있게끔 구현
