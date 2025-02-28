@@ -36,7 +36,9 @@ interface IsExpandProgressBarStore {
 
 interface AlertMessageStore {
   alertMessageText: string;
-  setAlertMessageText: (text: AlertMessageStore["alertMessageText"]) => void;
+  show: boolean;
+  showAlertMessage: (text: AlertMessageStore["alertMessageText"]) => void;
+  hiddenAlertMessage: () => void;
 }
 
 export const createAudioStore = create<AudioStore>((set) => ({
@@ -99,5 +101,8 @@ export const createIsExpandProgressBarStore = create<IsExpandProgressBarStore>(
 
 export const createAlertMessageStore = create<AlertMessageStore>((set) => ({
   alertMessageText: "",
-  setAlertMessageText: (text) => set(() => ({ alertMessageText: text })),
+  show: false,
+  showAlertMessage: (text) =>
+    set(() => ({ show: true, alertMessageText: text })),
+  hiddenAlertMessage: () => set(() => ({ show: false })),
 }));
