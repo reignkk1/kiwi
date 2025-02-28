@@ -9,6 +9,7 @@ import {
   createIsLyricsClickedStore,
   createIsPlayerMenuStore,
 } from "./store";
+import { useAlertStore } from "../../shared/hooks";
 
 export function useLyricsAndImageStore() {
   const isExpandProgressBar = createIsExpandProgressBarStore(
@@ -102,5 +103,11 @@ export function usePlayerMenuStore() {
   const closePlayerMenu = createIsPlayerMenuStore(
     (state) => state.closePlayerMenu
   );
-  return { state: { musicInfo }, action: { closePlayerMenu } };
+  const {
+    action: { toggleShowAlertMessage },
+  } = useAlertStore();
+  return {
+    state: { musicInfo },
+    action: { closePlayerMenu, toggleShowAlertMessage },
+  };
 }
