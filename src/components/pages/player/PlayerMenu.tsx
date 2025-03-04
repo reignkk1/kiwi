@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { usePlayerMenuStore } from "./hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { parserLocalStorage } from "parser-storages";
@@ -46,15 +46,28 @@ export default function PlayerMenu() {
       </MusicInfo>
       <div>
         <Menu>
-          <MenuList>곡 정보</MenuList>
-          <MenuList>앨범 정보</MenuList>
-          <MenuList onClick={onClick}>음악서랍에 담기</MenuList>
+          <ListButton text="곡 정보" />
+          <ListButton text="앨범 정보" />
+          <ListButton onClick={onClick} text="음악서랍에 담기" />
         </Menu>
         <CloseButton onClick={() => closePlayerMenu()}>
           <button>닫기</button>
         </CloseButton>
       </div>
     </Container>
+  );
+}
+
+interface ListButtonProps {
+  text: string;
+  onClick?: () => void;
+}
+
+function ListButton({ text, onClick }: ListButtonProps) {
+  return (
+    <MenuList>
+      <button onClick={onClick}>{text}</button>
+    </MenuList>
   );
 }
 
@@ -76,8 +89,15 @@ const MusicInfo = styled.div`
 
 const Menu = styled.ul``;
 const MenuList = styled.li`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   cursor: pointer;
+  button {
+    text-align: start;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    padding: 5px 0px;
+  }
 `;
 
 const CloseButton = styled.div`
