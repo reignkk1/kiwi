@@ -72,26 +72,11 @@ export function useMusicCardStore() {
 }
 
 export function useAlertStore() {
-  const [alertMessageText, show, showAlertMessage, hiddenAlertMessage] =
-    createAlertMessageStore(
-      useShallow((state) => [
-        state.alertMessageText,
-        state.show,
-        state.showAlertMessage,
-        state.hiddenAlertMessage,
-      ])
-    );
-
-  const toggleShowAlertMessage = (text: string) => {
-    setTimeout(() => hiddenAlertMessage(), 2000);
-
-    // 버튼 누르고 메시지 보이면 버튼 비활성화
-    // 2초 뒤에 메세지가 없어지면 그떄 다시 버튼 활성화
-    showAlertMessage(text);
-  };
+  const [alertMessageText, show] = createAlertMessageStore(
+    useShallow((state) => [state.alertMessageText, state.show])
+  );
 
   return {
     state: { alertMessageText, show },
-    action: { toggleShowAlertMessage },
   };
 }
