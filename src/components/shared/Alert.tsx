@@ -7,21 +7,23 @@ export default function Alert() {
   } = useAlertStore();
 
   return show ? (
-    <Container>
+    <Container show={show}>
       <span>{alertMessageText}</span>
     </Container>
   ) : null;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ show: boolean }>`
   position: absolute;
   left: 50%;
   bottom: 110px;
   transform: translateX(-50%);
   text-align: center;
-  animation: 2s flicker forwards;
+  /* animation: 2s flicker forwards; */
   pointer-events: none;
   z-index: 99;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: all 2s;
   span {
     background-color: rgb(124, 124, 124, 0.9);
     padding: 10px 25px;
