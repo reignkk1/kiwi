@@ -12,7 +12,7 @@ interface IsLyricsClickedStore {
   unclickedLyrics: () => void;
 }
 
-export interface IsExpandLyricsStore {
+interface IsExpandLyricsStore {
   isExpandLyrics: boolean;
   setIsExpandLyrics: (
     isExpandLyrics: IsExpandLyricsStore["isExpandLyrics"]
@@ -26,7 +26,6 @@ export const createIsPlayerMenuStore = create<IsPlayerMenuStore>((set) => ({
   closePlayerMenu: () => set(() => ({ isPlayerMenu: false })),
 }));
 
-// 가사 클릭 했을 때
 export const createIsLyricsClickedStore = create<IsLyricsClickedStore>(
   (set) => ({
     isLyricsClicked: false,
@@ -35,7 +34,6 @@ export const createIsLyricsClickedStore = create<IsLyricsClickedStore>(
   })
 );
 
-// 가사 클릭시 확대
 export const createIsExpandLyricsStore = create<IsExpandLyricsStore>((set) => ({
   isExpandLyrics: false,
   setIsExpandLyrics: (isExpandLyrics) => set(() => ({ isExpandLyrics })),
