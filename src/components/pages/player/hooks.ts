@@ -1,5 +1,6 @@
 import { useShallow } from "zustand/react/shallow";
 import {
+  createAlertMessageStore,
   createAudioStore,
   createIsExpandProgressBarStore,
   createProgressInputStore,
@@ -9,7 +10,6 @@ import {
   createIsLyricsClickedStore,
   createIsPlayerMenuStore,
 } from "./store";
-import { useAlertStore } from "../../shared/hooks";
 
 export function useLyricsAndImageStore() {
   const isExpandProgressBar = createIsExpandProgressBarStore(
@@ -100,14 +100,33 @@ export function useTimeStampStore() {
 
 export function usePlayerMenuStore() {
   const musicInfo = createAudioStore((state) => state.musicInfo);
+
   const closePlayerMenu = createIsPlayerMenuStore(
     (state) => state.closePlayerMenu
   );
-  const {
-    action: { toggleShowAlertMessage },
-  } = useAlertStore();
+
+  const [showAlertMessage, hiddenAlertMessage] = createAlertMessageStore(
+    useShallow((state) => [state.showAlertMessage, state.hiddenAlertMessage])
+  );
+
+  let timeoutId: NodeJS.Timeout;
+
+  const toggleShowAlertMessage = (text: string) => {
+    // 눌렀을 때 clear함수가 스택에 있으면 clear 없으면 noclear
+    // 클릭을 여러번 계속하면 메시지는 계속 띄워지고 2초뒤에 사라짐
+    // alert 컴포넌트 transtion 으로 구현하기
+    hiddenAlertMessage();
+    showAlertMessage(text);
+    console.log(timeoutId);
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => hiddenAlertMessage(), 2000);
+    console.log(timeoutId);
+  };
   return {
     state: { musicInfo },
-    action: { closePlayerMenu, toggleShowAlertMessage },
+    action: {
+      closePlayerMenu,
+      toggleShowAlertMessage,
+    },
   };
 }
