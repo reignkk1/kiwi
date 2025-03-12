@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import { getProgressPercent } from "../../utils";
 import { MusicType } from "./types";
+import { musicPlayer } from "../../lib/musicPlayer";
 
 interface AudioState {
-  audio: HTMLAudioElement;
   isPlay: boolean;
   musicInfo: MusicType;
   progressPercent: number;
   currentTime: number;
+  duration: number;
 }
 
 interface AudioAction {
@@ -37,44 +38,47 @@ interface IsExpandProgressBarStore {
 interface AlertMessageStore {
   alertMessageText: string;
   show: boolean;
-  showAlertMessage: (text: AlertMessageStore["alertMessageText"]) => void;
-  hiddenAlertMessage: () => void;
+  toggleFadeAlertMessage: (text: AlertMessageStore["alertMessageText"]) => void;
 }
 
 export const createAudioStore = create<AudioStore>((set) => ({
-  audio: new Audio(),
   isPlay: false,
   musicInfo: {} as MusicType,
   progressPercent: 0,
   currentTime: 0,
-  play: (newMusicInfo) =>
-    set((state) => {
-      if (newMusicInfo) {
-        state.audio.src = `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`;
-      }
-      state.audio.play();
-      return { isPlay: true, musicInfo: newMusicInfo };
-    }),
+  duration: 0,
+  play: (newMusicInfo) => {
+    if (newMusicInfo) {
+      musicPlayer.src = `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`;
+    }
+    musicPlayer.play().then(() =>
+      set({
+        isPlay: true,
+        musicInfo: newMusicInfo,
+        duration: musicPlayer.duration,
+      })
+    );
+  },
   pause: () =>
-    set((state) => {
-      state.audio.pause();
+    set(() => {
+      musicPlayer.pause();
       return { isPlay: false };
     }),
 
   togglePlay: () =>
     set((state) => {
       if (state.isPlay) {
-        state.audio.pause();
+        musicPlayer.pause();
       } else {
-        state.audio.play();
+        musicPlayer.play();
       }
       return { isPlay: !state.isPlay };
     }),
   updateProgressPercent: () =>
-    set((state) => ({
+    set(() => ({
       progressPercent:
-        getProgressPercent(state.audio.currentTime, state.audio.duration) || 0,
-      currentTime: state.audio.currentTime,
+        getProgressPercent(musicPlayer.currentTime, musicPlayer.duration) || 0,
+      currentTime: musicPlayer.currentTime,
     })),
 
   setProgressPercent: (value) =>
@@ -99,10 +103,15 @@ export const createIsExpandProgressBarStore = create<IsExpandProgressBarStore>(
   })
 );
 
-export const createAlertMessageStore = create<AlertMessageStore>((set) => ({
-  alertMessageText: "",
-  show: false,
-  showAlertMessage: (text) =>
-    set(() => ({ show: true, alertMessageText: text })),
-  hiddenAlertMessage: () => set(() => ({ show: false })),
-}));
+export const createAlertMessageStore = create<AlertMessageStore>((set) => {
+  let timeoutId: NodeJS.Timeout;
+  return {
+    alertMessageText: "",
+    show: false,
+    toggleFadeAlertMessage: (text) => {
+      clearTimeout(timeoutId);
+      set(() => ({ show: true, alertMessageText: text }));
+      timeoutId = setTimeout(() => set(() => ({ show: false })), 2000);
+    },
+  };
+});
