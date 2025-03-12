@@ -36,7 +36,11 @@ export function ButtonIcon({
 
   return (
     <button onClick={onClick}>
-      <FontAwesomeIcon icon={icon} fontSize={size} color="white" />
+      <FontAwesomeIcon
+        icon={icon}
+        fontSize={size}
+        color={active ? "var(--signature-color)" : "white"}
+      />
     </button>
   );
 }
