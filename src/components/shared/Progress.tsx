@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useProgressStore } from "./hooks";
+import { musicPlayer } from "../../lib/musicPlayer";
 
 export function Progress({
   isExpand = false,
@@ -10,7 +11,7 @@ export function Progress({
   value?: number;
 }) {
   const {
-    state: { audio, progressPercent },
+    state: { progressPercent },
     action: { updateProgressPercent },
   } = useProgressStore();
 
@@ -23,8 +24,8 @@ export function Progress({
   }
 
   useEffect(() => {
-    audio.ontimeupdate = updateProgressPercent;
-  }, []);
+    musicPlayer.ontimeupdate = updateProgressPercent;
+  }, [updateProgressPercent]);
 
   return (
     <Container isExpand={isExpand}>
