@@ -4,19 +4,17 @@ import { useTimeStampStore } from "./hooks";
 
 export default function TimeStamp() {
   const {
-    state: { audio, currentTime, isExpandProgressBar, progressInputValue },
+    state: { duration, currentTime, isExpandProgressBar, progressInputValue },
   } = useTimeStampStore();
 
   return (
     <Container>
       <span>
         {isExpandProgressBar
-          ? convertTime(
-              convertFromPercentToTime(audio.duration, progressInputValue)
-            )
+          ? convertTime(convertFromPercentToTime(duration, progressInputValue))
           : convertTime(currentTime)}
       </span>
-      <span>{convertTime(audio.duration)}</span>
+      <span>{convertTime(duration)}</span>
     </Container>
   );
 }
