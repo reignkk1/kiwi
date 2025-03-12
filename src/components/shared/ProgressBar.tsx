@@ -3,10 +3,16 @@ import { Progress } from "./Progress";
 import { useRef } from "react";
 import { convertFromPercentToTime, convertTime } from "../../utils";
 import { useProgressBarStore } from "./hooks";
+import { musicPlayer } from "../../lib/musicPlayer";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   const {
-    state: { audio, isExpandProgressBar, progressInputValue, progressPercent },
+    state: {
+      duration,
+      isExpandProgressBar,
+      progressInputValue,
+      progressPercent,
+    },
     action: {
       setIsExpandProgressBar,
       setProgressInputValue,
@@ -23,7 +29,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           {isExpandProgressBar && (
             <span>
               {convertTime(
-                convertFromPercentToTime(audio.duration, progressInputValue)
+                convertFromPercentToTime(duration, progressInputValue)
               )}
             </span>
           )}
@@ -39,8 +45,8 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
         }}
         onClick={() => {
-          audio.currentTime = convertFromPercentToTime(
-            audio.duration,
+          musicPlayer.currentTime = convertFromPercentToTime(
+            duration,
             progressInputValue
           );
         }}
