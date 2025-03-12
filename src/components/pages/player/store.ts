@@ -20,6 +20,16 @@ interface IsExpandLyricsStore {
   toggleExpandLyrics: () => void;
 }
 
+interface IsShuffleStore {
+  isShuffle: boolean;
+  toggleShuffle: () => void;
+}
+
+interface IsRepeatStore {
+  isRepeat: boolean;
+  toggleRepeat: () => void;
+}
+
 export const createIsPlayerMenuStore = create<IsPlayerMenuStore>((set) => ({
   isPlayerMenu: false,
   openPlayerMenu: () => set(() => ({ isPlayerMenu: true })),
@@ -39,4 +49,14 @@ export const createIsExpandLyricsStore = create<IsExpandLyricsStore>((set) => ({
   setIsExpandLyrics: (isExpandLyrics) => set(() => ({ isExpandLyrics })),
   toggleExpandLyrics: () =>
     set((state) => ({ isExpandLyrics: !state.isExpandLyrics })),
+}));
+
+export const createIsShuffleStore = create<IsShuffleStore>((set) => ({
+  isShuffle: false,
+  toggleShuffle: () => set((state) => ({ isShuffle: !state.isShuffle })),
+}));
+
+export const createIsRepeatStore = create<IsRepeatStore>((set) => ({
+  isRepeat: false,
+  toggleRepeat: () => set((state) => ({ isRepeat: !state.isRepeat })),
 }));
