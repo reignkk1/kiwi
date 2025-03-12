@@ -9,6 +9,8 @@ import {
   createIsExpandLyricsStore,
   createIsLyricsClickedStore,
   createIsPlayerMenuStore,
+  createIsRepeatStore,
+  createIsShuffleStore,
 } from "./store";
 
 export function useLyricsAndImageStore() {
@@ -81,8 +83,8 @@ export function usePlayerHeaderStore() {
 }
 
 export function useTimeStampStore() {
-  const [audio, currentTime] = createAudioStore(
-    useShallow((state) => [state.audio, state.currentTime])
+  const [duration, currentTime] = createAudioStore(
+    useShallow((state) => [state.duration, state.currentTime])
   );
 
   const isExpandProgressBar = createIsExpandProgressBarStore(
@@ -94,7 +96,7 @@ export function useTimeStampStore() {
   );
 
   return {
-    state: { audio, currentTime, isExpandProgressBar, progressInputValue },
+    state: { duration, currentTime, isExpandProgressBar, progressInputValue },
   };
 }
 
@@ -105,28 +107,31 @@ export function usePlayerMenuStore() {
     (state) => state.closePlayerMenu
   );
 
-  const [showAlertMessage, hiddenAlertMessage] = createAlertMessageStore(
-    useShallow((state) => [state.showAlertMessage, state.hiddenAlertMessage])
+  const toggleFadeAlertMessage = createAlertMessageStore(
+    (state) => state.toggleFadeAlertMessage
   );
 
-  let timeoutId: NodeJS.Timeout;
-
-  const toggleShowAlertMessage = (text: string) => {
-    // 눌렀을 때 clear함수가 스택에 있으면 clear 없으면 noclear
-    // 클릭을 여러번 계속하면 메시지는 계속 띄워지고 2초뒤에 사라짐
-    // alert 컴포넌트 transtion 으로 구현하기
-    hiddenAlertMessage();
-    showAlertMessage(text);
-    console.log(timeoutId);
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => hiddenAlertMessage(), 2000);
-    console.log(timeoutId);
-  };
   return {
     state: { musicInfo },
     action: {
       closePlayerMenu,
-      toggleShowAlertMessage,
+      toggleFadeAlertMessage,
     },
+  };
+}
+
+export function useControllerButtonsStore() {
+  const [isShuffle, toggleShuffle] = createIsShuffleStore(
+    useShallow((state) => [state.isShuffle, state.toggleShuffle])
+  );
+  const [isRepeat, toggleRepeat] = createIsRepeatStore(
+    useShallow((state) => [state.isRepeat, state.toggleRepeat])
+  );
+  const toggleFadeAlertMessage = createAlertMessageStore(
+    (state) => state.toggleFadeAlertMessage
+  );
+  return {
+    state: { isShuffle, isRepeat },
+    action: { toggleShuffle, toggleRepeat, toggleFadeAlertMessage },
   };
 }
