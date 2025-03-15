@@ -1,14 +1,16 @@
+import { is } from "../utils";
+
 type Key = string;
 type Value = string | number | (string | number | object)[];
 
 type ValueObject = Record<Key, Value>;
 
-type MusicListStorage = {
-  age: number;
+type MusicDrawerStorage = {
+  musicDrawer: number[];
 };
 
-export const musicListStorage = createLocalStorageImpl<MusicListStorage>({
-  age: 27,
+export const musicDrawerStorage = createLocalStorageImpl<MusicDrawerStorage>({
+  musicDrawer: [],
 });
 
 function createLocalStorageImpl<T extends ValueObject>(object: T) {
@@ -16,15 +18,17 @@ function createLocalStorageImpl<T extends ValueObject>(object: T) {
   const values = Object.values(object);
 
   Object.entries(object).forEach(([key, value]) => {
-    let stringifyValue;
+    if (!localStorage.getItem(key)) {
+      let stringifyValue;
 
-    if (typeof value === "number" || typeof value === "object") {
-      stringifyValue = JSON.stringify(value);
-    } else {
-      stringifyValue = value;
+      if (typeof value === "number" || typeof value === "object") {
+        stringifyValue = JSON.stringify(value);
+      } else {
+        stringifyValue = value;
+      }
+
+      localStorage.setItem(key, stringifyValue);
     }
-
-    localStorage.setItem(key, stringifyValue);
   });
 
   const set = (newObject: T) => {
@@ -42,7 +46,11 @@ function createLocalStorageImpl<T extends ValueObject>(object: T) {
   };
 
   const get = (key: keyof T) => {
-    return localStorage.getItem(key as string);
+    if (is.string(object[key])) {
+      return localStorage.getItem(key as string);
+    } else {
+      return JSON.parse(localStorage.getItem(key as string) || "");
+    }
   };
 
   return { set, get };
