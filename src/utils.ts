@@ -34,3 +34,10 @@ export function convertTime(time: number) {
 export function convertFromPercentToTime(duration: number, percent: number) {
   return Math.floor(Math.floor(duration) * (percent / 100));
 }
+
+export const is = {
+  boolean: (data: any) => typeof data === "boolean",
+  number: (data: any) => typeof data === "number",
+  object: (data: any) => typeof data === "object",
+  string: (data: any) => typeof data === "string",
+};
