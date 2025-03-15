@@ -18,21 +18,21 @@ export default function PlayerMenu() {
   const onClick = () => {
     const isIncluded = parserLocalStorage
       .get("musicDrawer")
-      .some((id: number) => id === musicInfo.id);
+      ?.some((id: number) => id === musicInfo.id);
 
     if (isIncluded) {
-      toggleFadeAlertMessage("이미 담긴 곡 입니다.");
+      return toggleFadeAlertMessage("이미 담긴 곡 입니다.");
     } else {
       toggleFadeAlertMessage("1곡을 음악서랍에 담았습니다.");
-    }
 
-    if (parserLocalStorage.get("musicDrawer")) {
-      parserLocalStorage.set("musicDrawer", [
-        ...parserLocalStorage.get("musicDrawer"),
-        musicInfo.id,
-      ]);
-    } else {
-      parserLocalStorage.set("musicDrawer", [musicInfo.id]);
+      if (parserLocalStorage.get("musicDrawer")) {
+        parserLocalStorage.set("musicDrawer", [
+          ...parserLocalStorage.get("musicDrawer"),
+          musicInfo.id,
+        ]);
+      } else {
+        parserLocalStorage.set("musicDrawer", [musicInfo.id]);
+      }
     }
   };
 
