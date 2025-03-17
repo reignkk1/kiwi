@@ -3,6 +3,7 @@ import { parserLocalStorage } from "parser-storages";
 import MusicCard from "../../shared/MusicCard";
 import { useMusicListStore } from "./hooks";
 import styled from "styled-components";
+import { musicDrawerStorage } from "../../../lib/localStorage";
 
 export default function MusicList() {
   const {
@@ -11,8 +12,10 @@ export default function MusicList() {
     },
   } = useMusicListStore();
 
+  const { get: getMusicDrawerStorage } = musicDrawerStorage;
+
   const musicList = musicData.data.filter((music) =>
-    parserLocalStorage.get("musicDrawer")?.some((id: number) => music.id === id)
+    getMusicDrawerStorage("musicDrawer").some((id: number) => music.id === id)
   );
 
   return (
