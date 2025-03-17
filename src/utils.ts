@@ -41,3 +41,7 @@ export const is = {
   object: (data: any) => typeof data === "object",
   string: (data: any) => typeof data === "string",
 };
+
+export function selectRandomWithinArray(array: Array<string | number>) {
+  return array[Math.floor(Math.random() * array.length)];
+}
