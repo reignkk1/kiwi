@@ -3,7 +3,7 @@ import { usePlayerMenuStore } from "./hooks";
 import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { parserLocalStorage } from "parser-storages";
+import { musicDrawerStorage } from "../../../lib/localStorage";
 
 export default function PlayerMenu() {
   const {
@@ -11,28 +11,25 @@ export default function PlayerMenu() {
     action: { closePlayerMenu, toggleFadeAlertMessage },
   } = usePlayerMenuStore();
 
+  const { set: setMusicDrawerStorage, get: getMusicDrawerStorage } =
+    musicDrawerStorage;
+
   useEffect(() => {
     return () => closePlayerMenu();
   }, []);
 
   const onClick = () => {
-    const isIncluded = parserLocalStorage
-      .get("musicDrawer")
-      ?.some((id: number) => id === musicInfo.id);
+    const isIncluded = getMusicDrawerStorage("musicDrawer").some(
+      (id: number) => id === musicInfo.id
+    );
 
     if (isIncluded) {
       return toggleFadeAlertMessage("이미 담긴 곡 입니다.");
     } else {
       toggleFadeAlertMessage("1곡을 음악서랍에 담았습니다.");
-
-      if (parserLocalStorage.get("musicDrawer")) {
-        parserLocalStorage.set("musicDrawer", [
-          ...parserLocalStorage.get("musicDrawer"),
-          musicInfo.id,
-        ]);
-      } else {
-        parserLocalStorage.set("musicDrawer", [musicInfo.id]);
-      }
+      setMusicDrawerStorage({
+        musicDrawer: [...getMusicDrawerStorage("musicDrawer"), musicInfo.id],
+      });
     }
   };
 
