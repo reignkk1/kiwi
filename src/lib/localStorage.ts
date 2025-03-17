@@ -1,19 +1,16 @@
 import { is } from "../utils";
 
-type Key = string;
-type Value = string | number | (string | number | object)[];
-
-type ValueObject = Record<Key, Value>;
+type Storage = Record<string, string | number | (string | number | object)[]>;
 
 type MusicDrawerStorage = {
   musicDrawer: number[];
 };
 
-export const musicDrawerStorage = createLocalStorageImpl<MusicDrawerStorage>({
+export const musicDrawerStorage = createLocalStorage<MusicDrawerStorage>({
   musicDrawer: [],
 });
 
-function createLocalStorageImpl<T extends ValueObject>(object: T) {
+function createLocalStorage<T extends Storage>(object: T) {
   const keys = Object.keys(object);
   const values = Object.values(object);
 
@@ -53,5 +50,5 @@ function createLocalStorageImpl<T extends ValueObject>(object: T) {
     }
   };
 
-  return { set, get };
+  return { set, get, keys, values };
 }
