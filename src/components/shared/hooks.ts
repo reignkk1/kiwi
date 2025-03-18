@@ -19,23 +19,24 @@ export function useControllerStore() {
 }
 
 export function useProgressStore() {
-  const [progressPercent, updateProgressPercent] = createAudioStore(
-    useShallow((state) => [state.progressPercent, state.updateProgressPercent])
+  const [progressPercent] = createAudioStore(
+    useShallow((state) => [state.progressPercent])
   );
   return {
     state: { progressPercent },
-    action: { updateProgressPercent },
   };
 }
 
 export function useProgressBarStore() {
-  const [duration, progressPercent, setProgressPercent] = createAudioStore(
-    useShallow((state) => [
-      state.duration,
-      state.progressPercent,
-      state.setProgressPercent,
-    ])
-  );
+  const [duration, progressPercent, setProgressPercent, setMoveTimePoint] =
+    createAudioStore(
+      useShallow((state) => [
+        state.duration,
+        state.progressPercent,
+        state.setProgressPercent,
+        state.setMoveTimePoint,
+      ])
+    );
 
   const [progressInputValue, setProgressInputValue] = createProgressInputStore(
     useShallow((state) => [
@@ -63,6 +64,7 @@ export function useProgressBarStore() {
       setProgressPercent,
       setProgressInputValue,
       setIsExpandProgressBar,
+      setMoveTimePoint,
     },
   };
 }
