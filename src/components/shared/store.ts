@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { getProgressPercent } from "../../utils";
 import { MusicType } from "./types";
-import { musicPlayer } from "../../lib/musicPlayer";
 
 interface AudioState {
   isPlay: boolean;
@@ -9,14 +8,18 @@ interface AudioState {
   progressPercent: number;
   currentTime: number;
   duration: number;
+  src: string;
+  moveTimePoint: number;
 }
 
 interface AudioAction {
   play: (musicInfo: AudioState["musicInfo"]) => void;
-  pause: () => void;
   togglePlay: () => void;
-  updateProgressPercent: () => void;
-  setProgressPercent: (value?: AudioState["progressPercent"]) => void;
+  setProgressPercent: (progressPercent: AudioState["progressPercent"]) => void;
+  setSrc: (src: AudioState["src"]) => void;
+  setCurrentTime: (currentTime: AudioState["currentTime"]) => void;
+  setDuration: (duration: AudioState["duration"]) => void;
+  setMoveTimePoint: (moveTimePoint: AudioState["moveTimePoint"]) => void;
 }
 
 type AudioStore = AudioState & AudioAction;
@@ -43,48 +46,31 @@ interface AlertMessageStore {
 
 export const createAudioStore = create<AudioStore>((set) => ({
   isPlay: false,
+  src: "",
   musicInfo: {} as MusicType,
   progressPercent: 0,
   currentTime: 0,
   duration: 0,
-  play: (newMusicInfo) => {
-    if (newMusicInfo) {
-      musicPlayer.src = `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`;
-    }
-    musicPlayer.play().then(() =>
-      set({
-        isPlay: true,
-        musicInfo: newMusicInfo,
-        duration: musicPlayer.duration,
-      })
-    );
-  },
-  pause: () =>
-    set(() => {
-      musicPlayer.pause();
-      return { isPlay: false };
+  moveTimePoint: 0,
+  setSrc: (src) => set({ src }),
+  setDuration: (duration) => set({ duration }),
+  setMoveTimePoint: (moveTimePoint) => set({ moveTimePoint }),
+  togglePlay: () => set((state) => ({ isPlay: !state.isPlay })),
+  setProgressPercent: (progressPercent) =>
+    set({
+      progressPercent,
     }),
-
-  togglePlay: () =>
-    set((state) => {
-      if (state.isPlay) {
-        musicPlayer.pause();
-      } else {
-        musicPlayer.play();
-      }
-      return { isPlay: !state.isPlay };
+  setCurrentTime: (currentTime) =>
+    set((state) => ({
+      currentTime,
+      progressPercent: getProgressPercent(currentTime, state.duration) || 0,
+    })),
+  play: (newMusicInfo) =>
+    set({
+      isPlay: true,
+      musicInfo: newMusicInfo,
+      src: `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`,
     }),
-  updateProgressPercent: () =>
-    set(() => ({
-      progressPercent:
-        getProgressPercent(musicPlayer.currentTime, musicPlayer.duration) || 0,
-      currentTime: musicPlayer.currentTime,
-    })),
-
-  setProgressPercent: (value) =>
-    set(() => ({
-      progressPercent: value,
-    })),
 }));
 
 export const createProgressInputStore = create<ProgressInputValueStore>(
