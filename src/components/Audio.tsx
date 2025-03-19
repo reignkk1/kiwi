@@ -10,32 +10,38 @@ import music from "../musicData.json";
 import { selectRandomWithinArray } from "../utils";
 
 export default function AudioImpl() {
-  const [isPlay, src, setCurrentTime, setDuration, moveTimePoint, play] =
-    createAudioStore(
-      useShallow((state) => [
-        state.isPlay,
-        state.src,
-        state.setCurrentTime,
-        state.setDuration,
-        state.moveTimePoint,
-        state.play,
-      ])
-    );
+  const [
+    isPlay,
+    src,
+    setCurrentTime,
+    setDuration,
+    moveTimePoint,
+    play,
+    musicInfo,
+  ] = createAudioStore(
+    useShallow((state) => [
+      state.isPlay,
+      state.src,
+      state.setCurrentTime,
+      state.setDuration,
+      state.moveTimePoint,
+      state.play,
+      state.musicInfo,
+    ])
+  );
 
   const isShuffle = createIsShuffleStore((state) => state.isShuffle);
   const isRepeat = createIsRepeatStore((state) => state.isRepeat);
 
-  const { get, set } = musicDrawerStorage;
-
-  // 셔플, 반복재생 구현
+  const { get: getMusicDrawerStorage } = musicDrawerStorage;
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
 
   useEffect(() => {
     if (isPlay) {
-      audioRef.current?.play();
+      audioRef.current.play();
     } else {
-      audioRef.current?.pause();
+      audioRef.current.pause();
     }
   }, [isPlay, src]);
 
@@ -43,23 +49,64 @@ export default function AudioImpl() {
     audioRef.current.currentTime = moveTimePoint;
   }, [moveTimePoint]);
 
+  useEffect(() => {
+    if (isRepeat) {
+      audioRef.current.loop = true;
+    } else {
+      audioRef.current.loop = false;
+    }
+  }, [isRepeat]);
+
   const onTimeUpdate = () => setCurrentTime(audioRef.current.currentTime);
 
   const onDurationChange = () => setDuration(audioRef.current.duration);
+
+  // musicId를 인자 값으로 넣으면 해당 음악을 재생한다.
+  const playMusic = (musicId: number | string) => {
+    const newMusicInfo = music.data.find((music) => music.id === musicId)!;
+    play(newMusicInfo);
+  };
+
+  // 랜덤 재생
   const playRandom = () => {
-    console.log("실행");
-    const musicInfo = music.data.find(
-      (music) => music.id === selectRandomWithinArray(get("musicDrawer"))
+    // 음악서랍에 담긴 musicId 배열 값 안에서 랜덤으로 musicId 값을 뽑는다.
+    let nextMusicId = selectRandomWithinArray(
+      getMusicDrawerStorage("musicDrawer")
     );
 
-    // 랜덤 재생 구현
+    // 현재 재생 중인 음악 id값
+    let currentMusicId = musicInfo.id;
 
-    console.log(musicInfo);
-    if (musicInfo) {
-      play(musicInfo);
+    // 랜덤으로 뽑은 음악이 현재 재생 중인 음악과 같다면 다를 때까지 다시 뽑는다.
+    while (nextMusicId === currentMusicId) {
+      nextMusicId = selectRandomWithinArray(
+        getMusicDrawerStorage("musicDrawer")
+      );
     }
+
+    playMusic(nextMusicId);
   };
-  const playInOrder = () => {};
+
+  // 순서가 있는 재생
+  const playInOrder = () => {
+    const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
+      string | number
+    >;
+
+    // 현재 재생 중인 음악의 다음 곡 인덱스 값을 가져온다.
+    let nextMusicIndex =
+      musicDrawer.findIndex((musicId) => musicId === musicInfo.id) + 1;
+
+    // 만약 다음 곡의 인덱스가 없다면 첫번째 곡으로 간다.
+    if (nextMusicIndex === musicDrawer.length) {
+      nextMusicIndex = 0;
+    }
+
+    // 다음 곡의 id 값
+    const nextMusicId = musicDrawer[nextMusicIndex];
+
+    playMusic(nextMusicId);
+  };
 
   return (
     <audio
@@ -67,7 +114,7 @@ export default function AudioImpl() {
       src={src}
       onTimeUpdate={onTimeUpdate}
       onDurationChange={onDurationChange}
-      onEnded={playRandom}
+      onEnded={isShuffle ? playRandom : playInOrder}
     />
   );
 }
