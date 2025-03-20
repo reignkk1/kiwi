@@ -15,7 +15,7 @@ interface ControllerProps {
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
-    state: { isPlay },
+    state: { isPlay, isShuffle },
     action: { togglePlay },
   } = useControllerStore();
 
@@ -37,6 +37,8 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
     </Container>
   );
 }
+
+// shuffle 상태에 따라서 다음곡, 이전곡 클릭 시 로직 구현
 
 const Container = styled.div<{ width: number }>`
   display: flex;
