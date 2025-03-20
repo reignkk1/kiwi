@@ -5,17 +5,21 @@ import {
   createIsExpandProgressBarStore,
   createProgressInputStore,
 } from "./store";
+import { createIsShuffleStore } from "../pages/player/store";
 
 export function useAlbumImgStore() {
-  const playMusic = createAudioStore((state) => state.play);
-  return { action: { playMusic } };
+  const [playMusic, setMusicInfo] = createAudioStore(
+    useShallow((state) => [state.play, state.setMusicInfo])
+  );
+  return { action: { playMusic, setMusicInfo } };
 }
 
 export function useControllerStore() {
   const [isPlay, togglePlay] = createAudioStore(
     useShallow((state) => [state.isPlay, state.togglePlay])
   );
-  return { state: { isPlay }, action: { togglePlay } };
+  const isShuffle = createIsShuffleStore((state) => state.isShuffle);
+  return { state: { isPlay, isShuffle }, action: { togglePlay } };
 }
 
 export function useProgressStore() {
@@ -70,8 +74,10 @@ export function useProgressBarStore() {
 }
 
 export function useMusicCardStore() {
-  const musicPlay = createAudioStore((state) => state.play);
-  return { action: { musicPlay } };
+  const [play, setMusicInfo] = createAudioStore(
+    useShallow((state) => [state.play, state.setMusicInfo])
+  );
+  return { action: { play, setMusicInfo } };
 }
 
 export function useAlertStore() {
