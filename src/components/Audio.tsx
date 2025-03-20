@@ -18,6 +18,8 @@ export default function AudioImpl() {
     moveTimePoint,
     play,
     musicInfo,
+    setMusicInfo,
+    setMoveTimePoint,
   ] = createAudioStore(
     useShallow((state) => [
       state.isPlay,
@@ -27,6 +29,8 @@ export default function AudioImpl() {
       state.moveTimePoint,
       state.play,
       state.musicInfo,
+      state.setMusicInfo,
+      state.setMoveTimePoint,
     ])
   );
 
@@ -34,8 +38,18 @@ export default function AudioImpl() {
   const isRepeat = createIsRepeatStore((state) => state.isRepeat);
 
   const { get: getMusicDrawerStorage } = musicDrawerStorage;
+  const musicDrawer = getMusicDrawerStorage("musicDrawer");
+  const defaultMusicInfo = music.data.find(
+    (music) => music.id === musicDrawer[0]
+  );
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
+
+  useEffect(() => {
+    if (defaultMusicInfo) {
+      setMusicInfo(defaultMusicInfo);
+    }
+  }, []);
 
   useEffect(() => {
     if (isPlay) {
@@ -64,24 +78,28 @@ export default function AudioImpl() {
   // musicId를 인자 값으로 넣으면 해당 음악을 재생한다.
   const playMusic = (musicId: number | string) => {
     const newMusicInfo = music.data.find((music) => music.id === musicId)!;
-    play(newMusicInfo);
+    setMusicInfo(newMusicInfo);
+    play();
   };
 
   // 랜덤 재생
   const playRandom = () => {
+    const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
+      string | number
+    >;
+
+    if (musicDrawer.length === 1) {
+      return audioRef.current.play();
+    }
     // 음악서랍에 담긴 musicId 배열 값 안에서 랜덤으로 musicId 값을 뽑는다.
-    let nextMusicId = selectRandomWithinArray(
-      getMusicDrawerStorage("musicDrawer")
-    );
+    let nextMusicId = selectRandomWithinArray(musicDrawer);
 
     // 현재 재생 중인 음악 id값
     let currentMusicId = musicInfo.id;
 
     // 랜덤으로 뽑은 음악이 현재 재생 중인 음악과 같다면 다를 때까지 다시 뽑는다.
     while (nextMusicId === currentMusicId) {
-      nextMusicId = selectRandomWithinArray(
-        getMusicDrawerStorage("musicDrawer")
-      );
+      nextMusicId = selectRandomWithinArray(musicDrawer);
     }
 
     playMusic(nextMusicId);
@@ -92,6 +110,10 @@ export default function AudioImpl() {
     const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
       string | number
     >;
+
+    if (musicDrawer.length === 1) {
+      return audioRef.current.play();
+    }
 
     // 현재 재생 중인 음악의 다음 곡 인덱스 값을 가져온다.
     let nextMusicIndex =
