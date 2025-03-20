@@ -14,7 +14,7 @@ export default function PlayerHeader() {
   } = usePlayerHeaderStore();
 
   const navigate = useNavigate();
-  const isAnimation = musicInfo.title?.length > 20;
+  const isAnimation = (musicInfo.title?.length || 0) > 20;
 
   useEffect(() => {
     closePlayerMenu();
