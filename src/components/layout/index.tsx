@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     action: { hiddenModal, showModal },
   } = useLayoutStore();
 
-  const backGroundColor = musicBackGroundColor || "rgba(0,0,0,0.5)";
+  const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
 
   useEffect(() => {
     if (parserLocalStorage.get("name")) {
