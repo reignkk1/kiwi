@@ -52,7 +52,7 @@ export default function LyricsAndImage() {
           toggleExpandLyrics();
         }}
       >
-        {musicInfo.lyrics.map(({ text, startTime, endTime }) => {
+        {musicInfo.lyrics?.map(({ text, startTime, endTime }) => {
           const isActive =
             startTime <= cleanedCurrentTime && cleanedCurrentTime <= endTime;
           return (
