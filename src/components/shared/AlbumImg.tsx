@@ -25,7 +25,7 @@ const sizeMap = {
 
 interface AlbumImgProps {
   type: "small" | "middle" | "smallLarge" | "large";
-  musicInfo: MusicType;
+  musicInfo: Partial<MusicType>;
   isActiveButton?: boolean;
   isMusicBar?: boolean;
 }
@@ -37,7 +37,7 @@ export default function AlbumImg({
   isMusicBar = false,
 }: AlbumImgProps) {
   const {
-    action: { playMusic },
+    action: { playMusic, setMusicInfo },
   } = useAlbumImgStore();
 
   const { width, height } = sizeMap[type];
@@ -55,7 +55,10 @@ export default function AlbumImg({
         <ButtonIcon
           icon={faPlay}
           color="white"
-          onClick={() => playMusic(musicInfo)}
+          onClick={() => {
+            setMusicInfo(musicInfo);
+            playMusic();
+          }}
         />
       )}
     </Container>
