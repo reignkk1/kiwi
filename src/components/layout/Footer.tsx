@@ -31,14 +31,23 @@ function Player() {
 
   return (
     <Player.Container>
-      <Link to="/player">
+      {title ? (
+        <Link to="/player">
+          <TitleAndSinger
+            title={title}
+            singer={singer}
+            size="small"
+            width="200px"
+          />
+        </Link>
+      ) : (
         <TitleAndSinger
           title={title}
           singer={singer}
           size="small"
           width="200px"
         />
-      </Link>
+      )}
       <Controller width={130} />
     </Player.Container>
   );
@@ -93,21 +102,4 @@ NavBar.Container = styled.nav`
   align-items: center;
   height: 49%;
   padding: 12px 35px;
-`;
-
-const MusicInfo = styled.div`
-  cursor: pointer;
-`;
-const Title = styled.div`
-  color: white;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 200px;
-  margin-bottom: 5px;
-  font-size: 14px;
-`;
-const Singer = styled.div`
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
 `;
