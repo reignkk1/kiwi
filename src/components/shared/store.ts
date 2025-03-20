@@ -4,7 +4,7 @@ import { MusicType } from "./types";
 
 interface AudioState {
   isPlay: boolean;
-  musicInfo: MusicType;
+  musicInfo: Partial<MusicType>;
   progressPercent: number;
   currentTime: number;
   duration: number;
@@ -13,13 +13,14 @@ interface AudioState {
 }
 
 interface AudioAction {
-  play: (musicInfo: AudioState["musicInfo"]) => void;
+  play: () => void;
   togglePlay: () => void;
   setProgressPercent: (progressPercent: AudioState["progressPercent"]) => void;
   setSrc: (src: AudioState["src"]) => void;
   setCurrentTime: (currentTime: AudioState["currentTime"]) => void;
   setDuration: (duration: AudioState["duration"]) => void;
   setMoveTimePoint: (moveTimePoint: AudioState["moveTimePoint"]) => void;
+  setMusicInfo: (musicInfo: AudioState["musicInfo"]) => void;
 }
 
 type AudioStore = AudioState & AudioAction;
@@ -52,24 +53,21 @@ export const createAudioStore = create<AudioStore>((set) => ({
   currentTime: 0,
   duration: 0,
   moveTimePoint: 0,
+  play: () => set({ isPlay: true }),
+  togglePlay: () => set((state) => ({ isPlay: !state.isPlay })),
   setSrc: (src) => set({ src }),
   setDuration: (duration) => set({ duration }),
   setMoveTimePoint: (moveTimePoint) => set({ moveTimePoint }),
-  togglePlay: () => set((state) => ({ isPlay: !state.isPlay })),
-  setProgressPercent: (progressPercent) =>
-    set({
-      progressPercent,
-    }),
+  setProgressPercent: (progressPercent) => set({ progressPercent }),
   setCurrentTime: (currentTime) =>
     set((state) => ({
       currentTime,
       progressPercent: getProgressPercent(currentTime, state.duration) || 0,
     })),
-  play: (newMusicInfo) =>
+  setMusicInfo: (musicInfo) =>
     set({
-      isPlay: true,
-      musicInfo: newMusicInfo,
-      src: `./mp3/${newMusicInfo.singer} - ${newMusicInfo.title}.mp3`,
+      musicInfo,
+      src: `./mp3/${musicInfo.singer} - ${musicInfo.title}.mp3`,
     }),
 }));
 
