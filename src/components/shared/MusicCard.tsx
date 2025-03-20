@@ -7,17 +7,17 @@ import { useMusicCardStore } from "./hooks";
 
 interface MusicCardProps {
   musicInfo: MusicType;
-  mark: string;
+  mark?: string;
   isMusicBar?: boolean;
 }
 
 export default function MusicCard({
   musicInfo,
-  mark,
+  mark = "",
   isMusicBar = false,
 }: MusicCardProps) {
   const {
-    action: { musicPlay },
+    action: { play, setMusicInfo },
   } = useMusicCardStore();
 
   return (
@@ -29,7 +29,10 @@ export default function MusicCard({
           singer={markKeyword(musicInfo.singer, mark)}
           size="middle"
           width="250px"
-          onClick={() => musicPlay(musicInfo)}
+          onClick={() => {
+            setMusicInfo(musicInfo);
+            play();
+          }}
         />
       </Info>
     </Container>
