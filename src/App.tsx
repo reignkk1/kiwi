@@ -8,7 +8,7 @@ import Storage from "./pages/Storage";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/comfort">
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
