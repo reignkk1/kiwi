@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { useHeaderStore } from "./hooks";
+import { userNameStroage } from "../../lib/localStorage";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const {
-    state: { userName },
-  } = useHeaderStore();
 
   if (pathname === "/player") {
     return null;
@@ -14,8 +11,10 @@ export default function Header() {
 
   let title = "";
 
+  const { get: getUserNameStorage } = userNameStroage;
+
   if (pathname === "/") {
-    title = userName + "님 어서오세요!";
+    title = getUserNameStorage("name") + "님 어서오세요!";
   } else if (pathname === "/search") {
     title = "나에게 맞춘 탐색";
   } else if (pathname === "/storage") {

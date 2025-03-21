@@ -1,4 +1,3 @@
-import { parserLocalStorage } from "parser-storages";
 import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";

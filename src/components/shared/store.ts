@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getProgressPercent } from "../../utils";
+import { addBasePath, getProgressPercent } from "../../utils";
 import { MusicType } from "./types";
 
 interface AudioState {
@@ -70,7 +70,7 @@ export const createAudioStore = create<AudioStore>((set) => ({
   setMusicInfo: (musicInfo) =>
     set({
       musicInfo,
-      src: `./mp3/${musicInfo.singer} - ${musicInfo.title}.mp3`,
+      src: `/comfort/mp3/${musicInfo.singer} - ${musicInfo.title}.mp3`,
     }),
   setAction: (action) => set({ action }),
 }));

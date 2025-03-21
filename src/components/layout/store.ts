@@ -22,7 +22,7 @@ interface NavBarMenuStore {
 }
 
 export const createUserNameStore = create<UserNameStore>((set) => ({
-  userName: parserLocalStorage.get("name"),
+  userName: "",
   setUserName: (name) => set(() => ({ userName: name.slice(0, 4) })),
 }));
 

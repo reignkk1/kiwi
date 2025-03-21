@@ -27,11 +27,6 @@ export function useLayoutStore() {
   };
 }
 
-export function useHeaderStore() {
-  const userName = createUserNameStore((state) => state.userName);
-  return { state: { userName } };
-}
-
 export function usePlayerStore() {
   const musicInfo = createAudioStore((state) => state.musicInfo);
   return { state: { musicInfo } };

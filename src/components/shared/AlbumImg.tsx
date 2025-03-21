@@ -3,6 +3,7 @@ import { ButtonIcon } from "./ButtonIcon";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { useAlbumImgStore } from "./hooks";
 import { MusicType } from "./types";
+import { addBasePath } from "../../utils";
 
 const sizeMap = {
   small: {
@@ -44,11 +45,11 @@ export default function AlbumImg({
 
   return (
     <Container>
-      {isMusicBar && <MusicBarImg src="/img/music-bar.gif" />}
+      {isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
       <BackGroundImg
         width={width}
         height={height}
-        src={musicInfo.imgSrc}
+        src={addBasePath(musicInfo.imgSrc)}
         isMusicBar={isMusicBar}
       />
       {isActiveButton && (

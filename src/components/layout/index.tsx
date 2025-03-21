@@ -1,12 +1,12 @@
 import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
-import { parserLocalStorage } from "parser-storages";
 import Entry from "./Entry";
 import Header from "./Header";
 import { Footer } from "./Footer";
 import { useLayoutStore } from "./hooks";
 import Alert from "../shared/Alert";
 import { userNameStroage } from "../../lib/localStorage";
+import { addBasePath } from "../../utils";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <Container>
       <BackGroundFilter />
       <Burn backGroundColor={backGroundColor} />
-      <Edge>
+      <Edge src={`${addBasePath("./img/phone.png")}`}>
         {isModal && <Entry />}
         <Content>
           <Header />
@@ -96,10 +96,11 @@ const BackGroundFilter = styled.div`
   }
 `;
 
-const Edge = styled.div`
+const Edge = styled.div<{ src: string }>`
   width: 460px;
   height: 830px;
-  background: url("./img/phone.png") no-repeat;
+
+  background: url(${({ src }) => src}) no-repeat;
   position: relative;
   z-index: 3;
 
@@ -113,7 +114,7 @@ const Edge = styled.div`
   }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    background: none;
+    display: block;
   }
 `;
 
