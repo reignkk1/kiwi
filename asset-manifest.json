@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/comfort/static/js/main.a31deefd.js",
+    "index.html": "/comfort/index.html",
+    "main.a31deefd.js.map": "/comfort/static/js/main.a31deefd.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a31deefd.js"
+  ]
+}
