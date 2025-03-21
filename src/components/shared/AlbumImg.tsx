@@ -37,7 +37,7 @@ export default function AlbumImg({
   isMusicBar = false,
 }: AlbumImgProps) {
   const {
-    action: { playMusic, setMusicInfo },
+    action: { setIsPlay, setMusicInfo },
   } = useAlbumImgStore();
 
   const { width, height } = sizeMap[type];
@@ -57,7 +57,7 @@ export default function AlbumImg({
           color="white"
           onClick={() => {
             setMusicInfo(musicInfo);
-            playMusic();
+            setIsPlay(true);
           }}
         />
       )}
