@@ -6,6 +6,7 @@ import Header from "./Header";
 import { Footer } from "./Footer";
 import { useLayoutStore } from "./hooks";
 import Alert from "../shared/Alert";
+import { userNameStroage } from "../../lib/localStorage";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
@@ -15,8 +16,10 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
 
+  const { get: getUserNameStorage } = userNameStroage;
+
   useEffect(() => {
-    if (parserLocalStorage.get("name")) {
+    if (getUserNameStorage("name")) {
       hiddenModal();
     } else {
       showModal();
@@ -110,7 +113,7 @@ const Edge = styled.div`
   }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    display: none;
+    background: none;
   }
 `;
 

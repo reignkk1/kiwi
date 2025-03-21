@@ -3,6 +3,7 @@ import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEntryStore } from "./hooks";
+import { userNameStroage } from "../../lib/localStorage";
 
 export default function Entry() {
   const navigate = useNavigate();
@@ -11,6 +12,8 @@ export default function Entry() {
     action: { hiddenModal, setUserName },
   } = useEntryStore();
 
+  const { set: setUserNameStorage } = userNameStroage;
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUserName(e.currentTarget.value);
 
@@ -18,7 +21,7 @@ export default function Entry() {
     if (!userName) {
       return alert("이름을 입력해주세요.");
     }
-    parserLocalStorage.set("name", userName);
+    setUserNameStorage({ name: userName });
     hiddenModal();
     navigate("/");
   };

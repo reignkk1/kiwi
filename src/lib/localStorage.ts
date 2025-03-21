@@ -6,8 +6,16 @@ type MusicDrawerStorage = {
   musicDrawer: number[];
 };
 
+type UserNameStorage = {
+  name: string;
+};
+
 export const musicDrawerStorage = createLocalStorage<MusicDrawerStorage>({
   musicDrawer: [],
+});
+
+export const userNameStroage = createLocalStorage<UserNameStorage>({
+  name: "",
 });
 
 function createLocalStorage<T extends Storage>(object: T) {
