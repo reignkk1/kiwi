@@ -15,8 +15,8 @@ interface ControllerProps {
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
-    state: { isPlay, isShuffle },
-    action: { togglePlay },
+    state: { isPlay },
+    action: { toggleIsPlay, setAction },
   } = useControllerStore();
 
   return (
@@ -24,21 +24,21 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
       <ButtonIcon
         icon={faBackwardStep}
         size={typeof size === "number" ? size : size[0]}
+        onClick={() => setAction("playPrev")}
       />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
-        onClick={togglePlay}
+        onClick={toggleIsPlay}
         size={typeof size === "number" ? size : size[1]}
       />
       <ButtonIcon
         icon={faForwardStep}
         size={typeof size === "number" ? size : size[2]}
+        onClick={() => setAction("playNext")}
       />
     </Container>
   );
 }
-
-// shuffle 상태에 따라서 다음곡, 이전곡 클릭 시 로직 구현
 
 const Container = styled.div<{ width: number }>`
   display: flex;
