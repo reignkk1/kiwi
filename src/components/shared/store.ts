@@ -10,17 +10,19 @@ interface AudioState {
   duration: number;
   src: string;
   moveTimePoint: number;
+  action: "playNext" | "playPrev" | null;
 }
 
 interface AudioAction {
-  play: () => void;
-  togglePlay: () => void;
+  setIsPlay: (isPlay: AudioState["isPlay"]) => void;
+  toggleIsPlay: () => void;
   setProgressPercent: (progressPercent: AudioState["progressPercent"]) => void;
   setSrc: (src: AudioState["src"]) => void;
   setCurrentTime: (currentTime: AudioState["currentTime"]) => void;
   setDuration: (duration: AudioState["duration"]) => void;
   setMoveTimePoint: (moveTimePoint: AudioState["moveTimePoint"]) => void;
   setMusicInfo: (musicInfo: AudioState["musicInfo"]) => void;
+  setAction: (action: AudioState["action"]) => void;
 }
 
 type AudioStore = AudioState & AudioAction;
@@ -53,8 +55,9 @@ export const createAudioStore = create<AudioStore>((set) => ({
   currentTime: 0,
   duration: 0,
   moveTimePoint: 0,
-  play: () => set({ isPlay: true }),
-  togglePlay: () => set((state) => ({ isPlay: !state.isPlay })),
+  action: null,
+  setIsPlay: () => set({ isPlay: true }),
+  toggleIsPlay: () => set((state) => ({ isPlay: !state.isPlay })),
   setSrc: (src) => set({ src }),
   setDuration: (duration) => set({ duration }),
   setMoveTimePoint: (moveTimePoint) => set({ moveTimePoint }),
@@ -69,6 +72,7 @@ export const createAudioStore = create<AudioStore>((set) => ({
       musicInfo,
       src: `./mp3/${musicInfo.singer} - ${musicInfo.title}.mp3`,
     }),
+  setAction: (action) => set({ action }),
 }));
 
 export const createProgressInputStore = create<ProgressInputValueStore>(
