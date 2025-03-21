@@ -1,5 +1,6 @@
 import parse from "html-react-parser";
 import { useLocation } from "react-router-dom";
+import { BASE_URL_SLICE } from "./constant";
 
 // 현재 어떤 페이지에 위치하고 있는지 리턴해주는 함수
 export function useCurrentPage() {
@@ -54,4 +55,12 @@ export const is = {
 // 어레이 안에 있는 값들을 랜덤으로 뽑는 함수
 export function selectRandomWithinArray(array: Array<string | number>) {
   return array[Math.floor(Math.random() * array.length)];
+}
+
+// 기본 베이스 주소를 더하다.
+export function addBasePath(path?: string) {
+  const pathSplit = path?.split("/");
+  pathSplit?.splice(0, 1, BASE_URL_SLICE);
+
+  return pathSplit?.join("/");
 }
