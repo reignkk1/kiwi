@@ -16,10 +16,11 @@ export default function AudioImpl() {
     setCurrentTime,
     setDuration,
     moveTimePoint,
-    play,
+    setIsPlay,
     musicInfo,
     setMusicInfo,
-    setMoveTimePoint,
+    action,
+    setAction,
   ] = createAudioStore(
     useShallow((state) => [
       state.isPlay,
@@ -27,10 +28,11 @@ export default function AudioImpl() {
       state.setCurrentTime,
       state.setDuration,
       state.moveTimePoint,
-      state.play,
+      state.setIsPlay,
       state.musicInfo,
       state.setMusicInfo,
-      state.setMoveTimePoint,
+      state.action,
+      state.setAction,
     ])
   );
 
@@ -50,6 +52,24 @@ export default function AudioImpl() {
       setMusicInfo(defaultMusicInfo);
     }
   }, []);
+
+  useEffect(() => {
+    if (action === "playNext") {
+      if (isShuffle) {
+        playRandom();
+      } else {
+        playInOrder("next");
+      }
+    } else if (action === "playPrev") {
+      if (isShuffle) {
+        playRandom();
+      } else {
+        playInOrder("prev");
+      }
+    }
+
+    setAction(null);
+  }, [action]);
 
   useEffect(() => {
     if (isPlay) {
@@ -79,7 +99,7 @@ export default function AudioImpl() {
   const playMusic = (musicId: number | string) => {
     const newMusicInfo = music.data.find((music) => music.id === musicId)!;
     setMusicInfo(newMusicInfo);
-    play();
+    setIsPlay(true);
   };
 
   // 랜덤 재생
@@ -89,6 +109,7 @@ export default function AudioImpl() {
     >;
 
     if (musicDrawer.length === 1) {
+      audioRef.current.load();
       return audioRef.current.play();
     }
     // 음악서랍에 담긴 musicId 배열 값 안에서 랜덤으로 musicId 값을 뽑는다.
@@ -106,26 +127,37 @@ export default function AudioImpl() {
   };
 
   // 순서가 있는 재생
-  const playInOrder = () => {
+  const playInOrder = (type: "next" | "prev") => {
     const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
       string | number
     >;
 
     if (musicDrawer.length === 1) {
+      setIsPlay(true);
+      audioRef.current.load();
       return audioRef.current.play();
     }
 
     // 현재 재생 중인 음악의 다음 곡 인덱스 값을 가져온다.
-    let nextMusicIndex =
-      musicDrawer.findIndex((musicId) => musicId === musicInfo.id) + 1;
+    let musicIndex =
+      musicDrawer.findIndex((musicId) => musicId === musicInfo.id) +
+      (type === "next" ? 1 : -1);
 
     // 만약 다음 곡의 인덱스가 없다면 첫번째 곡으로 간다.
-    if (nextMusicIndex === musicDrawer.length) {
-      nextMusicIndex = 0;
+    if (type === "next") {
+      if (musicIndex === musicDrawer.length) {
+        musicIndex = 0;
+      }
+
+      // 만약 이전 곡의 인덱스가 없다면 마지막 곡으로 간다.
+    } else if (type === "prev") {
+      if (musicIndex === -1) {
+        musicIndex = musicDrawer.length - 1;
+      }
     }
 
     // 다음 곡의 id 값
-    const nextMusicId = musicDrawer[nextMusicIndex];
+    const nextMusicId = musicDrawer[musicIndex];
 
     playMusic(nextMusicId);
   };
@@ -136,7 +168,7 @@ export default function AudioImpl() {
       src={src}
       onTimeUpdate={onTimeUpdate}
       onDurationChange={onDurationChange}
-      onEnded={isShuffle ? playRandom : playInOrder}
+      onEnded={() => setAction("playNext")}
     />
   );
 }
