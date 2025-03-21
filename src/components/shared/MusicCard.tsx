@@ -17,7 +17,7 @@ export default function MusicCard({
   isMusicBar = false,
 }: MusicCardProps) {
   const {
-    action: { play, setMusicInfo },
+    action: { setIsPlay, setMusicInfo },
   } = useMusicCardStore();
 
   return (
@@ -31,7 +31,7 @@ export default function MusicCard({
           width="250px"
           onClick={() => {
             setMusicInfo(musicInfo);
-            play();
+            setIsPlay(true);
           }}
         />
       </Info>
