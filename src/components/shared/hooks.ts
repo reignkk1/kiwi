@@ -8,18 +8,18 @@ import {
 import { createIsShuffleStore } from "../pages/player/store";
 
 export function useAlbumImgStore() {
-  const [playMusic, setMusicInfo] = createAudioStore(
-    useShallow((state) => [state.play, state.setMusicInfo])
+  const [setIsPlay, setMusicInfo] = createAudioStore(
+    useShallow((state) => [state.setIsPlay, state.setMusicInfo])
   );
-  return { action: { playMusic, setMusicInfo } };
+  return { action: { setIsPlay, setMusicInfo } };
 }
 
 export function useControllerStore() {
-  const [isPlay, togglePlay] = createAudioStore(
-    useShallow((state) => [state.isPlay, state.togglePlay])
+  const [isPlay, toggleIsPlay, setAction] = createAudioStore(
+    useShallow((state) => [state.isPlay, state.toggleIsPlay, state.setAction])
   );
   const isShuffle = createIsShuffleStore((state) => state.isShuffle);
-  return { state: { isPlay, isShuffle }, action: { togglePlay } };
+  return { state: { isPlay, isShuffle }, action: { toggleIsPlay, setAction } };
 }
 
 export function useProgressStore() {
@@ -74,10 +74,10 @@ export function useProgressBarStore() {
 }
 
 export function useMusicCardStore() {
-  const [play, setMusicInfo] = createAudioStore(
-    useShallow((state) => [state.play, state.setMusicInfo])
+  const [setIsPlay, setMusicInfo] = createAudioStore(
+    useShallow((state) => [state.setIsPlay, state.setMusicInfo])
   );
-  return { action: { play, setMusicInfo } };
+  return { action: { setIsPlay, setMusicInfo } };
 }
 
 export function useAlertStore() {
