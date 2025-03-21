@@ -1,5 +1,4 @@
-import musicData from "../../../musicData.json";
-import { parserLocalStorage } from "parser-storages";
+import music from "../../../musicData.json";
 import MusicCard from "../../shared/MusicCard";
 import { useMusicListStore } from "./hooks";
 import styled from "styled-components";
@@ -14,9 +13,9 @@ export default function MusicList() {
 
   const { get: getMusicDrawerStorage } = musicDrawerStorage;
 
-  const musicList = musicData.data.filter((music) =>
-    getMusicDrawerStorage("musicDrawer").some((id: number) => music.id === id)
-  );
+  const musicList = (
+    getMusicDrawerStorage("musicDrawer") as Array<string | number>
+  ).map((id) => music.data.find((music) => music.id === id));
 
   return (
     <Container>
@@ -25,9 +24,9 @@ export default function MusicList() {
           return (
             <List>
               <MusicCard
-                musicInfo={musicInfo}
+                musicInfo={musicInfo!}
                 mark={title}
-                isMusicBar={musicInfo.title === title}
+                isMusicBar={musicInfo!.title === title}
               />
             </List>
           );
