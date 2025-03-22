@@ -89,7 +89,7 @@ const Content = styled.div`
     cursor: pointer;
   }
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    padding: 80px 25px;
+    padding: 60px 25px;
   }
 `;
 
@@ -122,11 +122,7 @@ const Edge = styled.div<{ src: string }>`
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     width: 100%;
     height: 100%;
-    zoom: 1 !important;
     background: none;
-  }
-  @media only screen and (max-height: 825px) {
-    zoom: 0.8;
   }
 `;
 
