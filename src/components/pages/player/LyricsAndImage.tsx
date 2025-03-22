@@ -75,8 +75,9 @@ const Container = styled.div<{
   isLyricsClicked: boolean;
   isPlayerMenu: boolean;
 }>`
-  width: 340px;
+  width: 100%;
   height: 450px;
+
   img {
     animation: ${({ isExpandLyrics, isLyricsClicked }) =>
         isExpandLyrics || !isLyricsClicked ? "hide" : "show"}
@@ -90,7 +91,7 @@ const Container = styled.div<{
     }
 
     100% {
-      transform: translateY(-70px);
+      transform: translate(-170px, -75px);
       width: 0px;
       height: 0px;
     }
@@ -98,7 +99,7 @@ const Container = styled.div<{
 
   @keyframes show {
     0% {
-      transform: translateY(-70px);
+      transform: translate(-170px, -75px);
       width: 0px;
       height: 0px;
     }

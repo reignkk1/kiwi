@@ -68,6 +68,7 @@ export default function AlbumImg({
 
 const Container = styled.div`
   position: relative;
+  text-align: center;
   button {
     position: absolute;
     top: 10px;

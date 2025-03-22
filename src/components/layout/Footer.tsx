@@ -85,6 +85,12 @@ Footer.Container = styled.footer`
     cursor: pointer;
     font-size: 22px;
   }
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+  }
 `;
 
 Player.Container = styled.div`

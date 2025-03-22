@@ -81,6 +81,9 @@ const Content = styled.div`
     background-color: grey;
     cursor: pointer;
   }
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    padding: 80px 25px;
+  }
 `;
 
 const BackGroundFilter = styled.div`
@@ -93,6 +96,11 @@ const BackGroundFilter = styled.div`
   z-index: 1;
   @media only screen and (max-height: 825px) {
     zoom: 0.8;
+  }
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
   }
 `;
 
@@ -108,13 +116,10 @@ const Edge = styled.div<{ src: string }>`
     width: 100%;
     height: 100%;
     zoom: 1 !important;
+    background: none;
   }
   @media only screen and (max-height: 825px) {
     zoom: 0.8;
-  }
-
-  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    display: block;
   }
 `;
 
