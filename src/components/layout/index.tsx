@@ -89,7 +89,7 @@ const Content = styled.div`
     cursor: pointer;
   }
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
-    padding: 60px 25px;
+    padding: 40px 25px;
   }
 `;
 
