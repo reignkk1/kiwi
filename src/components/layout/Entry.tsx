@@ -72,6 +72,12 @@ const Container = styled.div`
     font-weight: bold;
     border-radius: 10px;
   }
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    width: 100%;
+    left: 0;
+    height: 100%;
+    top: 0;
+  }
 `;
 
 const InputWrap = styled.div`

@@ -22,4 +22,8 @@ export const GlobalStyles = createGlobalStyle`
     a {
         text-decoration:none;
     }
+
+    body{
+        height: calc(var(--vh, 1vh) * 100);
+    }
 `;

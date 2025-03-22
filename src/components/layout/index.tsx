@@ -19,6 +19,13 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { get: getUserNameStorage } = userNameStroage;
 
   useEffect(() => {
+    function setScreenSize() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    }
+    setScreenSize();
+    window.addEventListener("resize", setScreenSize);
+
     if (getUserNameStorage("name")) {
       hiddenModal();
     } else {
@@ -125,7 +132,7 @@ const Edge = styled.div<{ src: string }>`
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
   background: linear-gradient(-45deg, #fff6b7, #f092bc, #8795e6, #c2ffd8);
   display: flex;
