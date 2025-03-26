@@ -101,9 +101,7 @@ const BackGroundFilter = styled.div`
   background-color: #121212;
   position: absolute;
   z-index: 1;
-  @media only screen and (max-height: 825px) {
-    zoom: 0.8;
-  }
+
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: 100%;
     border-radius: 0;
@@ -142,5 +140,4 @@ const Container = styled.div`
 `;
 
 // 모바일 환경에서 musicbar 클릭시 안됌 이벤트가 안 먹음
-// padding 위로 살짝 더 올려도 될거 같음.
 // 아이콘 변경 Kiwi
