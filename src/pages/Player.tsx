@@ -23,4 +23,8 @@ export default function Player() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  @media (max-height: 730px) {
+    zoom: 0.9;
+  }
+`;

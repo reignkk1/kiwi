@@ -140,3 +140,7 @@ const Container = styled.div`
     height: calc(var(--vh, 1vh) * 100);
   }
 `;
+
+// 모바일 환경에서 musicbar 클릭시 안됌 이벤트가 안 먹음
+// padding 위로 살짝 더 올려도 될거 같음.
+// 아이콘 변경 Kiwi
