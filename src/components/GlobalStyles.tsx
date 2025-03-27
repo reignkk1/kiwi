@@ -26,4 +26,8 @@ export const GlobalStyles = createGlobalStyle`
     body{
         height: calc(var(--vh, 1vh) * 100);
     }
+    button,input{
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+    }
+    
 `;
