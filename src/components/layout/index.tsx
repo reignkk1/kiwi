@@ -139,5 +139,7 @@ const Container = styled.div`
   }
 `;
 
-// 모바일 환경에서 musicbar 클릭시 안됌 이벤트가 안 먹음
+// 상수 색깔 globalstyles const로 빼기
 // 아이콘 변경 Kiwi
+// 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
+// 만약 음악서랍에 아무런 노래도 없을 시 다음, 이전 버튼 누르면 담긴 곡이 없다는 메세지
