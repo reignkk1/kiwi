@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
     body{
         height: calc(var(--vh, 1vh) * 100);
     }
-    button,input{
+    button,input,li{
         -webkit-tap-highlight-color:rgba(0,0,0,0);
     }
     
