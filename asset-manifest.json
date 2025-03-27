@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/comfort/static/js/main.03be7b5e.js",
+    "main.js": "/comfort/static/js/main.472941fd.js",
     "index.html": "/comfort/index.html",
-    "main.03be7b5e.js.map": "/comfort/static/js/main.03be7b5e.js.map"
+    "main.472941fd.js.map": "/comfort/static/js/main.472941fd.js.map"
   },
   "entrypoints": [
-    "static/js/main.03be7b5e.js"
+    "static/js/main.472941fd.js"
   ]
 }
