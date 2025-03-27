@@ -33,6 +33,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
               )}
             </span>
           )}
+          <input type="range" />
         </ExpandTime>
       )}
       <Input
@@ -50,6 +51,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           );
         }}
         onTouchStart={() => {
+          isClicked.current = true;
           setMoveTimePoint(
             convertFromPercentToTime(duration, progressInputValue)
           );
