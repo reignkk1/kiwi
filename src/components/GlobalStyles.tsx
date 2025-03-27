@@ -23,11 +23,8 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration:none;
     }
 
-    body{
+    body {
         height: calc(var(--vh, 1vh) * 100);
-    }
-    button,input,li{
         -webkit-tap-highlight-color:rgba(0,0,0,0);
     }
-    
 `;
