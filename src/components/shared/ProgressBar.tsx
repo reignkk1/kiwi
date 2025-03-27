@@ -47,7 +47,8 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
             convertFromPercentToTime(duration, progressInputValue)
           );
         }}
-        onTouchStart={() => {
+        onTouchStart={(e) => {
+          e.preventDefault();
           isClicked.current = true;
           setMoveTimePoint(
             convertFromPercentToTime(duration, progressInputValue)
@@ -61,8 +62,11 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
             setIsExpandProgressBar(true);
           }
         }}
-        onTouchMove={() => {
-          setIsExpandProgressBar(true);
+        onTouchMove={(e) => {
+          e.preventDefault();
+          if (isClicked.current) {
+            setIsExpandProgressBar(true);
+          }
         }}
         onMouseUp={() => {
           isClicked.current = false;
@@ -70,6 +74,13 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           setProgressPercent(0);
         }}
         onTouchEnd={(e) => {
+          e.preventDefault();
+          isClicked.current = false;
+          setIsExpandProgressBar(false);
+          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
+        }}
+        onTouchCancel={(e) => {
+          e.preventDefault();
           isClicked.current = false;
           setIsExpandProgressBar(false);
           setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
