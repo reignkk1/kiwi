@@ -24,18 +24,15 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
 
   return (
     <Container>
-      {!disabled && (
-        <ExpandTime>
-          {isExpandProgressBar && (
-            <span>
-              {convertTime(
-                convertFromPercentToTime(duration, progressInputValue)
-              )}
-            </span>
-          )}
-          <input type="range" />
-        </ExpandTime>
-      )}
+      <ExpandTime>
+        {isExpandProgressBar && (
+          <span>
+            {convertTime(
+              convertFromPercentToTime(duration, progressInputValue)
+            )}
+          </span>
+        )}
+      </ExpandTime>
       <Input
         type="range"
         max={100}
@@ -65,19 +62,17 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           }
         }}
         onTouchMove={() => {
-          if (isClicked.current) {
-            setIsExpandProgressBar(true);
-          }
+          setIsExpandProgressBar(true);
         }}
         onMouseUp={() => {
           isClicked.current = false;
           setIsExpandProgressBar(false);
           setProgressPercent(0);
         }}
-        onTouchEnd={() => {
+        onTouchEnd={(e) => {
           isClicked.current = false;
           setIsExpandProgressBar(false);
-          setProgressPercent(0);
+          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
         }}
       />
 
