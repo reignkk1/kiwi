@@ -19,7 +19,13 @@ export function useControllerStore() {
     useShallow((state) => [state.isPlay, state.toggleIsPlay, state.setAction])
   );
   const isShuffle = createIsShuffleStore((state) => state.isShuffle);
-  return { state: { isPlay, isShuffle }, action: { toggleIsPlay, setAction } };
+  const toggleFadeAlertMessage = createAlertMessageStore(
+    (state) => state.toggleFadeAlertMessage
+  );
+  return {
+    state: { isPlay, isShuffle },
+    action: { toggleIsPlay, setAction, toggleFadeAlertMessage },
+  };
 }
 
 export function useProgressStore() {
