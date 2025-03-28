@@ -7,6 +7,7 @@ import {
 import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
 import { useControllerStore } from "./hooks";
+import { musicDrawerStorage } from "../../lib/localStorage";
 
 interface ControllerProps {
   width: number;
@@ -16,15 +17,25 @@ interface ControllerProps {
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
     state: { isPlay },
-    action: { toggleIsPlay, setAction },
+    action: { toggleIsPlay, setAction, toggleFadeAlertMessage },
   } = useControllerStore();
+
+  const { get: getMusicDrawerStorage } = musicDrawerStorage;
+  const isMusicDrawer =
+    (getMusicDrawerStorage("musicDrawer") as number[]).length > 0;
 
   return (
     <Container width={width}>
       <ButtonIcon
         icon={faBackwardStep}
         size={typeof size === "number" ? size : size[0]}
-        onClick={() => setAction("playPrev")}
+        onClick={() => {
+          if (!isMusicDrawer) {
+            return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
+          }
+
+          setAction("playPrev");
+        }}
       />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
@@ -34,7 +45,13 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
       <ButtonIcon
         icon={faForwardStep}
         size={typeof size === "number" ? size : size[2]}
-        onClick={() => setAction("playNext")}
+        onClick={() => {
+          if (!isMusicDrawer) {
+            return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
+          }
+
+          setAction("playNext");
+        }}
       />
     </Container>
   );
