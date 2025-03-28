@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { palette } from "../../constant";
 
 interface TitleAndSingerProps {
   title: React.ReactNode;
@@ -56,7 +57,7 @@ const Title = styled.div<{
 }>`
   display: inline-block;
   font-size: ${({ size }) => size};
-  color: white;
+  color: ${palette.musicTitle};
   margin-bottom: 5px;
   overflow: hidden;
   white-space: nowrap;
@@ -89,5 +90,5 @@ const Title = styled.div<{
 `;
 const Singer = styled.div<{ size: string }>`
   font-size: ${({ size }) => size};
-  color: var(--singer-color);
+  color: ${palette.musicSinger};
 `;

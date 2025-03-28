@@ -3,11 +3,6 @@ import reset from "styled-reset";
 
 export const GlobalStyles = createGlobalStyle`
     ${reset}
-    :root{
-        --signature-color:#0ceb0c;
-        --title-color:rgba(255,255,255,1);
-        --singer-color:rgba(255,255,255,0.5);
-    }
 
     * {
         box-sizing:border-box;

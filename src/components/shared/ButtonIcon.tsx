@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Link } from "react-router-dom";
+import { palette } from "../../constant";
 
 interface ButtonIconProps {
   icon: IconProp;
@@ -25,9 +26,7 @@ export function ButtonIcon({
           <FontAwesomeIcon
             icon={icon}
             fontSize={size}
-            color={
-              active ? "var(--signature-color)" : "rgba(255, 255, 255, 0.6)"
-            }
+            color={active ? palette.signatureColor : "rgba(255, 255, 255, 0.6)"}
           />
         </Link>
       </button>
@@ -39,7 +38,7 @@ export function ButtonIcon({
       <FontAwesomeIcon
         icon={icon}
         fontSize={size}
-        color={active ? "var(--signature-color)" : "white"}
+        color={active ? palette.signatureColor : "white"}
       />
     </button>
   );
