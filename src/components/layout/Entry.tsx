@@ -28,9 +28,9 @@ export default function Entry() {
   return (
     <Container>
       <LogoContainer>
-        <Title>음악이 필요한 순간</Title>
+        <Title>노래가 필요한 순간</Title>
         <Logo>
-          <span>Melon</span>
+          <span>Kiwi Music</span>
         </Logo>
       </LogoContainer>
       <InputContainer>
