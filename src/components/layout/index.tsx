@@ -101,32 +101,35 @@ const BackGroundFilter = styled.div`
   background-color: #121212;
   position: absolute;
   z-index: 1;
+  zoom: 0.8;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: 100%;
     border-radius: 0;
     width: 100%;
+    zoom: 1;
   }
 `;
 
 const Edge = styled.div<{ src: string }>`
   width: 460px;
   height: 830px;
-
   background: url(${({ src }) => src}) no-repeat;
   position: relative;
   z-index: 3;
+  zoom: 0.8;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     width: 100%;
     height: 100%;
     background: none;
+    zoom: 1;
   }
 `;
 
 const Container = styled.div`
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   overflow: hidden;
   background: linear-gradient(-45deg, #fff6b7, #f092bc, #8795e6, #c2ffd8);
   display: flex;
@@ -134,6 +137,7 @@ const Container = styled.div`
   align-items: center;
   user-select: none;
   position: relative;
+
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: calc(var(--vh, 1vh) * 100);
   }
