@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useAlertStore } from "./hooks";
+import { addBasePath } from "../../utils";
 
 export default function Alert() {
   const {
@@ -8,7 +9,7 @@ export default function Alert() {
 
   return (
     <Container show={show}>
-      <span>{alertMessageText}</span>
+      <span>🥝 {alertMessageText}</span>
     </Container>
   );
 }
@@ -26,7 +27,7 @@ const Container = styled.div<{ show: boolean }>`
   transition: all 0.5s ease-in-out;
 
   span {
-    padding: 10px 12px;
+    padding: 12px 15px;
     background-color: rgb(124, 124, 124, 0.9);
     border-radius: 20px;
     color: white;
