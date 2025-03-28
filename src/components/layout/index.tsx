@@ -143,7 +143,8 @@ const Container = styled.div`
   }
 `;
 
-// 상수 색깔 globalstyles const로 빼기
-// 아이콘 변경 Kiwi
+// player img src 바뀔 때 애니메이션 살짝
+// 곡정보, 앨범소개 구현
+// 음악서랍에서 삭제
+// 음악서랍에서 위치 변경
 // 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
-// 만약 음악서랍에 아무런 노래도 없을 시 다음, 이전 버튼 누르면 담긴 곡이 없다는 메세지
