@@ -77,7 +77,6 @@ const Container = styled.div<{
 }>`
   width: 100%;
   height: 450px;
-
   img {
     animation: ${({ isExpandLyrics, isLyricsClicked }) =>
         isExpandLyrics || !isLyricsClicked ? "hide" : "show"}
@@ -86,6 +85,7 @@ const Container = styled.div<{
     animation-play-state: ${({ isLyricsClicked }) =>
       isLyricsClicked ? "running" : "paused"};
   }
+
   @keyframes hide {
     0% {
     }
