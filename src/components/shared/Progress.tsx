@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useProgressStore } from "./hooks";
+import { palette } from "../../constant";
 
 export function Progress({
   isExpand = false,
@@ -33,7 +34,7 @@ const Container = styled.div<{ isExpand: boolean }>`
 `;
 
 const Percent = styled.div<{ progressPercent: number }>`
-  background-color: var(--signature-color);
+  background-color: ${palette.signatureColor};
   width: ${({ progressPercent }) => `${progressPercent}%`};
   height: 100%;
 `;
