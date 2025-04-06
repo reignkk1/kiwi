@@ -50,6 +50,9 @@ export function TitleAndSinger({
 const Container = styled.div<{ width?: string }>`
   width: ${({ width }) => width};
   overflow: hidden;
+  mark {
+    color: ${palette.signatureColor};
+  }
 `;
 const Title = styled.div<{
   size: string;
