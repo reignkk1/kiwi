@@ -42,7 +42,7 @@ export default function LyricsAndImage() {
       isExpandLyrics={isExpandLyrics}
       isLyricsClicked={isLyricsClicked}
     >
-      <AlbumImg type="large" musicInfo={musicInfo} animation={true} />
+      <AlbumImg type="large" musicInfo={musicInfo} />
       <LyricsContainer
         isExpandLyrics={isExpandLyrics}
         onClick={() => {
