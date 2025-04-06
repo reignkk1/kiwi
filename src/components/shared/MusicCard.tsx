@@ -47,8 +47,4 @@ const Container = styled.div`
 const Info = styled.div`
   margin-left: 10px;
   cursor: pointer;
-  mark {
-    background: none;
-    color: var(--signature-color);
-  }
 `;
