@@ -18,8 +18,6 @@ export function useLyricsAndImageStore() {
     (state) => state.isExpandProgressBar
   );
 
-  const isPlayerMenu = createIsPlayerMenuStore((state) => state.isPlayerMenu);
-
   const [musicInfo, currentTime] = createAudioStore(
     useShallow((state) => [state.musicInfo, state.currentTime])
   );
@@ -49,7 +47,6 @@ export function useLyricsAndImageStore() {
       isExpandLyrics,
       isExpandProgressBar,
       isLyricsClicked,
-      isPlayerMenu,
     },
     action: {
       setIsExpandLyrics,

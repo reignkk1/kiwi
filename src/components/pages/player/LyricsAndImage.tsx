@@ -11,7 +11,6 @@ export default function LyricsAndImage() {
       isExpandLyrics,
       isExpandProgressBar,
       isLyricsClicked,
-      isPlayerMenu,
     },
     action: {
       setIsExpandLyrics,
@@ -42,9 +41,8 @@ export default function LyricsAndImage() {
     <Container
       isExpandLyrics={isExpandLyrics}
       isLyricsClicked={isLyricsClicked}
-      isPlayerMenu={isPlayerMenu}
     >
-      <AlbumImg type="large" musicInfo={musicInfo} />
+      <AlbumImg type="large" musicInfo={musicInfo} animation={true} />
       <LyricsContainer
         isExpandLyrics={isExpandLyrics}
         onClick={() => {
@@ -73,7 +71,6 @@ export default function LyricsAndImage() {
 const Container = styled.div<{
   isExpandLyrics: boolean;
   isLyricsClicked: boolean;
-  isPlayerMenu: boolean;
 }>`
   width: 100%;
   height: 450px;
