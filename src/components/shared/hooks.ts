@@ -1,11 +1,11 @@
 import { useShallow } from "zustand/react/shallow";
 import {
   createAlertMessageStore,
-  createAudioStore,
   createIsExpandProgressBarStore,
   createProgressInputStore,
 } from "./store";
 import { createIsShuffleStore } from "../pages/player/store";
+import { createAudioStore } from "./../audio/store";
 
 export function useAlbumImgStore() {
   const [setIsPlay, setMusicInfo] = createAudioStore(

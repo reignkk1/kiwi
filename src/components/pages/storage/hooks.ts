@@ -1,4 +1,4 @@
-import { createAudioStore } from "./../../shared/store";
+import { createAudioStore } from "./../../audio/store";
 
 export function useMusicListStore() {
   const musicInfo = createAudioStore((state) => state.musicInfo);

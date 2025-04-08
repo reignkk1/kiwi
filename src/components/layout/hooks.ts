@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/react/shallow";
-import { createAudioStore } from "../shared/store";
+import { createAudioStore } from "./../audio/store";
 import {
   createIsModalStore,
   createNavBarMenuStore,
