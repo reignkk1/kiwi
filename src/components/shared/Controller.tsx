@@ -8,10 +8,11 @@ import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
 import { useControllerStore } from "./hooks";
 import { musicDrawerStorage } from "../../lib/localStorage";
+import { is } from "../../utils";
 
 interface ControllerProps {
   width: number;
-  size?: [number, number, number] | number;
+  size?: [number, number, number] | number | any;
 }
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
@@ -28,7 +29,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
     <Container width={width}>
       <ButtonIcon
         icon={faBackwardStep}
-        size={typeof size === "number" ? size : size[0]}
+        size={is.number(size) ? size : size[0]}
         onClick={() => {
           if (!isMusicDrawer) {
             return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
@@ -40,11 +41,11 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
         onClick={toggleIsPlay}
-        size={typeof size === "number" ? size : size[1]}
+        size={is.number(size) ? size : size[1]}
       />
       <ButtonIcon
         icon={faForwardStep}
-        size={typeof size === "number" ? size : size[2]}
+        size={is.number(size) ? size : size[2]}
         onClick={() => {
           if (!isMusicDrawer) {
             return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
