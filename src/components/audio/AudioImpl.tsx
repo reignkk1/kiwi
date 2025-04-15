@@ -3,6 +3,7 @@ import { musicDrawerStorage } from "../../lib/localStorage";
 import music from "../../musicData.json";
 import { selectRandomWithinArray } from "../../utils";
 import { useAudioImplStore } from "./hooks";
+import { MusicType } from "../shared/types";
 
 export default function AudioImpl() {
   const {
@@ -19,14 +20,18 @@ export default function AudioImpl() {
   } = useAudioImplStore();
 
   const { get: getMusicDrawerStorage } = musicDrawerStorage;
-  const musicDrawer = getMusicDrawerStorage("musicDrawer");
+  const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
+    string | number
+  >;
   const defaultMusicInfo = music.data.find(
     (music) => music.id === musicDrawer[0]
   );
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
 
-  // playedMusicHistory useRef로 Array 형태로 만들기
+  //  음악 히스토리 스택으로 구현
+  const nextPlayedMusicHistory = useRef<Array<Partial<MusicType>>>([]).current;
+  const prevPlayedMusicHistory = useRef<Array<Partial<MusicType>>>([]).current;
 
   useEffect(() => {
     if (defaultMusicInfo) {
@@ -37,13 +42,35 @@ export default function AudioImpl() {
   useEffect(() => {
     if (action === "playNext") {
       if (isShuffle) {
-        playRandom();
+        if (nextPlayedMusicHistory.length === 0) {
+          playRandom();
+          prevPlayedMusicHistory.push(musicInfo);
+        } else {
+          setMusicInfo(
+            nextPlayedMusicHistory[nextPlayedMusicHistory.length - 1]
+          );
+          setIsPlay(true);
+
+          prevPlayedMusicHistory.push(musicInfo);
+          nextPlayedMusicHistory.pop();
+        }
       } else {
         playInOrder("next");
       }
     } else if (action === "playPrev") {
       if (isShuffle) {
-        playRandom();
+        if (prevPlayedMusicHistory.length === 0) {
+          playRandom();
+          nextPlayedMusicHistory.push(musicInfo);
+        } else {
+          setMusicInfo(
+            prevPlayedMusicHistory[prevPlayedMusicHistory.length - 1]
+          );
+          setIsPlay(true);
+
+          nextPlayedMusicHistory.push(musicInfo);
+          prevPlayedMusicHistory.pop();
+        }
       } else {
         playInOrder("prev");
       }
@@ -85,10 +112,6 @@ export default function AudioImpl() {
 
   // 랜덤 재생
   const playRandom = () => {
-    const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
-      string | number
-    >;
-
     if (musicDrawer.length === 1) {
       audioRef.current.load();
       return audioRef.current.play();
@@ -109,10 +132,6 @@ export default function AudioImpl() {
 
   // 순서가 있는 재생
   const playInOrder = (type: "next" | "prev") => {
-    const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
-      string | number
-    >;
-
     if (musicDrawer.length === 1) {
       setIsPlay(true);
       audioRef.current.load();
