@@ -3,7 +3,7 @@ import { is } from "../utils";
 type Storage = Record<string, string | number | (string | number | object)[]>;
 
 type MusicDrawerStorage = {
-  musicDrawer: number[];
+  musicDrawer: Array<number>;
 };
 
 type UserNameStorage = {
@@ -50,9 +50,9 @@ function createLocalStorage<T extends Storage>(object: T) {
     });
   };
 
-  const get = (key: keyof T) => {
+  const get = (key: keyof T): T[keyof T] => {
     if (is.string(object[key])) {
-      return localStorage.getItem(key as string);
+      return localStorage.getItem(key as string) as T[keyof T];
     } else {
       return JSON.parse(localStorage.getItem(key as string) || "");
     }
