@@ -26,7 +26,7 @@ const sizeMap = {
 
 interface AlbumImgProps {
   type: "small" | "middle" | "smallLarge" | "large";
-  musicInfo: Partial<MusicType>;
+  musicInfo: MusicType;
   isActiveButton?: boolean;
   isMusicBar?: boolean;
 }

@@ -20,18 +20,18 @@ export default function AudioImpl() {
   } = useAudioImplStore();
 
   const { get: getMusicDrawerStorage } = musicDrawerStorage;
-  const musicDrawer = getMusicDrawerStorage("musicDrawer") as Array<
-    string | number
-  >;
+  const musicDrawer = getMusicDrawerStorage("musicDrawer");
   const defaultMusicInfo = music.data.find(
     (music) => music.id === musicDrawer[0]
   );
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
 
+  console.log(musicDrawer);
+
   //  음악 히스토리 스택으로 구현
-  const nextPlayedMusicHistory = useRef<Array<Partial<MusicType>>>([]).current;
-  const prevPlayedMusicHistory = useRef<Array<Partial<MusicType>>>([]).current;
+  const nextPlayedMusicHistory = useRef<Array<MusicType>>([]).current;
+  const prevPlayedMusicHistory = useRef<Array<MusicType>>([]).current;
 
   useEffect(() => {
     if (defaultMusicInfo) {
@@ -172,3 +172,5 @@ export default function AudioImpl() {
     />
   );
 }
+
+// 리팩토링 진행, 스토어 디스패처 형태로 구현해보기

@@ -4,7 +4,7 @@ import { getProgressPercent } from "../../utils";
 
 interface AudioState {
   isPlay: boolean;
-  musicInfo: Partial<MusicType>;
+  musicInfo: MusicType;
   progressPercent: number;
   currentTime: number;
   duration: number;
