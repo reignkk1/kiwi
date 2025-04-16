@@ -53,7 +53,7 @@ export const is = {
 };
 
 // 어레이 안에 있는 값들을 랜덤으로 뽑는 함수
-export function selectRandomWithinArray(array: Array<string | number>) {
+export function selectRandomWithinArray(array: Array<number>) {
   return array[Math.floor(Math.random() * array.length)];
 }
 

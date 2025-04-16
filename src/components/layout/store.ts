@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { parserLocalStorage } from "parser-storages";
 
 interface IsModalStore {
   isModal: boolean;
