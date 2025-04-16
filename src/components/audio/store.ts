@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { MusicType } from "../shared/types";
 import { getProgressPercent } from "../../utils";
+import { musicDrawerStorage } from "../../lib/localStorage";
+import music from "../../musicData.json";
 
 interface AudioState {
   isPlay: boolean;
@@ -27,10 +29,16 @@ interface AudioAction {
 
 type AudioStore = AudioState & AudioAction;
 
+const { get: getMusicDrawerStorage } = musicDrawerStorage;
+const musicDrawer = getMusicDrawerStorage("musicDrawer");
+const defaultMusicInfo = music.data.find(
+  (music) => music.id === musicDrawer[0]
+);
+
 export const createAudioStore = create<AudioStore>((set) => ({
   isPlay: false,
   src: "",
-  musicInfo: {} as MusicType,
+  musicInfo: defaultMusicInfo as MusicType,
   progressPercent: 0,
   currentTime: 0,
   duration: 0,
