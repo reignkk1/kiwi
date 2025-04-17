@@ -38,13 +38,14 @@ export function useProgressStore() {
 }
 
 export function useProgressBarStore() {
-  const [duration, progressPercent, setProgressPercent, setMoveTimePoint] =
+  const [duration, progressPercent, setProgressPercent, setCurrentTime] =
     createAudioStore(
       useShallow((state) => [
         state.duration,
         state.progressPercent,
         state.setProgressPercent,
-        state.setMoveTimePoint,
+
+        state.setCurrentTime,
       ])
     );
 
@@ -74,7 +75,7 @@ export function useProgressBarStore() {
       setProgressPercent,
       setProgressInputValue,
       setIsExpandProgressBar,
-      setMoveTimePoint,
+      setCurrentTime,
     },
   };
 }

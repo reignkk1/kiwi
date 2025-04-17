@@ -7,15 +7,7 @@ import { MusicType } from "../shared/types";
 
 export default function AudioImpl() {
   const {
-    state: {
-      isPlay,
-      src,
-      action,
-      moveTimePoint,
-      musicInfo,
-      isRepeat,
-      isShuffle,
-    },
+    state: { isPlay, src, action, musicInfo, isRepeat, isShuffle, currentTime },
     action: { setAction, setCurrentTime, setDuration, setIsPlay, setMusicInfo },
   } = useAudioImplStore();
 
@@ -56,8 +48,8 @@ export default function AudioImpl() {
   }, [isPlay, src]);
 
   useEffect(() => {
-    audio.currentTime = moveTimePoint;
-  }, [moveTimePoint]);
+    audio.currentTime = currentTime;
+  }, [currentTime]);
 
   useEffect(() => {
     audio.loop = isRepeat;

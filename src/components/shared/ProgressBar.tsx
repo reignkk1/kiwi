@@ -16,7 +16,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
       setIsExpandProgressBar,
       setProgressInputValue,
       setProgressPercent,
-      setMoveTimePoint,
+      setCurrentTime,
     },
   } = useProgressBarStore();
 
@@ -57,14 +57,14 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           isClicked.current = false;
           setIsExpandProgressBar(false);
           setProgressPercent(0);
-          setMoveTimePoint(
+          setCurrentTime(
             convertFromPercentToTime(duration, progressInputValue)
           );
         }}
         onTouchEnd={() => {
           setIsExpandProgressBar(false);
           setProgressPercent(0);
-          setMoveTimePoint(
+          setCurrentTime(
             convertFromPercentToTime(duration, progressInputValue)
           );
         }}

@@ -51,6 +51,7 @@ export const createIsExpandLyricsStore = create<IsExpandLyricsStore>((set) => ({
     set((state) => ({ isExpandLyrics: !state.isExpandLyrics })),
 }));
 
+// 오디오 상태로
 export const createIsShuffleStore = create<IsShuffleStore>((set) => ({
   isShuffle: false,
   toggleShuffle: () => set((state) => ({ isShuffle: !state.isShuffle })),
