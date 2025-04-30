@@ -3,6 +3,7 @@ import { useAudioImplStore } from "../../hooks/audio/useAudioImplStore";
 import useAudioInitialize from "../../hooks/audio/useAudioInitialize";
 import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
 import useAudioRef from "../../hooks/audio/useAudioRef";
+import { addBasePath } from "../../utils";
 
 export default function AudioImpl() {
   useAudioInitialize();
@@ -27,6 +28,7 @@ export default function AudioImpl() {
 
   useEffect(() => {
     isPlay ? audio.play() : audio.pause();
+    console.log(src);
   }, [isPlay, src, audio]);
 
   useEffect(() => {
@@ -38,7 +40,9 @@ export default function AudioImpl() {
   }, [isRepeat, audio]);
 
   useEffect(() => {
-    setSrc(`/mp3/${currentMusic.singer} - ${currentMusic.title}.mp3`);
+    setSrc(
+      addBasePath(`/mp3/${currentMusic.singer} - ${currentMusic.title}.mp3`)
+    );
   }, [currentMusic, setSrc]);
 
   return (

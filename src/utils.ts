@@ -60,7 +60,7 @@ export function selectRandomWithinArray(array: Array<number>) {
 }
 
 // 기본 베이스 주소를 더하다.
-export function addBasePath(path?: string) {
+export function addBasePath(path: string) {
   const pathSplit = path?.split("/");
   pathSplit?.splice(0, 1, BASE_URL_SLICE);
 
