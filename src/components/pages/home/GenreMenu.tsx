@@ -24,6 +24,7 @@ export default function GenreMenu() {
       <Menu>
         {menu.map(({ id, text }) => (
           <MenuItem
+            key={id}
             id={id}
             active={activeMenu === id}
             onClick={() => setActiveMenu(id)}
