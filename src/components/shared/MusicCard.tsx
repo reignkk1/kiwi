@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { TitleAndSinger } from "./TitleAndSinger";
 import AlbumImg from "./AlbumImg";
-import { MusicType } from "./types";
 import { markKeyword } from "../../utils";
-import { useMusicCardStore } from "./hooks";
+import { MusicType } from "../../types";
+import { useMusicCardStore } from "../../hooks/store/useMusicCardStore";
 
 interface MusicCardProps {
   musicInfo: MusicType;
@@ -17,7 +17,7 @@ export default function MusicCard({
   isMusicBar = false,
 }: MusicCardProps) {
   const {
-    action: { setIsPlay, setMusicInfo },
+    action: { setIsPlay, setCurrentMusic },
   } = useMusicCardStore();
 
   return (
@@ -30,7 +30,7 @@ export default function MusicCard({
           size="middle"
           width="250px"
           onClick={() => {
-            setMusicInfo(musicInfo);
+            setCurrentMusic(musicInfo);
             setIsPlay(true);
           }}
         />

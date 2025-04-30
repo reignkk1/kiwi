@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Progress } from "./Progress";
 import { useRef } from "react";
 import { convertFromPercentToTime, convertTime } from "../../utils";
-import { useProgressBarStore } from "./hooks";
+import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   const {
@@ -22,6 +22,15 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
 
   const isClicked = useRef<boolean>(false);
 
+  const pressAndUp = () => {
+    // 확대 기능 off
+    setIsExpandProgressBar(false);
+    // 퍼센트 게이지 초기화
+    setProgressPercent(0);
+    // 눌렀다 뗀 위치로 이동
+    setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
+  };
+
   return (
     <Container>
       <ExpandTime>
@@ -39,35 +48,21 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         step={1}
         value={progressInputValue}
         disabled={disabled}
-        onChange={(e) => {
-          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
-        }}
-        onMouseDown={() => {
-          isClicked.current = true;
-        }}
+        onChange={(e) =>
+          setProgressInputValue(Math.floor(Number(e.currentTarget.value)))
+        }
+        onMouseDown={() => (isClicked.current = true)}
         onMouseMove={() => {
           if (isClicked.current) {
             setIsExpandProgressBar(true);
           }
         }}
-        onTouchMove={() => {
-          setIsExpandProgressBar(true);
-        }}
+        onTouchMove={() => setIsExpandProgressBar(true)}
         onMouseUp={() => {
           isClicked.current = false;
-          setIsExpandProgressBar(false);
-          setProgressPercent(0);
-          setCurrentTime(
-            convertFromPercentToTime(duration, progressInputValue)
-          );
+          pressAndUp();
         }}
-        onTouchEnd={() => {
-          setIsExpandProgressBar(false);
-          setProgressPercent(0);
-          setCurrentTime(
-            convertFromPercentToTime(duration, progressInputValue)
-          );
-        }}
+        onTouchEnd={pressAndUp}
       />
 
       <Progress

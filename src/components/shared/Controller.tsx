@@ -6,9 +6,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
-import { useControllerStore } from "./hooks";
-import { musicDrawerStorage } from "../../lib/localStorage";
 import { is } from "../../utils";
+import { useControllerStore } from "../../hooks/store/useControllerStore";
+import useMusicDrawerStorage from "../../hooks/localStorage/useMusicDrawerStorage";
 
 interface ControllerProps {
   width: number;
@@ -18,41 +18,38 @@ interface ControllerProps {
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
     state: { isPlay },
-    action: { toggleIsPlay, setAction, toggleFadeAlertMessage },
+    action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
   } = useControllerStore();
 
-  const { get: getMusicDrawerStorage } = musicDrawerStorage;
-  const isMusicDrawer =
-    (getMusicDrawerStorage("musicDrawer") as number[]).length > 0;
+  const { musicDrawer } = useMusicDrawerStorage();
+  const isMusicDrawer = musicDrawer.length > 0;
+
+  const handleMusicDrawerCheck = (direction: "next" | "prev") => {
+    if (!isMusicDrawer) {
+      return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
+    }
+
+    setPlayDirection(direction);
+  };
+
+  const getSize = (index: number) => (is.number(size) ? size : size[index]);
 
   return (
     <Container width={width}>
       <ButtonIcon
         icon={faBackwardStep}
-        size={is.number(size) ? size : size[0]}
-        onClick={() => {
-          if (!isMusicDrawer) {
-            return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
-          }
-
-          setAction("playPrev");
-        }}
+        size={getSize(0)}
+        onClick={() => handleMusicDrawerCheck("prev")}
       />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
         onClick={toggleIsPlay}
-        size={is.number(size) ? size : size[1]}
+        size={getSize(1)}
       />
       <ButtonIcon
         icon={faForwardStep}
-        size={is.number(size) ? size : size[2]}
-        onClick={() => {
-          if (!isMusicDrawer) {
-            return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
-          }
-
-          setAction("playNext");
-        }}
+        size={getSize(2)}
+        onClick={() => handleMusicDrawerCheck("next")}
       />
     </Container>
   );

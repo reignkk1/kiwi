@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import musicData from "./../../../musicData.json";
-import { MusicType } from "../../shared/types";
+import musicData from "../../musicData.json";
+import { MusicType } from "../../types";
 
-export interface SearchStore {
+type SearchStore = {
   searchKeyWord: string;
-  searchResultMusic: MusicType[];
+  searchResultMusic: Array<MusicType>;
   setSearchKeyWord: (keyWord: SearchStore["searchKeyWord"]) => void;
   searchMusic: () => void;
-}
+};
 
-export const createSearchStore = create<SearchStore>((set) => ({
+export const useSearchStore = create<SearchStore>((set) => ({
   searchKeyWord: "",
   searchResultMusic: [],
   setSearchKeyWord: (keyWord) => set(() => ({ searchKeyWord: keyWord })),

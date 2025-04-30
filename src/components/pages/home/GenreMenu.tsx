@@ -1,13 +1,17 @@
 import styled from "styled-components";
-import { useGenreMenuStore } from "./hooks";
+import { useShallow } from "zustand/react/shallow";
+import { useActiveGenreMenuStore } from "../../../store/home";
+import type { GenreMenuType } from "../../../types";
 
 export default function GenreMenu() {
-  const {
-    state: { activeGenreMenu },
-    action: { setActiveGenreMenu },
-  } = useGenreMenuStore();
+  const [activeMenu, setActiveMenu] = useActiveGenreMenuStore(
+    useShallow((state) => [state.activeMenu, state.setActiveMenu])
+  );
 
-  const menu = [
+  const menu: Array<{
+    id: GenreMenuType;
+    text: string;
+  }> = [
     { id: "all", text: "전체" },
     { id: "ballad", text: "발라드" },
     { id: "indie", text: "인디음악" },
@@ -21,8 +25,8 @@ export default function GenreMenu() {
         {menu.map(({ id, text }) => (
           <MenuItem
             id={id}
-            active={activeGenreMenu === id}
-            onClick={() => setActiveGenreMenu(id)}
+            active={activeMenu === id}
+            onClick={() => setActiveMenu(id)}
           >
             <span>{text}</span>
           </MenuItem>

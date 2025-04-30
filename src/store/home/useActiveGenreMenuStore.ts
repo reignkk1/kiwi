@@ -7,9 +7,7 @@ type ActiveGenreMenuStore = {
   setActiveMenu: (genreMenu: ActiveGenreMenuStore["activeMenu"]) => void;
 };
 
-export const createActiveGenreMenuStore = create<ActiveGenreMenuStore>(
-  (set) => ({
-    activeMenu: "all",
-    setActiveMenu: (menu) => set(() => ({ activeMenu: menu })),
-  })
-);
+export const useActiveGenreMenuStore = create<ActiveGenreMenuStore>((set) => ({
+  activeMenu: "all",
+  setActiveMenu: (menu) => set(() => ({ activeMenu: menu })),
+}));

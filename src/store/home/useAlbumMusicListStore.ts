@@ -1,14 +1,14 @@
 import { create } from "zustand";
-import musicData from "../musicData.json";
-import { MusicType } from "./../components/shared/types";
+import musicData from "../../musicData.json";
+import { MusicType } from "../../types";
 
-type AlbumListStore = {
+type AlbumMusicListStore = {
   albumMusicList: Array<MusicType>;
   setAlbumMusicListAll: () => void;
   filterAlbumMusicList: (activeGenreMenu: string) => void;
 };
 
-export const useAlbumListStore = create<AlbumListStore>((set) => ({
+export const useAlbumMusicListStore = create<AlbumMusicListStore>((set) => ({
   albumMusicList: [],
   setAlbumMusicListAll: () => set(() => ({ albumMusicList: musicData.data })),
   filterAlbumMusicList: (activeGenreMenu) => {

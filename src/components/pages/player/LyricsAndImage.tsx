@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
-import { useLyricsAndImageStore } from "./hooks";
+import { useLyricsAndImageStore } from "../../../hooks/store/useLyricsAndImageStore";
 
 export default function LyricsAndImage() {
   const {
     state: {
-      musicInfo,
+      currentMusic,
       currentTime,
       isExpandLyrics,
       isExpandProgressBar,
@@ -21,7 +21,6 @@ export default function LyricsAndImage() {
   } = useLyricsAndImageStore();
 
   const activeLyricsText = useRef<HTMLDivElement>(null);
-
   const cleanedCurrentTime = Math.floor(currentTime);
 
   useEffect(() => {
@@ -35,14 +34,14 @@ export default function LyricsAndImage() {
       setIsExpandLyrics(false);
       unclickedLyrics();
     };
-  }, []);
+  }, [setIsExpandLyrics, unclickedLyrics]);
 
   return (
     <Container
       isExpandLyrics={isExpandLyrics}
       isLyricsClicked={isLyricsClicked}
     >
-      <AlbumImg type="large" musicInfo={musicInfo} />
+      <AlbumImg type="large" musicInfo={currentMusic} />
       <LyricsContainer
         isExpandLyrics={isExpandLyrics}
         onClick={() => {
@@ -50,7 +49,7 @@ export default function LyricsAndImage() {
           toggleExpandLyrics();
         }}
       >
-        {musicInfo.lyrics?.map(({ text, startTime, endTime }) => {
+        {currentMusic.lyrics.map(({ text, startTime, endTime }) => {
           const isActive =
             startTime <= cleanedCurrentTime && cleanedCurrentTime <= endTime;
           return (
@@ -58,6 +57,7 @@ export default function LyricsAndImage() {
               ref={isActive ? activeLyricsText : null}
               active={isActive}
               isExpandProgressBar={isExpandProgressBar}
+              key={startTime}
             >
               <span>{text}</span>
             </LyricsText>

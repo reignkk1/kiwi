@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import { useAlertStore } from "./hooks";
-import { addBasePath } from "../../utils";
+import { useAlertStore } from "./../../store/shared/useAlertStore";
+import { useShallow } from "zustand/react/shallow";
 
 export default function Alert() {
-  const {
-    state: { alertMessageText, show },
-  } = useAlertStore();
-
+  const [text, show] = useAlertStore(
+    useShallow((state) => [state.text, state.show])
+  );
   return (
     <Container show={show}>
-      <span>🥝 {alertMessageText}</span>
+      <span>🥝 {text}</span>
     </Container>
   );
 }

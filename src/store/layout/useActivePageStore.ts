@@ -4,6 +4,7 @@ const initialState = {
   home: false,
   search: false,
   storage: false,
+  player: false,
 };
 
 type ActivePageStore = {

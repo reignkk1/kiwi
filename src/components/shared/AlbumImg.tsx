@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { ButtonIcon } from "./ButtonIcon";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { useAlbumImgStore } from "./hooks";
-import { MusicType } from "./types";
 import { addBasePath } from "../../utils";
+import { MusicType } from "./../../types";
+import { useAlbumImgStore } from "../../hooks/store/useAlbumImgStore";
 
 const sizeMap = {
   small: {
@@ -38,7 +38,7 @@ export default function AlbumImg({
   isMusicBar = false,
 }: AlbumImgProps) {
   const {
-    action: { setIsPlay, setMusicInfo },
+    action: { setIsPlay, setCurrentMusic },
   } = useAlbumImgStore();
 
   const { width, height } = sizeMap[type];
@@ -55,9 +55,8 @@ export default function AlbumImg({
       {isActiveButton && (
         <ButtonIcon
           icon={faPlay}
-          color="white"
           onClick={() => {
-            setMusicInfo(musicInfo);
+            setCurrentMusic(musicInfo);
             setIsPlay(true);
           }}
         />

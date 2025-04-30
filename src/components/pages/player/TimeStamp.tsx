@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { convertFromPercentToTime, convertTime } from "../../../utils";
-import { useTimeStampStore } from "./hooks";
+import { useTimeStampStore } from "../../../hooks/store/useTimeStampStore";
 
 export default function TimeStamp() {
   const {

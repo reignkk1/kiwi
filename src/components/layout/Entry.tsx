@@ -1,17 +1,18 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useEntryStore } from "./hooks";
-import { userNameStroage } from "../../lib/localStorage";
+import useUserNameStorage from "../../hooks/localStorage/useUserNameStorage";
+import { useEntryStore } from "../../hooks/store/useEntryStore";
 
 export default function Entry() {
   const navigate = useNavigate();
+
   const {
     state: { userName },
     action: { hiddenModal, setUserName },
   } = useEntryStore();
 
-  const { set: setUserNameStorage } = userNameStroage;
+  const { setUserName: setUserNameStorage } = useUserNameStorage();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUserName(e.currentTarget.value);

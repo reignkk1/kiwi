@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useProgressStore } from "./hooks";
 import { palette } from "../../constant";
+import { useProgressStore } from "./../../store/shared/useProgressStore";
 
 export function Progress({
   isExpand = false,
@@ -9,17 +9,8 @@ export function Progress({
   isExpand?: boolean;
   value?: number;
 }) {
-  const {
-    state: { progressPercent },
-  } = useProgressStore();
-
-  let percent: number;
-
-  if (!value) {
-    percent = progressPercent;
-  } else {
-    percent = value;
-  }
+  const progressPercent = useProgressStore((state) => state.progressPercent);
+  const percent = value ?? progressPercent;
 
   return (
     <Container isExpand={isExpand}>
