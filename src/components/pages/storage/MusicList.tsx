@@ -22,7 +22,7 @@ export default function MusicList() {
               <MusicCard
                 musicInfo={musicInfo!}
                 mark={currentMusic.title}
-                isMusicBar={musicInfo!.title === currentMusic.title}
+                $isMusicBar={musicInfo!.title === currentMusic.title}
               />
             </List>
           );

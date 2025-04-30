@@ -28,14 +28,14 @@ interface AlbumImgProps {
   type: "small" | "middle" | "smallLarge" | "large";
   musicInfo: MusicType;
   isActiveButton?: boolean;
-  isMusicBar?: boolean;
+  $isMusicBar?: boolean;
 }
 
 export default function AlbumImg({
   type,
   musicInfo,
   isActiveButton = false,
-  isMusicBar = false,
+  $isMusicBar = false,
 }: AlbumImgProps) {
   const {
     action: { setIsPlay, setCurrentMusic },
@@ -45,12 +45,12 @@ export default function AlbumImg({
 
   return (
     <Container>
-      {isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
+      {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
       <BackGroundImg
         width={width}
         height={height}
         src={addBasePath(musicInfo.imgSrc)}
-        isMusicBar={isMusicBar}
+        $isMusicBar={$isMusicBar}
       />
       {isActiveButton && (
         <ButtonIcon
@@ -76,11 +76,11 @@ const Container = styled.div`
   }
 `;
 
-const BackGroundImg = styled.img<{ isMusicBar: boolean }>`
+const BackGroundImg = styled.img<{ $isMusicBar: boolean }>`
   border-radius: 5px;
   object-fit: fill;
-  ${({ isMusicBar }) =>
-    isMusicBar &&
+  ${({ $isMusicBar }) =>
+    $isMusicBar &&
     css`
       filter: brightness(40%);
     `}

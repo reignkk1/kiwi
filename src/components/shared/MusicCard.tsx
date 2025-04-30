@@ -8,13 +8,13 @@ import { useMusicCardStore } from "../../hooks/store/useMusicCardStore";
 interface MusicCardProps {
   musicInfo: MusicType;
   mark?: string;
-  isMusicBar?: boolean;
+  $isMusicBar?: boolean;
 }
 
 export default function MusicCard({
   musicInfo,
   mark = "",
-  isMusicBar = false,
+  $isMusicBar = false,
 }: MusicCardProps) {
   const {
     action: { setIsPlay, setCurrentMusic },
@@ -22,7 +22,7 @@ export default function MusicCard({
 
   return (
     <Container>
-      <AlbumImg type="small" musicInfo={musicInfo} isMusicBar={isMusicBar} />
+      <AlbumImg type="small" musicInfo={musicInfo} $isMusicBar={$isMusicBar} />
       <Info>
         <TitleAndSinger
           title={markKeyword(musicInfo.title, mark)}
