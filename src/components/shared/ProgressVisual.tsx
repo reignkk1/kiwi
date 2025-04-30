@@ -1,15 +1,25 @@
 import styled from "styled-components";
 import { palette } from "../../constant";
-import { useProgressStore } from "./../../store/shared/useProgressStore";
+import { useEffect } from "react";
+import { getProgressPercent } from "../../utils";
+import useProgressVisualStore from "../../hooks/store/useProgressVisualStore";
 
-export function Progress({
+export function ProgressVisual({
   isExpand = false,
   value,
 }: {
   isExpand?: boolean;
   value?: number;
 }) {
-  const progressPercent = useProgressStore((state) => state.progressPercent);
+  const {
+    state: { currentTime, duration, progressPercent },
+    action: { setProgressPercent },
+  } = useProgressVisualStore();
+
+  useEffect(() => {
+    setProgressPercent(getProgressPercent(currentTime, duration) || 0);
+  }, [currentTime]);
+
   const percent = value ?? progressPercent;
 
   return (

@@ -28,7 +28,6 @@ export default function AudioImpl() {
 
   useEffect(() => {
     isPlay ? audio.play() : audio.pause();
-    console.log(src);
   }, [isPlay, src, audio]);
 
   useEffect(() => {

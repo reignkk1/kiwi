@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Progress } from "./Progress";
+import { ProgressVisual } from "./ProgressVisual";
 import { useRef } from "react";
 import { convertFromPercentToTime, convertTime } from "../../utils";
 import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
@@ -65,7 +65,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         onTouchEnd={pressAndUp}
       />
 
-      <Progress
+      <ProgressVisual
         isExpand={isExpandProgressBar}
         value={isExpandProgressBar ? progressInputValue : progressPercent}
       />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import Controller from "../shared/Controller";
-import { Progress } from "../shared/Progress";
+import { ProgressVisual } from "../shared/ProgressVisual";
 import { useCurrentPage } from "../../utils";
 import { TitleAndSinger } from "../shared/TitleAndSinger";
 import { useActivePageStore } from "../../store/layout";
@@ -17,7 +17,7 @@ export function Footer() {
 
   return (
     <FooterContainer>
-      {!isPlayerPage && <Progress />}
+      {!isPlayerPage && <ProgressVisual />}
       {!isPlayerPage && <Player />}
       <NavBar />
     </FooterContainer>
