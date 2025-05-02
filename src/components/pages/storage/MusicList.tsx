@@ -18,7 +18,7 @@ export default function MusicList() {
       {musicList.length ? (
         musicList.map((musicInfo) => {
           return (
-            <List>
+            <List key={musicInfo!.id}>
               <MusicCard
                 musicInfo={musicInfo!}
                 mark={currentMusic.title}
