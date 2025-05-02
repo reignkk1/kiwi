@@ -66,7 +66,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
       />
 
       <ProgressVisual
-        isExpand={isExpandProgressBar}
+        $isExpand={isExpandProgressBar}
         value={isExpandProgressBar ? progressInputValue : progressPercent}
       />
     </Container>

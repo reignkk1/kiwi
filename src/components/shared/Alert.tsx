@@ -7,13 +7,13 @@ export default function Alert() {
     useShallow((state) => [state.text, state.show])
   );
   return (
-    <Container show={show}>
+    <Container $show={show}>
       <span>🥝 {text}</span>
     </Container>
   );
 }
 
-const Container = styled.div<{ show: boolean }>`
+const Container = styled.div<{ $show: boolean }>`
   width: 300px;
   position: absolute;
   left: 50%;
@@ -22,7 +22,7 @@ const Container = styled.div<{ show: boolean }>`
   text-align: center;
   pointer-events: none;
   z-index: 99;
-  opacity: ${({ show }) => (show ? 1 : 0)};
+  opacity: ${({ $show }) => ($show ? 1 : 0)};
   transition: all 0.5s ease-in-out;
 
   span {

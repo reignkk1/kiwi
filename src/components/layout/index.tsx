@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <BackGroundFilter />
-      <Burn backGroundColor={backGroundColor} />
+      <Burn $backGroundColor={backGroundColor} />
       <Edge src={`${addBasePath("./img/phone.png")}`}>
         {isModal && <Entry />}
         <Content>
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-const Burn = styled.div<{ backGroundColor: string[] }>`
+const Burn = styled.div<{ $backGroundColor: string[] }>`
   width: 430px;
   height: 250px;
   position: absolute;
@@ -59,8 +59,8 @@ const Burn = styled.div<{ backGroundColor: string[] }>`
   background-size: 200% 200%;
   animation: gradientAnimation 100s linear infinite;
   background-position: 190% 190%;
-  background: ${({ backGroundColor }) =>
-    `linear-gradient(${backGroundColor[0]},${backGroundColor[1]},${backGroundColor[2]})`};
+  background: ${({ $backGroundColor }) =>
+    `linear-gradient(${$backGroundColor[0]},${$backGroundColor[1]},${$backGroundColor[2]})`};
   filter: blur(150px);
 
   @keyframes gradientAnimation {
@@ -148,3 +148,5 @@ const Container = styled.div`
 // 음악서랍에서 삭제
 // 음악서랍에서 위치 변경
 // 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
+
+// 리액트 에러 없애기 $ 접두사 붙여야함.

@@ -28,7 +28,7 @@ export default function PlayerHeader() {
         size="large"
         title={currentMusic.title}
         singer={currentMusic.singer}
-        isAnimation={isAnimation}
+        $isAnimation={isAnimation}
       />
       <Buttons>
         <ButtonIcon

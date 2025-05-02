@@ -5,10 +5,10 @@ import { getProgressPercent } from "../../utils";
 import useProgressVisualStore from "../../hooks/store/useProgressVisualStore";
 
 export function ProgressVisual({
-  isExpand = false,
+  $isExpand = false,
   value,
 }: {
-  isExpand?: boolean;
+  $isExpand?: boolean;
   value?: number;
 }) {
   const {
@@ -23,19 +23,19 @@ export function ProgressVisual({
   const percent = value ?? progressPercent;
 
   return (
-    <Container isExpand={isExpand}>
-      <Percent progressPercent={percent} />
+    <Container $isExpand={$isExpand}>
+      <Percent $progressPercent={percent} />
     </Container>
   );
 }
 
-const Container = styled.div<{ isExpand: boolean }>`
-  height: ${({ isExpand }) => (isExpand ? "4px" : "2px")};
+const Container = styled.div<{ $isExpand: boolean }>`
+  height: ${({ $isExpand }) => ($isExpand ? "4px" : "2px")};
   background-color: rgba(255, 255, 255, 0.1);
 `;
 
-const Percent = styled.div<{ progressPercent: number }>`
+const Percent = styled.div<{ $progressPercent: number }>`
   background-color: ${palette.signatureColor};
-  width: ${({ progressPercent }) => `${progressPercent}%`};
+  width: ${({ $progressPercent }) => `${$progressPercent}%`};
   height: 100%;
 `;

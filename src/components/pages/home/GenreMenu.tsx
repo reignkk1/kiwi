@@ -26,7 +26,7 @@ export default function GenreMenu() {
           <MenuItem
             key={id}
             id={id}
-            active={activeMenu === id}
+            $active={activeMenu === id}
             onClick={() => setActiveMenu(id)}
           >
             <span>{text}</span>
@@ -57,12 +57,12 @@ const Menu = styled.ul`
   display: flex;
 `;
 
-const MenuItem = styled.li<{ active: boolean; id: string }>`
+const MenuItem = styled.li<{ $active: boolean; id: string }>`
   margin-right: 5px;
   cursor: pointer;
 
   span {
-    color: ${({ active }) => (active ? "green" : "rgba(255,255,255,0.5)")};
+    color: ${({ $active }) => ($active ? "green" : "rgba(255,255,255,0.5)")};
   }
 
   &::before {

@@ -4,7 +4,7 @@ import { palette } from "../../constant";
 interface TitleAndSingerProps {
   title: React.ReactNode;
   singer: React.ReactNode;
-  isAnimation?: boolean;
+  $isAnimation?: boolean;
   size: "small" | "middle" | "large";
   onClick?: () => void;
   width?: string;
@@ -17,7 +17,7 @@ const sizeMap = {
 };
 
 export function TitleAndSinger({
-  isAnimation = false,
+  $isAnimation = false,
   width = "auto",
   size,
   onClick,
@@ -29,7 +29,7 @@ export function TitleAndSinger({
   const titleContent = (
     <>
       <span>{title}</span>
-      {isAnimation && (
+      {$isAnimation && (
         <span>
           &nbsp; &nbsp; &nbsp; &nbsp; {title} &nbsp; &nbsp; &nbsp; &nbsp;
         </span>
@@ -39,7 +39,7 @@ export function TitleAndSinger({
 
   return (
     <Container width={width} onClick={onClick}>
-      <Title size={titleSize} isAnimation={isAnimation}>
+      <Title size={titleSize} $isAnimation={$isAnimation}>
         {titleContent}
       </Title>
       <Singer size={singerSize}>{singer}</Singer>
@@ -53,7 +53,7 @@ const Container = styled.div<{ width?: string }>`
 `;
 const Title = styled.div<{
   size: string;
-  isAnimation: boolean;
+  $isAnimation: boolean;
 }>`
   display: inline-block;
   font-size: ${({ size }) => size};
@@ -62,8 +62,8 @@ const Title = styled.div<{
   overflow: hidden;
   white-space: nowrap;
 
-  ${({ isAnimation }) =>
-    isAnimation
+  ${({ $isAnimation }) =>
+    $isAnimation
       ? css`
           animation: marquee 15s linear infinite;
           animation-play-state: running;
