@@ -1,9 +1,9 @@
-import useMusicDrawer from "../localStorage/useMusicDrawerStorage";
 import music from "../../musicData.json";
 import { selectRandomWithinArray } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
+import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
 
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생
@@ -11,7 +11,7 @@ import { useShallow } from "zustand/react/shallow";
 // 3. 순차재생
 
 export default function useAudioPlayTypes() {
-  const { musicDrawer } = useMusicDrawer();
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
 

@@ -3,15 +3,12 @@ import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { usePlayerMenuStore } from "../../../hooks/store/usePlayerMenuStore";
-import useMusicDrawerStorage from "../../../hooks/localStorage/useMusicDrawerStorage";
 
 export default function PlayerMenu() {
   const {
-    state: { currentMusic },
-    action: { closePlayerMenu, toggleFadeAlertMessage },
+    state: { currentMusic, musicDrawer },
+    action: { closePlayerMenu, toggleFadeAlertMessage, setMusicDrawer },
   } = usePlayerMenuStore();
-
-  const { musicDrawer, setMusicDrawer } = useMusicDrawerStorage();
 
   useEffect(() => {
     return () => closePlayerMenu();
@@ -24,9 +21,7 @@ export default function PlayerMenu() {
       return toggleFadeAlertMessage("이미 담긴 곡 입니다.");
     } else {
       toggleFadeAlertMessage("1곡을 음악서랍에 담았습니다.");
-      setMusicDrawer({
-        musicDrawer: [...musicDrawer, currentMusic.id],
-      });
+      setMusicDrawer([...musicDrawer, currentMusic.id]);
     }
   };
 

@@ -1,27 +1,25 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import useUserNameStorage from "../../hooks/localStorage/useUserNameStorage";
 import { useEntryStore } from "../../hooks/store/useEntryStore";
 
 export default function Entry() {
   const navigate = useNavigate();
 
   const {
-    state: { userName },
     action: { hiddenModal, setUserName },
   } = useEntryStore();
 
-  const { setUserName: setUserNameStorage } = useUserNameStorage();
+  const [inputValue, setInputValue] = useState<string>();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setUserName(e.currentTarget.value);
+    setInputValue(e.currentTarget.value);
 
   const onClick = () => {
-    if (!userName) {
+    if (!inputValue) {
       return alert("이름을 입력해주세요.");
     }
-    setUserNameStorage({ name: userName });
+    setUserName(inputValue);
     hiddenModal();
     navigate("/");
   };
@@ -40,7 +38,7 @@ export default function Entry() {
             onChange={onChange}
             type="text"
             maxLength={4}
-            value={userName}
+            value={inputValue}
           />
         </InputWrap>
         <span>님, 안녕하세요</span>

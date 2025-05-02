@@ -8,7 +8,6 @@ import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
 import { is } from "../../utils";
 import { useControllerStore } from "../../hooks/store/useControllerStore";
-import useMusicDrawerStorage from "../../hooks/localStorage/useMusicDrawerStorage";
 
 interface ControllerProps {
   width: number;
@@ -17,11 +16,10 @@ interface ControllerProps {
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
-    state: { isPlay },
+    state: { isPlay, musicDrawer },
     action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
   } = useControllerStore();
 
-  const { musicDrawer } = useMusicDrawerStorage();
   const isMusicDrawer = musicDrawer.length > 0;
 
   const handleMusicDrawerCheck = (direction: "next" | "prev") => {

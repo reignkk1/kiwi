@@ -2,12 +2,11 @@ import music from "../../../musicData.json";
 import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
 import { useCurrentMusicStore } from "../../../store/shared";
-import useMusicDrawerStorage from "../../../hooks/localStorage/useMusicDrawerStorage";
+import { useMusicDrawerStore } from "../../../store/storage/useMusicDrawerStore";
 
 export default function MusicList() {
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
-
-  const { musicDrawer } = useMusicDrawerStorage();
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
 
   const musicList = musicDrawer.map((id) =>
     music.data.find((music) => music.id === id)

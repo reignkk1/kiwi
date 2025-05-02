@@ -2,22 +2,6 @@ import { is } from "../utils";
 
 type Storage = Record<string, string | number | (string | number | object)[]>;
 
-type MusicDrawerStorage = {
-  musicDrawer: Array<number>;
-};
-
-type UserNameStorage = {
-  name: string;
-};
-
-export const musicDrawerStorage = createLocalStorage<MusicDrawerStorage>({
-  musicDrawer: [],
-});
-
-export const userNameStroage = createLocalStorage<UserNameStorage>({
-  name: "",
-});
-
 function createLocalStorage<T extends Storage>(object: T) {
   const keys = Object.keys(object);
   const values = Object.values(object);
