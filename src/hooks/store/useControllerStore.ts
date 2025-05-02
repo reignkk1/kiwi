@@ -1,6 +1,10 @@
 import { useShallow } from "zustand/react/shallow";
 import { useAudioStore } from "../../store/audio";
-import { useAlertStore, usePlayDirectionStore } from "../../store/shared";
+import {
+  useAlertStore,
+  useCurrentMusicStore,
+  usePlayDirectionStore,
+} from "../../store/shared";
 import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
 
 export function useControllerStore() {
@@ -18,8 +22,10 @@ export function useControllerStore() {
 
   const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
 
+  const currnetMusic = useCurrentMusicStore((state) => state.currentMusic);
+
   return {
-    state: { isPlay, isShuffle, musicDrawer },
+    state: { isPlay, isShuffle, musicDrawer, currnetMusic },
     action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
   };
 }
