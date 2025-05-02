@@ -1,25 +1,20 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import { userNameStroage } from "../../lib/localStorage";
+import useUserNameStorage from "../../hooks/localStorage/useUserNameStorage";
 
 export default function Header() {
   const { pathname } = useLocation();
+  const { userName } = useUserNameStorage();
 
-  if (pathname === "/player") {
-    return null;
-  }
+  if (pathname === "/player") return null;
 
-  let title = "";
+  const pathNameTitleMap: Record<string, string> = {
+    "/": userName + "님 어서오세요!",
+    "/search": "나에게 맞춘 탐색",
+    "/storage": "음악서랍",
+  };
 
-  const { get: getUserNameStorage } = userNameStroage;
-
-  if (pathname === "/") {
-    title = getUserNameStorage("name") + "님 어서오세요!";
-  } else if (pathname === "/search") {
-    title = "나에게 맞춘 탐색";
-  } else if (pathname === "/storage") {
-    title = "음악서랍";
-  }
+  const title = pathNameTitleMap[pathname];
 
   return (
     <Container>

@@ -1,34 +1,31 @@
 import styled from "styled-components";
-import { usePlayerMenuStore } from "./hooks";
 import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { musicDrawerStorage } from "../../../lib/localStorage";
+import { usePlayerMenuStore } from "../../../hooks/store/usePlayerMenuStore";
+import useMusicDrawerStorage from "../../../hooks/localStorage/useMusicDrawerStorage";
 
 export default function PlayerMenu() {
   const {
-    state: { musicInfo },
+    state: { currentMusic },
     action: { closePlayerMenu, toggleFadeAlertMessage },
   } = usePlayerMenuStore();
 
-  const { set: setMusicDrawerStorage, get: getMusicDrawerStorage } =
-    musicDrawerStorage;
+  const { musicDrawer, setMusicDrawer } = useMusicDrawerStorage();
 
   useEffect(() => {
     return () => closePlayerMenu();
-  }, []);
+  }, [closePlayerMenu]);
 
   const onClick = () => {
-    const isIncluded = getMusicDrawerStorage("musicDrawer").some(
-      (id: number) => id === musicInfo.id
-    );
+    const isIncluded = musicDrawer.some((id: number) => id === currentMusic.id);
 
     if (isIncluded) {
       return toggleFadeAlertMessage("이미 담긴 곡 입니다.");
     } else {
       toggleFadeAlertMessage("1곡을 음악서랍에 담았습니다.");
-      setMusicDrawerStorage({
-        musicDrawer: [...getMusicDrawerStorage("musicDrawer"), musicInfo.id],
+      setMusicDrawer({
+        musicDrawer: [...musicDrawer, currentMusic.id],
       });
     }
   };
@@ -36,10 +33,10 @@ export default function PlayerMenu() {
   return (
     <Container>
       <MusicInfo>
-        <AlbumImg type="smallLarge" musicInfo={musicInfo} />
+        <AlbumImg type="smallLarge" musicInfo={currentMusic} />
         <TitleAndSinger
-          title={musicInfo.title}
-          singer={musicInfo.singer}
+          title={currentMusic.title}
+          singer={currentMusic.singer}
           size="middle"
         />
       </MusicInfo>

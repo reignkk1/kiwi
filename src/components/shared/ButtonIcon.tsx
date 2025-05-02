@@ -6,7 +6,6 @@ import { palette } from "../../constant";
 interface ButtonIconProps {
   icon: IconProp;
   size?: number;
-  color?: string;
   onClick?: () => void;
   href?: string;
   active?: boolean;
@@ -17,7 +16,7 @@ export function ButtonIcon({
   size = 18,
   onClick,
   href,
-  active,
+  active = false,
 }: ButtonIconProps) {
   if (href) {
     return (

@@ -1,32 +1,28 @@
 import music from "../../../musicData.json";
 import MusicCard from "../../shared/MusicCard";
-import { useMusicListStore } from "./hooks";
 import styled from "styled-components";
-import { musicDrawerStorage } from "../../../lib/localStorage";
+import { useCurrentMusicStore } from "../../../store/shared";
+import useMusicDrawerStorage from "../../../hooks/localStorage/useMusicDrawerStorage";
 
 export default function MusicList() {
-  const {
-    state: {
-      musicInfo: { title },
-    },
-  } = useMusicListStore();
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
 
-  const { get: getMusicDrawerStorage } = musicDrawerStorage;
+  const { musicDrawer } = useMusicDrawerStorage();
 
-  const musicList = (
-    getMusicDrawerStorage("musicDrawer") as Array<string | number>
-  ).map((id) => music.data.find((music) => music.id === id));
+  const musicList = musicDrawer.map((id) =>
+    music.data.find((music) => music.id === id)
+  );
 
   return (
     <Container>
       {musicList.length ? (
         musicList.map((musicInfo) => {
           return (
-            <List>
+            <List key={musicInfo!.id}>
               <MusicCard
                 musicInfo={musicInfo!}
-                mark={title}
-                isMusicBar={musicInfo!.title === title}
+                mark={currentMusic.title}
+                $isMusicBar={musicInfo!.title === currentMusic.title}
               />
             </List>
           );

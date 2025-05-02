@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Entry from "./Entry";
 import Header from "./Header";
 import { Footer } from "./Footer";
-import { useLayoutStore } from "./hooks";
 import Alert from "../shared/Alert";
-import { userNameStroage } from "../../lib/localStorage";
 import { addBasePath } from "../../utils";
+import { useLayoutStore } from "../../hooks/store/useLayoutStore";
+import useUserNameStorage from "../../hooks/localStorage/useUserNameStorage";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
@@ -16,27 +16,27 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
 
-  const { get: getUserNameStorage } = userNameStroage;
+  const { userName } = useUserNameStorage();
+
+  const setScreenSize = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  };
 
   useEffect(() => {
-    function setScreenSize() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    }
     setScreenSize();
     window.addEventListener("resize", setScreenSize);
+    userName ? hiddenModal() : showModal();
 
-    if (getUserNameStorage("name")) {
-      hiddenModal();
-    } else {
-      showModal();
-    }
-  }, []);
+    return () => {
+      window.removeEventListener("resize", setScreenSize);
+    };
+  }, [hiddenModal, showModal, userName]);
 
   return (
     <Container>
       <BackGroundFilter />
-      <Burn backGroundColor={backGroundColor} />
+      <Burn $backGroundColor={backGroundColor} />
       <Edge src={`${addBasePath("./img/phone.png")}`}>
         {isModal && <Entry />}
         <Content>
@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   );
 }
 
-const Burn = styled.div<{ backGroundColor: string[] }>`
+const Burn = styled.div<{ $backGroundColor: string[] }>`
   width: 430px;
   height: 250px;
   position: absolute;
@@ -59,8 +59,8 @@ const Burn = styled.div<{ backGroundColor: string[] }>`
   background-size: 200% 200%;
   animation: gradientAnimation 100s linear infinite;
   background-position: 190% 190%;
-  background: ${({ backGroundColor }) =>
-    `linear-gradient(${backGroundColor[0]},${backGroundColor[1]},${backGroundColor[2]})`};
+  background: ${({ $backGroundColor }) =>
+    `linear-gradient(${$backGroundColor[0]},${$backGroundColor[1]},${$backGroundColor[2]})`};
   filter: blur(150px);
 
   @keyframes gradientAnimation {
@@ -148,3 +148,5 @@ const Container = styled.div`
 // 음악서랍에서 삭제
 // 음악서랍에서 위치 변경
 // 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
+
+// 리액트 에러 없애기 $ 접두사 붙여야함.

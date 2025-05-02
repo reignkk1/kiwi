@@ -1,20 +1,19 @@
 import styled from "styled-components";
-import { useAlertStore } from "./hooks";
-import { addBasePath } from "../../utils";
+import { useAlertStore } from "./../../store/shared/useAlertStore";
+import { useShallow } from "zustand/react/shallow";
 
 export default function Alert() {
-  const {
-    state: { alertMessageText, show },
-  } = useAlertStore();
-
+  const [text, show] = useAlertStore(
+    useShallow((state) => [state.text, state.show])
+  );
   return (
-    <Container show={show}>
-      <span>🥝 {alertMessageText}</span>
+    <Container $show={show}>
+      <span>🥝 {text}</span>
     </Container>
   );
 }
 
-const Container = styled.div<{ show: boolean }>`
+const Container = styled.div<{ $show: boolean }>`
   width: 300px;
   position: absolute;
   left: 50%;
@@ -23,7 +22,7 @@ const Container = styled.div<{ show: boolean }>`
   text-align: center;
   pointer-events: none;
   z-index: 99;
-  opacity: ${({ show }) => (show ? 1 : 0)};
+  opacity: ${({ $show }) => ($show ? 1 : 0)};
   transition: all 0.5s ease-in-out;
 
   span {

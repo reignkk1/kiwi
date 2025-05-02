@@ -4,77 +4,62 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import Controller from "../shared/Controller";
-import { Progress } from "../shared/Progress";
+import { ProgressVisual } from "../shared/ProgressVisual";
 import { useCurrentPage } from "../../utils";
-import { useNavBarStore, usePlayerStore } from "./hooks";
 import { TitleAndSinger } from "../shared/TitleAndSinger";
+import { useActivePageStore } from "../../store/layout";
+import { useShallow } from "zustand/react/shallow";
+import { useCurrentMusicStore } from "../../store/shared";
 
 export function Footer() {
   const currentPage = useCurrentPage();
-  const isPlayerPage = currentPage == "player";
+  const isPlayerPage = currentPage === "player";
 
   return (
-    <Footer.Container>
-      {!isPlayerPage && <Progress />}
+    <FooterContainer>
+      {!isPlayerPage && <ProgressVisual />}
       {!isPlayerPage && <Player />}
       <NavBar />
-    </Footer.Container>
+    </FooterContainer>
   );
 }
 
 function Player() {
-  const {
-    state: {
-      musicInfo: { title, singer },
-    },
-  } = usePlayerStore();
+  const { title, singer } = useCurrentMusicStore((state) => state.currentMusic);
+
+  const info = (
+    <TitleAndSinger title={title} singer={singer} size="small" width="200px" />
+  );
 
   return (
-    <Player.Container>
-      {title ? (
-        <Link to="/player">
-          <TitleAndSinger
-            title={title}
-            singer={singer}
-            size="small"
-            width="200px"
-          />
-        </Link>
-      ) : (
-        <TitleAndSinger
-          title={title}
-          singer={singer}
-          size="small"
-          width="200px"
-        />
-      )}
+    <PlayerContainer>
+      {title ? <Link to="/player">{info}</Link> : info}
       <Controller width={130} />
-    </Player.Container>
+    </PlayerContainer>
   );
 }
 
 function NavBar() {
-  const {
-    state: { activeMenu },
-    action: { setActiveMenu },
-  } = useNavBarStore();
+  const [activePage, setActivePage] = useActivePageStore(
+    useShallow((state) => [state.activePage, state.setActivePage])
+  );
 
   const currentPage = useCurrentPage();
 
   useEffect(() => {
-    setActiveMenu(currentPage);
-  }, [currentPage]);
+    setActivePage(currentPage);
+  }, [currentPage, setActivePage]);
 
   return (
-    <NavBar.Container>
-      <ButtonIcon icon={faHome} href="/" active={activeMenu.home} />
-      <ButtonIcon icon={faSearch} href="/search" active={activeMenu.search} />
-      <ButtonIcon icon={faBars} href="/storage" active={activeMenu.storage} />
-    </NavBar.Container>
+    <NavBarContainer>
+      <ButtonIcon icon={faHome} href="/" active={activePage.home} />
+      <ButtonIcon icon={faSearch} href="/search" active={activePage.search} />
+      <ButtonIcon icon={faBars} href="/storage" active={activePage.storage} />
+    </NavBarContainer>
   );
 }
 
-Footer.Container = styled.footer`
+const FooterContainer = styled.footer`
   background-color: black;
   position: absolute;
   width: 87%;
@@ -93,7 +78,7 @@ Footer.Container = styled.footer`
   }
 `;
 
-Player.Container = styled.div`
+const PlayerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,7 +87,7 @@ Player.Container = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
-NavBar.Container = styled.nav`
+const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;

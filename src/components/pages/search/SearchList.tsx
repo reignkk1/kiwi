@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { useSearchListStore } from "./hooks";
 import MusicCard from "../../shared/MusicCard";
+import { useSearchStore } from "../../../store/search";
+import { useShallow } from "zustand/react/shallow";
 
 export default function SearchList() {
-  const {
-    state: { searchKeyWord, searchResultMusic },
-  } = useSearchListStore();
+  const [searchKeyWord, searchResultMusic] = useSearchStore(
+    useShallow((state) => [state.searchKeyWord, state.searchResultMusic])
+  );
 
   return (
     <ul>
       {searchResultMusic?.map((musicInfo) => (
-        <Item>
+        <Item key={musicInfo.id}>
           <MusicCard musicInfo={musicInfo} mark={searchKeyWord} />
           <ItemButtons>
             <ButtonIcon icon={faEllipsisV} />

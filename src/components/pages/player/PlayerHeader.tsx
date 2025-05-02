@@ -4,31 +4,31 @@ import { faChevronDown, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { usePlayerHeaderStore } from "./hooks";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
+import { usePlayerHeaderStore } from "../../../hooks/store/usePlayerHeaderStore";
 
 export default function PlayerHeader() {
   const {
-    state: { musicInfo, isExpandLyrics },
+    state: { currentMusic, isExpandLyrics },
     action: { openPlayerMenu, closePlayerMenu },
   } = usePlayerHeaderStore();
 
   const navigate = useNavigate();
-  const isAnimation = (musicInfo.title?.length || 0) > 20;
+  const isAnimation = (currentMusic.title?.length || 0) > 20;
 
   useEffect(() => {
     closePlayerMenu();
-  }, []);
+  }, [closePlayerMenu]);
 
   return (
     <Container>
-      {isExpandLyrics && <AlbumImg type="small" musicInfo={musicInfo} />}
+      {isExpandLyrics && <AlbumImg type="small" musicInfo={currentMusic} />}
       <TitleAndSinger
         width={isExpandLyrics ? "174px" : "245px"}
         size="large"
-        title={musicInfo.title}
-        singer={musicInfo.singer}
-        isAnimation={isAnimation}
+        title={currentMusic.title}
+        singer={currentMusic.singer}
+        $isAnimation={isAnimation}
       />
       <Buttons>
         <ButtonIcon

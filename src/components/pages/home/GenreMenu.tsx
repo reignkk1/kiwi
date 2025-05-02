@@ -1,13 +1,17 @@
 import styled from "styled-components";
-import { useGenreMenuStore } from "./hooks";
+import { useShallow } from "zustand/react/shallow";
+import { useActiveGenreMenuStore } from "../../../store/home";
+import type { GenreMenuType } from "../../../types";
 
 export default function GenreMenu() {
-  const {
-    state: { activeGenreMenu },
-    action: { setActiveGenreMenu },
-  } = useGenreMenuStore();
+  const [activeMenu, setActiveMenu] = useActiveGenreMenuStore(
+    useShallow((state) => [state.activeMenu, state.setActiveMenu])
+  );
 
-  const menu = [
+  const menu: Array<{
+    id: GenreMenuType;
+    text: string;
+  }> = [
     { id: "all", text: "전체" },
     { id: "ballad", text: "발라드" },
     { id: "indie", text: "인디음악" },
@@ -20,9 +24,10 @@ export default function GenreMenu() {
       <Menu>
         {menu.map(({ id, text }) => (
           <MenuItem
+            key={id}
             id={id}
-            active={activeGenreMenu === id}
-            onClick={() => setActiveGenreMenu(id)}
+            $active={activeMenu === id}
+            onClick={() => setActiveMenu(id)}
           >
             <span>{text}</span>
           </MenuItem>
@@ -52,12 +57,12 @@ const Menu = styled.ul`
   display: flex;
 `;
 
-const MenuItem = styled.li<{ active: boolean; id: string }>`
+const MenuItem = styled.li<{ $active: boolean; id: string }>`
   margin-right: 5px;
   cursor: pointer;
 
   span {
-    color: ${({ active }) => (active ? "green" : "rgba(255,255,255,0.5)")};
+    color: ${({ $active }) => ($active ? "green" : "rgba(255,255,255,0.5)")};
   }
 
   &::before {

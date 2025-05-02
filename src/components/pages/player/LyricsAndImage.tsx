@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
-import { useLyricsAndImageStore } from "./hooks";
+import { useLyricsAndImageStore } from "../../../hooks/store/useLyricsAndImageStore";
 
 export default function LyricsAndImage() {
   const {
     state: {
-      musicInfo,
+      currentMusic,
       currentTime,
       isExpandLyrics,
       isExpandProgressBar,
@@ -21,7 +21,6 @@ export default function LyricsAndImage() {
   } = useLyricsAndImageStore();
 
   const activeLyricsText = useRef<HTMLDivElement>(null);
-
   const cleanedCurrentTime = Math.floor(currentTime);
 
   useEffect(() => {
@@ -35,29 +34,30 @@ export default function LyricsAndImage() {
       setIsExpandLyrics(false);
       unclickedLyrics();
     };
-  }, []);
+  }, [setIsExpandLyrics, unclickedLyrics]);
 
   return (
     <Container
-      isExpandLyrics={isExpandLyrics}
-      isLyricsClicked={isLyricsClicked}
+      $isExpandLyrics={isExpandLyrics}
+      $isLyricsClicked={isLyricsClicked}
     >
-      <AlbumImg type="large" musicInfo={musicInfo} />
+      <AlbumImg type="large" musicInfo={currentMusic} />
       <LyricsContainer
-        isExpandLyrics={isExpandLyrics}
+        $isExpandLyrics={isExpandLyrics}
         onClick={() => {
           clickLyrics();
           toggleExpandLyrics();
         }}
       >
-        {musicInfo.lyrics?.map(({ text, startTime, endTime }) => {
+        {currentMusic.lyrics?.map(({ text, startTime, endTime }) => {
           const isActive =
             startTime <= cleanedCurrentTime && cleanedCurrentTime <= endTime;
           return (
             <LyricsText
               ref={isActive ? activeLyricsText : null}
-              active={isActive}
-              isExpandProgressBar={isExpandProgressBar}
+              $active={isActive}
+              $isExpandProgressBar={isExpandProgressBar}
+              key={startTime}
             >
               <span>{text}</span>
             </LyricsText>
@@ -69,18 +69,18 @@ export default function LyricsAndImage() {
 }
 
 const Container = styled.div<{
-  isExpandLyrics: boolean;
-  isLyricsClicked: boolean;
+  $isExpandLyrics: boolean;
+  $isLyricsClicked: boolean;
 }>`
   width: 100%;
   height: 450px;
   img {
-    animation: ${({ isExpandLyrics, isLyricsClicked }) =>
-        isExpandLyrics || !isLyricsClicked ? "hide" : "show"}
+    animation: ${({ $isExpandLyrics, $isLyricsClicked }) =>
+        $isExpandLyrics || !$isLyricsClicked ? "hide" : "show"}
       0.3s forwards;
 
-    animation-play-state: ${({ isLyricsClicked }) =>
-      isLyricsClicked ? "running" : "paused"};
+    animation-play-state: ${({ $isLyricsClicked }) =>
+      $isLyricsClicked ? "running" : "paused"};
   }
 
   @keyframes hide {
@@ -106,16 +106,17 @@ const Container = styled.div<{
   }
 `;
 
-const LyricsContainer = styled.div<{ isExpandLyrics: boolean }>`
-  height: ${({ isExpandLyrics }) => (isExpandLyrics ? "100%" : "100px")};
-  text-align: ${({ isExpandLyrics }) => (isExpandLyrics ? "start" : "center")};
-  overflow-y: ${({ isExpandLyrics }) => (isExpandLyrics ? "auto" : "hidden")};
-  font-size: ${({ isExpandLyrics }) => (isExpandLyrics ? "16px" : "15px")};
-  line-height: ${({ isExpandLyrics }) => (isExpandLyrics ? "2" : "1.7")};
-  padding: ${({ isExpandLyrics }) =>
-    isExpandLyrics ? "0px 0px 30px 0px" : ""};
-  margin: ${({ isExpandLyrics }) =>
-    isExpandLyrics ? "0px 0px 20px 0px" : "18px 0px"};
+const LyricsContainer = styled.div<{ $isExpandLyrics: boolean }>`
+  height: ${({ $isExpandLyrics }) => ($isExpandLyrics ? "100%" : "100px")};
+  text-align: ${({ $isExpandLyrics }) =>
+    $isExpandLyrics ? "start" : "center"};
+  overflow-y: ${({ $isExpandLyrics }) => ($isExpandLyrics ? "auto" : "hidden")};
+  font-size: ${({ $isExpandLyrics }) => ($isExpandLyrics ? "16px" : "15px")};
+  line-height: ${({ $isExpandLyrics }) => ($isExpandLyrics ? "2" : "1.7")};
+  padding: ${({ $isExpandLyrics }) =>
+    $isExpandLyrics ? "0px 0px 30px 0px" : ""};
+  margin: ${({ $isExpandLyrics }) =>
+    $isExpandLyrics ? "0px 0px 20px 0px" : "18px 0px"};
   cursor: pointer;
 
   &::-webkit-scrollbar {
@@ -126,13 +127,13 @@ const LyricsContainer = styled.div<{ isExpandLyrics: boolean }>`
 `;
 
 const LyricsText = styled.div<{
-  active: boolean;
-  isExpandProgressBar: boolean;
+  $active: boolean;
+  $isExpandProgressBar: boolean;
 }>`
-  color: ${({ active, isExpandProgressBar }) =>
-    isExpandProgressBar
+  color: ${({ $active, $isExpandProgressBar }) =>
+    $isExpandProgressBar
       ? "rgba(255, 255, 255, 0.2)"
-      : active
+      : $active
       ? "white"
       : " rgba(255, 255, 255, 0.5)"};
 `;

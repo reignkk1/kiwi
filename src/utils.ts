@@ -13,7 +13,9 @@ export function useCurrentPage() {
     "/player": "player",
   };
 
-  return pageMap[pathname] || "unknown";
+  return (
+    (pageMap[pathname] as "home" | "search" | "storage" | "player") || "unknown"
+  );
 }
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
@@ -58,7 +60,7 @@ export function selectRandomWithinArray(array: Array<number>) {
 }
 
 // 기본 베이스 주소를 더하다.
-export function addBasePath(path?: string) {
+export function addBasePath(path: string) {
   const pathSplit = path?.split("/");
   pathSplit?.splice(0, 1, BASE_URL_SLICE);
 
