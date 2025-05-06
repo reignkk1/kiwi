@@ -42,6 +42,9 @@ export default function MusicDrawerList() {
               musicInfo={musicInfo!}
               mark={currentMusic.title}
               $isMusicBar={musicInfo!.title === currentMusic.title}
+              $isAnimation={
+                isActive(musicInfo!.id) && (musicInfo?.title.length || 0) > 20
+              }
             />
           </List>
         ))
