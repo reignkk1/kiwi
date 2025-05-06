@@ -18,7 +18,7 @@ export function ProgressVisual({
 
   useEffect(() => {
     setProgressPercent(getProgressPercent(currentTime, duration) || 0);
-  }, [currentTime]);
+  }, [currentTime, duration, setProgressPercent]);
 
   const percent = value ?? progressPercent;
 

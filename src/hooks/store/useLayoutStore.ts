@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/react/shallow";
-import { useEntryModalStore } from "../../store/layout";
+import { useEntryModalStore, useUserNameStore } from "../../store/layout";
 import { useCurrentMusicStore } from "../../store/shared";
 
 export function useLayoutStore() {
@@ -9,8 +9,10 @@ export function useLayoutStore() {
   const [isModal, hiddenModal, showModal] = useEntryModalStore(
     useShallow((state) => [state.isModal, state.hiddenModal, state.showModal])
   );
+
+  const userName = useUserNameStore((state) => state.userName);
   return {
-    state: { isModal, musicBackGroundColor },
+    state: { isModal, musicBackGroundColor, userName },
     action: { hiddenModal, showModal },
   };
 }

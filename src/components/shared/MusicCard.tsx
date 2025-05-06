@@ -9,12 +9,14 @@ interface MusicCardProps {
   musicInfo: MusicType;
   mark?: string;
   $isMusicBar?: boolean;
+  $isAnimation?: boolean;
 }
 
 export default function MusicCard({
   musicInfo,
   mark = "",
   $isMusicBar = false,
+  $isAnimation = false,
 }: MusicCardProps) {
   const {
     action: { setIsPlay, setCurrentMusic },
@@ -33,6 +35,7 @@ export default function MusicCard({
             setCurrentMusic(musicInfo);
             setIsPlay(true);
           }}
+          $isAnimation={$isAnimation}
         />
       </Info>
     </Container>

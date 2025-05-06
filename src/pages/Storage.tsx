@@ -1,9 +1,11 @@
-import MusicList from "../components/pages/storage/MusicList";
+import MusicDrawerList from "../components/pages/storage/MusicDrawerList";
+import TotalCount from "../components/pages/storage/TotalCount";
 
 export default function Storage() {
   return (
     <div>
-      <MusicList />
+      <TotalCount />
+      <MusicDrawerList />
     </div>
   );
 }

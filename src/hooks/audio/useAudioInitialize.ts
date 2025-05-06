@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import music from "../../musicData.json";
-import useMusicDrawer from "../localStorage/useMusicDrawerStorage";
 import { useCurrentMusicStore } from "../../store/shared";
+import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
 
 // 오디오 초기음악 설정 hook
 
 export default function useAudioInitialize() {
-  const { musicDrawer } = useMusicDrawer();
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
 
   const setCurrentMusic = useCurrentMusicStore(
     (state) => state.setCurrentMusic

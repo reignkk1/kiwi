@@ -6,17 +6,14 @@ import { Footer } from "./Footer";
 import Alert from "../shared/Alert";
 import { addBasePath } from "../../utils";
 import { useLayoutStore } from "../../hooks/store/useLayoutStore";
-import useUserNameStorage from "../../hooks/localStorage/useUserNameStorage";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
-    state: { isModal, musicBackGroundColor },
+    state: { isModal, musicBackGroundColor, userName },
     action: { hiddenModal, showModal },
   } = useLayoutStore();
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
-
-  const { userName } = useUserNameStorage();
 
   const setScreenSize = () => {
     let vh = window.innerHeight * 0.01;
@@ -148,5 +145,3 @@ const Container = styled.div`
 // 음악서랍에서 삭제
 // 음악서랍에서 위치 변경
 // 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
-
-// 리액트 에러 없애기 $ 접두사 붙여야함.

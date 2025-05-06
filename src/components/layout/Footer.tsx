@@ -10,15 +10,28 @@ import { TitleAndSinger } from "../shared/TitleAndSinger";
 import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
+import { useSelectedMusicIdsStore } from "../../store/storage/useSelectedMusicIdsStore";
+import SelectMenu from "../pages/storage/SelectMenu";
 
 export function Footer() {
   const currentPage = useCurrentPage();
   const isPlayerPage = currentPage === "player";
 
+  const selectedMusicIds = useSelectedMusicIdsStore(
+    (state) => state.selectedMusicIds
+  );
+
+  const isSelected = selectedMusicIds.length > 0;
+
   return (
     <FooterContainer>
-      {!isPlayerPage && <ProgressVisual />}
-      {!isPlayerPage && <Player />}
+      {!isPlayerPage && (
+        <MiniPlayer $isSelected={isSelected}>
+          <ProgressVisual />
+          <Player />
+        </MiniPlayer>
+      )}
+      {isSelected && <SelectMenu />}
       <NavBar />
     </FooterContainer>
   );
@@ -60,12 +73,10 @@ function NavBar() {
 }
 
 const FooterContainer = styled.footer`
-  background-color: black;
-  position: absolute;
+  position: relative;
   width: 87%;
   left: 6.375%;
   bottom: 4%;
-  border-radius: 0px 0px 36px 36px;
   svg {
     cursor: pointer;
     font-size: 22px;
@@ -91,6 +102,44 @@ const NavBarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 49%;
+  height: 50px;
   padding: 12px 35px;
+  background-color: black;
+  border-radius: 0px 0px 36px 36px;
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  bottom: 0;
+`;
+
+const MiniPlayer = styled.div<{ $isSelected: boolean }>`
+  background-color: black;
+  animation: ${({ $isSelected }) => ($isSelected ? "fade-out" : "fade-in")} 0.4s
+    forwards;
+  position: absolute;
+  z-index: 1;
+  bottom: 50px;
+  width: 100%;
+
+  @keyframes fade-out {
+    0% {
+    }
+
+    100% {
+      display: none;
+      transform: translate(0, 56px);
+      border-radius: 0px 0px 36px 36px;
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      border-radius: 0px 0px 36px 36px;
+      transform: translate(0, 50px);
+    }
+
+    100% {
+      transform: translate(0, 0);
+    }
+  }
 `;

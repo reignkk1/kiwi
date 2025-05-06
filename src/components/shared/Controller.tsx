@@ -8,7 +8,6 @@ import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
 import { is } from "../../utils";
 import { useControllerStore } from "../../hooks/store/useControllerStore";
-import useMusicDrawerStorage from "../../hooks/localStorage/useMusicDrawerStorage";
 
 interface ControllerProps {
   width: number;
@@ -17,11 +16,10 @@ interface ControllerProps {
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
-    state: { isPlay },
+    state: { isPlay, musicDrawer, currnetMusic },
     action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
   } = useControllerStore();
 
-  const { musicDrawer } = useMusicDrawerStorage();
   const isMusicDrawer = musicDrawer.length > 0;
 
   const handleMusicDrawerCheck = (direction: "next" | "prev") => {
@@ -43,7 +41,13 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
       />
       <ButtonIcon
         icon={isPlay ? faPause : faPlay}
-        onClick={toggleIsPlay}
+        onClick={() => {
+          // 만약 현재 곡이 지정되어 있지 않고 비어있을 경우
+          // 플레이 버튼은 작동하지 않음.
+          if (Object.keys(currnetMusic).length) {
+            toggleIsPlay();
+          }
+        }}
         size={getSize(1)}
       />
       <ButtonIcon

@@ -27,7 +27,7 @@ export default function AudioImpl() {
   }, [playDirection, handlePlayDirection, setPlayDirection]);
 
   useEffect(() => {
-    isPlay ? audio.play() : audio.pause();
+    isPlay ? audio.play().catch(() => audio.play()) : audio.pause();
   }, [isPlay, src, audio]);
 
   useEffect(() => {
