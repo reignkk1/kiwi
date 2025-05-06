@@ -13,8 +13,6 @@ import { useCurrentMusicStore } from "../../store/shared";
 import { useSelectedMusicIdsStore } from "../../store/storage/useSelectedMusicIdsStore";
 import SelectMenu from "../pages/storage/SelectMenu";
 
-// useIsActivePlayerStore 필요없을듯
-
 export function Footer() {
   const currentPage = useCurrentPage();
   const isPlayerPage = currentPage === "player";
