@@ -1,20 +1,17 @@
-import {
-  useMusicDrawerStore,
-  useSelectedMusicIdsStore,
-} from "../../store/storage";
+import { useInformModalStore } from "../../store/layout/useInfoModalStore";
+import { useSelectedMusicIdsStore } from "../../store/storage";
 import { useShallow } from "zustand/react/shallow";
 
 export default function useSelectMenuStore() {
-  const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
+  const [selectedMusicIds] = useSelectedMusicIdsStore(
     useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
   );
 
-  const [musicDrawer, setMusicDrawer] = useMusicDrawerStore(
-    useShallow((state) => [state.musicDrawer, state.setMusicDrawer])
+  const setIsShowInformModal = useInformModalStore(
+    (state) => state.setIsShowInformModal
   );
-
   return {
-    state: { musicDrawer, selectedMusicIds },
-    action: { setMusicDrawer, setSelectedMusicIds },
+    state: { selectedMusicIds },
+    action: { setIsShowInformModal },
   };
 }

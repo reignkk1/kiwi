@@ -2,12 +2,13 @@ import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useEntryStore } from "../../hooks/store/useEntryStore";
+import { ModalContainer } from "./ModalContainer";
 
 export default function Entry() {
   const navigate = useNavigate();
 
   const {
-    action: { hiddenModal, setUserName },
+    action: { hiddenEntryModal, setUserName },
   } = useEntryStore();
 
   const [inputValue, setInputValue] = useState<string>();
@@ -20,7 +21,7 @@ export default function Entry() {
       return alert("이름을 입력해주세요.");
     }
     setUserName(inputValue);
-    hiddenModal();
+    hiddenEntryModal();
     navigate("/");
   };
 
@@ -48,20 +49,14 @@ export default function Entry() {
   );
 }
 
-const Container = styled.div`
+const Container = styled(ModalContainer)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   color: white;
-  width: 89%;
-  height: 93%;
   background-color: black;
-  position: absolute;
-  left: 5%;
-  top: 3%;
-  z-index: 99;
-  border-radius: 30px;
+
   button {
     color: white;
     background-color: rgba(255, 255, 255, 0.1);

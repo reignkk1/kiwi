@@ -1,7 +1,9 @@
 import { useEntryModalStore, useUserNameStore } from "../../store/layout";
 
 export function useEntryStore() {
-  const hiddenModal = useEntryModalStore((state) => state.hiddenModal);
+  const hiddenEntryModal = useEntryModalStore(
+    (state) => state.hiddenEntryModal
+  );
   const setUserName = useUserNameStore((state) => state.setUserName);
-  return { action: { hiddenModal, setUserName } };
+  return { action: { hiddenEntryModal, setUserName } };
 }

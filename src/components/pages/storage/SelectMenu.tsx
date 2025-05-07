@@ -6,16 +6,13 @@ import useSelectMenuStore from "../../../hooks/store/useSelectMenuStore";
 
 export default function SelectMenu() {
   const {
-    state: { selectedMusicIds, musicDrawer },
-    action: { setMusicDrawer, setSelectedMusicIds },
+    state: { selectedMusicIds },
+    action: { setIsShowInformModal },
   } = useSelectMenuStore();
 
   const isSelected = selectedMusicIds.length > 0;
 
-  const onClick = () => {
-    setMusicDrawer(musicDrawer.filter((id) => !selectedMusicIds.includes(id)));
-    setSelectedMusicIds([]);
-  };
+  const onClick = () => setIsShowInformModal(true);
 
   return (
     <Container onClick={onClick} $isSelected={isSelected}>
