@@ -6,11 +6,17 @@ import { Footer } from "./Footer";
 import Alert from "../shared/Alert";
 import { addBasePath } from "../../utils";
 import { useLayoutStore } from "../../hooks/store/useLayoutStore";
+import Inform from "./Inform";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
-    state: { isModal, musicBackGroundColor, userName },
-    action: { hiddenModal, showModal },
+    state: {
+      isShowEntryModal,
+      musicBackGroundColor,
+      userName,
+      isShowInformModal,
+    },
+    action: { hiddenEntryModal, showEntryModal },
   } = useLayoutStore();
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
@@ -23,19 +29,20 @@ export default function Layout({ children }: { children: ReactNode }) {
   useEffect(() => {
     setScreenSize();
     window.addEventListener("resize", setScreenSize);
-    userName ? hiddenModal() : showModal();
+    userName ? hiddenEntryModal() : showEntryModal();
 
     return () => {
       window.removeEventListener("resize", setScreenSize);
     };
-  }, [hiddenModal, showModal, userName]);
+  }, [hiddenEntryModal, showEntryModal, userName]);
 
   return (
     <Container>
       <BackGroundFilter />
       <Burn $backGroundColor={backGroundColor} />
       <Edge src={`${addBasePath("./img/phone.png")}`}>
-        {isModal && <Entry />}
+        {isShowEntryModal && <Entry />}
+        {isShowInformModal && <Inform />}
         <Content>
           <Header />
           {children}
