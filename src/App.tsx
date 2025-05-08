@@ -1,10 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import Player from "./pages/Player";
 import Layout from "./components/layout";
-import Storage from "./pages/Storage";
+import { Home, Music, Player, Search, Storage } from "./pages";
 
 function App() {
   return (
@@ -15,6 +11,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/player" element={<Player />} />
           <Route path="/storage" element={<Storage />} />
+          <Route path="/music/:id" element={<Music />} />
         </Routes>
       </Layout>
     </BrowserRouter>
