@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { usePlayerMenuStore } from "../../../hooks/store/usePlayerMenuStore";
+import { Link } from "react-router-dom";
 
 export default function PlayerMenu() {
   const {
@@ -37,7 +38,9 @@ export default function PlayerMenu() {
       </MusicInfo>
       <div>
         <Menu>
-          <ListButton text="곡 정보" />
+          <Link to={`/music/${currentMusic.id}`}>
+            <ListButton text="곡 정보" />
+          </Link>
           <ListButton text="앨범 소개" />
           <ListButton onClick={onClick} text="음악서랍에 담기" />
         </Menu>
