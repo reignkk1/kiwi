@@ -38,7 +38,7 @@ export default function PlayerMenu() {
       <div>
         <Menu>
           <ListButton text="곡 정보" />
-          <ListButton text="앨범 정보" />
+          <ListButton text="앨범 소개" />
           <ListButton onClick={onClick} text="음악서랍에 담기" />
         </Menu>
         <CloseButton onClick={() => closePlayerMenu()}>
