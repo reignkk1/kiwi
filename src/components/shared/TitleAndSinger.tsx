@@ -4,8 +4,8 @@ import { palette } from "../../constant";
 interface TitleAndSingerProps {
   title: React.ReactNode;
   singer: React.ReactNode;
-  $isAnimation?: boolean;
   size: "small" | "middle" | "large";
+  $isAnimation?: boolean;
   onClick?: () => void;
   width?: string;
 }

@@ -1,15 +1,15 @@
 import { create } from "zustand";
+import { Pages } from "../../types";
 
-const initialState = {
-  home: false,
-  search: false,
-  storage: false,
-  player: false,
-};
+const pages: Pages[] = ["home", "music", "player", "search", "storage"];
+
+const initialState = Object.fromEntries(
+  pages.map((page) => [page, false])
+) as Record<Pages, boolean>;
 
 type ActivePageStore = {
   activePage: typeof initialState;
-  setActivePage: (activePage: keyof typeof initialState) => void;
+  setActivePage: (activePage: Pages) => void;
 };
 
 export const useActivePageStore = create<ActivePageStore>((set) => ({
