@@ -6,5 +6,7 @@ export default function useGetMusicInfoById() {
 
   const musicInfo = music.data.find((data) => data.id === Number(id));
 
+  console.log(id);
+
   return musicInfo;
 }
