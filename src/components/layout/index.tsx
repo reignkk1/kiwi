@@ -1,10 +1,9 @@
 import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 import Entry from "./Entry";
-import Header from "./Header";
 import { Footer } from "./Footer";
 import Alert from "../shared/Alert";
-import { addBasePath } from "../../utils";
+import { addBasePath, useCurrentPage } from "../../utils";
 import { useLayoutStore } from "../../hooks/store/useLayoutStore";
 import Inform from "./Inform";
 
@@ -18,6 +17,9 @@ export default function Layout({ children }: { children: ReactNode }) {
     },
     action: { hiddenEntryModal, showEntryModal },
   } = useLayoutStore();
+
+  const currentPage = useCurrentPage();
+  const isMusicPage = currentPage === "music";
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
 
@@ -39,12 +41,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <BackGroundFilter />
-      <Burn $backGroundColor={backGroundColor} />
+      {!isMusicPage && <Burn $backGroundColor={backGroundColor} />}
       <Edge src={`${addBasePath("./img/phone.png")}`}>
         {isShowEntryModal && <Entry />}
         {isShowInformModal && <Inform />}
         <Content>
-          <Header />
           {children}
           <Alert />
         </Content>
@@ -82,7 +83,7 @@ const Burn = styled.div<{ $backGroundColor: string[] }>`
 
 const Content = styled.div`
   height: 100%;
-  padding: 80px 60px;
+  padding: 70px 60px;
   & ::-webkit-scrollbar {
     background-color: black;
     height: 3px;
@@ -146,8 +147,3 @@ const Container = styled.div`
     height: calc(var(--vh, 1vh) * 100);
   }
 `;
-
-// player img src 바뀔 때 애니메이션 살짝
-// 곡정보, 앨범소개 구현
-// 음악서랍에서 위치 변경
-// 노래 재생 중에 input을 잡고 왼쪽끝까지 끌었을 때 progressBar가 채워짐(?)
