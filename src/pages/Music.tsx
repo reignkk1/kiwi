@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import MusicHeader from "../components/pages/music/MusicHeader";
 import MusicInfo from "../components/pages/music/MusicInfo";
 import MusicControllerButtons from "../components/pages/music/MusicControllerButtons";
+import MusicHeader from "../components/pages/music/MusicHeader";
 
 export default function Music() {
   return (
@@ -13,4 +13,6 @@ export default function Music() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 100%;
+`;
