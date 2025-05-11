@@ -1,6 +1,7 @@
 import parse from "html-react-parser";
 import { useLocation } from "react-router-dom";
 import { BASE_URL_SLICE } from "./constant";
+import { Pages } from "./types";
 
 // 현재 어떤 페이지에 위치하고 있는지 리턴해주는 함수
 export function useCurrentPage() {
@@ -13,9 +14,11 @@ export function useCurrentPage() {
     "/player": "player",
   };
 
-  return (
-    (pageMap[pathname] as "home" | "search" | "storage" | "player") || "unknown"
-  );
+  if (pathname.startsWith("/music")) {
+    return "music";
+  }
+
+  return (pageMap[pathname] as Pages) || "unknown";
 }
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
