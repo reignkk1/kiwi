@@ -5,13 +5,13 @@ import { useEffect } from "react";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import Controller from "../shared/Controller";
 import { ProgressVisual } from "../shared/ProgressVisual";
-import { useCurrentPage } from "../../utils";
 import { TitleAndSinger } from "../shared/TitleAndSinger";
 import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useSelectedMusicIdsStore } from "../../store/storage/useSelectedMusicIdsStore";
 import SelectMenu from "../pages/storage/SelectMenu";
+import { useCurrentPage } from "../../hooks/useCurrentPage";
 
 export function Footer() {
   const currentPage = useCurrentPage();
