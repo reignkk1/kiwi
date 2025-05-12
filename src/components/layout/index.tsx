@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Entry from "./Entry";
 import { Footer } from "./Footer";
 import Alert from "../shared/Alert";
-import { addBasePath, useCurrentPage } from "../../utils";
+import { addBasePath } from "../../utils";
 import { useLayoutStore } from "../../hooks/store/useLayoutStore";
 import Inform from "./Inform";
+import { useCurrentPage } from "../../hooks/useCurrentPage";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const {
