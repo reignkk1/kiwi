@@ -27,6 +27,7 @@ const Container = styled.div`
   gap: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background-color: #121212;
+  z-index: 1;
 `;
 
 const Title = styled.div`
@@ -38,9 +39,3 @@ const Title = styled.div`
   text-overflow: ellipsis;
   text-align: center;
 `;
-
-// 컴포넌트 스타일링 및 기능 개발
-// hooks 폴더에서 페이지 별로 나눠야 할듯? 그게 더 관리하기 쉬움
-// store 폴더에서 나눈것 처럼
-
-// padding도 줘야할것 같고 스크롤을 감지하여 내렸을 때 제목 뜨고 border 적용
