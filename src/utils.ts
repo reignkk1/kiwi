@@ -8,7 +8,10 @@ export function markKeyword(letter: string, keyWord: string) {
 
 // 총 길이에서 현재 시간을 인자 값으로 받아 퍼센트로 나타내주는 함수
 // ex) getProgressPercent(50,100) => 50%
-export function getProgressPercent(currentTime: number, duration: number) {
+export function convertFromTimeToPercent(
+  duration: number,
+  currentTime: number
+) {
   return Number(((currentTime / duration) * 100).toFixed(1));
 }
 
