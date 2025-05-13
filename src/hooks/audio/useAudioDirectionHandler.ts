@@ -1,16 +1,13 @@
 import { useRef } from "react";
 import { MusicType } from "../../types";
-import useAudioRef from "./useAudioRef";
 import useAudioPlayTypes from "./useAudioPlayTypes";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
 
-export default function useAudioDirectionHandler() {
+export default function useAudioDirectionHandler(audio: HTMLAudioElement) {
   const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
-
-  const { audio } = useAudioRef();
 
   const { playInOrder, playRandom } = useAudioPlayTypes();
 
