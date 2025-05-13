@@ -3,57 +3,45 @@ import { useAudioStore } from "../../store/audio";
 import {
   useCurrentMusicStore,
   usePlayDirectionStore,
+  useProgressStore,
 } from "../../store/shared";
 
 export function useAudioImplStore() {
-  const [
-    isPlay,
-    isShuffle,
-    isRepeat,
-    src,
-    currentTime,
-    setIsPlay,
-    setDuration,
-    setSrc,
-    setCurrentTime,
-  ] = useAudioStore(
-    useShallow((state) => [
-      state.isPlay,
-      state.isShuffle,
-      state.isRepeat,
-      state.src,
-      state.currentTime,
-      state.setIsPlay,
-      state.setDuration,
-      state.setSrc,
-      state.setCurrentTime,
-    ])
-  );
+  const [isPlay, isRepeat, src, setDuration, setSrc, setCurrentTime] =
+    useAudioStore(
+      useShallow((state) => [
+        state.isPlay,
+        state.isRepeat,
+        state.src,
+        state.setDuration,
+        state.setSrc,
+        state.setCurrentTime,
+      ])
+    );
 
   const [playDirection, setPlayDirection] = usePlayDirectionStore(
     useShallow((state) => [state.playDirection, state.setPlayDirection])
   );
 
-  const [currentMusic, setCurrentMusic] = useCurrentMusicStore(
-    useShallow((state) => [state.currentMusic, state.setCurrentMusic])
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
+
+  const pressedInputValue = useProgressStore(
+    (state) => state.pressedInputValue
   );
 
   return {
     state: {
       isPlay,
       src,
-      isShuffle,
       isRepeat,
-      currentTime,
       playDirection,
       currentMusic,
+      pressedInputValue,
     },
     action: {
-      setIsPlay,
       setDuration,
       setCurrentTime,
       setPlayDirection,
-      setCurrentMusic,
       setSrc,
     },
   };
