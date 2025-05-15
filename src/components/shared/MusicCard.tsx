@@ -2,39 +2,39 @@ import styled from "styled-components";
 import { TitleAndSinger } from "./TitleAndSinger";
 import AlbumImg from "./AlbumImg";
 import { markKeyword } from "../../utils";
-import { MusicType } from "../../types";
-import { useMusicCardStore } from "../../hooks/store/useMusicCardStore";
+import usePlay from "../../hooks/usePlay";
 
 interface MusicCardProps {
-  musicInfo: MusicType;
+  id: number;
+  title: string;
+  singer: string;
+  imgSrc: string;
   mark?: string;
   $isMusicBar?: boolean;
   $isAnimation?: boolean;
 }
 
 export default function MusicCard({
-  musicInfo,
+  id,
+  title,
+  singer,
+  imgSrc,
   mark = "",
   $isMusicBar = false,
   $isAnimation = false,
 }: MusicCardProps) {
-  const {
-    action: { setIsPlay, setCurrentMusic },
-  } = useMusicCardStore();
+  const play = usePlay(id);
 
   return (
     <Container>
-      <AlbumImg type="small" musicInfo={musicInfo} $isMusicBar={$isMusicBar} />
+      <AlbumImg size="small" src={imgSrc} $isMusicBar={$isMusicBar} />
       <Info>
         <TitleAndSinger
-          title={markKeyword(musicInfo.title, mark)}
-          singer={markKeyword(musicInfo.singer, mark)}
+          title={markKeyword(title, mark)}
+          singer={markKeyword(singer, mark)}
           size="middle"
           width="250px"
-          onClick={() => {
-            setCurrentMusic(musicInfo);
-            setIsPlay(true);
-          }}
+          onClick={play}
           $isAnimation={$isAnimation}
         />
       </Info>
