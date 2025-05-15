@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 import { ButtonIcon } from "./ButtonIcon";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { addBasePath } from "../../utils";
-import { MusicType } from "./../../types";
-import { useAlbumImgStore } from "../../hooks/store/useAlbumImgStore";
+import { addBasePath, getMusicDataFromSrc } from "../../utils";
+import { Link } from "react-router-dom";
+import usePlay from "../../hooks/usePlay";
 
 const sizeMap = {
   small: {
@@ -25,42 +25,47 @@ const sizeMap = {
 };
 
 interface AlbumImgProps {
-  type: "small" | "middle" | "smallLarge" | "large";
-  musicInfo: MusicType;
+  size: "small" | "middle" | "smallLarge" | "large";
+  src: string;
+  link?: string;
   isActiveButton?: boolean;
   $isMusicBar?: boolean;
 }
 
 export default function AlbumImg({
-  type,
-  musicInfo,
+  size,
+  src,
+  link,
   isActiveButton = false,
   $isMusicBar = false,
 }: AlbumImgProps) {
-  const {
-    action: { setIsPlay, setCurrentMusic },
-  } = useAlbumImgStore();
+  const { width, height } = sizeMap[size];
 
-  const { width, height } = sizeMap[type];
+  const music = getMusicDataFromSrc(src);
+  const play = usePlay(music.id);
 
   return (
     <Container>
       {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
-      <BackGroundImg
-        width={width}
-        height={height}
-        src={addBasePath(musicInfo.imgSrc)}
-        $isMusicBar={$isMusicBar}
-      />
-      {isActiveButton && (
-        <ButtonIcon
-          icon={faPlay}
-          onClick={() => {
-            setCurrentMusic(musicInfo);
-            setIsPlay(true);
-          }}
+      {link ? (
+        <Link to={link}>
+          <BackGroundImg
+            width={width}
+            height={height}
+            src={addBasePath(src)}
+            $isMusicBar={$isMusicBar}
+          />
+        </Link>
+      ) : (
+        <BackGroundImg
+          width={width}
+          height={height}
+          src={addBasePath(src)}
+          $isMusicBar={$isMusicBar}
         />
       )}
+
+      {isActiveButton && <ButtonIcon icon={faPlay} onClick={play} />}
     </Container>
   );
 }
