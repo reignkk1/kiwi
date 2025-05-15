@@ -1,5 +1,6 @@
 import parse from "html-react-parser";
 import { BASE_URL_SLICE } from "./constant";
+import music from "./musicData.json";
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
 export function markKeyword(letter: string, keyWord: string) {
@@ -51,4 +52,34 @@ export function addBasePath(path: string) {
   pathSplit?.splice(0, 1, BASE_URL_SLICE);
 
   return pathSplit?.join("/");
+}
+
+// 음악 id 값에 대한 타입 검증 함수
+// 문자열 number 값이 들어오면 숫자로 인식하여 변환
+export function resolveMusicId(musicId?: string | number) {
+  if (musicId === undefined || musicId === null) {
+    throw new Error("musicId is required");
+  }
+  const resolvedMusicId = Number(musicId);
+
+  if (isNaN(resolvedMusicId)) {
+    throw new Error("musicId is not number");
+  }
+
+  return resolvedMusicId;
+}
+
+// 음악 id 값으로 데이터 가져오기
+export function getMusicDataFromId(id?: string | number) {
+  const resolvedMusicId = resolveMusicId(id);
+  const musicData = music.data.find(({ id }) => id === resolvedMusicId);
+  if (!musicData) throw new Error("music not found");
+  return musicData;
+}
+
+// 음악 src 값으로 데이터 가져오기
+export function getMusicDataFromSrc(src: string) {
+  const musicData = music.data.find(({ imgSrc }) => imgSrc === src);
+  if (!musicData) throw new Error("music not found");
+  return musicData;
 }
