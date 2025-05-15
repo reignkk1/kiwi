@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import useGetMusicInfoById from "../../../hooks/useGetMusicInfoById";
 import parser from "html-react-parser";
+import { useParams } from "react-router-dom";
+import { getMusicDataFromId } from "../../../utils";
 
 export default function MusicLyrics() {
-  const musicInfo = useGetMusicInfoById()!;
+  const { id } = useParams();
+  const music = getMusicDataFromId(id);
 
-  const lyrics = musicInfo.lyrics.reduce(
+  const lyrics = music.lyrics.reduce(
     (acc, lyric) => (acc += lyric.text + "<br>"),
     ""
   );

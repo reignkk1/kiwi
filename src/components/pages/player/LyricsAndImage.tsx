@@ -41,7 +41,7 @@ export default function LyricsAndImage() {
       $isExpandLyrics={isExpandLyrics}
       $isLyricsClicked={isLyricsClicked}
     >
-      <AlbumImg type="large" musicInfo={currentMusic} />
+      <AlbumImg size="large" src={currentMusic.imgSrc} />
       <LyricsContainer
         $isExpandLyrics={isExpandLyrics}
         onClick={() => {

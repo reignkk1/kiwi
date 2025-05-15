@@ -1,20 +1,18 @@
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { MusicType } from "../../../types";
-import { Link } from "react-router-dom";
 
 interface AlbumProps {
-  musicInfo: MusicType;
+  title: string;
+  singer: string;
+  imgSrc: string;
+  link: string;
 }
 
-export default function Album({ musicInfo }: AlbumProps) {
-  const { title, singer } = musicInfo;
+export default function Album({ title, singer, imgSrc, link }: AlbumProps) {
   return (
     <AlbumTemplate>
-      <Link to={`/music/${musicInfo.id}`}>
-        <AlbumImg type="middle" musicInfo={musicInfo} isActiveButton={true} />
-      </Link>
+      <AlbumImg size="middle" src={imgSrc} link={link} isActiveButton={true} />
       <TitleAndSinger width="100%" title={title} singer={singer} size="small" />
     </AlbumTemplate>
   );

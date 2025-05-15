@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import useGetMusicInfoById from "../../../hooks/useGetMusicInfoById";
+import { useNavigate, useParams } from "react-router-dom";
+import { getMusicDataFromId } from "../../../utils";
 
 export default function MusicHeader() {
   const navigate = useNavigate();
-  const musicInfo = useGetMusicInfoById();
+  const { id } = useParams();
+  const music = getMusicDataFromId(id);
 
   return (
     <Container>
       <ButtonIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
-      <Title>{musicInfo?.title}</Title>
+      <Title>{music.title}</Title>
     </Container>
   );
 }

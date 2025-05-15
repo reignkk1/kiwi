@@ -17,8 +17,14 @@ export default function AlbumList() {
 
   return (
     <Container>
-      {albumMusicList.map((musicInfo) => (
-        <Album key={musicInfo.id} musicInfo={musicInfo} />
+      {albumMusicList.map(({ id, title, singer, imgSrc }) => (
+        <Album
+          key={id}
+          title={title}
+          singer={singer}
+          link={`/music/${id}`}
+          imgSrc={imgSrc}
+        />
       ))}
     </Container>
   );

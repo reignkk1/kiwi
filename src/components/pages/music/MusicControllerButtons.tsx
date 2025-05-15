@@ -3,19 +3,33 @@ import styled from "styled-components";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { palette } from "../../../constant";
 import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
+import usePlay from "../../../hooks/usePlay";
+import { useParams } from "react-router-dom";
+import usePutInMusicDrawer from "../../../hooks/usePutInMusicDrawer";
 
 export default function MusicControllerButtons() {
+  const { id } = useParams();
+
+  const play = usePlay(id);
+  const putInMusicDrawer = usePutInMusicDrawer(id);
+
   return (
     <Container>
-      <ControllerButton icon={faPlay} text="재생" />
-      <ControllerButton icon={faPlus} text="담기" />
+      <ControllerButton onClick={play} icon={faPlay} text="재생" />
+      <ControllerButton onClick={putInMusicDrawer} icon={faPlus} text="담기" />
     </Container>
   );
 }
 
-function ControllerButton({ icon, text }: { icon: IconProp; text: string }) {
+interface ControllerButtonProps {
+  icon: IconProp;
+  text: string;
+  onClick: () => void;
+}
+
+function ControllerButton({ icon, text, onClick }: ControllerButtonProps) {
   return (
-    <ButtonContainer>
+    <ButtonContainer onClick={onClick}>
       <ButtonIcon icon={icon} />
       <Text>
         <span>{text}</span>

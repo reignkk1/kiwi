@@ -1,25 +1,27 @@
 import styled from "styled-components";
-import useGetMusicInfoById from "../../../hooks/useGetMusicInfoById";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
+import { getMusicDataFromId } from "../../../utils";
+import { useParams } from "react-router-dom";
 
 export default function MusicInfo() {
-  const musicInfo = useGetMusicInfoById()!;
+  const { id } = useParams();
+  const music = getMusicDataFromId(id);
 
   return (
     <Container>
       <div>
         <AlbumTitle>
-          <span>{musicInfo.albumTitle}</span>
+          <span>{music.albumTitle}</span>
         </AlbumTitle>
         <TitleAndSinger
           width="200px"
-          title={musicInfo.title}
-          singer={musicInfo.singer}
+          title={music.title}
+          singer={music.singer}
           size="large"
         />
       </div>
-      <AlbumImg musicInfo={musicInfo} type="middle" />
+      <AlbumImg src={music.imgSrc} size="middle" />
     </Container>
   );
 }
