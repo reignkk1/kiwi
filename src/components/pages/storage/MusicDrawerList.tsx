@@ -1,9 +1,9 @@
-import music from "../../../musicData.json";
 import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
 import SelectButton from "./SelectButton";
 import useMusicDrawerListStore from "../../../hooks/store/useMusicDrawerListStore";
 import { useEffect } from "react";
+import { getMusicDataFromId } from "../../../utils";
 
 export default function MusicDrawerList() {
   const {
@@ -11,18 +11,16 @@ export default function MusicDrawerList() {
     action: { setSelectedMusicIds },
   } = useMusicDrawerListStore();
 
-  const musicList = musicDrawer.map((id) =>
-    music.data.find((music) => music.id === id)
-  );
+  const musicList = musicDrawer.map((id) => getMusicDataFromId(id));
 
   const isActive = (musicId: number) => selectedMusicIds.includes(musicId);
 
   const onClickSelectCircle = (musicId: number) => {
-    if (isActive(musicId)) {
-      setSelectedMusicIds(selectedMusicIds.filter((id) => id !== musicId));
-    } else {
-      setSelectedMusicIds([...selectedMusicIds, musicId]);
-    }
+    const selected = isActive(musicId)
+      ? selectedMusicIds.filter((id) => id !== musicId)
+      : [...selectedMusicIds, musicId];
+
+    setSelectedMusicIds(selected);
   };
 
   useEffect(() => {
@@ -32,19 +30,20 @@ export default function MusicDrawerList() {
   return (
     <Container>
       {musicList.length ? (
-        musicList.map((musicInfo) => (
-          <List key={musicInfo!.id}>
+        musicList.map(({ id, title, singer, imgSrc }) => (
+          <List key={id}>
             <SelectButton
-              onClick={() => onClickSelectCircle(musicInfo!.id)}
-              $active={isActive(musicInfo!.id)}
+              onClick={() => onClickSelectCircle(id)}
+              $active={isActive(id)}
             />
             <MusicCard
-              musicInfo={musicInfo!}
+              id={id}
+              title={title}
+              singer={singer}
+              imgSrc={imgSrc}
               mark={currentMusic.title}
-              $isMusicBar={musicInfo!.title === currentMusic.title}
-              $isAnimation={
-                isActive(musicInfo!.id) && (musicInfo?.title.length || 0) > 20
-              }
+              $isMusicBar={title === currentMusic.title}
+              $isAnimation={isActive(id) && (title.length || 0) > 20}
             />
           </List>
         ))
