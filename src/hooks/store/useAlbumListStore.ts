@@ -4,17 +4,12 @@ import { useAlbumMusicListStore } from "../../store/home/useAlbumMusicListStore"
 
 export function useAlbumListStore() {
   const activeMenu = useActiveGenreMenuStore((state) => state.activeMenu);
-  const [albumMusicList, setAlbumMusicListAll, filterAlbumMusicList] =
-    useAlbumMusicListStore(
-      useShallow((state) => [
-        state.albumMusicList,
-        state.setAlbumMusicListAll,
-        state.filterAlbumMusicList,
-      ])
-    );
+  const [albumMusicList, setAlbumMusicList] = useAlbumMusicListStore(
+    useShallow((state) => [state.albumMusicList, state.setAlbumMusicList])
+  );
 
   return {
     state: { activeMenu, albumMusicList },
-    action: { setAlbumMusicListAll, filterAlbumMusicList },
+    action: { setAlbumMusicList },
   };
 }
