@@ -1,10 +1,8 @@
 import { useAudioStore } from "../store/audio";
 import { useCurrentMusicStore } from "../store/shared";
-import { getMusicDataFromId } from "../utils";
+import { MusicType } from "../types";
 
-export default function usePlay(musicId?: number | string) {
-  const music = getMusicDataFromId(musicId);
-
+export default function usePlay(music: MusicType) {
   const setCurrentMusic = useCurrentMusicStore(
     (state) => state.setCurrentMusic
   );
