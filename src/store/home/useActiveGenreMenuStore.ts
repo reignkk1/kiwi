@@ -1,9 +1,8 @@
 import { create } from "zustand";
-
-type GenreMenu = "all" | "ballad" | "indie" | "hiphop";
+import { GenreType } from "../../types";
 
 type ActiveGenreMenuStore = {
-  activeMenu: GenreMenu;
+  activeMenu: GenreType;
   setActiveMenu: (genreMenu: ActiveGenreMenuStore["activeMenu"]) => void;
 };
 
