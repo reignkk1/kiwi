@@ -9,7 +9,7 @@ export default function GenreMenu() {
     useShallow((state) => [state.activeMenu, state.setActiveMenu])
   );
 
-  const menu: Array<GenreType> = ["all", "ballad", "hiphop", "indie"];
+  const menu: Array<GenreType | "all"> = ["all", "ballad", "hiphop", "indie"];
 
   return (
     <Container>
