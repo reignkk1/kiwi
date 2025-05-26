@@ -1,27 +1,26 @@
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { getMusicDataFromId } from "../../../utils";
-import { useParams } from "react-router-dom";
+import { useMusicDataFromId } from "../../../store/music/useMusicDataFromId";
 
 export default function MusicInfo() {
-  const { id } = useParams();
-  const music = getMusicDataFromId(id);
+  const music = useMusicDataFromId((state) => state.music);
 
   return (
     <Container>
       <div>
         <AlbumTitle>
-          <span>{music.albumTitle}</span>
+          <span>{music?.albumTitle}</span>
         </AlbumTitle>
         <TitleAndSinger
           width="200px"
-          title={music.title}
-          singer={music.singer}
+          title={music?.title}
+          singer={music?.singer}
           size="large"
+          $isWhiteSpace={false}
         />
       </div>
-      <AlbumImg src={music.imgSrc} size="middle" />
+      <AlbumImg music={music!} size="middle" />
     </Container>
   );
 }
@@ -43,10 +42,7 @@ const AlbumTitle = styled.div`
 // hooks 폴더에서 페이지 별로 나눠야 할듯? 그게 더 관리하기 쉬움
 // store 폴더에서 나눈것 처럼
 
-// 스크롤을 감지하여 내렸을 때 제목 뜨고 border 적용
-// 제목 넘치면 밑으로 줄바꿈 ... 없애야함 props 변수로 구현 해야할듯?
-
 // 다른 노래들 작사,작곡, 앨범 타이틀 등 데이터 입력하기
 
 // 색깔 팔레트 상수로 빼기?
-// 재생, 담기 로직, 더보기, 크레딧
+// 인포는 완료 커밋
