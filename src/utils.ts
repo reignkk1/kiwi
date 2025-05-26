@@ -85,6 +85,17 @@ export function getMusicDataFromSrc(src: string) {
   return musicData;
 }
 
+// 장르에 맞는 음악 데이터 가져오기
+export function getMusicDataFromGenre(genre: GenreType) {
+  if (genre === "all") {
+    return music.data;
+  }
+
+  const musicData = music.data.filter((music) => music.genre === genre);
+  if (!musicData) throw new Error("music not found");
+  return musicData;
+}
+
 // 메뉴 id값을 한글로 변경
 export function convertToGenreKorea(letter?: string | GenreType) {
   if (!letter) return null;
