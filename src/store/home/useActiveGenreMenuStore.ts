@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { GenreType } from "../../types";
 
 type ActiveGenreMenuStore = {
-  activeMenu: GenreType;
+  activeMenu: GenreType | "all";
   setActiveMenu: (genreMenu: ActiveGenreMenuStore["activeMenu"]) => void;
 };
 
