@@ -1,19 +1,27 @@
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
+import { MusicType } from "../../../types";
 
 interface AlbumProps {
-  title: string;
-  singer: string;
-  imgSrc: string;
-  link: string;
+  music: MusicType;
 }
 
-export default function Album({ title, singer, imgSrc, link }: AlbumProps) {
+export default function Album({ music }: AlbumProps) {
   return (
     <AlbumTemplate>
-      <AlbumImg size="middle" src={imgSrc} link={link} isActiveButton={true} />
-      <TitleAndSinger width="100%" title={title} singer={singer} size="small" />
+      <AlbumImg
+        size="middle"
+        music={music}
+        isLink={true}
+        isActiveButton={true}
+      />
+      <TitleAndSinger
+        width="100%"
+        title={music.title}
+        singer={music.singer}
+        size="small"
+      />
     </AlbumTemplate>
   );
 }
