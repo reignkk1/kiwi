@@ -1,4 +1,4 @@
-export type GenreType = "all" | "ballad" | "indie" | "hiphop";
+export type GenreType = "ballad" | "indie" | "hiphop";
 
 export type Pages = "home" | "search" | "storage" | "player" | "music";
 
