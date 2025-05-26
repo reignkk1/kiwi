@@ -9,12 +9,11 @@ type AlbumMusicListStore = {
 
 export const useAlbumMusicListStore = create<AlbumMusicListStore>((set) => ({
   albumMusicList: { all: getMusicDataFromGenre("all") },
-  setAlbumMusicList: (genreMenu) => {
+  setAlbumMusicList: (genreMenu) =>
     set((state) => ({
       albumMusicList: {
         ...state.albumMusicList,
         [genreMenu]: getMusicDataFromGenre(genreMenu),
       },
-    }));
-  },
+    })),
 }));
