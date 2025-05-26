@@ -1,21 +1,20 @@
 import { create } from "zustand";
-import musicData from "../../musicData.json";
-import { MusicType } from "../../types";
+import { GenreType, MusicType } from "../../types";
+import { getMusicDataFromGenre } from "../../utils";
 
 type AlbumMusicListStore = {
-  albumMusicList: Array<MusicType>;
-  setAlbumMusicListAll: () => void;
-  filterAlbumMusicList: (activeGenreMenu: string) => void;
+  albumMusicList: Partial<Record<GenreType | "all", Array<MusicType>>>;
+  setAlbumMusicList: (genreMenu: GenreType | "all") => void;
 };
 
 export const useAlbumMusicListStore = create<AlbumMusicListStore>((set) => ({
-  albumMusicList: [],
-  setAlbumMusicListAll: () => set(() => ({ albumMusicList: musicData.data })),
-  filterAlbumMusicList: (activeGenreMenu) => {
-    set(() => ({
-      albumMusicList: musicData.data.filter(
-        ({ genre }) => genre === activeGenreMenu
-      ),
+  albumMusicList: { all: getMusicDataFromGenre("all") },
+  setAlbumMusicList: (genreMenu) => {
+    set((state) => ({
+      albumMusicList: {
+        ...state.albumMusicList,
+        [genreMenu]: getMusicDataFromGenre(genreMenu),
+      },
     }));
   },
 }));
