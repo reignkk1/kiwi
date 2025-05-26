@@ -1,6 +1,7 @@
 import parse from "html-react-parser";
 import { BASE_URL_SLICE } from "./constant";
 import music from "./musicData.json";
+import { GenreType } from "./types";
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
 export function markKeyword(letter: string, keyWord: string) {
@@ -8,7 +9,7 @@ export function markKeyword(letter: string, keyWord: string) {
 }
 
 // 총 길이에서 현재 시간을 인자 값으로 받아 퍼센트로 나타내주는 함수
-// ex) getProgressPercent(50,100) => 50%
+// ex) getProgressPercent(100,50) => 50%
 export function convertFromTimeToPercent(
   duration: number,
   currentTime: number
@@ -82,4 +83,17 @@ export function getMusicDataFromSrc(src: string) {
   const musicData = music.data.find(({ imgSrc }) => imgSrc === src);
   if (!musicData) throw new Error("music not found");
   return musicData;
+}
+
+// 메뉴 id값을 한글로 변경
+export function convertToGenreKorea(letter?: string | GenreType) {
+  if (!letter) return null;
+
+  const convertMap: Record<GenreType | string, string> = {
+    indie: "인디음악",
+    ballad: "발라드",
+    hiphop: "랩/힙합",
+    all: "전체",
+  };
+  return convertMap[letter];
 }
