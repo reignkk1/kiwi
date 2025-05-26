@@ -6,11 +6,13 @@ import { faPlay, faPlus } from "@fortawesome/free-solid-svg-icons";
 import usePlay from "../../../hooks/usePlay";
 import { useParams } from "react-router-dom";
 import usePutInMusicDrawer from "../../../hooks/usePutInMusicDrawer";
+import { getMusicDataFromId } from "../../../utils";
 
 export default function MusicControllerButtons() {
   const { id } = useParams();
+  const music = getMusicDataFromId(id);
 
-  const play = usePlay(id);
+  const play = usePlay(music);
   const putInMusicDrawer = usePutInMusicDrawer(id);
 
   return (
