@@ -86,7 +86,7 @@ export function getMusicDataFromSrc(src: string) {
 }
 
 // 장르에 맞는 음악 데이터 가져오기
-export function getMusicDataFromGenre(genre: GenreType) {
+export function getMusicDataFromGenre(genre: GenreType | "all") {
   if (genre === "all") {
     return music.data;
   }
