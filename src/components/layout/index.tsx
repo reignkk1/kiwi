@@ -85,6 +85,7 @@ const Burn = styled.div<{ $backGroundColor: string[] }>`
 const Content = styled.div`
   height: 100%;
   padding: 70px 60px;
+
   & ::-webkit-scrollbar {
     background-color: black;
     height: 3px;

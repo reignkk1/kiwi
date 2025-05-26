@@ -11,7 +11,7 @@ export default function MusicDrawerList() {
     action: { setSelectedMusicIds },
   } = useMusicDrawerListStore();
 
-  const musicList = musicDrawer.map((id) => getMusicDataFromId(id));
+  const music = musicDrawer.map((id) => getMusicDataFromId(id));
 
   const isActive = (musicId: number) => selectedMusicIds.includes(musicId);
 
@@ -29,24 +29,24 @@ export default function MusicDrawerList() {
 
   return (
     <Container>
-      {musicList.length ? (
-        musicList.map(({ id, title, singer, imgSrc }) => (
-          <List key={id}>
-            <SelectButton
-              onClick={() => onClickSelectCircle(id)}
-              $active={isActive(id)}
-            />
-            <MusicCard
-              id={id}
-              title={title}
-              singer={singer}
-              imgSrc={imgSrc}
-              mark={currentMusic.title}
-              $isMusicBar={title === currentMusic.title}
-              $isAnimation={isActive(id) && (title.length || 0) > 20}
-            />
-          </List>
-        ))
+      {music.length ? (
+        music.map((musicData) => {
+          const { id, title } = musicData;
+          return (
+            <List key={id}>
+              <SelectButton
+                onClick={() => onClickSelectCircle(id)}
+                $active={isActive(id)}
+              />
+              <MusicCard
+                music={musicData}
+                mark={currentMusic.title}
+                $isMusicBar={title === currentMusic.title}
+                $isAnimation={isActive(id) && (title.length || 0) > 20}
+              />
+            </List>
+          );
+        })
       ) : (
         <Wrapper>
           <span>음악서랍이 비어있습니다.</span>

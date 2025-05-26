@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 import { ButtonIcon } from "./ButtonIcon";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { addBasePath, getMusicDataFromSrc } from "../../utils";
+import { addBasePath } from "../../utils";
 import { Link } from "react-router-dom";
 import usePlay from "../../hooks/usePlay";
+import { MusicType } from "../../types";
 
 const sizeMap = {
   small: {
@@ -26,33 +27,32 @@ const sizeMap = {
 
 interface AlbumImgProps {
   size: "small" | "middle" | "smallLarge" | "large";
-  src: string;
-  link?: string;
+  music: MusicType;
+  isLink?: boolean;
   isActiveButton?: boolean;
   $isMusicBar?: boolean;
 }
 
 export default function AlbumImg({
   size,
-  src,
-  link,
+  music,
+  isLink = false,
   isActiveButton = false,
   $isMusicBar = false,
 }: AlbumImgProps) {
   const { width, height } = sizeMap[size];
 
-  const music = getMusicDataFromSrc(src);
-  const play = usePlay(music.id);
+  const play = usePlay(music);
 
   return (
     <Container>
       {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
-      {link ? (
-        <Link to={link}>
+      {isLink ? (
+        <Link to={`/music/${music.id}`}>
           <BackGroundImg
             width={width}
             height={height}
-            src={addBasePath(src)}
+            src={addBasePath(music.imgSrc)}
             $isMusicBar={$isMusicBar}
           />
         </Link>
@@ -60,7 +60,7 @@ export default function AlbumImg({
         <BackGroundImg
           width={width}
           height={height}
-          src={addBasePath(src)}
+          src={addBasePath(music.imgSrc)}
           $isMusicBar={$isMusicBar}
         />
       )}

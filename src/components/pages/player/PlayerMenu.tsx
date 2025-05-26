@@ -21,7 +21,7 @@ export default function PlayerMenu() {
   return (
     <Container>
       <MusicInfo>
-        <AlbumImg size="smallLarge" src={currentMusic.imgSrc} />
+        <AlbumImg size="smallLarge" music={currentMusic} />
         <TitleAndSinger
           title={currentMusic.title}
           singer={currentMusic.singer}
