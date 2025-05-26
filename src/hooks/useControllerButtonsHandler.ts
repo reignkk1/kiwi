@@ -8,16 +8,22 @@ export default function useControllerButtonsHandler() {
 
   const handleShuffleClick = () => {
     toggleShuffle();
-    isShuffle
-      ? toggleFadeAlertMessage("셔플을 사용하지 않습니다.")
-      : toggleFadeAlertMessage("셔플을 사용합니다.");
+
+    const message = isShuffle
+      ? "셔플을 사용하지 않습니다."
+      : "셔플을 사용합니다.";
+
+    toggleFadeAlertMessage(message);
   };
 
   const handleRepeatClick = () => {
     toggleRepeat();
-    isRepeat
-      ? toggleFadeAlertMessage("반복을 사용하지 않습니다.")
-      : toggleFadeAlertMessage("현재 음악을 반복합니다.");
+
+    const message = isRepeat
+      ? "반복을 사용하지 않습니다."
+      : "현재 음악을 반복합니다.";
+
+    toggleFadeAlertMessage(message);
   };
 
   return { handleShuffleClick, handleRepeatClick, isRepeat, isShuffle };
