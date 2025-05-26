@@ -9,18 +9,22 @@ export function useProgressBarStore() {
   const [
     progressPercent,
     progressInputValue,
+    pressedInputValue,
     isExpandProgressBar,
     setProgressPercent,
     setProgressInputValue,
     setIsExpandProgressBar,
+    setPressedInputValue,
   ] = useProgressStore(
     useShallow((state) => [
       state.progressPercent,
       state.progressInputValue,
+      state.pressedInputValue,
       state.isExpandProgressBar,
       state.setProgressPercent,
       state.setProgressInputValue,
       state.setIsExpandProgressBar,
+      state.setPressedInputValue,
     ])
   );
 
@@ -30,12 +34,14 @@ export function useProgressBarStore() {
       progressPercent,
       progressInputValue,
       isExpandProgressBar,
+      pressedInputValue,
     },
     action: {
       setProgressPercent,
       setProgressInputValue,
       setIsExpandProgressBar,
       setCurrentTime,
+      setPressedInputValue,
     },
   };
 }

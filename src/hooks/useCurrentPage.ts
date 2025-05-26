@@ -1,0 +1,19 @@
+import { useLocation } from "react-router-dom";
+import { Pages } from "../types";
+
+export function useCurrentPage() {
+  const { pathname } = useLocation();
+
+  const pageMap: { [key: string]: string } = {
+    "/": "home",
+    "/search": "search",
+    "/storage": "storage",
+    "/player": "player",
+  };
+
+  if (pathname.startsWith("/music")) {
+    return "music";
+  }
+
+  return (pageMap[pathname] as Pages) || "unknown";
+}

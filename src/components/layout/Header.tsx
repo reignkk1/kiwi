@@ -1,24 +1,9 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
-import { useUserNameStore } from "../../store/layout";
 
-export default function Header() {
-  const { pathname } = useLocation();
-  const userName = useUserNameStore((state) => state.userName);
-
-  if (pathname === "/player") return null;
-
-  const pathNameTitleMap: Record<string, string> = {
-    "/": userName + "님 어서오세요!",
-    "/search": "나에게 맞춘 탐색",
-    "/storage": "음악서랍",
-  };
-
-  const title = pathNameTitleMap[pathname];
-
+export default function HeaderTitle({ title }: { title: string }) {
   return (
     <Container>
-      <Title>{title}</Title>
+      <Content>{title}</Content>
     </Container>
   );
 }
@@ -27,7 +12,7 @@ const Container = styled.header`
   width: 100%;
   margin-bottom: 30px;
 `;
-const Title = styled.h1`
+const Content = styled.div`
   color: white;
   font-weight: bold;
   font-size: 25px;

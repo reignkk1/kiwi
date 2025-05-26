@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { palette } from "../../constant";
 import { useEffect } from "react";
-import { getProgressPercent } from "../../utils";
+import { convertFromTimeToPercent } from "../../utils";
 import useProgressVisualStore from "../../hooks/store/useProgressVisualStore";
 
 export function ProgressVisual({
@@ -17,7 +17,7 @@ export function ProgressVisual({
   } = useProgressVisualStore();
 
   useEffect(() => {
-    setProgressPercent(getProgressPercent(currentTime, duration) || 0);
+    setProgressPercent(convertFromTimeToPercent(duration, currentTime) || 0);
   }, [currentTime, duration, setProgressPercent]);
 
   const percent = value ?? progressPercent;

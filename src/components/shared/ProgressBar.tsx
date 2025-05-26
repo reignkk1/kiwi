@@ -17,6 +17,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
       setProgressInputValue,
       setProgressPercent,
       setCurrentTime,
+      setPressedInputValue,
     },
   } = useProgressBarStore();
 
@@ -25,10 +26,15 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   const pressAndUp = () => {
     // 확대 기능 off
     setIsExpandProgressBar(false);
+
     // 퍼센트 게이지 초기화
     setProgressPercent(0);
+
     // 눌렀다 뗀 위치로 이동
     setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
+
+    // 눌렀다 뗀 시점의 위치 value 상태 업뎃
+    setPressedInputValue(progressInputValue);
   };
 
   return (
@@ -48,9 +54,9 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         step={1}
         value={progressInputValue}
         disabled={disabled}
-        onChange={(e) =>
-          setProgressInputValue(Math.floor(Number(e.currentTarget.value)))
-        }
+        onChange={(e) => {
+          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
+        }}
         onMouseDown={() => (isClicked.current = true)}
         onMouseMove={() => {
           if (isClicked.current) {

@@ -22,7 +22,7 @@ export default function PlayerHeader() {
 
   return (
     <Container>
-      {isExpandLyrics && <AlbumImg type="small" musicInfo={currentMusic} />}
+      {isExpandLyrics && <AlbumImg size="small" music={currentMusic} />}
       <TitleAndSinger
         width={isExpandLyrics ? "174px" : "245px"}
         size="large"

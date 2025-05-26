@@ -1,22 +1,7 @@
 import parse from "html-react-parser";
-import { useLocation } from "react-router-dom";
 import { BASE_URL_SLICE } from "./constant";
-
-// 현재 어떤 페이지에 위치하고 있는지 리턴해주는 함수
-export function useCurrentPage() {
-  const { pathname } = useLocation();
-
-  const pageMap: { [key: string]: string } = {
-    "/": "home",
-    "/search": "search",
-    "/storage": "storage",
-    "/player": "player",
-  };
-
-  return (
-    (pageMap[pathname] as "home" | "search" | "storage" | "player") || "unknown"
-  );
-}
+import music from "./musicData.json";
+import { GenreType } from "./types";
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
 export function markKeyword(letter: string, keyWord: string) {
@@ -24,8 +9,11 @@ export function markKeyword(letter: string, keyWord: string) {
 }
 
 // 총 길이에서 현재 시간을 인자 값으로 받아 퍼센트로 나타내주는 함수
-// ex) getProgressPercent(50,100) => 50%
-export function getProgressPercent(currentTime: number, duration: number) {
+// ex) getProgressPercent(100,50) => 50%
+export function convertFromTimeToPercent(
+  duration: number,
+  currentTime: number
+) {
   return Number(((currentTime / duration) * 100).toFixed(1));
 }
 
@@ -65,4 +53,47 @@ export function addBasePath(path: string) {
   pathSplit?.splice(0, 1, BASE_URL_SLICE);
 
   return pathSplit?.join("/");
+}
+
+// 음악 id 값에 대한 타입 검증 함수
+// 문자열 number 값이 들어오면 숫자로 인식하여 변환
+export function resolveMusicId(musicId?: string | number) {
+  if (musicId === undefined || musicId === null) {
+    throw new Error("musicId is required");
+  }
+  const resolvedMusicId = Number(musicId);
+
+  if (isNaN(resolvedMusicId)) {
+    throw new Error("musicId is not number");
+  }
+
+  return resolvedMusicId;
+}
+
+// 음악 id 값으로 데이터 가져오기
+export function getMusicDataFromId(id?: string | number) {
+  const resolvedMusicId = resolveMusicId(id);
+  const musicData = music.data.find(({ id }) => id === resolvedMusicId);
+  if (!musicData) throw new Error("music not found");
+  return musicData;
+}
+
+// 음악 src 값으로 데이터 가져오기
+export function getMusicDataFromSrc(src: string) {
+  const musicData = music.data.find(({ imgSrc }) => imgSrc === src);
+  if (!musicData) throw new Error("music not found");
+  return musicData;
+}
+
+// 메뉴 id값을 한글로 변경
+export function convertToGenreKorea(letter?: string | GenreType) {
+  if (!letter) return null;
+
+  const convertMap: Record<GenreType | string, string> = {
+    indie: "인디음악",
+    ballad: "발라드",
+    hiphop: "랩/힙합",
+    all: "전체",
+  };
+  return convertMap[letter];
 }

@@ -4,8 +4,9 @@ import { palette } from "../../constant";
 interface TitleAndSingerProps {
   title: React.ReactNode;
   singer: React.ReactNode;
-  $isAnimation?: boolean;
   size: "small" | "middle" | "large";
+  $isWhiteSpace?: boolean;
+  $isAnimation?: boolean;
   onClick?: () => void;
   width?: string;
 }
@@ -18,6 +19,7 @@ const sizeMap = {
 
 export function TitleAndSinger({
   $isAnimation = false,
+  $isWhiteSpace = true,
   width = "auto",
   size,
   onClick,
@@ -39,7 +41,11 @@ export function TitleAndSinger({
 
   return (
     <Container width={width} onClick={onClick}>
-      <Title size={titleSize} $isAnimation={$isAnimation}>
+      <Title
+        size={titleSize}
+        $isAnimation={$isAnimation}
+        $isWhiteSpace={$isWhiteSpace}
+      >
         {titleContent}
       </Title>
       <Singer size={singerSize}>{singer}</Singer>
@@ -54,13 +60,22 @@ const Container = styled.div<{ width?: string }>`
 const Title = styled.div<{
   size: string;
   $isAnimation: boolean;
+  $isWhiteSpace: boolean;
 }>`
   display: inline-block;
   font-size: ${({ size }) => size};
   color: ${palette.musicTitle};
   margin-bottom: 5px;
   overflow: hidden;
-  white-space: nowrap;
+
+  ${({ $isWhiteSpace }) =>
+    $isWhiteSpace
+      ? css`
+          white-space: nowrap;
+        `
+      : css`
+          line-height: 1.5;
+        `}
 
   ${({ $isAnimation }) =>
     $isAnimation

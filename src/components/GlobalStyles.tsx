@@ -4,6 +4,8 @@ import { palette } from "../constant";
 
 export const GlobalStyles = createGlobalStyle`
     ${reset}
+    
+ 
 
     * {
         box-sizing:border-box;
@@ -25,7 +27,11 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     mark {
-    background: none;
-    color: ${palette.signatureColor};
+      background: none;
+      color: ${palette.signatureColor};
     }
+    html, body {
+      overflow: hidden;
+      height: 100%;
+}
 `;

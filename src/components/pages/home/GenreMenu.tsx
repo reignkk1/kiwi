@@ -1,35 +1,28 @@
 import styled from "styled-components";
 import { useShallow } from "zustand/react/shallow";
 import { useActiveGenreMenuStore } from "../../../store/home";
-import type { GenreMenuType } from "../../../types";
+import type { GenreType } from "../../../types";
+import { convertToGenreKorea } from "../../../utils";
 
 export default function GenreMenu() {
   const [activeMenu, setActiveMenu] = useActiveGenreMenuStore(
     useShallow((state) => [state.activeMenu, state.setActiveMenu])
   );
 
-  const menu: Array<{
-    id: GenreMenuType;
-    text: string;
-  }> = [
-    { id: "all", text: "전체" },
-    { id: "ballad", text: "발라드" },
-    { id: "indie", text: "인디음악" },
-    { id: "hiphop", text: "랩/힙합" },
-  ];
+  const menu: Array<GenreType> = ["all", "ballad", "hiphop", "indie"];
 
   return (
     <Container>
       <h2>장르</h2>
       <Menu>
-        {menu.map(({ id, text }) => (
+        {menu.map((id) => (
           <MenuItem
             key={id}
             id={id}
             $active={activeMenu === id}
             onClick={() => setActiveMenu(id)}
           >
-            <span>{text}</span>
+            <span>{convertToGenreKorea(id)}</span>
           </MenuItem>
         ))}
       </Menu>

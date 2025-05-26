@@ -4,15 +4,24 @@ import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { MusicType } from "../../../types";
 
 interface AlbumProps {
-  musicInfo: MusicType;
+  music: MusicType;
 }
 
-export default function Album({ musicInfo }: AlbumProps) {
-  const { title, singer } = musicInfo;
+export default function Album({ music }: AlbumProps) {
   return (
     <AlbumTemplate>
-      <AlbumImg type="middle" musicInfo={musicInfo} isActiveButton={true} />
-      <TitleAndSinger width="100%" title={title} singer={singer} size="small" />
+      <AlbumImg
+        size="middle"
+        music={music}
+        isLink={true}
+        isActiveButton={true}
+      />
+      <TitleAndSinger
+        width="100%"
+        title={music.title}
+        singer={music.singer}
+        size="small"
+      />
     </AlbumTemplate>
   );
 }

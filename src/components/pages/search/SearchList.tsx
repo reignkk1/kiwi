@@ -12,9 +12,9 @@ export default function SearchList() {
 
   return (
     <ul>
-      {searchResultMusic?.map((musicInfo) => (
-        <Item key={musicInfo.id}>
-          <MusicCard musicInfo={musicInfo} mark={searchKeyWord} />
+      {searchResultMusic?.map((music) => (
+        <Item key={music.id}>
+          <MusicCard music={music} mark={searchKeyWord} />
           <ItemButtons>
             <ButtonIcon icon={faEllipsisV} />
           </ItemButtons>

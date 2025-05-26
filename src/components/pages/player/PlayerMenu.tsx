@@ -3,32 +3,25 @@ import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
 import { usePlayerMenuStore } from "../../../hooks/store/usePlayerMenuStore";
+import { Link } from "react-router-dom";
+import usePutInMusicDrawer from "../../../hooks/usePutInMusicDrawer";
 
 export default function PlayerMenu() {
   const {
-    state: { currentMusic, musicDrawer },
-    action: { closePlayerMenu, toggleFadeAlertMessage, setMusicDrawer },
+    state: { currentMusic },
+    action: { closePlayerMenu },
   } = usePlayerMenuStore();
+
+  const putInMusicDrawer = usePutInMusicDrawer(currentMusic.id);
 
   useEffect(() => {
     return () => closePlayerMenu();
   }, [closePlayerMenu]);
 
-  const onClick = () => {
-    const isIncluded = musicDrawer.some((id: number) => id === currentMusic.id);
-
-    if (isIncluded) {
-      return toggleFadeAlertMessage("이미 담긴 곡 입니다.");
-    } else {
-      toggleFadeAlertMessage("1곡을 음악서랍에 담았습니다.");
-      setMusicDrawer([...musicDrawer, currentMusic.id]);
-    }
-  };
-
   return (
     <Container>
       <MusicInfo>
-        <AlbumImg type="smallLarge" musicInfo={currentMusic} />
+        <AlbumImg size="smallLarge" music={currentMusic} />
         <TitleAndSinger
           title={currentMusic.title}
           singer={currentMusic.singer}
@@ -37,9 +30,11 @@ export default function PlayerMenu() {
       </MusicInfo>
       <div>
         <Menu>
-          <ListButton text="곡 정보" />
-          <ListButton text="앨범 정보" />
-          <ListButton onClick={onClick} text="음악서랍에 담기" />
+          <Link to={`/music/${currentMusic.id}`}>
+            <ListButton text="곡 정보" />
+          </Link>
+          <ListButton text="앨범 소개" />
+          <ListButton onClick={putInMusicDrawer} text="음악서랍에 담기" />
         </Menu>
         <CloseButton onClick={() => closePlayerMenu()}>
           <button>닫기</button>
