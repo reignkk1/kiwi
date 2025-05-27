@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout";
-import { Home, Music, Player, Search, Storage } from "./pages";
+import { AlbumIntro, Home, Music, Player, Search, Storage } from "./pages";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
           <Route path="/player" element={<Player />} />
           <Route path="/storage" element={<Storage />} />
           <Route path="/music/:id" element={<Music />} />
+          <Route path="/album/:id" element={<AlbumIntro />} />
         </Routes>
       </Layout>
     </BrowserRouter>
