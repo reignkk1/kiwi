@@ -33,7 +33,9 @@ export default function PlayerMenu() {
           <Link to={`/music/${currentMusic.id}`}>
             <ListButton text="곡 정보" />
           </Link>
-          <ListButton text="앨범 소개" />
+          <Link to={`/album/${currentMusic.id}`}>
+            <ListButton text="앨범 소개" />
+          </Link>
           <ListButton onClick={putInMusicDrawer} text="음악서랍에 담기" />
         </Menu>
         <CloseButton onClick={() => closePlayerMenu()}>
