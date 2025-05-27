@@ -44,6 +44,8 @@ export default function AlbumImg({
 
   const play = usePlay(music);
 
+  console.log(music);
+
   return (
     <Container>
       {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
@@ -52,7 +54,7 @@ export default function AlbumImg({
           <BackGroundImg
             width={width}
             height={height}
-            src={addBasePath(music.imgSrc)}
+            src={addBasePath(music?.imgSrc)}
             $isMusicBar={$isMusicBar}
           />
         </Link>
@@ -60,7 +62,7 @@ export default function AlbumImg({
         <BackGroundImg
           width={width}
           height={height}
-          src={addBasePath(music.imgSrc)}
+          src={addBasePath(music?.imgSrc)}
           $isMusicBar={$isMusicBar}
         />
       )}
