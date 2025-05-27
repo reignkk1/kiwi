@@ -31,6 +31,7 @@ export default function ScrollTitleLayout({
 
 const Container = styled.div`
   height: 100%;
+  padding-top: 50px;
   overflow: auto;
   &::-webkit-scrollbar {
     display: none;
