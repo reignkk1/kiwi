@@ -13,6 +13,8 @@ export function useCurrentPage() {
 
   if (pathname.startsWith("/music")) {
     return "music";
+  } else if (pathname.startsWith("/album")) {
+    return "album";
   }
 
   return (pageMap[pathname] as Pages) || "unknown";
