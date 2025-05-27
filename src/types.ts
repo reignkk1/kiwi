@@ -1,6 +1,12 @@
 export type GenreType = "ballad" | "indie" | "hiphop";
 
-export type Pages = "home" | "search" | "storage" | "player" | "music";
+export type Pages =
+  | "home"
+  | "search"
+  | "storage"
+  | "player"
+  | "music"
+  | "album";
 
 export type MusicType = {
   id: number;
