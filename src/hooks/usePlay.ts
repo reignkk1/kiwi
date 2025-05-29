@@ -12,7 +12,7 @@ export default function usePlay(music: MusicType) {
   const play = () => {
     if (!music) throw new Error("music not found");
 
-    setCurrentMusic(music);
+    setCurrentMusic({ ...music });
     setIsPlay(true);
   };
 

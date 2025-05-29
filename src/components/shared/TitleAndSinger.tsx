@@ -67,6 +67,7 @@ const Title = styled.div<{
   color: ${palette.musicTitle};
   margin-bottom: 5px;
   overflow: hidden;
+  line-height: 1.4;
 
   ${({ $isWhiteSpace }) =>
     $isWhiteSpace
