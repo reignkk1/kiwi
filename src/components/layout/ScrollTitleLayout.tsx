@@ -24,15 +24,16 @@ export default function ScrollTitleLayout({
         <ButtonIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
         <Title>{isShowTitle && title}</Title>
       </Header>
-      {children}
+      <Content>{children}</Content>
     </Container>
   );
 }
 
 const Container = styled.div`
   height: 100%;
-  padding-top: 50px;
   overflow: auto;
+  padding-top: 64px;
+  padding-bottom: 150px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -64,4 +65,11 @@ const Title = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  line-height: 1.2;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 `;
