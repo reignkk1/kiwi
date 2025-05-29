@@ -44,8 +44,6 @@ export default function AlbumImg({
 
   const play = usePlay(music);
 
-  console.log(music);
-
   return (
     <Container>
       {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}

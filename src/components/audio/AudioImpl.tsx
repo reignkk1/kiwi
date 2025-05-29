@@ -55,7 +55,8 @@ export default function AudioImpl() {
     setSrc(
       addBasePath(`/mp3/${currentMusic.singer} - ${currentMusic.title}.mp3`)
     );
-  }, [currentMusic, setSrc]);
+    audio.currentTime = 0;
+  }, [currentMusic, setSrc, audio]);
 
   return (
     <audio

@@ -20,7 +20,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   } = useLayoutStore();
 
   const currentPage = useCurrentPage();
+
   const isMusicPage = currentPage === "music";
+  const isAlbumPage = currentPage === "album";
+
+  const isBurn = !isMusicPage && !isAlbumPage;
 
   const backGroundColor = musicBackGroundColor || ["rgba(0,0,0,0.5)"];
 
@@ -42,7 +46,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Container>
       <BackGroundFilter />
-      {!isMusicPage && <Burn $backGroundColor={backGroundColor} />}
+      {isBurn && <Burn $backGroundColor={backGroundColor} />}
       <Edge src={`${addBasePath("./img/phone.png")}`}>
         {isShowEntryModal && <Entry />}
         {isShowInformModal && <Inform />}

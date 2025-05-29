@@ -5,7 +5,7 @@ type MusicScrollStore = {
   setScrollTop: (scrollTop: MusicScrollStore["scrollTop"]) => void;
 };
 
-export const useMusicScrollStore = create<MusicScrollStore>((set) => ({
+export const useScrollStore = create<MusicScrollStore>((set) => ({
   scrollTop: 0,
   setScrollTop: (scrollTop) => set({ scrollTop }),
 }));
