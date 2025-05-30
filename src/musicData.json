@@ -169,12 +169,376 @@
       ]
     },
     {
+      "id": 2,
+      "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
+      "singer": "사야 (SAya), 재연",
+      "imgSrc": "./img/2.jpg",
+      "backGroundColor": ["#364354", "#7D686F", "#9E8A8C"],
+      "genre": "ballad",
+      "releaseDate": "2019.09.21",
+      "publisher": "지니뮤직",
+      "agency": "삼화네트웍스",
+      "albumTitle": "멜로가 체질 OST Part 7",
+      "albumIntro": "멜로가 체질’에서 세상 달달한 연애를 시작한 배우 안재홍, 천우희가 OST를 함께 부르며 설렘 지수를 높였다.<br/><br/>안재홍, 천우희가 부른 ‘흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야’는 지난 8월 장범준이 선보인 원곡의 리메이크 버전이다. 어쿠스틱 기타의 연주와 담백하고 꾸밈없는 보이스를 가진 천우희, 안재홍의 화음은 듣는 사람들의 마음을 더욱 따뜻하게 해준다.<br/><br/>이 뿐만 아니라 ‘흔들리는꽃들 속에서 네 샴푸향이 느껴진거야’ 발라드 버전 역시 함께 공개된다. ‘남자친구’, ‘로맨스는 별책부록’ OST 등에 참여하며 인지도를 넓히고 있는 사야와 신인가수 재연 두 사람이 감성을 촉촉히 적시는 발라드 스타일의 보컬로 완성시켰다.<br/><br/>최근 ‘멜로가 체질’에서 임진주(천우희 분), 손범수(안재홍 분)은 본격적인 연애를 시작하며 달콤한 멜로의 진수를 보여주고 있다. 이 가운데 두 사람이 호흡을 맞추며 아름다운 목소리로 완성시킨 OST ‘흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야’는 드라마의 핑크빛 설렘 무드를 더욱 극대화시켜줄 것으로 전망된다.<br/><br/>[Credits]<br/><br/>1. 천우희, 안재홍 - 흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야 (Actors Ver.)<br/><br/>Lyrics & Composed by 장범준<br/>Arranged by 한재완<br/><br/>Guitar 영<br/>Piano 한재완<br/><br/>Recorded by 이경호 @ CSMUSIC& Studios<br/>Mixed & Mastered by 김대성 @ TONE Studio<br/><br/>2. 사야(SAya), 재연 - 흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야 (Ballad Ver.)<br/><br/>Lyrics & Composed by 장범준<br/>Arranged by 한재완<br/><br/>Guitar 영<br/>Bass, Drum & Piano 한재완<br/><br/>Recorded by 유정현 @POP MUSIC STUDIO<br/>Mixed by 노양수<br/>Mastered by 도정회, 박준 @SoundMAX",
+      "lyricist": "장범준",
+      "composer": "장범준",
+      "arranger": "한재완",
+      "lyrics": [
+        {
+          "text": "사야 (SAya), 재연 - 흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
+          "startTime": 0,
+          "endTime": 14
+        },
+        {
+          "text": "흔들리는 꽃들 속에서",
+          "startTime": 15,
+          "endTime": 21
+        },
+        {
+          "text": "네 샴푸향이 느껴진거야",
+          "startTime": 22,
+          "endTime": 27
+        },
+        {
+          "text": "스쳐지나간건가 뒤돌아보지만",
+          "startTime": 28,
+          "endTime": 34
+        },
+        {
+          "text": "그냥 사람들만 보이는거야",
+          "startTime": 35,
+          "endTime": 42
+        },
+        {
+          "text": "다와가는 집근처에서",
+          "startTime": 43,
+          "endTime": 48
+        },
+        {
+          "text": "괜히 핸드폰만 만지는거야",
+          "startTime": 49,
+          "endTime": 55
+        },
+        {
+          "text": "한번 연락해 볼까 용기내 보지만",
+          "startTime": 56,
+          "endTime": 62
+        },
+        {
+          "text": "그냥 내 마음만 아쉬운 거야",
+          "startTime": 63,
+          "endTime": 68
+        },
+        {
+          "text": "걷다가 보면 항상 이렇게 너를",
+          "startTime": 69,
+          "endTime": 74
+        },
+        {
+          "text": "바라만 보던 너를 기다린다고 말할까",
+          "startTime": 75,
+          "endTime": 81
+        },
+        {
+          "text": "지금 집앞에 계속 이렇게 너를",
+          "startTime": 82,
+          "endTime": 87
+        },
+        {
+          "text": "아쉬워 하다 너를 연락했다 할까",
+          "startTime": 88,
+          "endTime": 109
+        },
+        {
+          "text": "지나치는 꽃들 속에서",
+          "startTime": 110,
+          "endTime": 116
+        },
+        {
+          "text": "네 샴푸향만 보이는거야",
+          "startTime": 117,
+          "endTime": 123
+        },
+        {
+          "text": "스쳐지나간건가 뒤 돌아보지만",
+          "startTime": 124,
+          "endTime": 130
+        },
+        {
+          "text": "그냥 내 마음만 바빠진거야",
+          "startTime": 131,
+          "endTime": 136
+        },
+        {
+          "text": "걷다가 보면 항상 이렇게 너를",
+          "startTime": 137,
+          "endTime": 142
+        },
+        {
+          "text": "바라만 보던 너를 기다린다고 말할까",
+          "startTime": 143,
+          "endTime": 150
+        },
+        {
+          "text": "지금 집앞에 계속 이렇게 너를",
+          "startTime": 151,
+          "endTime": 156
+        },
+        {
+          "text": "아쉬워 하다 너를 연락했다 할까",
+          "startTime": 157,
+          "endTime": 163
+        },
+        {
+          "text": "어떤 계절이 너를 우연히라도",
+          "startTime": 164,
+          "endTime": 168
+        },
+        {
+          "text": "너를 마주치게 할까",
+          "startTime": 169,
+          "endTime": 173
+        },
+        {
+          "text": "난 이대로 아쉬워하다",
+          "startTime": 174,
+          "endTime": 178
+        },
+        {
+          "text": "너를 바라만 보던 너를",
+          "startTime": 179,
+          "endTime": 183
+        },
+        {
+          "text": "기다리면서 아무말 못하고",
+          "startTime": 184,
+          "endTime": 190
+        },
+        {
+          "text": "그리워만 할까",
+          "startTime": 191,
+          "endTime": 198
+        },
+        {
+          "text": "걷다가 보면 항상 이렇게 너를",
+          "startTime": 199,
+          "endTime": 204
+        },
+        {
+          "text": "바라만 보던 너를 생각한다고 말할까",
+          "startTime": 205,
+          "endTime": 212
+        },
+        {
+          "text": "지금 집앞에 기다리고",
+          "startTime": 213,
+          "endTime": 214
+        },
+        {
+          "text": "때론 지나치고 다시 기다리는",
+          "startTime": 215,
+          "endTime": 218
+        },
+        {
+          "text": "꽃이 피는 거리에 보고파라 이밤에",
+          "startTime": 219,
+          "endTime": 225
+        },
+        {
+          "text": "걷다가 보면 항상 이렇게 너를",
+          "startTime": 226,
+          "endTime": 231
+        },
+        {
+          "text": "아쉬워 하다 너를 기다린다고 말할까",
+          "startTime": 232,
+          "endTime": 239
+        },
+        {
+          "text": "지금 집앞에 계속 이렇게 너를",
+          "startTime": 240,
+          "endTime": 245
+        },
+        {
+          "text": "아쉬워 하다 너를 연락했다 할까",
+          "startTime": 246,
+          "endTime": 287
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "네 옆에 그 사람은 내가 아닌 다른사람",
+      "singer": "TOIL, Kid Wine",
+      "imgSrc": "./img/3.jpg",
+      "backGroundColor": ["#241B1E", "#A59E74", "#96968C"],
+      "genre": "ballad",
+      "releaseDate": "2020.10.30",
+      "publisher": "지니뮤직",
+      "agency": "Kitowine records",
+      "albumTitle": "네 옆에 그 사람은 내가 아닌 다른사람",
+      "albumIntro": "최고의 프로듀서 '토일'과 '키드와인'의 감성적인 보컬이 만났다.<br/><br/>올 겨울, 시린 마음을 녹여줄 따뜻한 두 남자의 이야기..!<br/><br/>01. 네 옆에 그 사람은 내가 아닌 다른사람<br/>작사: kid wine<br/>작곡: TOIL, kid wine<br/>편곡: TOIL<br/><br/>Credit<br/>Lyrics by kid wine<br/>Produced by TOIL, kid wine<br/>Arranged by TOIL<br/>Piano by 전성하<br/>Guitar by 정경환<br/>Bass by TOIL<br/>Drum by TOIL, 김준구<br/>String by TOIL<br/>Perc by 한동완<br/><br/>Artwork. LEERYAN (@akaleeryan)<br/>Mix & master by kid wine, TOIL",
+      "lyricist": "Kid Wine",
+      "composer": "TOIL",
+      "arranger": "TOIL",
+      "lyrics": [
+        {
+          "text": "TOIL, Kid Wine - 네 옆에 그 사람은 내가 아닌 다른사람",
+          "startTime": 0,
+          "endTime": 18
+        },
+        {
+          "text": "많은 시간이 지나도",
+          "startTime": 19,
+          "endTime": 22
+        },
+        {
+          "text": "난 너를 못 잊는 것은",
+          "startTime": 23,
+          "endTime": 25
+        },
+        {
+          "text": "그건 아마도",
+          "startTime": 26,
+          "endTime": 27
+        },
+        {
+          "text": "부정할 수 없는 사실인걸",
+          "startTime": 28,
+          "endTime": 32
+        },
+        {
+          "text": "어쩜 나를 떠난 그대는",
+          "startTime": 33,
+          "endTime": 36
+        },
+        {
+          "text": "마치 아무 일도 없던 사람처럼",
+          "startTime": 37,
+          "endTime": 41
+        },
+        {
+          "text": "웃을 수 있는지",
+          "startTime": 42,
+          "endTime": 44
+        },
+        {
+          "text": "두 번 다시 너를 찾지 않을 게",
+          "startTime": 45,
+          "endTime": 50
+        },
+        {
+          "text": "널 생각하는 마음도",
+          "startTime": 51,
+          "endTime": 53
+        },
+        {
+          "text": "네 사진도",
+          "startTime": 54,
+          "endTime": 55
+        },
+        {
+          "text": "잊지 못하는 나를 보네",
+          "startTime": 56,
+          "endTime": 59
+        },
+        {
+          "text": "웃고 있는 네 옆에 그 사람은",
+          "startTime": 60,
+          "endTime": 64
+        },
+        {
+          "text": "내가 아닌 다른 사람 일 거라는",
+          "startTime": 65,
+          "endTime": 70
+        },
+        {
+          "text": "생각이 난 더 아픈 거야",
+          "startTime": 71,
+          "endTime": 95
+        },
+        {
+          "text": "그댄 어떤가요",
+          "startTime": 96,
+          "endTime": 98
+        },
+        {
+          "text": "네모 속 그대 모습은",
+          "startTime": 99,
+          "endTime": 102
+        },
+        {
+          "text": "누구보다 행복한 사진들뿐인데",
+          "startTime": 103,
+          "endTime": 109
+        },
+        {
+          "text": "한 번쯤은 생각하는지",
+          "startTime": 110,
+          "endTime": 113
+        },
+        {
+          "text": "날 사랑했던 그대에게",
+          "startTime": 114,
+          "endTime": 116
+        },
+        {
+          "text": "나는 별거 아닌 일인지",
+          "startTime": 117,
+          "endTime": 121
+        },
+        {
+          "text": "두 번 다시 너를 찾지 않을 게",
+          "startTime": 122,
+          "endTime": 127
+        },
+        {
+          "text": "널 생각하는 마음도",
+          "startTime": 128,
+          "endTime": 131
+        },
+        {
+          "text": "네 사진도",
+          "startTime": 132,
+          "endTime": 132
+        },
+        {
+          "text": "잊지 못하는 나를 보네",
+          "startTime": 133,
+          "endTime": 136
+        },
+        {
+          "text": "웃고 있는 네 옆에 그 사람은",
+          "startTime": 137,
+          "endTime": 141
+        },
+        {
+          "text": "내가 아닌 다른 사람 일 거라는",
+          "startTime": 142,
+          "endTime": 147
+        },
+        {
+          "text": "생각이 난 더 아픈 거야",
+          "startTime": 148,
+          "endTime": 224
+        }
+      ]
+    },
+    {
       "id": 4,
       "title": "너를 사랑하지 않는 맘이 아냐 (Feat. 유주)",
       "singer": "Kid Wine",
       "imgSrc": "./img/4.jpg",
       "backGroundColor": ["#FB4F37", "#B43C2C", "#F0BFBA"],
       "genre": "indie",
+      "releaseDate": "2024.03.26",
+      "publisher": "YG PLUS",
+      "agency": "WINY",
+      "albumTitle": "SOMMELIER",
+      "albumIntro": "사랑은 그렇게 찾아온다<br/><br/>[Credit]<br/><br/>01. 사랑은 작은 빗방울처럼 (Feat. Chan, Gist)<br/>작사 : Kid Wine, Chan, Gist<br/>작곡 : PATEKO (파테코), Kid Wine, Chan, Gist<br/>편곡 : PATEKO (파테코)<br/>Drum, Piano by PATEKO (파테코)<br/>Bass by 박찬민<br/>Guitar by 최영훈<br/>Mixed by Kid Wine, Chan<br/><br/>02. 너를 사랑하지 않는 맘이 아냐 (Feat. 유주)<br/>작사 : Kid Wine, 유주<br/>작곡 : 정홍교, TOIL, Kid Wine<br/>편곡 : 정홍교, TOIL<br/>Perc by TOIL<br/>Guitar by 정홍교<br/><br/>03. 친구 사이 (Feat. VVON, Skinny Brown)<br/>작사 : HAAN, Kid Wine, VVON (본), Skinny Brown<br/>작곡 : HAAN, Kid Wine, VVON (본), Skinny Brown<br/>편곡 : HAAN<br/>Drum, Bass, Piano, Synth by HAAN<br/>Guitar by 바이빈 (vibin)<br/><br/>04. UNFOLLOW (Feat. Jayci Yucca)<br/>작사 : Kid Wine, Jayci Yucca<br/>작곡 : kyuu, Kid Wine, Jayci Yucca<br/>편곡 : kyuu, hwantar<br/>Drum, Bass, Perc by kyuu<br/>Guitar by 정경환<br/>Synth by 박병일<br/><br/>05. 이럴 거면 우리 (Feat. JAEHA)<br/>작사 : Kid Wine, JAEHA<br/>작곡 : The TRINITY, Kid Wine, JAEHA<br/>편곡 : The TRINITY<br/>Drum, Bass, Piano, Synth, String, Perc by The TRINITY<br/>Guitar by 김홍빈<br/><br/>06. 그럼에도 (Feat. DON MALIK)<br/>작사 : Kid Wine, DON MALIK<br/>작곡 : PATEKO (파테코), Kid Wine<br/>편곡 : PATEKO (파테코)<br/>Drum, Piano by PATEKO (파테코)<br/>Bass by 박찬민<br/>Guitar by 정홍교<br/>String by 임우빈<br/><br/>07. 사랑에 빠져보자 (Feat. 황세현)<br/>작사 : Kid Wine, 황세현<br/>작곡 : HAAN, Kid Wine, 황세현<br/>편곡 : HAAN<br/>Drum, Bass, Piano, Synth by HAAN<br/>Guitar by 바이빈 (vibin)<br/><br/>08. 행복한 꿈을 꾸길 바래<br/>작사 : Kid Wine<br/>작곡 : HYESUNG (혜성), Kid Wine<br/>편곡 : HYESUNG (혜성)<br/>Drum, Bass, Piano, String by HYESUNG (혜성)<br/><br/>09. 바보처럼<br/>작사 : Kid Wine<br/>작곡 : Kid Wine<br/>편곡 : Kid Wine, 낭만조이<br/>Drum by Kid Wine<br/>Bass by 한용탁<br/>Piano by 박기쁨<br/>Guitar by 이신우<br/><br/>Mixed & Mastered by Kid Wine @ WINY Studio<br/><br/>Artwork by SLY @slyphibian",
+      "lyricist": "Kid Wine",
+      "composer": "유주 (YUJU)",
+      "arranger": "TOIL",
       "lyrics": [
         {
           "text": "참 웃긴 것 같아",
@@ -389,352 +753,20 @@
       ]
     },
     {
-      "id": 2,
-      "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
-      "singer": "사야 (SAya), 재연",
-      "imgSrc": "./img/2.jpg",
-      "backGroundColor": ["#364354", "#7D686F", "#9E8A8C"],
-      "genre": "ballad",
-      "lyrics": [
-        {
-          "text": "사야 (SAya), 재연 - 흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
-          "startTime": 0,
-          "endTime": 14
-        },
-        {
-          "text": "흔들리는 꽃들 속에서",
-          "startTime": 15,
-          "endTime": 21
-        },
-        {
-          "text": "네 샴푸향이 느껴진거야",
-          "startTime": 22,
-          "endTime": 27
-        },
-        {
-          "text": "스쳐지나간건가 뒤돌아보지만",
-          "startTime": 28,
-          "endTime": 34
-        },
-        {
-          "text": "그냥 사람들만 보이는거야",
-          "startTime": 35,
-          "endTime": 42
-        },
-        {
-          "text": "다와가는 집근처에서",
-          "startTime": 43,
-          "endTime": 48
-        },
-        {
-          "text": "괜히 핸드폰만 만지는거야",
-          "startTime": 49,
-          "endTime": 55
-        },
-        {
-          "text": "한번 연락해 볼까 용기내 보지만",
-          "startTime": 56,
-          "endTime": 62
-        },
-        {
-          "text": "그냥 내 마음만 아쉬운 거야",
-          "startTime": 63,
-          "endTime": 68
-        },
-        {
-          "text": "걷다가 보면 항상 이렇게 너를",
-          "startTime": 69,
-          "endTime": 74
-        },
-        {
-          "text": "바라만 보던 너를 기다린다고 말할까",
-          "startTime": 75,
-          "endTime": 81
-        },
-        {
-          "text": "지금 집앞에 계속 이렇게 너를",
-          "startTime": 82,
-          "endTime": 87
-        },
-        {
-          "text": "아쉬워 하다 너를 연락했다 할까",
-          "startTime": 88,
-          "endTime": 109
-        },
-        {
-          "text": "지나치는 꽃들 속에서",
-          "startTime": 110,
-          "endTime": 116
-        },
-        {
-          "text": "네 샴푸향만 보이는거야",
-          "startTime": 117,
-          "endTime": 123
-        },
-        {
-          "text": "스쳐지나간건가 뒤 돌아보지만",
-          "startTime": 124,
-          "endTime": 130
-        },
-        {
-          "text": "그냥 내 마음만 바빠진거야",
-          "startTime": 131,
-          "endTime": 136
-        },
-        {
-          "text": "걷다가 보면 항상 이렇게 너를",
-          "startTime": 137,
-          "endTime": 142
-        },
-        {
-          "text": "바라만 보던 너를 기다린다고 말할까",
-          "startTime": 143,
-          "endTime": 150
-        },
-        {
-          "text": "지금 집앞에 계속 이렇게 너를",
-          "startTime": 151,
-          "endTime": 156
-        },
-        {
-          "text": "아쉬워 하다 너를 연락했다 할까",
-          "startTime": 157,
-          "endTime": 163
-        },
-        {
-          "text": "어떤 계절이 너를 우연히라도",
-          "startTime": 164,
-          "endTime": 168
-        },
-        {
-          "text": "너를 마주치게 할까",
-          "startTime": 169,
-          "endTime": 173
-        },
-        {
-          "text": "난 이대로 아쉬워하다",
-          "startTime": 174,
-          "endTime": 178
-        },
-        {
-          "text": "너를 바라만 보던 너를",
-          "startTime": 179,
-          "endTime": 183
-        },
-        {
-          "text": "기다리면서 아무말 못하고",
-          "startTime": 184,
-          "endTime": 190
-        },
-        {
-          "text": "그리워만 할까",
-          "startTime": 191,
-          "endTime": 198
-        },
-        {
-          "text": "걷다가 보면 항상 이렇게 너를",
-          "startTime": 199,
-          "endTime": 204
-        },
-        {
-          "text": "바라만 보던 너를 생각한다고 말할까",
-          "startTime": 205,
-          "endTime": 212
-        },
-        {
-          "text": "지금 집앞에 기다리고",
-          "startTime": 213,
-          "endTime": 214
-        },
-        {
-          "text": "때론 지나치고 다시 기다리는",
-          "startTime": 215,
-          "endTime": 218
-        },
-        {
-          "text": "꽃이 피는 거리에 보고파라 이밤에",
-          "startTime": 219,
-          "endTime": 225
-        },
-        {
-          "text": "걷다가 보면 항상 이렇게 너를",
-          "startTime": 226,
-          "endTime": 231
-        },
-        {
-          "text": "아쉬워 하다 너를 기다린다고 말할까",
-          "startTime": 232,
-          "endTime": 239
-        },
-        {
-          "text": "지금 집앞에 계속 이렇게 너를",
-          "startTime": 240,
-          "endTime": 245
-        },
-        {
-          "text": "아쉬워 하다 너를 연락했다 할까",
-          "startTime": 246,
-          "endTime": 287
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "title": "네 옆에 그 사람은 내가 아닌 다른사람",
-      "singer": "TOIL, Kid Wine",
-      "imgSrc": "./img/3.jpg",
-      "backGroundColor": ["#241B1E", "#A59E74", "#96968C"],
-      "genre": "ballad",
-      "lyrics": [
-        {
-          "text": "TOIL, Kid Wine - 네 옆에 그 사람은 내가 아닌 다른사람",
-          "startTime": 0,
-          "endTime": 18
-        },
-        {
-          "text": "많은 시간이 지나도",
-          "startTime": 19,
-          "endTime": 22
-        },
-        {
-          "text": "난 너를 못 잊는 것은",
-          "startTime": 23,
-          "endTime": 25
-        },
-        {
-          "text": "그건 아마도",
-          "startTime": 26,
-          "endTime": 27
-        },
-        {
-          "text": "부정할 수 없는 사실인걸",
-          "startTime": 28,
-          "endTime": 32
-        },
-        {
-          "text": "어쩜 나를 떠난 그대는",
-          "startTime": 33,
-          "endTime": 36
-        },
-        {
-          "text": "마치 아무 일도 없던 사람처럼",
-          "startTime": 37,
-          "endTime": 41
-        },
-        {
-          "text": "웃을 수 있는지",
-          "startTime": 42,
-          "endTime": 44
-        },
-        {
-          "text": "두 번 다시 너를 찾지 않을 게",
-          "startTime": 45,
-          "endTime": 50
-        },
-        {
-          "text": "널 생각하는 마음도",
-          "startTime": 51,
-          "endTime": 53
-        },
-        {
-          "text": "네 사진도",
-          "startTime": 54,
-          "endTime": 55
-        },
-        {
-          "text": "잊지 못하는 나를 보네",
-          "startTime": 56,
-          "endTime": 59
-        },
-        {
-          "text": "웃고 있는 네 옆에 그 사람은",
-          "startTime": 60,
-          "endTime": 64
-        },
-        {
-          "text": "내가 아닌 다른 사람 일 거라는",
-          "startTime": 65,
-          "endTime": 70
-        },
-        {
-          "text": "생각이 난 더 아픈 거야",
-          "startTime": 71,
-          "endTime": 95
-        },
-        {
-          "text": "그댄 어떤가요",
-          "startTime": 96,
-          "endTime": 98
-        },
-        {
-          "text": "네모 속 그대 모습은",
-          "startTime": 99,
-          "endTime": 102
-        },
-        {
-          "text": "누구보다 행복한 사진들뿐인데",
-          "startTime": 103,
-          "endTime": 109
-        },
-        {
-          "text": "한 번쯤은 생각하는지",
-          "startTime": 110,
-          "endTime": 113
-        },
-        {
-          "text": "날 사랑했던 그대에게",
-          "startTime": 114,
-          "endTime": 116
-        },
-        {
-          "text": "나는 별거 아닌 일인지",
-          "startTime": 117,
-          "endTime": 121
-        },
-        {
-          "text": "두 번 다시 너를 찾지 않을 게",
-          "startTime": 122,
-          "endTime": 127
-        },
-        {
-          "text": "널 생각하는 마음도",
-          "startTime": 128,
-          "endTime": 131
-        },
-        {
-          "text": "네 사진도",
-          "startTime": 132,
-          "endTime": 132
-        },
-        {
-          "text": "잊지 못하는 나를 보네",
-          "startTime": 133,
-          "endTime": 136
-        },
-        {
-          "text": "웃고 있는 네 옆에 그 사람은",
-          "startTime": 137,
-          "endTime": 141
-        },
-        {
-          "text": "내가 아닌 다른 사람 일 거라는",
-          "startTime": 142,
-          "endTime": 147
-        },
-        {
-          "text": "생각이 난 더 아픈 거야",
-          "startTime": 148,
-          "endTime": 224
-        }
-      ]
-    },
-    {
       "id": 5,
       "title": "그대만 있다면",
       "singer": "너드커넥션",
       "imgSrc": "./img/5.jpg",
       "backGroundColor": ["#70665D", "#9D6C4C", "#DBBFA9"],
       "genre": "ballad",
+      "releaseDate": "2023.08.15",
+      "publisher": "카카오엔터테인먼트",
+      "agency": "TOON STUDIO",
+      "albumTitle": "그대만 있다면 (여름날 우리 X 너드커넥션 (Nerd Connection))",
+      "albumIntro": "영화 ‘여름날 우리’ 컬래버레이션 음원 프로젝트 [너드커넥션 (Nerd Connection) - 그대만 있다면]<br/><br/>영화 '여름날 우리'는 ‘요우 용치’에게 풍덩 빠져버린 ‘저우 샤오치’가 그녀에게 닿기까지 수많은 여름을 그린 로맨스 영화로 허광한, 장약남이 출연해 여름날 온도처럼 뜨거운 청춘의 첫사랑을 그려냈다. 지난 2021년 8월 국내에서 개봉한 후에도 여전히 성원이 끊이지 않아, 올해 6월 28일 다시 한번 스크린에서 관객들을 만나 뜨거운 반응을 얻고 있다.",
+      "lyricist": "강현민",
+      "composer": "강현민",
+      "arranger": "정수민(SSMusic)",
       "lyrics": [
         {
           "text": "너드커넥션 - 그대만 있다면",
@@ -920,6 +952,14 @@
       "imgSrc": "./img/6.jpg",
       "backGroundColor": ["#E7E4DD", "#7D8063", "#ECDFCC"],
       "genre": "ballad",
+      "releaseDate": "2016.01.22",
+      "publisher": "지니뮤직",
+      "agency": "쿵엔터테인먼트",
+      "albumTitle": "응답하라 1988 감독판 오리지날사운드트랙",
+      "albumIntro": "어설퍼 귀여운, 완벽하지 않기에 더 사랑스러운 사춘기의 감정들.<br/>볼빨간사춘기의 [Red Diary Page.1]<br/><br/>설레는 만남부터 푸르게 시린 이별, 혼자의 순간까지.<br/>순수한 사춘기에 영원히 머물고픈 볼빨간사춘기가 써 내려가는 Red Diary, 그 첫 번째 페이지.<br/>지금 시작합니다.<br/><br/>01. 썸 탈꺼야<br/>아침에 눈뜨자마자 네 얼굴이 두둥실 떠오른다. 괜스레 네게 마음을 들키는 것만 같아 얼른 고개를 가로젓는다. 오늘은 해가 다 지도록 한 통의 연락도 오지 않는다. 종일 소식 없는 대화창만 애꿎게 들락날락. 그래도 이런 널 좋아한다고, 부끄러워 내 볼이 빨갛게 물들어도 이런 네게 좋아한다 말하고 싶어.<br/>사랑에 있어 표현은 중요한 요소다. ‘썸 탈꺼야’는 좋아하는 사람에게 밀고 당기기 보다 자신의 마음을 숨기지 않고 솔직하게 표현해 사춘기스러움이 묻어나는 곡이다. 전주와 도입부, 후렴 각각 리듬이 다르게 진행되어 상대를 좋아하는 마음처럼 버라이어티하고 다양한 구성을 느낄 수 있다.<br/>(작사 : 안지영 / 작곡 : 안지영, 바닐라맨 / 편곡 : 바닐라맨 / Acoustic Guitar : 바닐라맨 / Elec Guitar : 이승엽 / Bass : 이동혁 / Chorus : 안지영)<br/><br/>02. Blue<br/>“파랗게 blue blue 우리가 칠해지네. 서로의 맘도 파랗게 멍들어갈 때. 내 맘을 true true 너와 함께 있을 땐 사랑받던 모습이 그토록 아름다웠는데.”<br/>아직 널 좋아하지만 좋아하지 않는, 미워하지만 미워하지 않는. 너와 함께 하던 시간들이 익숙함이 되고, 달콤한 멜로디를 내던 마음들이 어긋나 불협화음을 만든다. 헤어지고 난 후 파랗게 칠해진 그와 나 사이의 심리를 우울하고 차가운 색으로 표현 한 곡 ‘Blue’. 나일론 기타의 대선이 돋보인다.<br/>(작사 : 안지영 / 작곡 : 안지영 / 편곡 : 바닐라맨 / Acoustic Guitar : 바닐라맨 / Elec Guitar : 이승엽 / Bass : 최훈 / Chorus : 안지영)<br/><br/>03. 고쳐주세요<br/>“기운이 하나도 없어. 밥도 잘 넘어가질 않아. 세상에 젤 슬픈 얼굴로 거리를 걷고. 머릿속에 먹구름이, 좀처럼 해가 뜨질 않아. 눈 밑이 점점 어두워져요. 어떡해, 나를 고쳐주세요.”<br/>제목에서 느껴지듯 ‘고쳐주세요’는 기운이 하나도 없고, 입맛도 없는 나를 고칠 수 있는 건 네 밝은 미소와 사랑뿐이라는 귀여운 고백을 담은 곡이다. 청량한 기타 사운드가 곡을 전체적으로 리드하고, 드럼과 베이스의 리듬감 있는 연주가 돋보인다. 한 번만 들어도 익숙해지는 간결한 멜로디와 대중적 요소가 특징이다.<br/>(작사 : 우지윤, 바닐라맨 / 작곡 : 바닐라맨 / 편곡 : 바닐라맨 / Acoustic Guitar : 바닐라맨 / Elec Guitar : 이승엽 / Bass : 최훈 / Chorus : 안지영, 우지윤 / Drum : 강수호)<br/><br/>04. 상상<br/>누군가를 마음에 들이게 되면, 매 순간 그와 시간을 보내는 상상을 하게 된다. 함께 맛있는 음식을 먹거나, 손을 맞잡고 영화를 보는 그런. 상대의 연락이 오기만을 온종일 기다리고, 메시지 하나에 마음이 부풀어 터질 것만 같다.<br/>‘상상’은 강아지가 하루 종일 주인만을 생각하며 기다리는 것처럼, 매일 상상만 하는 지루한 시간이 지나가고, 그가 어서 빨리 내 마음을 알아차리길 바라는 마음을 귀엽게 담았다. 발랄한 가사와 경쾌한 기타 리듬이 돋보인다.<br/>(작사 : 우지윤 / 작곡 : 우지윤 / 편곡 : 바닐라맨 / Acoustic Guitar : 바닐라맨 / Elec Guitar : 이승엽 / Bass : 최훈 / Chorus : 안지영, 우지윤)<br/><br/>05. 나의 사춘기에게<br/>세상이 모두 내 것 같다가도 별안간 세상에 나 홀로 남겨진 막막한 기분에 잠길 때. 지독히도 까만 밤이 무서워 잠 못 들던 나날의 연속.<br/>누구나 한 번쯤 겪는 사춘기. 한때처럼 살아가며 겪는 성장통에 아파하는 모든 이에게 위로의 마음을 건네는 ‘나의 사춘기에게’. 아름답고 아름답던 이 시절은 언젠가는 짧게 나마 빛을 내 비출 것이라는 소망을 담은, 아직은 여리고 어리숙한 나의 사춘기들에게 위로를 보내는 곡이다. 웅장한 사운드와 함께 대규모 편성이 이루어졌다.<br/>(작사 : 안지영 / 작곡 : 안지영 / 편곡 : 바닐라맨 / Acoustic Guitar : 바닐라맨 / Elec Guitar : 이승엽 / Bass : 이동혁 / Chorus : 안지영 / Drum : 강수호 / Piano : 조현석 / String Arranged : 김대홍 / Strings : 융스트링)<br/><br/>06. 썸 탈꺼야 (Chic ver)(CD Only)<br/>온라인에는 공개되지 않는 타이틀 곡 ‘썸 탈꺼야’의 새로운 편곡 버전이다. 재즈틱하고 감성적인 편곡으로 원곡과는 또 다른 매력을 느낄 수 있다.<br/><br/>Thanks to.<br/>From. 지영, 지윤<br/>우리 쇼파르뮤직 식구들, 우리 가족들 그리고 도와주신 모든 분들께 진심으로 감사드립니다.<br/>있는 그대로의 사춘기 감성을 사랑해주시는 팬분들께도 감사드립니다.<br/>어린 시절 나의 일기장처럼 그대들의 사춘기도 온전히 아름답게 쓰일 수 있도록 더 좋은 노래로 보답하겠습니다. 사랑합니다.<br/>-볼빨간사춘기 올림-<br/><br/>CREDIT<br/>Executive Producer by 신태권 for Shofar Music<br/>Producer by 바닐라맨, 신태권<br/>Recorded by Seoul studio, Velvet studio, Vanilla studio, Tomato studio<br/>Mixed by 김현곤 @둡둡 Studio(1,3,5), 바닐라맨 @Vanilla Studio(2,4,6)<br/>Mastered by 전훈 @Sonic Korea<br/>Chief Manager by 정세웅<br/>Management by 김민구, 정우진, 구용식, 전상혁, 홍석윤<br/>Production A&R by 김민구, 김예목<br/>On Line Marketing by 홍석윤, 김예목, 엄예지, 황정원, 최은지<br/>Fan Marketing by 엄예지<br/>Off Line Marketing by LOEN entertainment<br/>Accounting by 박재명<br/>Vocal Director by 윤혜린<br/>Style Director by 차오름, 노효린, 황은별<br/>Hair & Make up Director by 이명진, 이승연<br/>Album Photograph by 리에<br/>Album Designed by 황정원, 최은지<br/><br/>www.shofar-music.com<br/>www.facebook.com/shofarmusic<br/>http://cafe.daum.net/Bolbbalgan4<br/>www.facebook.com/bolbbalgan4",
+      "lyricist": "이영훈",
+      "composer": "이영훈",
+      "arranger": "philtre",
       "lyrics": [
         {
           "text": "오혁 - 소녀",
@@ -1025,6 +1065,14 @@
       "imgSrc": "./img/7.jpg",
       "backGroundColor": ["#07133B", "#7A4EA5", "#F3F2F7"],
       "genre": "ballad",
+      "releaseDate": "2016.01.26",
+      "publisher": "빅밴드",
+      "agency": "보이스메모리",
+      "albumTitle": "얼음꽃",
+      "albumIntro": "감성 그룹 보이스메모리가 3년 만에 따끈따끈한 두 번째 디지털 싱글앨범으로 추운 겨울의 문을 똑똑 두드렸다.<br/>이번 앨범은 보이스메모리의 기존 스타일 곡 과는 다르게 겨울에 어울리는 발라드 곡들로 선보이게 되었다.<br/>싱어송라이터이자 프로듀서인 리더 ‘서준빈‘을 필두로 애절한 보이스의 보컬 ’조성민‘이 노래를 불렀고 1집 앨범에서 매력적인 보이스로 많은 이들의 심금을 울렸던 보컬 ’손민지‘ 가 코러스를 담당했다.<br/>드럼 '임재석’ 건반 '신은지’ 베이스 ‘최봉환’ 의 한층 업그레이드 된 연주에 더불어 담당 엔지니어 ‘나현준’ 세컨건반 ‘유효진’이 함께 하면서 보다 수준높은 새로운 앨범이 탄생하게 되었다.<br/>앨범의 타이틀 곡인 ‘얼음꽃’ 은 겨울동화 같은 곡이다.<br/>공주를 그저 멀리서 바라보며 행복을 바래줄 수밖에 없는 소심한 난쟁이의 애절한 사랑이야기가 담겨져 있는 곡으로 추운 겨울 순수했던 난쟁이의 사랑을 떠올리며 아련한 추억에 잠겨볼수 있을 것 이다.<br/>두 번째 곡 ‘혼자하는 이별’ 역시 짝사랑에 대한 곡이다.<br/>평생토록 함께 하고 싶은 사람의 마음을 얻지 못한채 ‘혼자’ 사랑하다 결국 그 아픔을 견디기 힘들어 ‘혼자’ 이별을 결심하게 되는 가슴 아픈 곡이다.<br/>이번 앨범은 수준높은 뮤지션 들이 함께해 더욱더 완성도 있는 곡을 만들수 있었다.<br/>재즈 피아니스트 '황준익’ 님과 기타리스트 ‘황이현’ 님의 건반과 기타 연주로 한층 세련되고 깔끔한 반주가 완성되었고 싱어송라이터 ‘장지영’ 님과 Marry & Marry에 ‘안소영’ 님이 각각 편곡과 코러스 편곡을 이즈실용음악학원의 ‘장현철’ 님이 드럼녹음에 도움주었다.<br/>엔지니어 ‘W paul’ 님이 믹싱 작업을 해주었고 국내 최고의 엔지니어 ‘고현정’ 님이 마스터링 작업을 해주었다.<br/>보이스메모리는 다양한 장르의 음악을 노래한다.<br/>이번 앨범에선 발라드를 선보였지만 다음번에 기회가 생긴다면 더욱 다양한 장르의 음악으로 사람들과 함께 소통하고 싶다.<br/>추운 겨울 마음을 따듯하게 녹여 줄 수 있는 손난로 같은 그러한 보이스메모리로 기억에 남길 바란다.<br/><br/>::Credit<br/>Producer: 서준빈 / Writing & Composing Songs: 서준빈 / Vocal: 조성민 / Chorus: 손민지 , 서준빈 , 조성민 / Song Arrange: 보이스메모리 , 장지영 / Keyboard: 신은지 , 유효진 , 황준익 / Guitar: 황이현 / Drums: 임재석 / Bass: 최봉환 / Vocal Directed & Chorus Arrange: 안소영 / Recording Studio(Vocal Recording): RoadMakers Studio / Vocal Recording Engineer: His / Band Recording Engineer: 나현준 , 장현철 / Mixing Engineer: W Paul / Mastering Engineer: 고현정<br/><br/>01 얼음꽃<br/>1) 작사자 : 서준빈<br/>2) 작곡자 : 서준빈<br/>3) 편곡자 : 보이스메모리<br/>4) 실연자 : 보이스메모리, 황준익, 황이현, 유효진<br/><br/>02 혼자하는 이별<br/>1) 작사자 : 서준빈<br/>2) 작곡자 : 서준빈<br/>3) 편곡자 : 보이스메모리<br/>4) 실연자 : 보이스메모리, 황준익, 황이현, 유효진<br/><br/>03 얼음꽃 (Inst.)<br/>1) 작곡자 : 서준빈<br/>2) 편곡자 : 보이스메모리<br/>3) 실연자 : 보이스메모리, 황준익, 황이현, 유효진<br/><br/>04 혼자하는 이별 (Inst.)<br/>1) 작곡자 : 서준빈<br/>2) 편곡자 : 보이스메모리<br/>3) 실연자 : 보이스메모리, 황준익, 황이현, 유효진",
+      "lyricist": "서준빈",
+      "composer": "서준빈",
+      "arranger": "보이스메모리",
       "lyrics": [
         {
           "text": "보이스메모리 - 얼음꽃",
@@ -1290,6 +1338,14 @@
       "imgSrc": "./img/8.jpg",
       "backGroundColor": ["#405661", "#C49A82", "#CDC0BA"],
       "genre": "ballad",
+      "releaseDate": "2023.07.06",
+      "publisher": "카카오엔터테인먼트",
+      "agency": "TOON STUDIO",
+      "albumTitle": "잘 지내자, 우리 (여름날 우리 X 로이킴)",
+      "albumIntro": "영화 ‘여름날 우리’ 컬래버레이션 음원 프로젝트 [로이킴 – 잘 지내자, 우리]<br/><br/>영화 '여름날 우리'는 ‘요우 용치’에게 풍덩 빠져버린 ‘저우 샤오치’가 그녀에게 닿기까지 수많은 여름을 그린 로맨스 영화로 허광한, 장약남이 출연해 여름날 온도처럼 뜨거운 청춘의 첫사랑을 그려냈다.<br/>지난 2021년 8월 국내에서 개봉한 후에도 여전히 성원이 끊이지 않아, 올해 6월 28일 다시 한번 스크린에서 관객들을 만나 뜨거운 반응을 얻고 있다.",
+      "lyricist": "성용욱",
+      "composer": "성용욱",
+      "arranger": "최상언",
       "lyrics": [
         {
           "text": "마음을 다 보여줬던 너와는 다르게",
@@ -1480,6 +1536,14 @@
       "imgSrc": "./img/9.jpg",
       "backGroundColor": ["#7B9357", "#AAAD9A", "#414A37"],
       "genre": "ballad",
+      "releaseDate": "2021.04.14",
+      "publisher": "카카오엔터테인먼트",
+      "agency": "네버랜드엔터테인먼트",
+      "albumTitle": "봄 내음보다 너를",
+      "albumIntro": "[CREDIT]<br/><br/>ARTIST  김나영<br/><br/>EXECUTIVE PRODUCER  김세진<br/>ALL PROMOTION DIRECTOR  JUNOSIS, 김효승<br/>MEDIA PLANNER 박예진<br/><br/>LYRIC  김나영<br/>COMPOSE  김세진<br/>ARRANGE  김세진<br/><br/>GUITAR  적재<br/>PIANO  김세진<br/>KEYBOARD 김세진<br/>FRETLESS BASS 최훈<br/>CHORUS 김나영 김세진<br/><br/>RECORDING  최자연 AT W SOUND<br/>MIXED BY  조준성 AT W SOUND<br/>MASTERED BY  권남우 AT 821 SOUND<br/><br/>M/V DIRECTOR  이유영 이재현 AT SNP Film<br/>PHOTO 김청아<br/>ALBUM DESIGN  딩클리 (dinklelee)<br/><br/>`봄 내음보다 너를`은 제목에서 말해주듯 봄 내음보다 더 설레게 하는 사랑했던 시절을 추억하는 노래이다.<br/>처음부터 끝까지 감정조절만으로 섬세하고 덤덤한 감성만을 보여주는 김나영의 깊은 보이스와<br/>노래의 전반적인 흐름을 이끌어가는 감성 아티스트 적재의 Acoustic Guitar 선율이 표현한 쓸쓸함이 아련한 추억의 감성을 더욱 짙게 느낄 수 있게 하고 있다.<br/>그리고 중반부의 간주 부분은 레트로한 Upright Piano와 몽환적인 패드가 더욱더 감성을 충만하게 하여 듣는 리스너들에게 따뜻한 봄 하늘 아래 추억에 잠길 수 있는 따뜻한 곡이 될 것이다.",
+      "lyricist": "김나영",
+      "composer": "김세진",
+      "arranger": "김세진",
       "lyrics": [
         {
           "text": "너의 이름을 부르면",
@@ -1610,6 +1674,14 @@
       "imgSrc": "./img/10.jpg",
       "backGroundColor": ["#594018", "#AB7F52", "#B59D71"],
       "genre": "ballad",
+      "releaseDate": "2024.03.12",
+      "publisher": "NHN벅스",
+      "agency": "보이저뮤직",
+      "albumTitle": "묘해, 너와",
+      "albumIntro": "그와 그녀의 사랑 이야기들 'About Love'<br/><br/>'About Love'는 작사 작곡가이자 프로듀서인 심현보가 작품 활동 25주년을 맞아 그동안 사랑 받았던 그의 히트곡과 가사들을 새로운 감각으로 리메이크 하는 콜라보레이션 프로젝트이다.<br/><br/>데뷔 이후 오랫동안 히트곡 메이커로 각광받으며 자신의 음악 세계를 만들어온 프로듀서 심현보는 섬세하고 감수성 예민한 노래들로 사랑과 이별을 이야기하는 음유시인으로 자리매김해왔다. 장르를 넘나드는 다양한 음악적 스타일과 감각적인 멜로디, 그리고 일상의 디테일을 포착해내는 매력적인 가사로 사랑 받아온 그의 음악들이 동료와 후배 아티스트들과의 협업을 통해 새로운 감각으로 다시 태어난다.<br/><br/>이미 큰 사랑을 받았던 스테디셀러 음악들이 새로운 아티스트들과의 협업으로 리메이크되는 이번 시리즈는 많은 리스너들에게 신선하고 다채로운 편곡과 멜로디, 그리고 가사로 한층 더 크고 깊은 감동을 선사할 것으로 기대된다.<br/><br/>'About Love', '묘해, 너와'<br/>행복과 불안의 경계, 그 복잡하고 미묘한 사랑의 감정<br/>새롭게 떠오르는 감성 보컬리스트 NCT 태일의 새로운 해석 '묘해, 너와'<br/><br/>'묘해, 너와'는 사랑이라는 감정의 복잡하고 미묘한 순간들을 섬세하게 포착한 가사로 많은 사랑을 받았던 곡이다. 드라마 ‘연애의 발견’ 에 삽입되며 서서히 알려져 어쿠스틱 콜라보라는 신인 아티스트를 각인시키고 오랜 시간 차트 상위권을 차지한 스테디셀러 곡이기도하다. 심현보 특유의 독특하고 복합적인 감정의 가사와 제목의 뉘앙스, 그리고 담백하면서도 드라마틱한 멜로디라인이 발매 십여년이 지난 지금까지도 이 곡이 사랑받는 이유로 평가받는다.<br/><br/>여기에 현재 K-POP 씬에서 가장 주목 받는 감성 보컬리스트 NCT의 태일이 노래에 참여해 2024년 버전의 '묘해, 너와'를 한층 빛나게 만든다. 태일은 녹음현장에서 섬세한 감성과 가창력으로 이 노래의 복합적인 감정들을 훌륭히 표현해 관계자들의 많은 찬사를 들었다는 후문이다.<br/><br/>원곡이 그녀의 입장을 노래한 곡이라면 이번 태일 버전의 '묘해, 너와'는 그의 입장을 말하는 노래로, 사랑이라는 감정의 행복하고 두려운 양면을 한층 깊고 섬세하게 표현해 리스너들을 더욱 더 기대하게 만든다.<br/><br/>이번 태일의 '묘해, 너와'는 심플한 어쿠스틱 기타와 피아노, 14인조 스트링 편곡으로 곡의 분위기를 한껏 풍성하게 만들었고 호주 멜버른에서 촬영한 감각적인 영상의 뮤직 비디오 역시 화제가 되고 있는데, 박원의 ‘all of my life’ 정승환의 ’눈사람‘ 등에 함께한 실력파 배우 이세한, 이진하가 남녀주인공으로 출연해 한편의 영화 같은 영상미와 탁월한 감정 연기를 선보인다.<br/><br/>[Credit]<br/>Executive Producer 보이저뮤직<br/>Music Producer 심현보<br/>Composed by 심현보<br/>Lyrics by 심현보<br/>Arranged by norway_elephant<br/>Piano by 양혜선<br/>Pad by norway_elephant<br/>Guitar by 정재필<br/>Bass by 최훈<br/>Drums by norway_elephant<br/>String Arranged & Conducted by 한성은 @AimStrings<br/>Strings Performed by 융스트링<br/>Recorded by 장수남<br/>Mixed by 김영식<br/>Mastered by 최효영",
+      "lyricist": "심현보",
+      "composer": "심현보",
+      "arranger": "norway elephant",
       "lyrics": [
         {
           "text": "태일 - 묘해, 너와",
@@ -1870,6 +1942,14 @@
       "imgSrc": "./img/11.jpg",
       "backGroundColor": ["#72825D", "#E8DBD3", "#3A3A42"],
       "genre": "ballad",
+      "releaseDate": "2021.02.18",
+      "publisher": "카카오엔터테인먼트",
+      "agency": "TOON STUDIO",
+      "albumTitle": "좋아해.. (바른연애 길잡이 X 죠지)",
+      "albumIntro": "바른연애 길잡이 x 죠지 컬래버 음원 '좋아해..'<br/><br/>바른생활 만렙 여주 ‘바름’이 유일하게 못하는 연애 도전기, 네이버웹툰 BEST작 [바른연애 길잡이]<br/>라이징 싱어송라이터 죠지가 들려주는 풋풋한 사랑의 시작 '좋아해..'<br/><br/>웹툰 속 남자 주인공 ‘유연’이의 테마곡인 '좋아해..'는 ‘바름’을 좋아하기 시작하면서 “사랑”이란 감정에 대한 무겁고 고민되는 마음들을 하루 빨리 털어내고, 그 마음에 대한 답을 ‘바름’이에게 확인 받고 싶어하는 ‘유연’이의 모습을 담은 곡이다.<br/><br/>[CREDIT]<br/>Lyrics by 죠지<br/>Composed by basecamp, 죠지<br/>Arranged by basecamp<br/><br/>Vocal by 죠지<br/>Chorus by 변찬웅<br/>Piano by ACHIVE<br/>Guitar by Chiic<br/>Bass by 박규태<br/>Drum by Johnny<br/><br/>Recorded by WAVY STUDIO / george's home<br/>Mixed , Mastered by Nahzam Sue (나잠 수) @ 웜우드힐 스튜디오 (Wormwood Hill Studio)",
+      "lyricist": "죠지",
+      "composer": "죠지",
+      "arranger": "basecamp",
       "lyrics": [
         {
           "text": "죠지 - 좋아해",
