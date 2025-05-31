@@ -55,10 +55,14 @@ const Header = styled.div<{ $isShowTitle: boolean }>`
     `}
   background-color: #121212;
   z-index: 1;
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    top: 20px;
+    padding: 0px 10px 15px 10px;
+  }
 `;
 
 const Title = styled.div`
-  width: 250px;
+  width: 75%;
   color: white;
   font-size: 17px;
   white-space: nowrap;
