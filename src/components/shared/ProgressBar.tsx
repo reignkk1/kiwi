@@ -63,12 +63,20 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
             setIsExpandProgressBar(true);
           }
         }}
-        onTouchMove={() => setIsExpandProgressBar(true)}
+        onTouchStart={() => (isClicked.current = true)}
+        onTouchMove={() => {
+          if (isClicked.current) {
+            setIsExpandProgressBar(true);
+          }
+        }}
         onMouseUp={() => {
           isClicked.current = false;
           pressAndUp();
         }}
-        onTouchEnd={pressAndUp}
+        onTouchEnd={() => {
+          isClicked.current = false;
+          pressAndUp();
+        }}
       />
 
       <ProgressVisual
