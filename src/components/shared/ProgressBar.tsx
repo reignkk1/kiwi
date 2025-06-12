@@ -57,24 +57,14 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         onChange={(e) => {
           setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
         }}
-        onTouchStart={() => (isClicked.current = true)}
-        onTouchMove={() => {
-          if (isClicked.current) {
-            setIsExpandProgressBar(true);
-          }
-        }}
-        onTouchEnd={() => {
-          isClicked.current = false;
-          pressAndUp();
-        }}
-        onPointerDown={() => {
-          isClicked.current = true;
-        }}
+        onPointerDown={() => (isClicked.current = true)}
         onPointerMove={() => {
           if (isClicked.current) {
             setIsExpandProgressBar(true);
           }
         }}
+        // pointerUp 이벤트가 실행이 안됌
+        // 누르고 움직여서 뗸 상태일때!
         onPointerUp={() => {
           isClicked.current = false;
           pressAndUp();
