@@ -57,7 +57,19 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         onChange={(e) => {
           setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
         }}
-        onPointerDown={() => (isClicked.current = true)}
+        onTouchStart={() => (isClicked.current = true)}
+        onTouchMove={() => {
+          if (isClicked.current) {
+            setIsExpandProgressBar(true);
+          }
+        }}
+        onTouchEnd={() => {
+          isClicked.current = false;
+          pressAndUp();
+        }}
+        onPointerDown={() => {
+          isClicked.current = true;
+        }}
         onPointerMove={() => {
           if (isClicked.current) {
             setIsExpandProgressBar(true);
