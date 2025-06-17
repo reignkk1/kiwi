@@ -28,7 +28,6 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
     setIsExpandProgressBar(false);
 
     // 퍼센트 게이지 초기화
-    setProgressPercent(0);
 
     // 눌렀다 뗀 위치로 이동
     setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
@@ -66,6 +65,12 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
         // pointerUp 이벤트가 실행이 안됌
         // 누르고 움직여서 뗸 상태일때!
         onPointerUp={() => {
+          console.log("up");
+          isClicked.current = false;
+          pressAndUp();
+        }}
+        onTouchEnd={() => {
+          console.log("TouchUp");
           isClicked.current = false;
           pressAndUp();
         }}
