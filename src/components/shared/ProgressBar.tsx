@@ -62,8 +62,6 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
             setIsExpandProgressBar(true);
           }
         }}
-        // pointerUp 이벤트가 실행이 안됌
-        // 누르고 움직여서 뗸 상태일때!
         onPointerUp={() => {
           console.log("up");
           isClicked.current = false;

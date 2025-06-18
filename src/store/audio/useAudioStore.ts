@@ -25,8 +25,10 @@ type AudioAction = {
 
 type AudioStore = AudioState & AudioAction;
 
+const audio = new Audio();
+
 export const useAudioStore = create<AudioStore>((set) => ({
-  isPlay: false,
+  isPlay: !audio.paused,
   isShuffle: false,
   isRepeat: false,
   src: "",
