@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useControllerButtonsHandler from "../../../hooks/useControllerButtonsHandler";
 
 export default function ControllerButtons() {
-  const { handleRepeatClick, handleShuffleClick, isRepeat, isShuffle } =
+  const { handleRepeatClick, handleShuffleClick, isLoop, isShuffle } =
     useControllerButtonsHandler();
 
   return (
@@ -16,11 +16,7 @@ export default function ControllerButtons() {
         onClick={handleShuffleClick}
       />
       <Controller width={170} size={[30, 40, 30]} />
-      <ButtonIcon
-        active={isRepeat}
-        icon={faRepeat}
-        onClick={handleRepeatClick}
-      />
+      <ButtonIcon active={isLoop} icon={faRepeat} onClick={handleRepeatClick} />
     </Container>
   );
 }

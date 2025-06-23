@@ -5,13 +5,14 @@ import {
   usePlayDirectionStore,
   useProgressStore,
 } from "../../store/shared";
+import { useSeekStore } from "../../store/audio/useSeekStore";
 
 export function useAudioImplStore() {
-  const [isPlay, isRepeat, src, setDuration, setSrc, setCurrentTime] =
+  const [isPlay, isLoop, src, setDuration, setSrc, setCurrentTime] =
     useAudioStore(
       useShallow((state) => [
         state.isPlay,
-        state.isRepeat,
+        state.isLoop,
         state.src,
         state.setDuration,
         state.setSrc,
@@ -29,20 +30,26 @@ export function useAudioImplStore() {
     (state) => state.pressedInputValue
   );
 
+  const [seekTo, setSeekTo] = useSeekStore(
+    useShallow((state) => [state.seekTo, state.setSeekTo])
+  );
+
   return {
     state: {
       isPlay,
       src,
-      isRepeat,
+      isLoop,
       playDirection,
       currentMusic,
       pressedInputValue,
+      seekTo,
     },
     action: {
       setDuration,
       setCurrentTime,
       setPlayDirection,
       setSrc,
+      setSeekTo,
     },
   };
 }

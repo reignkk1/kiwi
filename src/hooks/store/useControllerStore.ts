@@ -8,8 +8,8 @@ import {
 import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
 
 export function useControllerStore() {
-  const [isPlay, isShuffle, toggleIsPlay] = useAudioStore(
-    useShallow((state) => [state.isPlay, state.isShuffle, state.toggleIsPlay])
+  const [isPlay, isShuffle, togglePlay] = useAudioStore(
+    useShallow((state) => [state.isPlay, state.isShuffle, state.togglePlay])
   );
 
   const setPlayDirection = usePlayDirectionStore(
@@ -26,6 +26,6 @@ export function useControllerStore() {
 
   return {
     state: { isPlay, isShuffle, musicDrawer, currnetMusic },
-    action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
+    action: { togglePlay, setPlayDirection, toggleFadeAlertMessage },
   };
 }

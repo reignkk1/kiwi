@@ -5,7 +5,7 @@ import { create } from "zustand";
 type AudioState = {
   isPlay: boolean;
   isShuffle: boolean;
-  isRepeat: boolean;
+  isLoop: boolean;
   src: string;
   currentTime: number;
   duration: number;
@@ -14,33 +14,31 @@ type AudioState = {
 type AudioAction = {
   setIsPlay: (isPlay: AudioState["isPlay"]) => void;
   setIsShuffle: (isShuffle: AudioState["isShuffle"]) => void;
-  setIsRepeat: (isRepeat: AudioState["isRepeat"]) => void;
+  setIsLoop: (isLoop: AudioState["isLoop"]) => void;
   setSrc: (src: AudioState["src"]) => void;
   setCurrentTime: (currentTime: AudioState["currentTime"]) => void;
   setDuration: (duration: AudioState["duration"]) => void;
-  toggleIsPlay: () => void;
+  togglePlay: () => void;
   toggleShuffle: () => void;
-  toggleRepeat: () => void;
+  toggleLoop: () => void;
 };
 
 type AudioStore = AudioState & AudioAction;
 
-const audio = new Audio();
-
 export const useAudioStore = create<AudioStore>((set) => ({
-  isPlay: !audio.paused,
+  isPlay: false,
+  isLoop: false,
   isShuffle: false,
-  isRepeat: false,
   src: "",
   currentTime: 0,
   duration: 0,
-  setIsPlay: () => set({ isPlay: true }),
-  setIsShuffle: (isShuffle) => set({ isShuffle }),
-  setIsRepeat: (isRepeat) => set({ isRepeat }),
-  setSrc: (src) => set({ src }),
-  setCurrentTime: (currentTime) => set({ currentTime }),
+  setIsPlay: (isPlay) => set({ isPlay }),
   setDuration: (duration) => set({ duration }),
-  toggleIsPlay: () => set((state) => ({ isPlay: !state.isPlay })),
+  setIsLoop: (isLoop) => set({ isLoop }),
+  setIsShuffle: (isShuffle) => set({ isShuffle }),
+  setSrc: (src) => set(() => ({ src })),
+  setCurrentTime: (currentTime) => set(() => ({ currentTime })),
+  togglePlay: () => set((state) => ({ isPlay: !state.isPlay })),
   toggleShuffle: () => set((state) => ({ isShuffle: !state.isShuffle })),
-  toggleRepeat: () => set((state) => ({ isRepeat: !state.isRepeat })),
+  toggleLoop: () => set((state) => ({ isLoop: !state.isLoop })),
 }));

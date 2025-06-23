@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { ProgressVisual } from "./ProgressVisual";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { convertFromPercentToTime, convertTime } from "../../utils";
 import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
+import { palette } from "../../constant";
 
 export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   const {
@@ -11,6 +12,8 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
       isExpandProgressBar,
       progressInputValue,
       progressPercent,
+      currentTime,
+      seeking,
     },
     action: {
       setIsExpandProgressBar,
@@ -18,10 +21,14 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
       setProgressPercent,
       setCurrentTime,
       setPressedInputValue,
+      setSeekTo,
+      setSeeking,
     },
   } = useProgressBarStore();
 
-  const isClicked = useRef<boolean>(false);
+  const isClicked = useRef(false);
+  const inputValue = useRef(0);
+  const [seekingValue, setSeekingValue] = useState(0);
 
   const pressAndUp = () => {
     // 확대 기능 off
@@ -30,7 +37,7 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
     // 퍼센트 게이지 초기화
 
     // 눌렀다 뗀 위치로 이동
-    setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
+    // setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
 
     // 눌렀다 뗀 시점의 위치 value 상태 업뎃
     setPressedInputValue(progressInputValue);
@@ -39,74 +46,65 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
   return (
     <Container>
       <ExpandTime>
-        {isExpandProgressBar && (
+        {seeking && (
           <span>
-            {convertTime(
-              convertFromPercentToTime(duration, progressInputValue)
-            )}
+            {convertTime(convertFromPercentToTime(duration, seekingValue))}
           </span>
         )}
       </ExpandTime>
       <Input
         type="range"
-        max={100}
-        step={1}
-        value={progressInputValue}
-        disabled={disabled}
+        max={duration}
+        step={0.1}
+        seeking={seeking}
+        value={seeking ? seekingValue : currentTime}
         onChange={(e) => {
-          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
+          inputValue.current = Number(e.currentTarget.value);
+          setSeekingValue(Number(e.currentTarget.value));
         }}
         onPointerDown={() => (isClicked.current = true)}
         onPointerMove={() => {
-          if (isClicked.current) {
-            setIsExpandProgressBar(true);
-          }
+          if (isClicked.current) setSeeking(true);
         }}
-        onPointerUp={() => {
-          console.log("up");
+        onPointerUp={(e) => {
+          setSeekTo(inputValue.current);
+          setSeeking(false);
           isClicked.current = false;
-          pressAndUp();
         }}
-        onTouchEnd={() => {
-          console.log("TouchUp");
-          isClicked.current = false;
-          pressAndUp();
-        }}
-      />
-
-      <ProgressVisual
-        $isExpand={isExpandProgressBar}
-        value={isExpandProgressBar ? progressInputValue : progressPercent}
       />
     </Container>
   );
 }
 
+// input을 좌로 땡기면 잔상이 남음
+
 const Container = styled.div`
-  height: 40px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
   width: 100%;
-  height: 15px;
-  bottom: -8px;
-  right: -1px;
+  height: ${({ seeking }) => (seeking ? "5px" : "2.5px")};
+  border-radius: 5px;
   cursor: pointer;
-  position: absolute;
-  z-index: 2;
-  opacity: 0;
   -webkit-appearance: none;
   appearance: none;
 
+  background: ${({ max, value }) =>
+    `linear-gradient(to right, ${palette.signatureColor} ${
+      (value / max) * 100
+    }%, #2A2A2A ${(value / max) * 100}%)`};
+
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
     appearance: none;
-    width: 0.1px;
-    height: 0.1px;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
   }
 `;
 

@@ -14,10 +14,17 @@ export default function AudioImpl() {
       src,
       playDirection,
       currentMusic,
-      isRepeat,
+      isLoop,
       pressedInputValue,
+      seekTo,
     },
-    action: { setPlayDirection, setCurrentTime, setDuration, setSrc },
+    action: {
+      setPlayDirection,
+      setCurrentTime,
+      setDuration,
+      setSrc,
+      setSeekTo,
+    },
   } = useAudioImplStore();
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
@@ -48,8 +55,8 @@ export default function AudioImpl() {
   }, [pressedInputValue, audio]);
 
   useEffect(() => {
-    audio.loop = isRepeat;
-  }, [isRepeat, audio]);
+    audio.loop = isLoop;
+  }, [isLoop, audio]);
 
   useEffect(() => {
     setSrc(
@@ -57,6 +64,13 @@ export default function AudioImpl() {
     );
     audio.currentTime = 0;
   }, [currentMusic, setSrc, audio]);
+
+  useEffect(() => {
+    if (seekTo) {
+      audio.currentTime = seekTo;
+      setSeekTo(null);
+    }
+  }, [seekTo]);
 
   return (
     <audio
