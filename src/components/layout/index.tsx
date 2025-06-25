@@ -119,6 +119,14 @@ const BackGroundFilter = styled.div`
     width: 100%;
     transform: scale(1);
   }
+
+  @media (max-height: 765px) and (max-width: 479px) {
+    transform: scale(1);
+  }
+
+  @media (min-height: 725px) and (min-width: 500px) {
+    transform: scale(0.8);
+  }
 `;
 
 const Edge = styled.div<{ src: string }>`
@@ -135,12 +143,15 @@ const Edge = styled.div<{ src: string }>`
     background: none;
     transform: scale(1);
   }
+
+  @media (min-height: 725px) and (min-width: 500px) {
+    transform: scale(0.8);
+  }
 `;
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   background: linear-gradient(-45deg, #fff6b7, #f092bc, #8795e6, #c2ffd8);
   display: flex;
   justify-content: center;
@@ -150,5 +161,16 @@ const Container = styled.div`
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: calc(var(--vh, 1vh) * 100);
+    background: none;
+  }
+
+  @media (max-height: 765px) and (max-width: 479px) {
+    transform: scale(0.9);
+  }
+  @media (max-height: 730px) and (max-width: 479px) {
+    transform: scale(0.85);
+  }
+  @media (max-height: 710px) and (max-width: 479px) {
+    transform: scale(0.8);
   }
 `;
