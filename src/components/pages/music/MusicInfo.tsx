@@ -8,7 +8,7 @@ export default function MusicInfo() {
 
   return (
     <Container>
-      <div>
+      <Info>
         <AlbumTitle>
           <span>{music?.albumTitle}</span>
         </AlbumTitle>
@@ -19,7 +19,7 @@ export default function MusicInfo() {
           size="large"
           $isWhiteSpace={false}
         />
-      </div>
+      </Info>
       <AlbumImg music={music!} size="middle" />
     </Container>
   );
@@ -31,9 +31,14 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
+const Info = styled.div`
+  margin-right: 10px;
+`;
+
 const AlbumTitle = styled.div`
   span {
     color: rgba(255, 255, 255, 0.7);
   }
   margin-bottom: 15px;
+  line-height: 1.1;
 `;

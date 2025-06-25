@@ -3,12 +3,12 @@ import { useAudioStore } from "../../store/audio";
 import { useAlertStore } from "../../store/shared";
 
 export function useControllerButtonsStore() {
-  const [isShuffle, isRepeat, toggleShuffle, toggleRepeat] = useAudioStore(
+  const [isShuffle, isLoop, toggleShuffle, toggleLoop] = useAudioStore(
     useShallow((state) => [
       state.isShuffle,
-      state.isRepeat,
+      state.isLoop,
       state.toggleShuffle,
-      state.toggleRepeat,
+      state.toggleLoop,
     ])
   );
 
@@ -17,7 +17,7 @@ export function useControllerButtonsStore() {
   );
 
   return {
-    state: { isShuffle, isRepeat },
-    action: { toggleShuffle, toggleRepeat, toggleFadeAlertMessage },
+    state: { isShuffle, isLoop },
+    action: { toggleShuffle, toggleLoop, toggleFadeAlertMessage },
   };
 }

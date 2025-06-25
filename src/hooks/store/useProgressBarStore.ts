@@ -1,47 +1,39 @@
 import { useShallow } from "zustand/react/shallow";
 import { useAudioStore } from "../../store/audio";
-import { useProgressStore } from "../../store/shared";
+import { useSeekStore } from "../../store/audio/useSeekStore";
 
 export function useProgressBarStore() {
-  const [duration, setCurrentTime] = useAudioStore(
-    useShallow((state) => [state.duration, state.setCurrentTime])
-  );
-  const [
-    progressPercent,
-    progressInputValue,
-    pressedInputValue,
-    isExpandProgressBar,
-    setProgressPercent,
-    setProgressInputValue,
-    setIsExpandProgressBar,
-    setPressedInputValue,
-  ] = useProgressStore(
+  const [duration, setCurrentTime, currentTime] = useAudioStore(
     useShallow((state) => [
-      state.progressPercent,
-      state.progressInputValue,
-      state.pressedInputValue,
-      state.isExpandProgressBar,
-      state.setProgressPercent,
-      state.setProgressInputValue,
-      state.setIsExpandProgressBar,
-      state.setPressedInputValue,
+      state.duration,
+      state.setCurrentTime,
+      state.currentTime,
     ])
   );
+
+  const [seeking, setSeeking, setSeekTo, seekingValue, setSeekingValue] =
+    useSeekStore(
+      useShallow((state) => [
+        state.seeking,
+        state.setSeeking,
+        state.setSeekTo,
+        state.seekingValue,
+        state.setSeekingValue,
+      ])
+    );
 
   return {
     state: {
       duration,
-      progressPercent,
-      progressInputValue,
-      isExpandProgressBar,
-      pressedInputValue,
+      currentTime,
+      seeking,
+      seekingValue,
     },
     action: {
-      setProgressPercent,
-      setProgressInputValue,
-      setIsExpandProgressBar,
       setCurrentTime,
-      setPressedInputValue,
+      setSeekTo,
+      setSeeking,
+      setSeekingValue,
     },
   };
 }

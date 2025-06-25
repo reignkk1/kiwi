@@ -4,12 +4,11 @@ import {
   useIsExpandLyricsStore,
   useIsLyricsClickedStore,
 } from "../../store/player";
-import { useCurrentMusicStore, useProgressStore } from "../../store/shared";
+import { useCurrentMusicStore } from "../../store/shared";
+import { useSeekStore } from "../../store/audio/useSeekStore";
 
 export function useLyricsAndImageStore() {
-  const isExpandProgressBar = useProgressStore(
-    (state) => state.isExpandProgressBar
-  );
+  const seeking = useSeekStore((state) => state.seeking);
 
   const currentTime = useAudioStore((state) => state.currentTime);
 
@@ -38,8 +37,8 @@ export function useLyricsAndImageStore() {
       currentMusic,
       currentTime,
       isExpandLyrics,
-      isExpandProgressBar,
       isLyricsClicked,
+      seeking,
     },
     action: {
       setIsExpandLyrics,

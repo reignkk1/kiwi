@@ -2,8 +2,8 @@ import { useControllerButtonsStore } from "./store/useControllerButtonsStore";
 
 export default function useControllerButtonsHandler() {
   const {
-    state: { isRepeat, isShuffle },
-    action: { toggleRepeat, toggleShuffle, toggleFadeAlertMessage },
+    state: { isLoop, isShuffle },
+    action: { toggleLoop, toggleShuffle, toggleFadeAlertMessage },
   } = useControllerButtonsStore();
 
   const handleShuffleClick = () => {
@@ -17,14 +17,14 @@ export default function useControllerButtonsHandler() {
   };
 
   const handleRepeatClick = () => {
-    toggleRepeat();
+    toggleLoop();
 
-    const message = isRepeat
+    const message = isLoop
       ? "반복을 사용하지 않습니다."
       : "현재 음악을 반복합니다.";
 
     toggleFadeAlertMessage(message);
   };
 
-  return { handleShuffleClick, handleRepeatClick, isRepeat, isShuffle };
+  return { handleShuffleClick, handleRepeatClick, isLoop, isShuffle };
 }

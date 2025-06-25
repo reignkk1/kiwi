@@ -1,114 +1,83 @@
 import styled from "styled-components";
-import { ProgressVisual } from "./ProgressVisual";
 import { useRef } from "react";
-import { convertFromPercentToTime, convertTime } from "../../utils";
+import { formatTime } from "../../utils";
 import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
+import { palette } from "../../constant";
 
-export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
+export function ProgressBar() {
   const {
-    state: {
-      duration,
-      isExpandProgressBar,
-      progressInputValue,
-      progressPercent,
-    },
-    action: {
-      setIsExpandProgressBar,
-      setProgressInputValue,
-      setProgressPercent,
-      setCurrentTime,
-      setPressedInputValue,
-    },
+    state: { duration, currentTime, seeking, seekingValue },
+    action: { setSeekTo, setSeeking, setSeekingValue },
   } = useProgressBarStore();
 
-  const isClicked = useRef<boolean>(false);
+  const isClicked = useRef(false);
+  const inputValue = useRef(0);
 
-  const pressAndUp = () => {
-    // 확대 기능 off
-    setIsExpandProgressBar(false);
-
-    // 퍼센트 게이지 초기화
-
-    // 눌렀다 뗀 위치로 이동
-    setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
-
-    // 눌렀다 뗀 시점의 위치 value 상태 업뎃
-    setPressedInputValue(progressInputValue);
-  };
+  // 반응형 고치기, footer 가수짤림 현상, 앨범제목 고치기, 커밋
 
   return (
     <Container>
       <ExpandTime>
-        {isExpandProgressBar && (
-          <span>
-            {convertTime(
-              convertFromPercentToTime(duration, progressInputValue)
-            )}
-          </span>
-        )}
+        {seeking && <span>{formatTime(seekingValue)}</span>}
       </ExpandTime>
       <Input
         type="range"
-        max={100}
-        step={1}
-        value={progressInputValue}
-        disabled={disabled}
+        max={duration}
+        step={0.1}
+        seeking={seeking}
+        value={seeking ? seekingValue : currentTime}
         onChange={(e) => {
-          setProgressInputValue(Math.floor(Number(e.currentTarget.value)));
+          inputValue.current = Number(e.currentTarget.value);
+          setSeekingValue(Number(e.currentTarget.value));
         }}
         onPointerDown={() => (isClicked.current = true)}
-        onPointerMove={() => {
-          if (isClicked.current) {
-            setIsExpandProgressBar(true);
-          }
-        }}
-        // pointerUp 이벤트가 실행이 안됌
-        // 누르고 움직여서 뗸 상태일때!
+        onPointerMove={() => isClicked.current && !seeking && setSeeking(true)}
         onPointerUp={() => {
-          console.log("up");
           isClicked.current = false;
-          pressAndUp();
+          setSeekTo(inputValue.current);
         }}
         onTouchEnd={() => {
-          console.log("TouchUp");
           isClicked.current = false;
-          pressAndUp();
+          setSeekTo(inputValue.current);
         }}
-      />
-
-      <ProgressVisual
-        $isExpand={isExpandProgressBar}
-        value={isExpandProgressBar ? progressInputValue : progressPercent}
       />
     </Container>
   );
 }
 
+// seeking이 true일때 seekingValue를 보여주다가 마우스를 놓으면 seeking이 false로 변하면서
+// onPointerUp 이벤트가 발생하기 전에 value값이 currentTime으로 바껴서 이전 값을 보여줬다가
+// onPointerUp 이벤트가 실행이되면서 currentTime을 새로 업뎃하여 input value가 다시 바뀜
+// 그래서 깜빡이는 잔상 같은 것들이 나타남.
+
 const Container = styled.div`
-  height: 40px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
   width: 100%;
-  height: 15px;
-  bottom: -8px;
-  right: -1px;
+  height: ${({ seeking }) => (seeking ? "5px" : "2.5px")};
+  border-radius: 5px;
   cursor: pointer;
-  position: absolute;
-  z-index: 2;
-  opacity: 0;
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
+  background: ${({ max, value }) =>
+    `linear-gradient(to right, ${palette.signatureColor} ${(
+      (value / max) *
+      100
+    ).toFixed(1)}%, #2A2A2A ${((value / max) * 100).toFixed(1)}%)`};
 
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
     appearance: none;
-    width: 0.1px;
-    height: 0.1px;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
   }
 `;
 

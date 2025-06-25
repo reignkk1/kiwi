@@ -1,20 +1,18 @@
 import styled from "styled-components";
-import { convertFromPercentToTime, convertTime } from "../../../utils";
+import { formatTime } from "../../../utils";
 import { useTimeStampStore } from "../../../hooks/store/useTimeStampStore";
 
 export default function TimeStamp() {
   const {
-    state: { duration, currentTime, isExpandProgressBar, progressInputValue },
+    state: { duration, currentTime, seeking, seekingValue },
   } = useTimeStampStore();
 
   return (
     <Container>
       <span>
-        {isExpandProgressBar
-          ? convertTime(convertFromPercentToTime(duration, progressInputValue))
-          : convertTime(currentTime)}
+        {seeking ? formatTime(seekingValue) : formatTime(currentTime)}
       </span>
-      <span>{convertTime(duration)}</span>
+      <span>{formatTime(duration)}</span>
     </Container>
   );
 }

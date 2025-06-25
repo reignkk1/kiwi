@@ -3,21 +3,20 @@ import { useAudioImplStore } from "../../hooks/audio/useAudioImplStore";
 import useAudioInitialize from "../../hooks/audio/useAudioInitialize";
 import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
 import { addBasePath } from "../../utils";
-import { convertFromPercentToTime } from "./../../utils";
 
 export default function AudioImpl() {
   useAudioInitialize();
 
   const {
-    state: {
-      isPlay,
-      src,
-      playDirection,
-      currentMusic,
-      isRepeat,
-      pressedInputValue,
+    state: { isPlay, src, playDirection, currentMusic, isLoop, seekTo },
+    action: {
+      setPlayDirection,
+      setCurrentTime,
+      setDuration,
+      setSrc,
+      setSeekTo,
+      setSeeking,
     },
-    action: { setPlayDirection, setCurrentTime, setDuration, setSrc },
   } = useAudioImplStore();
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
@@ -39,17 +38,8 @@ export default function AudioImpl() {
   }, [isPlay, src, audio]);
 
   useEffect(() => {
-    if (audio.readyState === 4) {
-      audio.currentTime = convertFromPercentToTime(
-        audio.duration,
-        pressedInputValue
-      );
-    }
-  }, [pressedInputValue, audio]);
-
-  useEffect(() => {
-    audio.loop = isRepeat;
-  }, [isRepeat, audio]);
+    audio.loop = isLoop;
+  }, [isLoop, audio]);
 
   useEffect(() => {
     setSrc(
@@ -58,10 +48,18 @@ export default function AudioImpl() {
     audio.currentTime = 0;
   }, [currentMusic, setSrc, audio]);
 
+  useEffect(() => {
+    if (seekTo) {
+      audio.currentTime = seekTo;
+      setSeekTo(null);
+    }
+  }, [seekTo, audio, setSeekTo]);
+
   return (
     <audio
       ref={audioRef}
       src={src}
+      onSeeked={() => setSeeking(false)}
       onTimeUpdate={() => setCurrentTime(audio.currentTime)}
       onDurationChange={() => setDuration(audio.duration)}
       onEnded={() => setPlayDirection("next")}

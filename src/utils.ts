@@ -8,24 +8,10 @@ export function markKeyword(letter: string, keyWord: string) {
   return parse(letter.replaceAll(keyWord, `<mark>${keyWord}</mark>`));
 }
 
-// 총 길이에서 현재 시간을 인자 값으로 받아 퍼센트로 나타내주는 함수
-// ex) getProgressPercent(100,50) => 50%
-export function convertFromTimeToPercent(
-  duration: number,
-  currentTime: number
-) {
-  return Number(((currentTime / duration) * 100).toFixed(1));
-}
-
-// 총 길이와 퍼센트 숫자를 인자 값으로 넣으면 현재 시간이 리턴된다.
-export function convertFromPercentToTime(duration: number, percent: number) {
-  return Math.floor(Math.floor(duration) * (percent / 100));
-}
-
 // 숫자로 된 초시간을 인자 값으로 받아 쌍점(:)을 사용한 표기법으로 변환
 // 1분 10초 => 70초
 // ex) convertTime(70) => 1:10
-export function convertTime(time: number) {
+export function formatTime(time: number) {
   time = Math.floor(time);
 
   const minute = Math.floor(time / 60);

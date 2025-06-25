@@ -17,7 +17,7 @@ interface ControllerProps {
 export default function Controller({ width, size = 18 }: ControllerProps) {
   const {
     state: { isPlay, musicDrawer, currnetMusic },
-    action: { toggleIsPlay, setPlayDirection, toggleFadeAlertMessage },
+    action: { togglePlay, setPlayDirection, toggleFadeAlertMessage },
   } = useControllerStore();
 
   const isMusicDrawer = musicDrawer.length > 0;
@@ -45,7 +45,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
           // 만약 현재 곡이 지정되어 있지 않고 비어있을 경우
           // 플레이 버튼은 작동하지 않음.
           if (Object.keys(currnetMusic).length) {
-            toggleIsPlay();
+            togglePlay();
           }
         }}
         size={getSize(1)}
