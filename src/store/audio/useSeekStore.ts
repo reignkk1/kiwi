@@ -3,13 +3,17 @@ import { create } from "zustand";
 type SeekStore = {
   seekTo: number | null;
   seeking: boolean;
-  setSeekTo: (time: SeekStore["seekTo"]) => void;
+  seekingValue: number;
+  setSeekTo: (seekTo: SeekStore["seekTo"]) => void;
   setSeeking: (seeking: SeekStore["seeking"]) => void;
+  setSeekingValue: (seekingValue: SeekStore["seekingValue"]) => void;
 };
 
 export const useSeekStore = create<SeekStore>((set) => ({
   seekTo: null,
   seeking: false,
-  setSeekTo: (time) => set({ seekTo: time }),
+  seekingValue: 0,
+  setSeekTo: (seekTo) => set({ seekTo }),
   setSeeking: (seeking) => set({ seeking }),
+  setSeekingValue: (seekingValue) => set({ seekingValue }),
 }));
