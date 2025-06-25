@@ -108,17 +108,16 @@ const BackGroundFilter = styled.div`
   width: 430px;
   height: 785px;
   border-radius: 40px;
-  top: 65 px;
   background-color: #121212;
   position: absolute;
   z-index: 1;
-  zoom: 0.8;
+  transform: scale(0.9);
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     height: 100%;
     border-radius: 0;
     width: 100%;
-    zoom: 1;
+    transform: scale(1);
   }
 `;
 
@@ -128,13 +127,13 @@ const Edge = styled.div<{ src: string }>`
   background: url(${({ src }) => src}) no-repeat;
   position: relative;
   z-index: 3;
-  zoom: 0.8;
+  transform: scale(0.9);
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     width: 100%;
     height: 100%;
     background: none;
-    zoom: 1;
+    transform: scale(1);
   }
 `;
 
