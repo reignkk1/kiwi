@@ -73,7 +73,7 @@ const Container = styled.div<{
   $isLyricsClicked: boolean;
 }>`
   width: 100%;
-  height: 450px;
+
   img {
     animation: ${({ $isExpandLyrics, $isLyricsClicked }) =>
         $isExpandLyrics || !$isLyricsClicked ? "hide" : "show"}
@@ -81,6 +81,10 @@ const Container = styled.div<{
 
     animation-play-state: ${({ $isLyricsClicked }) =>
       $isLyricsClicked ? "running" : "paused"};
+    @media (max-height: 760px) and (max-width: 479px) {
+      width: 300px;
+      height: 270px;
+    }
   }
 
   @keyframes hide {

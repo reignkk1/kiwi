@@ -40,6 +40,7 @@ export default function MusicCard({
 const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 85%;
 `;
 
 const Info = styled.div`

@@ -24,7 +24,7 @@ export function ProgressBar() {
         type="range"
         max={duration}
         step={0.1}
-        seeking={seeking}
+        $seeking={seeking}
         value={seeking ? seekingValue : currentTime}
         onChange={(e) => {
           inputValue.current = Number(e.currentTarget.value);
@@ -51,56 +51,28 @@ export function ProgressBar() {
 // 그래서 깜빡이는 잔상 같은 것들이 나타남.
 
 const Container = styled.div`
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
 `;
 
-const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
-  width: 100%;
-  height: ${({ seeking }) => (seeking ? "5px" : "2.5px")};
-  border-radius: 5px;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  position: relative;
-  background: ${({ max, value }) =>
-    `linear-gradient(to right, ${palette.signatureColor} ${(
-      (value / max) *
-      100
-    ).toFixed(1)}%, #2A2A2A ${((value / max) * 100).toFixed(1)}%)`};
-
-  &::-webkit-slider-thumb {
-    appearance: none;
-    width: 0;
-    height: 0;
-    background: transparent;
-    border: none;
-  }
-`;
-
 // 클래스 네임 성능문제해결
 
-// const Input = styled.input.attrs<{
-//   max: number;
-//   value: number;
-//   $seeking: boolean;
-// }>(({ max, value }) => ({
-//   style: {
-//     background: `linear-gradient(to right, ${palette.signatureColor} ${
-//       (value / max) * 100
-//     }%, #2A2A2A ${(value / max) * 100}%)`,
-//   },
-// }))`
+// const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
 //   width: 100%;
-//   height: ${({ $seeking }) => ($seeking ? "5px" : "2.5px")};
+//   height: ${({ seeking }) => (seeking ? "5px" : "2.5px")};
 //   border-radius: 5px;
 //   cursor: pointer;
 //   -webkit-appearance: none;
 //   appearance: none;
 //   position: relative;
+//   background: ${({ max, value }) =>
+//     `linear-gradient(to right, ${palette.signatureColor} ${(
+//       (value / max) *
+//       100
+//     ).toFixed(1)}%, #2A2A2A ${((value / max) * 100).toFixed(1)}%)`};
 
 //   &::-webkit-slider-thumb {
 //     appearance: none;
@@ -110,6 +82,34 @@ const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
 //     border: none;
 //   }
 // `;
+
+const Input = styled.input.attrs<{
+  max: number;
+  value: number;
+  $seeking: boolean;
+}>(({ max, value }) => ({
+  style: {
+    background: `linear-gradient(to right, ${palette.signatureColor} ${
+      (value / max) * 100
+    }%, #2A2A2A ${(value / max) * 100}%)`,
+  },
+}))`
+  width: 100%;
+  height: ${({ $seeking }) => ($seeking ? "5px" : "2.5px")};
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: none;
+  }
+`;
 
 const ExpandTime = styled.div`
   height: 15px;

@@ -102,16 +102,6 @@ const Content = styled.div`
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     padding: 40px 25px;
   }
-
-  @media (max-height: 765px) and (max-width: 479px) {
-    transform: scale(0.9);
-  }
-  @media (max-height: 730px) and (max-width: 479px) {
-    transform: scale(0.85);
-  }
-  @media (max-height: 710px) and (max-width: 479px) {
-    transform: scale(0.8);
-  }
 `;
 
 const BackGroundFilter = styled.div`
