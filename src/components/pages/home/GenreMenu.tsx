@@ -31,7 +31,7 @@ export default function GenreMenu() {
 }
 
 const Container = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   h2 {
     font-size: 20px;
     font-weight: bold;
