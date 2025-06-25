@@ -15,12 +15,19 @@ export default function Player() {
   ) : (
     <Container>
       <PlayerHeader />
-      <LyricsAndImage />
-      <ProgressBar />
-      <TimeStamp />
-      <ControllerButtons />
+      <Content>
+        <LyricsAndImage />
+        <ProgressBar />
+        <TimeStamp />
+        <ControllerButtons />
+      </Content>
     </Container>
   );
 }
 
 const Container = styled.div``;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

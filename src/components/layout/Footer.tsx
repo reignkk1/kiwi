@@ -110,6 +110,9 @@ const NavBarContainer = styled.nav`
   z-index: 99;
   width: 100%;
   bottom: 0;
+  @media (max-width: 479px) {
+    border-radius: 0px 0px 0px 0px;
+  }
 `;
 
 const MiniPlayer = styled.div<{ $isSelected: boolean }>`

@@ -125,7 +125,7 @@ const BackGroundFilter = styled.div`
   }
 
   @media (min-height: 725px) and (min-width: 500px) {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 `;
 
@@ -145,7 +145,7 @@ const Edge = styled.div<{ src: string }>`
   }
 
   @media (min-height: 725px) and (min-width: 500px) {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 `;
 

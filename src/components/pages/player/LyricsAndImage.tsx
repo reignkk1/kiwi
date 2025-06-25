@@ -72,8 +72,7 @@ const Container = styled.div<{
   $isExpandLyrics: boolean;
   $isLyricsClicked: boolean;
 }>`
-  width: 100%;
-
+  height: 420px;
   img {
     animation: ${({ $isExpandLyrics, $isLyricsClicked }) =>
         $isExpandLyrics || !$isLyricsClicked ? "hide" : "show"}
@@ -81,9 +80,29 @@ const Container = styled.div<{
 
     animation-play-state: ${({ $isLyricsClicked }) =>
       $isLyricsClicked ? "running" : "paused"};
-    @media (max-height: 760px) and (max-width: 479px) {
+  }
+
+  @media (max-height: 760px) and (max-width: 479px) {
+    height: 400px;
+    img {
       width: 300px;
       height: 270px;
+    }
+  }
+
+  @media (max-height: 720px) and (max-width: 479px) {
+    height: 380px;
+    img {
+      width: 280px;
+      height: 250px;
+    }
+  }
+
+  @media (max-height: 680px) and (max-width: 479px) {
+    height: 340px;
+    img {
+      width: 250px;
+      height: 220px;
     }
   }
 
