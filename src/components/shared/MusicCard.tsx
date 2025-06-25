@@ -40,10 +40,10 @@ export default function MusicCard({
 const Container = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
   width: 85%;
 `;
 
 const Info = styled.div`
-  margin-left: 10px;
   cursor: pointer;
 `;

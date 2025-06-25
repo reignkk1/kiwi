@@ -66,9 +66,10 @@ const Container = styled.ul`
 `;
 
 const List = styled.div`
+  width: 250px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
   margin-bottom: 20px;
 `;
 
