@@ -9,8 +9,8 @@ export default function LyricsAndImage() {
       currentMusic,
       currentTime,
       isExpandLyrics,
-      isExpandProgressBar,
       isLyricsClicked,
+      seeking,
     },
     action: {
       setIsExpandLyrics,
@@ -56,7 +56,7 @@ export default function LyricsAndImage() {
             <LyricsText
               ref={isActive ? activeLyricsText : null}
               $active={isActive}
-              $isExpandProgressBar={isExpandProgressBar}
+              $seeking={seeking}
               key={startTime}
             >
               <span>{text}</span>
@@ -128,10 +128,10 @@ const LyricsContainer = styled.div<{ $isExpandLyrics: boolean }>`
 
 const LyricsText = styled.div<{
   $active: boolean;
-  $isExpandProgressBar: boolean;
+  $seeking: boolean;
 }>`
-  color: ${({ $active, $isExpandProgressBar }) =>
-    $isExpandProgressBar
+  color: ${({ $active, $seeking }) =>
+    $seeking
       ? "rgba(255, 255, 255, 0.2)"
       : $active
       ? "white"
