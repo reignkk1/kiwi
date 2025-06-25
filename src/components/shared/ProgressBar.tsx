@@ -81,6 +81,36 @@ const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
   }
 `;
 
+// 클래스 네임 성능문제해결
+
+// const Input = styled.input.attrs<{
+//   max: number;
+//   value: number;
+//   $seeking: boolean;
+// }>(({ max, value }) => ({
+//   style: {
+//     background: `linear-gradient(to right, ${palette.signatureColor} ${
+//       (value / max) * 100
+//     }%, #2A2A2A ${(value / max) * 100}%)`,
+//   },
+// }))`
+//   width: 100%;
+//   height: ${({ $seeking }) => ($seeking ? "5px" : "2.5px")};
+//   border-radius: 5px;
+//   cursor: pointer;
+//   -webkit-appearance: none;
+//   appearance: none;
+//   position: relative;
+
+//   &::-webkit-slider-thumb {
+//     appearance: none;
+//     width: 0;
+//     height: 0;
+//     background: transparent;
+//     border: none;
+//   }
+// `;
+
 const ExpandTime = styled.div`
   height: 15px;
   color: white;
