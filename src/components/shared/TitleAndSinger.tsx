@@ -107,4 +107,5 @@ const Title = styled.div<{
 const Singer = styled.div<{ size: string }>`
   font-size: ${({ size }) => size};
   color: ${palette.musicSinger};
+  line-height: 1.2;
 `;
