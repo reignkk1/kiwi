@@ -1,56 +1,24 @@
 import styled from "styled-components";
-import { ProgressVisual } from "./ProgressVisual";
-import { useRef, useState } from "react";
-import { convertFromPercentToTime, convertTime } from "../../utils";
+import { useRef } from "react";
+import { formatTime } from "../../utils";
 import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
 import { palette } from "../../constant";
 
-export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
+export function ProgressBar() {
   const {
-    state: {
-      duration,
-      isExpandProgressBar,
-      progressInputValue,
-      progressPercent,
-      currentTime,
-      seeking,
-    },
-    action: {
-      setIsExpandProgressBar,
-      setProgressInputValue,
-      setProgressPercent,
-      setCurrentTime,
-      setPressedInputValue,
-      setSeekTo,
-      setSeeking,
-    },
+    state: { duration, currentTime, seeking, seekingValue },
+    action: { setSeekTo, setSeeking, setSeekingValue },
   } = useProgressBarStore();
 
   const isClicked = useRef(false);
   const inputValue = useRef(0);
-  const [seekingValue, setSeekingValue] = useState(0);
 
-  const pressAndUp = () => {
-    // 확대 기능 off
-    setIsExpandProgressBar(false);
-
-    // 퍼센트 게이지 초기화
-
-    // 눌렀다 뗀 위치로 이동
-    // setCurrentTime(convertFromPercentToTime(duration, progressInputValue));
-
-    // 눌렀다 뗀 시점의 위치 value 상태 업뎃
-    setPressedInputValue(progressInputValue);
-  };
+  // 반응형 고치기, footer 가수짤림 현상, 앨범제목 고치기, 커밋
 
   return (
     <Container>
       <ExpandTime>
-        {seeking && (
-          <span>
-            {convertTime(convertFromPercentToTime(duration, seekingValue))}
-          </span>
-        )}
+        {seeking && <span>{formatTime(seekingValue)}</span>}
       </ExpandTime>
       <Input
         type="range"
@@ -63,20 +31,24 @@ export function ProgressBar({ disabled = false }: { disabled?: boolean }) {
           setSeekingValue(Number(e.currentTarget.value));
         }}
         onPointerDown={() => (isClicked.current = true)}
-        onPointerMove={() => {
-          if (isClicked.current) setSeeking(true);
-        }}
-        onPointerUp={(e) => {
-          setSeekTo(inputValue.current);
-          setSeeking(false);
+        onPointerMove={() => isClicked.current && !seeking && setSeeking(true)}
+        onPointerUp={() => {
           isClicked.current = false;
+          setSeekTo(inputValue.current);
+        }}
+        onTouchEnd={() => {
+          isClicked.current = false;
+          setSeekTo(inputValue.current);
         }}
       />
     </Container>
   );
 }
 
-// input을 좌로 땡기면 잔상이 남음
+// seeking이 true일때 seekingValue를 보여주다가 마우스를 놓으면 seeking이 false로 변하면서
+// onPointerUp 이벤트가 발생하기 전에 value값이 currentTime으로 바껴서 이전 값을 보여줬다가
+// onPointerUp 이벤트가 실행이되면서 currentTime을 새로 업뎃하여 input value가 다시 바뀜
+// 그래서 깜빡이는 잔상 같은 것들이 나타남.
 
 const Container = styled.div`
   height: 50px;
@@ -93,11 +65,12 @@ const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-
+  position: relative;
   background: ${({ max, value }) =>
-    `linear-gradient(to right, ${palette.signatureColor} ${
-      (value / max) * 100
-    }%, #2A2A2A ${(value / max) * 100}%)`};
+    `linear-gradient(to right, ${palette.signatureColor} ${(
+      (value / max) *
+      100
+    ).toFixed(1)}%, #2A2A2A ${((value / max) * 100).toFixed(1)}%)`};
 
   &::-webkit-slider-thumb {
     appearance: none;
@@ -107,6 +80,36 @@ const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
     border: none;
   }
 `;
+
+// 클래스 네임 성능문제해결!! 블로그글 쓰기!!
+
+// const Input = styled.input.attrs<{
+//   max: number;
+//   value: number;
+//   $seeking: boolean;
+// }>(({ max, value }) => ({
+//   style: {
+//     background: `linear-gradient(to right, ${palette.signatureColor} ${
+//       (value / max) * 100
+//     }%, #2A2A2A ${(value / max) * 100}%)`,
+//   },
+// }))`
+//   width: 100%;
+//   height: ${({ $seeking }) => ($seeking ? "5px" : "2.5px")};
+//   border-radius: 5px;
+//   cursor: pointer;
+//   -webkit-appearance: none;
+//   appearance: none;
+//   position: relative;
+
+//   &::-webkit-slider-thumb {
+//     appearance: none;
+//     width: 0;
+//     height: 0;
+//     background: transparent;
+//     border: none;
+//   }
+// `;
 
 const ExpandTime = styled.div`
   height: 15px;
