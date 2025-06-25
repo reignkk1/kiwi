@@ -14,7 +14,7 @@ export function ProgressVisual({
 
   return (
     <Container $isExpand={$isExpand}>
-      <Percent $progressPercent={(currentTime / duration) * 100} />
+      <Percent $progressPercent={(currentTime / duration) * 100 || 0} />
     </Container>
   );
 }
