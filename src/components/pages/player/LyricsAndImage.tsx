@@ -72,7 +72,7 @@ const Container = styled.div<{
   $isExpandLyrics: boolean;
   $isLyricsClicked: boolean;
 }>`
-  height: 420px;
+  height: 435px;
   img {
     animation: ${({ $isExpandLyrics, $isLyricsClicked }) =>
         $isExpandLyrics || !$isLyricsClicked ? "hide" : "show"}
