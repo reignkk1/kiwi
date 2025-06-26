@@ -67,7 +67,7 @@ const Burn = styled.div<{ $backGroundColor: string[] }>`
   top: 120px;
   z-index: 3;
   background-size: 200% 200%;
-  animation: gradientAnimation 100s linear infinite;
+  animation: gradientAnimation 90s linear infinite;
   background-position: 190% 190%;
   background: ${({ $backGroundColor }) =>
     `linear-gradient(${$backGroundColor[0]},${$backGroundColor[1]},${$backGroundColor[2]})`};
@@ -78,7 +78,7 @@ const Burn = styled.div<{ $backGroundColor: string[] }>`
       transform: translateX(150px);
     }
     60% {
-      transform: translateY(100px);
+      transform: translateY(60px);
     }
     75% {
       transform: translateX(-200px);
@@ -127,6 +127,14 @@ const BackGroundFilter = styled.div`
   @media (min-height: 725px) and (min-width: 500px) {
     transform: scale(0.9);
   }
+
+  @media (max-height: 780px) {
+    transform: scale(0.8);
+  }
+
+  @media (max-height: 700px) {
+    transform: scale(0.7);
+  }
 `;
 
 const Edge = styled.div<{ src: string }>`
@@ -146,6 +154,14 @@ const Edge = styled.div<{ src: string }>`
 
   @media (min-height: 725px) and (min-width: 500px) {
     transform: scale(0.9);
+  }
+
+  @media (max-height: 780px) {
+    transform: scale(0.8);
+  }
+
+  @media (max-height: 700px) {
+    transform: scale(0.7);
   }
 `;
 
