@@ -45,7 +45,7 @@ const Header = styled.div<{ $isShowTitle: boolean }>`
   padding: 0px 40px 15px 40px;
   position: absolute;
   width: 90%;
-  top: 70px;
+  top: 65px;
   left: 22px;
   gap: 20px;
   ${({ $isShowTitle }) =>
