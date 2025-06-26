@@ -128,11 +128,11 @@ const BackGroundFilter = styled.div`
     transform: scale(0.9);
   }
 
-  @media (max-height: 780px) {
+  @media (min-width: 480px) and (max-height: 780px) {
     transform: scale(0.8);
   }
 
-  @media (max-height: 700px) {
+  @media (min-width: 480px) and (max-height: 700px) {
     transform: scale(0.7);
   }
 `;
@@ -156,11 +156,11 @@ const Edge = styled.div<{ src: string }>`
     transform: scale(0.9);
   }
 
-  @media (max-height: 780px) {
+  @media (min-width: 480px) and (max-height: 780px) {
     transform: scale(0.8);
   }
 
-  @media (max-height: 700px) {
+  @media (min-width: 480px) and (max-height: 700px) {
     transform: scale(0.7);
   }
 `;
