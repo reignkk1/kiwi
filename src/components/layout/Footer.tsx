@@ -121,7 +121,7 @@ const MiniPlayer = styled.div<{ $isSelected: boolean }>`
     forwards;
   position: absolute;
   z-index: 1;
-  bottom: 50px;
+  bottom: 45px;
   width: 100%;
 
   @keyframes fade-out {
