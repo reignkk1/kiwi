@@ -58,10 +58,12 @@ export default function MusicDrawerList() {
 
 const Container = styled.ul`
   height: 560px;
+  padding-bottom: 50px;
   overflow: auto;
 
   &::-webkit-scrollbar {
     width: 2px;
+    display: none;
   }
 `;
 
