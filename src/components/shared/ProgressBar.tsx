@@ -13,8 +13,6 @@ export function ProgressBar() {
   const isClicked = useRef(false);
   const inputValue = useRef(0);
 
-  // 반응형 고치기, footer 가수짤림 현상, 앨범제목 고치기, 커밋
-
   return (
     <Container>
       <ExpandTime>
@@ -101,6 +99,7 @@ const Input = styled.input.attrs<{
   -webkit-appearance: none;
   appearance: none;
   position: relative;
+  touch-action: none;
 
   &::-webkit-slider-thumb {
     appearance: none;
