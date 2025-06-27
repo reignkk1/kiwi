@@ -41,13 +41,15 @@ const Container = styled.div`
 
 const Header = styled.div<{ $isShowTitle: boolean }>`
   display: flex;
-  align-items: center;
-  padding: 0px 40px 15px 40px;
   position: absolute;
   width: 90%;
   top: 65px;
   left: 22px;
-  gap: 20px;
+  padding-bottom: 15px;
+  button {
+    margin-left: 30px;
+  }
+
   ${({ $isShowTitle }) =>
     $isShowTitle &&
     css`
@@ -57,12 +59,16 @@ const Header = styled.div<{ $isShowTitle: boolean }>`
   z-index: 1;
   @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
     top: 20px;
-    padding: 0px 10px 15px 10px;
+    width: 100%;
+    left: 0px;
   }
 `;
 
-const Title = styled.div`
-  width: 75%;
+const Title = styled.span`
+  width: 200px;
+  position: absolute;
+  left: 21%;
+
   color: white;
   font-size: 17px;
   white-space: nowrap;
@@ -70,6 +76,7 @@ const Title = styled.div`
   text-overflow: ellipsis;
   text-align: center;
   line-height: 1.2;
+  margin-left: 20px;
 `;
 
 const Content = styled.div`
