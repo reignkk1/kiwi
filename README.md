@@ -1,6 +1,8 @@
 # 🥝Kiwi
-<img src="https://github.com/user-attachments/assets/08339e28-4977-4c79-8bc0-8bf5b401eafd" width="400" />
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/41f5674d-e620-4c75-aed2-1a00dba8b510" width="300" />
+</div>
 
 Kiwi는 설치 없이 브라우저에서 바로 음악을 감상할 수 있는 심플한 웹 뮤직 플레이어입니다. </br>
 복잡한 과정 없이 누구나 쉽게 음악과 함께하는 일상을 시작해보세요.
