@@ -23,7 +23,7 @@ export function ButtonIcon({
   if (href) {
     return (
       <button aria-label={ariaLabel} onClick={onClick}>
-        <Link to={href}>
+        <Link to={href} aria-label="페이지 이동">
           <FontAwesomeIcon
             icon={icon}
             fontSize={size}
