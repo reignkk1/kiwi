@@ -50,6 +50,7 @@ export default function AlbumImg({
       {isLink ? (
         <Link to={`/music/${music.id}`}>
           <BackGroundImg
+            alt={music.albumTitle}
             width={width}
             height={height}
             src={addBasePath(music?.imgSrc)}
@@ -58,6 +59,7 @@ export default function AlbumImg({
         </Link>
       ) : (
         <BackGroundImg
+          alt={music.albumTitle}
           width={width}
           height={height}
           src={addBasePath(music?.imgSrc)}
@@ -65,7 +67,9 @@ export default function AlbumImg({
         />
       )}
 
-      {isActiveButton && <ButtonIcon icon={faPlay} onClick={play} />}
+      {isActiveButton && (
+        <ButtonIcon ariaLabel="재생" icon={faPlay} onClick={play} />
+      )}
     </Container>
   );
 }
