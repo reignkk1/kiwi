@@ -47,7 +47,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     <Container>
       <BackGroundFilter />
       {isBurn && <Burn $backGroundColor={backGroundColor} />}
-      <Edge src={`${addBasePath("./img/phone.png")}`}>
+      <Edge
+        role="img"
+        aria-label="테두리 이미지"
+        src={`${addBasePath("./img/phone.png")}`}
+      >
         {isShowEntryModal && <Entry />}
         {isShowInformModal && <Inform />}
         <Content>

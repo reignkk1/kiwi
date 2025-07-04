@@ -35,7 +35,7 @@ export function ButtonIcon({
   }
 
   return (
-    <button onClick={onClick}>
+    <button aria-label={ariaLabel} onClick={onClick}>
       <FontAwesomeIcon
         icon={icon}
         fontSize={size}

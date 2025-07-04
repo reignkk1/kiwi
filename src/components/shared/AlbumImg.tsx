@@ -46,7 +46,9 @@ export default function AlbumImg({
 
   return (
     <Container>
-      {$isMusicBar && <MusicBarImg src={`${"./img/music-bar.gif"}`} />}
+      {$isMusicBar && (
+        <MusicBarImg alt="재생중" src={`${"./img/music-bar.gif"}`} />
+      )}
       {isLink ? (
         <Link to={`/music/${music.id}`}>
           <BackGroundImg
