@@ -9,6 +9,7 @@ interface ButtonIconProps {
   onClick?: () => void;
   href?: string;
   active?: boolean;
+  ariaLabel: string;
 }
 
 export function ButtonIcon({
@@ -17,10 +18,11 @@ export function ButtonIcon({
   onClick,
   href,
   active = false,
+  ariaLabel,
 }: ButtonIconProps) {
   if (href) {
     return (
-      <button onClick={onClick}>
+      <button aria-label={ariaLabel} onClick={onClick}>
         <Link to={href}>
           <FontAwesomeIcon
             icon={icon}

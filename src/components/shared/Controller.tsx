@@ -35,11 +35,13 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
   return (
     <Container width={width}>
       <ButtonIcon
+        ariaLabel="이전"
         icon={faBackwardStep}
         size={getSize(0)}
         onClick={() => handleMusicDrawerCheck("prev")}
       />
       <ButtonIcon
+        ariaLabel="재생/일시정지"
         icon={isPlay ? faPause : faPlay}
         onClick={() => {
           // 만약 현재 곡이 지정되어 있지 않고 비어있을 경우
@@ -51,6 +53,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
         size={getSize(1)}
       />
       <ButtonIcon
+        ariaLabel="다음"
         icon={faForwardStep}
         size={getSize(2)}
         onClick={() => handleMusicDrawerCheck("next")}

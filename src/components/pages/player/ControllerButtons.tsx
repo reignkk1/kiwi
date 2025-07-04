@@ -11,12 +11,18 @@ export default function ControllerButtons() {
   return (
     <Container>
       <ButtonIcon
+        ariaLabel="셔플"
         active={isShuffle}
         icon={faShuffle}
         onClick={handleShuffleClick}
       />
       <Controller width={170} size={[30, 40, 30]} />
-      <ButtonIcon active={isLoop} icon={faRepeat} onClick={handleRepeatClick} />
+      <ButtonIcon
+        ariaLabel="반복"
+        active={isLoop}
+        icon={faRepeat}
+        onClick={handleRepeatClick}
+      />
     </Container>
   );
 }

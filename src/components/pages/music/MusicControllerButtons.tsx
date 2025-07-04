@@ -32,7 +32,7 @@ interface ControllerButtonProps {
 function ControllerButton({ icon, text, onClick }: ControllerButtonProps) {
   return (
     <ButtonContainer onClick={onClick}>
-      <ButtonIcon icon={icon} />
+      <ButtonIcon ariaLabel={text} icon={icon} />
       <Text>
         <span>{text}</span>
       </Text>

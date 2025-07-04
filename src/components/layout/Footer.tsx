@@ -65,9 +65,24 @@ function NavBar() {
 
   return (
     <NavBarContainer>
-      <ButtonIcon icon={faHome} href="/" active={activePage.home} />
-      <ButtonIcon icon={faSearch} href="/search" active={activePage.search} />
-      <ButtonIcon icon={faBars} href="/storage" active={activePage.storage} />
+      <ButtonIcon
+        ariaLabel="홈"
+        icon={faHome}
+        href="/"
+        active={activePage.home}
+      />
+      <ButtonIcon
+        ariaLabel="검색"
+        icon={faSearch}
+        href="/search"
+        active={activePage.search}
+      />
+      <ButtonIcon
+        ariaLabel="음악서랍"
+        icon={faBars}
+        href="/storage"
+        active={activePage.storage}
+      />
     </NavBarContainer>
   );
 }

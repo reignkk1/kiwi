@@ -32,11 +32,13 @@ export default function PlayerHeader() {
       />
       <Buttons>
         <ButtonIcon
+          ariaLabel="메뉴"
           onClick={() => openPlayerMenu()}
           icon={faEllipsisV}
           size={20}
         />
         <ButtonIcon
+          ariaLabel="뒤로가기"
           icon={faChevronDown}
           size={20}
           onClick={() => navigate(-1)}

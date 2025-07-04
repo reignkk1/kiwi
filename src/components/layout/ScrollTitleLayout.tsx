@@ -21,7 +21,11 @@ export default function ScrollTitleLayout({
   return (
     <Container onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}>
       <Header $isShowTitle={isShowTitle}>
-        <ButtonIcon icon={faChevronLeft} onClick={() => navigate(-1)} />
+        <ButtonIcon
+          ariaLabel="뒤로가기"
+          icon={faChevronLeft}
+          onClick={() => navigate(-1)}
+        />
         <Title>{isShowTitle && title}</Title>
       </Header>
       <Content>{children}</Content>
