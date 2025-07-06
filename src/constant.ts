@@ -1,4 +1,4 @@
-export const BASE_URL_SLICE = "/comfort";
+export const BASE_URL_SLICE = "/kiwi";
 
 export const palette = {
   signatureColor: "#0ceb0c",

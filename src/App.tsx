@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout";
 import { AlbumIntro, Home, Music, Player, Search, Storage } from "./pages";
+import { BASE_URL_SLICE } from "./constant";
 
 function App() {
   return (
-    <BrowserRouter basename="/comfort">
+    <BrowserRouter basename={BASE_URL_SLICE}>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
