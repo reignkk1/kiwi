@@ -5,8 +5,6 @@ import { palette } from "../constant";
 export const GlobalStyles = createGlobalStyle`
     ${reset}
     
- 
-
     * {
         box-sizing:border-box;
     }
@@ -19,6 +17,7 @@ export const GlobalStyles = createGlobalStyle`
 
     a {
         text-decoration:none;
+        display:inline-block;
     }
 
     body {
@@ -30,8 +29,10 @@ export const GlobalStyles = createGlobalStyle`
       background: none;
       color: ${palette.signatureColor};
     }
+    
     html, body {
       overflow: hidden;
       height: 100%;
-}
+    }
+
 `;
