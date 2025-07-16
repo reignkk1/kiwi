@@ -24,7 +24,7 @@ export default function useAudioDirectionHandler(audio: HTMLAudioElement) {
   const prevPlayedMusicHistory = useRef<Array<MusicType>>([]).current;
 
   const handlePlayDirection = (direction: "next" | "prev") => {
-    if (musicDrawer.length === 1) {
+    if (musicDrawer.length <= 1) {
       setIsPlay(true);
       audio.load();
       audio.play();
