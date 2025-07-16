@@ -27,7 +27,7 @@ const sizeMap = {
 
 interface AlbumImgProps {
   size: "small" | "middle" | "smallLarge" | "large";
-  music: MusicType;
+  music?: MusicType | null;
   isLink?: boolean;
   isActiveButton?: boolean;
   $isMusicBar?: boolean;
@@ -50,9 +50,9 @@ export default function AlbumImg({
         <MusicBarImg alt="재생중" src={`${"./img/music-bar.gif"}`} />
       )}
       {isLink ? (
-        <Link to={`/music/${music.id}`}>
+        <Link to={`/music/${music?.id}`}>
           <BackGroundImg
-            alt={music.albumTitle}
+            alt={music?.albumTitle}
             width={width}
             height={height}
             src={addBasePath(music?.imgSrc)}
@@ -61,7 +61,7 @@ export default function AlbumImg({
         </Link>
       ) : (
         <BackGroundImg
-          alt={music.albumTitle}
+          alt={music?.albumTitle}
           width={width}
           height={height}
           src={addBasePath(music?.imgSrc)}
