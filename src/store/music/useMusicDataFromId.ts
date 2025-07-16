@@ -4,7 +4,7 @@ import { MusicType } from "../../types";
 
 type MusicDataFromId = {
   music: MusicType | null;
-  getMusicDataFromId: (id: string | number) => void;
+  getMusicDataFromId: (id?: string | number) => void;
 };
 
 export const useMusicDataFromId = create<MusicDataFromId>((set) => ({
