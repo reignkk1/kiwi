@@ -56,31 +56,6 @@ const Container = styled.div`
   position: relative;
 `;
 
-// 클래스 네임 성능문제해결
-
-// const Input = styled.input<{ max: number; value: number; seeking: boolean }>`
-//   width: 100%;
-//   height: ${({ seeking }) => (seeking ? "5px" : "2.5px")};
-//   border-radius: 5px;
-//   cursor: pointer;
-//   -webkit-appearance: none;
-//   appearance: none;
-//   position: relative;
-//   background: ${({ max, value }) =>
-//     `linear-gradient(to right, ${palette.signatureColor} ${(
-//       (value / max) *
-//       100
-//     ).toFixed(1)}%, #2A2A2A ${((value / max) * 100).toFixed(1)}%)`};
-
-//   &::-webkit-slider-thumb {
-//     appearance: none;
-//     width: 0;
-//     height: 0;
-//     background: transparent;
-//     border: none;
-//   }
-// `;
-
 const Input = styled.input.attrs<{
   max: number;
   value: number;
