@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MusicCredit from "../components/pages/music/MusicCredit";
 import ScrollTitleLayout from "../components/layout/ScrollTitleLayout";
+import MusicVideo from "../components/pages/music/MusicVideo";
 
 export default function Music() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ export default function Music() {
       <MusicControllerButtons />
       <MusicLyrics />
       <MusicCredit />
+      <MusicVideo />
     </ScrollTitleLayout>
   );
 }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useMusicDataFromId } from "../../../store/music/useMusicDataFromId";
 import { convertToGenreKorea } from "./../../../utils";
 import InfoTable from "../../shared/InfoTable";
+import TitleContent from "../../layout/TitleContent";
 
 export default function MusicCredit() {
   const music = useMusicDataFromId((state) => state.music);
@@ -15,13 +16,12 @@ export default function MusicCredit() {
 
   return (
     <Container>
-      <Title>
-        <span>크레딧</span>
-      </Title>
-      <MusicTitle>
-        <span>{music?.title}</span>
-      </MusicTitle>
-      <InfoTable info={infoMap} />
+      <TitleContent title="크레딧">
+        <MusicTitle>
+          <span>{music?.title}</span>
+        </MusicTitle>
+        <InfoTable info={infoMap} />
+      </TitleContent>
     </Container>
   );
 }
@@ -33,11 +33,7 @@ const Container = styled.div`
   gap: 20px;
 `;
 
-const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
 const MusicTitle = styled.div`
   font-size: 15px;
+  margin-bottom: 20px;
 `;

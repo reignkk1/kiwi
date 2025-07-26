@@ -8,6 +8,7 @@ import styled from "styled-components";
 import InfoTable from "../components/shared/InfoTable";
 import { convertToGenreKorea } from "../utils";
 import parser from "html-react-parser";
+import TitleContent from "../components/layout/TitleContent";
 
 export default function AlbumIntro() {
   const { id } = useParams();
@@ -36,29 +37,17 @@ export default function AlbumIntro() {
         singer={music?.singer}
         size="middle"
       />
-      <Info>
-        <Title>상세 정보</Title>
+      <TitleContent title="상세 정보">
         <InfoTable info={infoMap} />
-      </Info>
-      <Intro>
-        <Title>앨범 소개</Title>
+      </TitleContent>
+      <TitleContent title="앨범 소개">
         <P>{parser(music?.albumIntro || "")}</P>
-      </Intro>
+      </TitleContent>
     </ScrollTitleLayout>
   );
 }
 
-const Info = styled.div``;
-
-const Intro = styled.div``;
 const P = styled.p`
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
-`;
-
-const Title = styled.h2`
-  color: white;
-  font-size: 21px;
-  font-weight: bold;
-  margin-bottom: 30px;
 `;
