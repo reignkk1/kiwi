@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
-export default function Skeleton() {
-  return <Container />;
+interface SkeletonProps {
+  width: string;
+  height: string;
 }
 
-const Container = styled.div`
-  width: 340px;
-  height: 200px;
+export default function Skeleton({ width, height }: SkeletonProps) {
+  return <Container width={width} height={height} />;
+}
+
+const Container = styled.div<{ width: string; height: string }>`
+  width: ${({ width }) => width + "px"};
+  height: ${({ height }) => height + "px"};;
   border-radius: 10px;
 
   background: linear-gradient(

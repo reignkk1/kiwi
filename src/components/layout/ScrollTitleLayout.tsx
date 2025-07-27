@@ -36,8 +36,7 @@ export default function ScrollTitleLayout({
 const Container = styled.div`
   height: 100%;
   overflow: auto;
-  padding-top: 64px;
-  padding-bottom: 150px;
+  padding: 64px 0px 150px 0px;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -46,9 +45,9 @@ const Container = styled.div`
 const Header = styled.div<{ $isShowTitle: boolean }>`
   display: flex;
   position: absolute;
-  width: 90%;
+  width: 87%;
   top: 65px;
-  left: 22px;
+  left: 25px;
   padding-bottom: 15px;
   button {
     margin-left: 30px;

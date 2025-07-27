@@ -12,42 +12,24 @@ export default function GenreMenu() {
   const menu: Array<GenreType | "all"> = ["all", "ballad", "hiphop", "indie"];
 
   return (
-    <Container>
-      <h2>장르</h2>
-      <Menu>
-        {menu.map((id) => (
-          <MenuItem
-            key={id}
-            id={id}
-            $active={activeMenu === id}
-            onClick={() => setActiveMenu(id)}
-          >
-            <span>{convertToGenreKorea(id)}</span>
-          </MenuItem>
-        ))}
-      </Menu>
-    </Container>
+    <Menu>
+      {menu.map((id) => (
+        <MenuItem
+          key={id}
+          id={id}
+          $active={activeMenu === id}
+          onClick={() => setActiveMenu(id)}
+        >
+          <span>{convertToGenreKorea(id)}</span>
+        </MenuItem>
+      ))}
+    </Menu>
   );
 }
 
-const Container = styled.div`
-  margin-bottom: 20px;
-  h2 {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 10px;
-  }
-  ul {
-    display: flex;
-    li {
-      margin-right: 5px;
-    }
-  }
-`;
-
 const Menu = styled.ul`
   display: flex;
+  margin-bottom: 20px;
 `;
 
 const MenuItem = styled.li<{ $active: boolean; id: string }>`
