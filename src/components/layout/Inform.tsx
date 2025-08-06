@@ -1,16 +1,28 @@
 import styled from "styled-components";
 import { palette } from "../../constant";
-import useInformStore from "../../hooks/store/useInfoModalStore";
 import { ModalContainer } from "./ModalContainer";
+import { useInformModalStore } from "../../store/layout/useInfoModalStore";
+import { useShallow } from "zustand/react/shallow";
+import {
+  useMusicDrawerStore,
+  useSelectedMusicIdsStore,
+} from "../../store/storage";
 
 // 일단은 삭제 모달로 구현
 // 추후에 여러 안내 모달창이 구현될 때는 재사용 가능하게끔 구현
 
 export default function Inform() {
-  const {
-    state: { musicDrawer, selectedMusicIds },
-    action: { setIsShowInformModal, setMusicDrawer, setSelectedMusicIds },
-  } = useInformStore();
+  const [setIsShowInformModal] = useInformModalStore(
+    useShallow((state) => [state.setIsShowInformModal])
+  );
+
+  const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
+    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
+  );
+
+  const [musicDrawer, setMusicDrawer] = useMusicDrawerStore(
+    useShallow((state) => [state.musicDrawer, state.setMusicDrawer])
+  );
 
   const onClickCancle = () => setIsShowInformModal(false);
 

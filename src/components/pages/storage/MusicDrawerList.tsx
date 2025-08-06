@@ -1,15 +1,22 @@
 import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
 import SelectButton from "./SelectButton";
-import useMusicDrawerListStore from "../../../hooks/store/useMusicDrawerListStore";
 import { useEffect } from "react";
 import { getMusicDataFromId } from "../../../utils";
+import { useCurrentMusicStore } from "../../../store/shared";
+import {
+  useMusicDrawerStore,
+  useSelectedMusicIdsStore,
+} from "../../../store/storage";
+import { useShallow } from "zustand/react/shallow";
 
 export default function MusicDrawerList() {
-  const {
-    state: { musicDrawer, currentMusic, selectedMusicIds },
-    action: { setSelectedMusicIds },
-  } = useMusicDrawerListStore();
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
+
+  const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
+    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
+  );
 
   const music = musicDrawer.map((id) => getMusicDataFromId(id));
 

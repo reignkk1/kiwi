@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import SelectCircle from "./SelectButton";
-import useTotalCountStore from "../../../hooks/store/useTotalCountStore";
+import {
+  useMusicDrawerStore,
+  useSelectedMusicIdsStore,
+} from "../../../store/storage";
+import { useShallow } from "zustand/react/shallow";
 
 export default function TotalCount() {
-  const {
-    state: { musicDrawer, selectedMusicIds },
-    action: { setSeletedMusicIds },
-  } = useTotalCountStore();
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
+  const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIdsStore(
+    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
+  );
 
   const onClickSelectCircle = () => {
     if (selectedMusicIds.length) {

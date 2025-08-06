@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { palette } from "../../constant";
-import useProgressVisualStore from "../../hooks/store/useProgressVisualStore";
+import { useAudioStore } from "../../store/audio";
+import { useShallow } from "zustand/react/shallow";
 
 export function ProgressVisual({
   $isExpand = false,
@@ -8,9 +9,9 @@ export function ProgressVisual({
   $isExpand?: boolean;
   value?: number;
 }) {
-  const {
-    state: { currentTime, duration },
-  } = useProgressVisualStore();
+  const [currentTime, duration] = useAudioStore(
+    useShallow((state) => [state.currentTime, state.duration])
+  );
 
   return (
     <Container $isExpand={$isExpand}>

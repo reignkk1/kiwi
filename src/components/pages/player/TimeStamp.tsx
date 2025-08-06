@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import { formatTime } from "../../../utils";
-import { useTimeStampStore } from "../../../hooks/store/useTimeStampStore";
+import { useAudioStore } from "../../../store/audio";
+import { useSeekStore } from "../../../store/audio/useSeekStore";
+import { useShallow } from "zustand/react/shallow";
 
 export default function TimeStamp() {
-  const {
-    state: { duration, currentTime, seeking, seekingValue },
-  } = useTimeStampStore();
+  const [duration, currentTime] = useAudioStore(
+    useShallow((state) => [state.duration, state.currentTime])
+  );
+
+  const [seeking, seekingValue] = useSeekStore(
+    useShallow((state) => [state.seeking, state.seekingValue])
+  );
 
   return (
     <Container>

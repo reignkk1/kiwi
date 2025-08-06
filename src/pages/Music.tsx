@@ -23,7 +23,7 @@ export default function Music() {
       getMusicDataFromId(id);
       setIsLoading(false);
     }
-  }, [id]);
+  }, [id, getMusicDataFromId]);
 
   return !isLoading ? (
     <ScrollTitleLayout title={music?.title}>

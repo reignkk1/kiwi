@@ -7,7 +7,14 @@ import {
 import { ButtonIcon } from "./ButtonIcon";
 import styled from "styled-components";
 import { is } from "../../utils";
-import { useControllerStore } from "../../hooks/store/useControllerStore";
+import { useAudioStore } from "../../store/audio";
+import { useShallow } from "zustand/react/shallow";
+import {
+  useAlertStore,
+  useCurrentMusicStore,
+  usePlayDirectionStore,
+} from "../../store/shared";
+import { useMusicDrawerStore } from "../../store/storage";
 
 interface ControllerProps {
   width: number;
@@ -15,10 +22,17 @@ interface ControllerProps {
 }
 
 export default function Controller({ width, size = 18 }: ControllerProps) {
-  const {
-    state: { isPlay, musicDrawer, currnetMusic },
-    action: { togglePlay, setPlayDirection, toggleFadeAlertMessage },
-  } = useControllerStore();
+  const [isPlay, togglePlay] = useAudioStore(
+    useShallow((state) => [state.isPlay, state.togglePlay])
+  );
+  const setPlayDirection = usePlayDirectionStore(
+    (state) => state.setPlayDirection
+  );
+  const toggleFadeAlertMessage = useAlertStore(
+    (state) => state.toggleFadeAlertMessage
+  );
+  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
+  const currnetMusic = useCurrentMusicStore((state) => state.currentMusic);
 
   const isMusicDrawer = musicDrawer.length > 0;
 
@@ -26,7 +40,6 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
     if (!isMusicDrawer) {
       return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
     }
-
     setPlayDirection(direction);
   };
 

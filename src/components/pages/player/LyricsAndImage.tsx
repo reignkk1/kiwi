@@ -1,24 +1,37 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
-import { useLyricsAndImageStore } from "../../../hooks/store/useLyricsAndImageStore";
+import { useSeekStore } from "../../../store/audio/useSeekStore";
+import { useAudioStore } from "../../../store/audio";
+import { useCurrentMusicStore } from "../../../store/shared";
+import {
+  useIsExpandLyricsStore,
+  useIsLyricsClickedStore,
+} from "../../../store/player";
+import { useShallow } from "zustand/react/shallow";
 
 export default function LyricsAndImage() {
-  const {
-    state: {
-      currentMusic,
-      currentTime,
-      isExpandLyrics,
-      isLyricsClicked,
-      seeking,
-    },
-    action: {
-      setIsExpandLyrics,
-      toggleExpandLyrics,
-      clickLyrics,
-      unclickedLyrics,
-    },
-  } = useLyricsAndImageStore();
+  const seeking = useSeekStore((state) => state.seeking);
+  const currentTime = useAudioStore((state) => state.currentTime);
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
+
+  const [isLyricsClicked, clickLyrics, unclickedLyrics] =
+    useIsLyricsClickedStore(
+      useShallow((state) => [
+        state.isLyricsClicked,
+        state.clickLyrics,
+        state.unclickedLyrics,
+      ])
+    );
+
+  const [isExpandLyrics, setIsExpandLyrics, toggleExpandLyrics] =
+    useIsExpandLyricsStore(
+      useShallow((state) => [
+        state.isExpandLyrics,
+        state.setIsExpandLyrics,
+        state.toggleExpandLyrics,
+      ])
+    );
 
   const activeLyricsText = useRef<HTMLDivElement>(null);
   const cleanedCurrentTime = Math.floor(currentTime);

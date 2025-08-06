@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import { palette } from "../../../constant";
-import useSelectMenuStore from "../../../hooks/store/useSelectMenuStore";
+import { useInformModalStore } from "../../../store/layout/useInfoModalStore";
+import { useSelectedMusicIdsStore } from "../../../store/storage";
 
 // 선택을 했을 때 나오는 메뉴에는 삭제, 선택반복, 담기
 
 export default function SelectMenu() {
-  const {
-    state: { selectedMusicIds },
-    action: { setIsShowInformModal },
-  } = useSelectMenuStore();
+  const selectedMusicIds = useSelectedMusicIdsStore(
+    (state) => state.selectedMusicIds
+  );
+
+  const setIsShowInformModal = useInformModalStore(
+    (state) => state.setIsShowInformModal
+  );
 
   const isSelected = selectedMusicIds.length > 0;
 

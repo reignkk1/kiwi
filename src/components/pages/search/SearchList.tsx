@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { ButtonIcon } from "../../shared/ButtonIcon";
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import MusicCard from "../../shared/MusicCard";
 import { useSearchStore } from "../../../store/search";
 import { useShallow } from "zustand/react/shallow";
@@ -36,12 +34,5 @@ const Item = styled.li`
     100% {
       opacity: 1;
     }
-  }
-`;
-
-const ItemButtons = styled.div`
-  display: flex;
-  button {
-    margin-left: 10px;
   }
 `;

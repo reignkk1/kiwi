@@ -2,15 +2,17 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { usePlayerMenuStore } from "../../../hooks/store/usePlayerMenuStore";
 import { Link } from "react-router-dom";
 import usePutInMusicDrawer from "../../../hooks/usePutInMusicDrawer";
+import { useCurrentMusicStore } from "../../../store/shared";
+import { useIsPlayerMenuStore } from "../../../store/player";
 
 export default function PlayerMenu() {
-  const {
-    state: { currentMusic },
-    action: { closePlayerMenu },
-  } = usePlayerMenuStore();
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
+
+  const closePlayerMenu = useIsPlayerMenuStore(
+    (state) => state.closePlayerMenu
+  );
 
   const putInMusicDrawer = usePutInMusicDrawer(currentMusic.id);
 

@@ -1,13 +1,17 @@
-import usePutInMusicDrawerStore from "./store/usePutInMusicDrawerStore";
 import { resolveMusicId } from "./../utils";
+import { useMusicDrawerStore } from "../store/storage";
+import { useShallow } from "zustand/react/shallow";
+import { useAlertStore } from "../store/shared";
 
 export default function usePutInMusicDrawer(musicId?: number | string) {
   const id = resolveMusicId(musicId);
 
-  const {
-    state: { musicDrawer },
-    action: { toggleFadeAlertMessage, setMusicDrawer },
-  } = usePutInMusicDrawerStore();
+  const [musicDrawer, setMusicDrawer] = useMusicDrawerStore(
+    useShallow((state) => [state.musicDrawer, state.setMusicDrawer])
+  );
+  const toggleFadeAlertMessage = useAlertStore(
+    (state) => state.toggleFadeAlertMessage
+  );
 
   const isIncluded = musicDrawer.includes(id);
 

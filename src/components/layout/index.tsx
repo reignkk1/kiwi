@@ -4,20 +4,30 @@ import Entry from "./Entry";
 import { Footer } from "./Footer";
 import Alert from "../shared/Alert";
 import { addBasePath } from "../../utils";
-import { useLayoutStore } from "../../hooks/store/useLayoutStore";
 import Inform from "./Inform";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
+import { useCurrentMusicStore } from "../../store/shared";
+import { useEntryModalStore, useUserNameStore } from "../../store/layout";
+import { useShallow } from "zustand/react/shallow";
+import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const {
-    state: {
-      isShowEntryModal,
-      musicBackGroundColor,
-      userName,
-      isShowInformModal,
-    },
-    action: { hiddenEntryModal, showEntryModal },
-  } = useLayoutStore();
+  const musicBackGroundColor = useCurrentMusicStore(
+    (state) => state.currentMusic.backGroundColor
+  );
+  const [isShowEntryModal, hiddenEntryModal, showEntryModal] =
+    useEntryModalStore(
+      useShallow((state) => [
+        state.isShowEntryModal,
+        state.hiddenEntryModal,
+        state.showEntryModal,
+      ])
+    );
+
+  const userName = useUserNameStore((state) => state.userName);
+  const isShowInformModal = useInformModalStore(
+    (state) => state.isShowInformModal
+  );
 
   const currentPage = useCurrentPage();
 

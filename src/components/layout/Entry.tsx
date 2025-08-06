@@ -1,15 +1,16 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useEntryStore } from "../../hooks/store/useEntryStore";
 import { ModalContainer } from "./ModalContainer";
+import { useEntryModalStore, useUserNameStore } from "../../store/layout";
 
 export default function Entry() {
   const navigate = useNavigate();
 
-  const {
-    action: { hiddenEntryModal, setUserName },
-  } = useEntryStore();
+  const hiddenEntryModal = useEntryModalStore(
+    (state) => state.hiddenEntryModal
+  );
+  const setUserName = useUserNameStore((state) => state.setUserName);
 
   const [inputValue, setInputValue] = useState<string>();
 

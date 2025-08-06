@@ -1,14 +1,26 @@
 import styled from "styled-components";
 import { useRef } from "react";
 import { formatTime } from "../../utils";
-import { useProgressBarStore } from "../../hooks/store/useProgressBarStore";
 import { palette } from "../../constant";
+import { useAudioStore } from "../../store/audio";
+import { useShallow } from "zustand/react/shallow";
+import { useSeekStore } from "../../store/audio/useSeekStore";
 
 export function ProgressBar() {
-  const {
-    state: { duration, currentTime, seeking, seekingValue },
-    action: { setSeekTo, setSeeking, setSeekingValue },
-  } = useProgressBarStore();
+  const [duration, currentTime] = useAudioStore(
+    useShallow((state) => [state.duration, state.currentTime])
+  );
+
+  const [seeking, setSeeking, setSeekTo, seekingValue, setSeekingValue] =
+    useSeekStore(
+      useShallow((state) => [
+        state.seeking,
+        state.setSeeking,
+        state.setSeekTo,
+        state.seekingValue,
+        state.setSeekingValue,
+      ])
+    );
 
   const isClicked = useRef(false);
   const inputValue = useRef(0);

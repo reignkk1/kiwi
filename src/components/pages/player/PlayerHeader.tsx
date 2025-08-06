@@ -5,13 +5,23 @@ import AlbumImg from "../../shared/AlbumImg";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { usePlayerHeaderStore } from "../../../hooks/store/usePlayerHeaderStore";
+import { useCurrentMusicStore } from "../../../store/shared";
+import {
+  useIsExpandLyricsStore,
+  useIsPlayerMenuStore,
+} from "../../../store/player";
+import { useShallow } from "zustand/react/shallow";
 
 export default function PlayerHeader() {
-  const {
-    state: { currentMusic, isExpandLyrics },
-    action: { openPlayerMenu, closePlayerMenu },
-  } = usePlayerHeaderStore();
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
+
+  const isExpandLyrics = useIsExpandLyricsStore(
+    (state) => state.isExpandLyrics
+  );
+
+  const [openPlayerMenu, closePlayerMenu] = useIsPlayerMenuStore(
+    useShallow((state) => [state.openPlayerMenu, state.closePlayerMenu])
+  );
 
   const navigate = useNavigate();
   const isAnimation = (currentMusic.title?.length || 0) > 20;
