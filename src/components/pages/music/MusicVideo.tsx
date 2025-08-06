@@ -42,7 +42,7 @@ export default function MusicVideo() {
     };
 
     fetchData();
-  }, []);
+  }, [music?.singer, music?.title]);
 
   return (
     <TitleContent title="이 곡의 비디오">
@@ -50,11 +50,12 @@ export default function MusicVideo() {
         <Container>
           {video?.map((data: any) => (
             <iframe
+              title={`${data.snippet.title} (${data.id.videoId})`}
               key={data.id.videoId}
               width="350px"
               height="200px"
               src={`https://www.youtube.com/embed/${data.id.videoId}?modestbranding=1&rel=0`}
-            ></iframe>
+            />
           ))}
         </Container>
       ) : (
