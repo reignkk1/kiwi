@@ -5,7 +5,10 @@ interface SelectCircleProps {
   $active: boolean;
 }
 
-export default function SelectButton({ onClick, $active }: SelectCircleProps) {
+export default function DrawerSelectButton({
+  onClick,
+  $active,
+}: SelectCircleProps) {
   return $active ? (
     <EmojiButton onClick={onClick}>✅</EmojiButton>
   ) : (

@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import SelectCircle from "./SelectButton";
+import SelectCircle from "./DrawerSelectButton";
 import {
   useMusicDrawerStore,
   useSelectedMusicIdsStore,
 } from "../../../store/storage";
 import { useShallow } from "zustand/react/shallow";
 
-export default function TotalCount() {
+export default function DrawerTotalCount() {
   const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
   const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIdsStore(
     useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])

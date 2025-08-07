@@ -4,7 +4,7 @@ import { useAudioStore } from "../../../store/audio";
 import { useSeekStore } from "../../../store/audio/useSeekStore";
 import { useShallow } from "zustand/react/shallow";
 
-export default function TimeStamp() {
+export default function PlayerTimeStamp() {
   const [duration, currentTime] = useAudioStore(
     useShallow((state) => [state.duration, state.currentTime])
   );

@@ -1,7 +1,7 @@
 import HeaderTitle from "../components/layout/Header";
 import TitleContent from "../components/layout/TitleContent";
-import AlbumList from "../components/pages/home/AlbumList";
-import GenreMenu from "../components/pages/home/GenreMenu";
+import HomeAlbumList from "../components/pages/home/HomeAlbumList";
+import HomeGenreMenu from "../components/pages/home/HomeGenreMenu";
 import { useUserNameStore } from "../store/layout";
 
 export default function Home() {
@@ -11,8 +11,8 @@ export default function Home() {
     <div>
       <HeaderTitle title={userName + "님 어서오세요!"} />
       <TitleContent title="장르">
-        <GenreMenu />
-        <AlbumList />
+        <HomeGenreMenu />
+        <HomeAlbumList />
       </TitleContent>
     </div>
   );

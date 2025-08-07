@@ -4,7 +4,7 @@ import { useActiveGenreMenuStore } from "../../../store/home";
 import type { GenreType } from "../../../types";
 import { convertToGenreKorea } from "../../../utils";
 
-export default function GenreMenu() {
+export default function HomeenreMenu() {
   const [activeMenu, setActiveMenu] = useActiveGenreMenuStore(
     useShallow((state) => [state.activeMenu, state.setActiveMenu])
   );

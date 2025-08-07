@@ -7,7 +7,7 @@ interface AlbumProps {
   music: MusicType;
 }
 
-export default function Album({ music }: AlbumProps) {
+export default function HomeAlbum({ music }: AlbumProps) {
   return (
     <AlbumTemplate>
       <AlbumImg

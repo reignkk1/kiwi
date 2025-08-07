@@ -4,7 +4,7 @@ import Controller from "../../shared/Controller";
 import styled from "styled-components";
 import useControllerButtonsHandler from "../../../hooks/useControllerButtonsHandler";
 
-export default function ControllerButtons() {
+export default function PlayerControllerButtons() {
   const { handleRepeatClick, handleShuffleClick, isLoop, isShuffle } =
     useControllerButtonsHandler();
 

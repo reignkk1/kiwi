@@ -1,6 +1,6 @@
-import TimeStamp from "../components/pages/player/TimeStamp";
-import ControllerButtons from "../components/pages/player/ControllerButtons";
-import LyricsAndImage from "../components/pages/player/LyricsAndImage";
+import PlayerTimeStamp from "../components/pages/player/PlayerTimeStamp";
+import PlayerControllerButtons from "../components/pages/player/PlayerControllerButtons";
+import PlayerLyricsAndImage from "../components/pages/player/PlayerLyricsAndImage";
 import { ProgressBar } from "../components/shared/ProgressBar";
 import PlayerMenu from "../components/pages/player/PlayerMenu";
 import styled from "styled-components";
@@ -16,10 +16,10 @@ export default function Player() {
     <Container>
       <PlayerHeader />
       <Content>
-        <LyricsAndImage />
+        <PlayerLyricsAndImage />
         <ProgressBar />
-        <TimeStamp />
-        <ControllerButtons />
+        <PlayerTimeStamp />
+        <PlayerControllerButtons />
       </Content>
     </Container>
   );

@@ -1,4 +1,4 @@
-import Album from "./Album";
+import HomeAlbum from "./HomeAlbum";
 import { useEffect } from "react";
 import styled from "styled-components";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../../../store/home";
 import { useShallow } from "zustand/react/shallow";
 
-export default function AlbumList() {
+export default function HomeAlbumList() {
   const activeMenu = useActiveGenreMenuStore((state) => state.activeMenu);
   const [albumMusicList, setAlbumMusicList] = useAlbumMusicListStore(
     useShallow((state) => [state.albumMusicList, state.setAlbumMusicList])
@@ -21,7 +21,7 @@ export default function AlbumList() {
   return (
     <Container>
       {albumMusicList[activeMenu]?.map((music) => (
-        <Album key={music.id} music={music} />
+        <HomeAlbum key={music.id} music={music} />
       ))}
     </Container>
   );

@@ -10,7 +10,7 @@ import {
 } from "../../../store/player";
 import { useShallow } from "zustand/react/shallow";
 
-export default function LyricsAndImage() {
+export default function PlayerLyricsAndImage() {
   const seeking = useSeekStore((state) => state.seeking);
   const currentTime = useAudioStore((state) => state.currentTime);
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);

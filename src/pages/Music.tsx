@@ -21,7 +21,7 @@ export default function Music() {
   useEffect(() => {
     if (id) {
       getMusicDataFromId(id);
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   }, [id, getMusicDataFromId]);
 
