@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Pages } from "../../types";
 
-const pages: Pages[] = ["home", "music", "player", "search", "storage"];
+const pages: Pages[] = ["home", "music", "player", "search", "drawer"];
 
 const initialState = Object.fromEntries(
   pages.map((page) => [page, false])
