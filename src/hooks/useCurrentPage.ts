@@ -7,7 +7,7 @@ export function useCurrentPage() {
   const pageMap: { [key: string]: string } = {
     "/": "home",
     "/search": "search",
-    "/storage": "storage",
+    "/drawer": "drawer",
     "/player": "player",
   };
 
