@@ -6,6 +6,7 @@ import PlayerMenu from "../components/pages/player/PlayerMenu";
 import styled from "styled-components";
 import { useIsPlayerMenuStore } from "../store/player";
 import PlayerHeader from "../components/pages/player/PlayerHeader";
+import PlayerVolume from "../components/pages/player/PlayerVolume";
 
 export default function Player() {
   const isPlayerMenu = useIsPlayerMenuStore((state) => state.isPlayerMenu);
@@ -13,19 +14,18 @@ export default function Player() {
   return isPlayerMenu ? (
     <PlayerMenu />
   ) : (
-    <Container>
+    <div>
       <PlayerHeader />
       <Content>
         <PlayerLyricsAndImage />
+        <PlayerVolume />
         <ProgressBar />
         <PlayerTimeStamp />
         <PlayerControllerButtons />
       </Content>
-    </Container>
+    </div>
   );
 }
-
-const Container = styled.div``;
 
 const Content = styled.div`
   display: flex;
