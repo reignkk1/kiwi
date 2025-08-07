@@ -10,7 +10,7 @@ import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useSelectedMusicIdsStore } from "../../store/storage/useSelectedMusicIdsStore";
-import SelectMenu from "../pages/storage/SelectMenu";
+import SelectMenu from "../pages/drawer/DrawerSelectMenu";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
 
 export function Footer() {
@@ -80,8 +80,8 @@ function NavBar() {
       <ButtonIcon
         ariaLabel="음악서랍"
         icon={faBars}
-        href="/storage"
-        active={activePage.storage}
+        href="/drawer"
+        active={activePage.drawer}
       />
     </NavBarContainer>
   );
