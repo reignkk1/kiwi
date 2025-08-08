@@ -5,24 +5,33 @@ import { palette } from "../../constant";
 
 interface ButtonIconProps {
   icon: IconProp;
+  ariaLabel: string;
   size?: number;
-  onClick?: () => void;
   href?: string;
   active?: boolean;
-  ariaLabel: string;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export function ButtonIcon({
   icon,
   size = 18,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   href,
   active = false,
   ariaLabel,
 }: ButtonIconProps) {
   if (href) {
     return (
-      <button aria-label={ariaLabel} onClick={onClick}>
+      <button
+        aria-label={ariaLabel}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <Link to={href} aria-label="페이지 이동">
           <FontAwesomeIcon
             icon={icon}
@@ -35,7 +44,12 @@ export function ButtonIcon({
   }
 
   return (
-    <button aria-label={ariaLabel} onClick={onClick}>
+    <button
+      aria-label={ariaLabel}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <FontAwesomeIcon
         icon={icon}
         fontSize={size}
