@@ -61,7 +61,7 @@ export function ProgressBar() {
 // 그래서 깜빡이는 잔상 같은 것들이 나타남.
 
 const Container = styled.div`
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -98,7 +98,7 @@ const Input = styled.input.attrs<{
 `;
 
 const ExpandTime = styled.div`
-  height: 15px;
+  height: 10px;
   color: white;
   text-align: center;
   margin-bottom: 20px;
