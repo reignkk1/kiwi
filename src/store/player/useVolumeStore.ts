@@ -6,6 +6,6 @@ type VolumeStore = {
 };
 
 export const useVolumeStore = create<VolumeStore>((set) => ({
-  volume: 0.5,
+  volume: 30,
   setVolume: (volume) => set(() => ({ volume })),
 }));
