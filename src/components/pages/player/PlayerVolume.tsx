@@ -4,10 +4,15 @@ import styled from "styled-components";
 import { useMutedStore } from "../../../store/player/useMutedStore";
 import { useShallow } from "zustand/react/shallow";
 import { useRef, useState } from "react";
+import { useVolumeStore } from "../../../store/player/useVolumeStore";
 
 export default function PlayerVolume() {
   const [isMuted, toggleMuted] = useMutedStore(
     useShallow((state) => [state.isMuted, state.toggleMuted])
+  );
+
+  const [volume, setVolume] = useVolumeStore(
+    useShallow((state) => [state.volume, state.setVolume])
   );
 
   const [isHover, setIsHover] = useState(false);
@@ -36,6 +41,8 @@ export default function PlayerVolume() {
       {isHover && (
         <Input
           type="range"
+          value={volume}
+          onChange={(e) => setVolume(Number(e.currentTarget.value))}
           onMouseEnter={showVolumeBar}
           onMouseLeave={startHideTimer}
         />
