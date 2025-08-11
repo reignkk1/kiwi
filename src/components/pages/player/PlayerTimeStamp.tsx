@@ -27,9 +27,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   color: white;
-  margin: 12px 0px;
   font-size: 14px;
-
   span:nth-child(2) {
     color: rgba(255, 255, 255, 0.5);
   }
