@@ -38,6 +38,13 @@ export default function PlayerVolume() {
 
   return (
     <Container>
+      <ButtonIcon
+        onClick={() => toggleMuted()}
+        onMouseEnter={showVolumeBar}
+        onMouseLeave={startHideTimer}
+        ariaLabel="볼륨조절"
+        icon={isMuted ? faVolumeMute : faVolumeLow}
+      />
       {isHover && (
         <Input
           type="range"
@@ -47,27 +54,35 @@ export default function PlayerVolume() {
           onMouseLeave={startHideTimer}
         />
       )}
-      <ButtonIcon
-        onClick={() => toggleMuted()}
-        onMouseEnter={showVolumeBar}
-        onMouseLeave={startHideTimer}
-        ariaLabel="볼륨조절"
-        icon={isMuted ? faVolumeMute : faVolumeLow}
-      />
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
-  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 116px;
+  padding-left: 2px;
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs<{ value: number }>(({ value }) => ({
+  style: {
+    background: `linear-gradient(to right, white ${
+      (value / 100) * 100
+    }%, #2A2A2A ${(value / 100) * 100}%)`,
+  },
+}))`
   width: 80px;
-  transform: rotate(270deg);
-  position: absolute;
-  right: -28px;
-  bottom: 60px;
+  height: 4px;
+  appearance: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+  }
 `;
