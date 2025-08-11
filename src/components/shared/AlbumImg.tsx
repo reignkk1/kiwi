@@ -20,8 +20,8 @@ const sizeMap = {
     height: "220px",
   },
   large: {
-    width: "340px",
-    height: "310px",
+    width: "320px",
+    height: "290px",
   },
 };
 
