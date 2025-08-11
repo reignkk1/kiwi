@@ -3,6 +3,8 @@ import { useAudioImplStore } from "../../hooks/audio/useAudioImplStore";
 import useAudioInitialize from "../../hooks/audio/useAudioInitialize";
 import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
 import { addBasePath } from "../../utils";
+import { useMutedStore } from "../../store/player/useMutedStore";
+import { useVolumeStore } from "../../store/player/useVolumeStore";
 
 export default function AudioImpl() {
   useAudioInitialize();
@@ -18,6 +20,9 @@ export default function AudioImpl() {
       setSeeking,
     },
   } = useAudioImplStore();
+
+  const isMuted = useMutedStore((state) => state.isMuted);
+  const volume = useVolumeStore((state) => state.volume);
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const audio = audioRef.current;
@@ -54,6 +59,14 @@ export default function AudioImpl() {
       setSeekTo(null);
     }
   }, [seekTo, audio, setSeekTo]);
+
+  useEffect(() => {
+    audio.muted = isMuted;
+  }, [isMuted]);
+
+  useEffect(() => {
+    audio.volume = volume / 100;
+  }, [volume]);
 
   return (
     <audio
