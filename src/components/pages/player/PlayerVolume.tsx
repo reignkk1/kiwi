@@ -62,8 +62,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 116px;
+  width: 120px;
   padding-left: 2px;
+  @media only screen and (min-device-width: 360px) and (max-device-width: 479px) {
+    display: none;
+  }
 `;
 
 const Input = styled.input.attrs<{ value: number }>(({ value }) => ({
