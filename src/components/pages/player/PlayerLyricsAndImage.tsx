@@ -34,11 +34,19 @@ export default function PlayerLyricsAndImage() {
     );
 
   const activeLyricsText = useRef<HTMLDivElement>(null);
+  const LyricsContainerRef = useRef<HTMLDivElement>(null);
+
   const cleanedCurrentTime = Math.floor(currentTime);
 
   useEffect(() => {
-    if (!isExpandLyrics) {
-      activeLyricsText.current?.scrollIntoView(true);
+    if (
+      !isExpandLyrics &&
+      activeLyricsText.current &&
+      LyricsContainerRef.current
+    ) {
+      LyricsContainerRef.current.scrollTo({
+        top: activeLyricsText.current.offsetTop,
+      });
     }
   }, [currentTime, isExpandLyrics]);
 
@@ -56,6 +64,7 @@ export default function PlayerLyricsAndImage() {
     >
       <AlbumImg size="large" music={currentMusic} />
       <LyricsContainer
+        ref={LyricsContainerRef}
         $isExpandLyrics={isExpandLyrics}
         onClick={() => {
           clickLyrics();
@@ -143,6 +152,7 @@ const Container = styled.div<{
 `;
 
 const LyricsContainer = styled.div<{ $isExpandLyrics: boolean }>`
+  min-height: 100px;
   height: ${({ $isExpandLyrics }) => ($isExpandLyrics ? "100%" : "100px")};
   text-align: ${({ $isExpandLyrics }) =>
     $isExpandLyrics ? "start" : "center"};
