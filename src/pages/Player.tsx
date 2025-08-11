@@ -18,10 +18,10 @@ export default function Player() {
       <PlayerHeader />
       <Content>
         <PlayerLyricsAndImage />
-        <PlayerVolume />
         <ProgressBar />
         <PlayerTimeStamp />
         <PlayerControllerButtons />
+        <PlayerVolume />
       </Content>
     </div>
   );
@@ -30,4 +30,5 @@ export default function Player() {
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 15px;
 `;
