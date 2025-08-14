@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { getMusicDataFromId } from "../../utils";
-import { MusicType } from "../../types";
+import type { MusicType } from "../../types";
 
 type MusicDataFromId = {
   music: MusicType | null;

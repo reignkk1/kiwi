@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Pages } from "../../types";
+import type { Pages } from "../../types";
 
 const pages: Pages[] = ["home", "music", "player", "search", "drawer"];
 

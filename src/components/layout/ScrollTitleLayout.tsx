@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useScrollStore } from "../../store/shared";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { ButtonIcon } from "../shared/ButtonIcon";
 import { useNavigate } from "react-router-dom";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";

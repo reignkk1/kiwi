@@ -4,7 +4,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { addBasePath } from "../../utils";
 import { Link } from "react-router-dom";
 import usePlay from "../../hooks/usePlay";
-import { MusicType } from "../../types";
+import type { MusicType } from "../../types";
 
 const sizeMap = {
   small: {

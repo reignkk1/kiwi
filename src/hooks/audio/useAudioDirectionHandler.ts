@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { MusicType } from "../../types";
+import type { MusicType } from "../../types";
 import useAudioPlayTypes from "./useAudioPlayTypes";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";

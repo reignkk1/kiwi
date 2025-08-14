@@ -1,7 +1,7 @@
 import parse from "html-react-parser";
 import { BASE_URL_SLICE } from "./constant";
 import music from "./musicData.json";
-import { GenreType } from "./types";
+import type { GenreType } from "./types";
 
 // letter 인자로 들어온 글자들 중 keyWord에 해당하는 부분을 marking 해주는 함수
 export function markKeyword(letter: string, keyWord: string) {

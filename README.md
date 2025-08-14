@@ -1,39 +1,69 @@
-# 🥝Kiwi
+# React + TypeScript + Vite
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/41f5674d-e620-4c75-aed2-1a00dba8b510" width="300" />
-</div>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Kiwi는 설치 없이 브라우저에서 바로 음악을 감상할 수 있는 심플한 웹 뮤직 플레이어입니다. </br>
-복잡한 과정 없이 누구나 쉽게 음악과 함께하는 일상을 시작해보세요.
+Currently, two official plugins are available:
 
-👉 <a href="https://reignkk1.github.io/kiwi">Kiwi 바로 체험하기</a>
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## 🌟 Features
+## Expanding the ESLint configuration
 
-- 웹 브라우저에서 바로 음악 재생
-- 랜덤재생, 반복재생 구현
-- 플레이리스트 음악 추가 및 삭제
-- 실시간 재생바, 시크 바 구현
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 🛠️ 기술 스택
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- React.js, TypeScript
-- Styled-components
-- Zustand
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-## 🧩 설치 및 실행 방법
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-```bash
-# 1. 프로젝트 클론
-git clone https://github.com/reignkk1/kiwi.git
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-# 2. 디렉토리 이동
-cd kiwi
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-# 3. 의존성 설치
-npm install
-
-# 4. 로컬 실행
-npm run dev
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```

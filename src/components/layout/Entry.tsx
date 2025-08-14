@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { ModalContainer } from "./ModalContainer";

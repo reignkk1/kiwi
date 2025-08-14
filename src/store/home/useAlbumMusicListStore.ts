@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { GenreType, MusicType } from "../../types";
+import type { GenreType, MusicType } from "../../types";
 import { getMusicDataFromGenre } from "../../utils";
 
 type AlbumMusicListStore = {

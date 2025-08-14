@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { GenreType } from "../../types";
+import type { GenreType } from "../../types";
 
 type ActiveGenreMenuStore = {
   activeMenu: GenreType | "all";
