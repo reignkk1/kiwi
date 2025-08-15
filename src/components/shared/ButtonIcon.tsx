@@ -5,7 +5,8 @@ import { palette } from "../../constant";
 
 interface ButtonIconProps {
   icon: IconProp;
-  ariaLabel: string;
+  ariaLabel?: string;
+  title?: string;
   size?: number;
   href?: string;
   active?: boolean;
@@ -15,6 +16,7 @@ interface ButtonIconProps {
 }
 
 export function ButtonIcon({
+  title,
   icon,
   size = 18,
   onClick,
@@ -27,6 +29,7 @@ export function ButtonIcon({
   if (href) {
     return (
       <button
+        title={title}
         aria-label={ariaLabel}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
@@ -45,6 +48,7 @@ export function ButtonIcon({
 
   return (
     <button
+      title={title}
       aria-label={ariaLabel}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
