@@ -83,16 +83,24 @@ export default function PlayerVolume() {
     <Container>
       <ButtonWrapper>
         <ButtonIcon
+          title={isMuted ? "음소거 해제(m)" : "음소거(m)"}
+          ariaLabel={isMuted ? "음소거 해제(단축키 m)" : "음소거(단축키 m)"}
+          ariaKeyShortCuts="m"
           onClick={onClickVolumeIcon}
           onMouseEnter={showVolumeBar}
           onMouseLeave={startHideTimer}
-          ariaLabel="볼륨조절"
           icon={resolvedVolumeIcon}
         />
       </ButtonWrapper>
       {isShowVolumeBar && (
         <Input
           type="range"
+          title="볼륨바"
+          aria-label="볼륨바"
+          aria-valuenow={volume}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuetext={`현재 볼륨 ${volume}%`}
           value={volume}
           hideAnimation={hideAnimation}
           onChange={onChangeVolumeRange}
