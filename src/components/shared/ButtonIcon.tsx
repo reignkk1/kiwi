@@ -6,6 +6,7 @@ import { palette } from "../../constant";
 interface ButtonIconProps {
   icon: IconProp;
   ariaLabel?: string;
+  ariaKeyShortCuts?: string;
   title?: string;
   size?: number;
   href?: string;
@@ -25,12 +26,14 @@ export function ButtonIcon({
   href,
   active = false,
   ariaLabel,
+  ariaKeyShortCuts,
 }: ButtonIconProps) {
   if (href) {
     return (
       <button
         title={title}
         aria-label={ariaLabel}
+        aria-keyshortcuts={ariaKeyShortCuts}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -50,6 +53,7 @@ export function ButtonIcon({
     <button
       title={title}
       aria-label={ariaLabel}
+      aria-keyshortcuts={ariaKeyShortCuts}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
