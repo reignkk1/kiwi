@@ -1,9 +1,13 @@
-import { faVolumeLow, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+import {
+  faVolumeHigh,
+  faVolumeLow,
+  faVolumeMute,
+} from "@fortawesome/free-solid-svg-icons";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import styled from "styled-components";
 import { useMutedStore } from "../../../store/player/useMutedStore";
 import { useShallow } from "zustand/react/shallow";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useVolumeStore } from "../../../store/player/useVolumeStore";
 
 export default function PlayerVolume() {
@@ -24,6 +28,10 @@ export default function PlayerVolume() {
   }>({});
 
   const prevVolume = useRef<number>(0);
+
+  useEffect(() => {
+    setIsMuted(volume === 0);
+  }, [isMuted, volume]);
 
   const clearTimers = () => {
     if (timerIds.current.hideAnimation && timerIds.current.showVolumeBar) {
@@ -46,34 +54,40 @@ export default function PlayerVolume() {
     );
   };
 
-  useEffect(() => {
-    setIsMuted(volume === 0);
-  }, [isMuted, volume]);
-
   const showVolumeBar = () => {
     clearTimers();
     setHideAnimation(false);
     setIsShowVolumeBar(true);
   };
 
+  const resolvedVolumeIcon = isMuted
+    ? faVolumeMute
+    : volume > 50
+      ? faVolumeHigh
+      : faVolumeLow;
+
+  const onClickVolumeIcon = () => {
+    toggleMuted();
+    if (volume > 0) {
+      prevVolume.current = volume;
+      setVolume(0);
+    } else {
+      setVolume(prevVolume.current);
+    }
+  };
+
+  const onChangeVolumeRange = (e: ChangeEvent<HTMLInputElement>) =>
+    setVolume(Number(e.currentTarget.value));
+
   return (
     <Container>
       <ButtonWrapper>
         <ButtonIcon
-          onClick={() => {
-            toggleMuted();
-            if (volume > 0) {
-              prevVolume.current = volume;
-              setVolume(0);
-            } else {
-              setVolume(prevVolume.current);
-            }
-            console.log(isMuted);
-          }}
+          onClick={onClickVolumeIcon}
           onMouseEnter={showVolumeBar}
           onMouseLeave={startHideTimer}
           ariaLabel="볼륨조절"
-          icon={isMuted ? faVolumeMute : faVolumeLow}
+          icon={resolvedVolumeIcon}
         />
       </ButtonWrapper>
       {isShowVolumeBar && (
@@ -81,7 +95,7 @@ export default function PlayerVolume() {
           type="range"
           value={volume}
           hideAnimation={hideAnimation}
-          onChange={(e) => setVolume(Number(e.currentTarget.value))}
+          onChange={onChangeVolumeRange}
           onMouseEnter={showVolumeBar}
           onMouseLeave={startHideTimer}
         />
