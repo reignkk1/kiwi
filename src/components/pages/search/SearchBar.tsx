@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ChangeEvent, useEffect } from "react";
+import { type ChangeEvent, useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { ButtonIcon } from "../../shared/ButtonIcon";
 import { useSearchStore } from "../../../store/search";

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import musicData from "../../musicData.json";
-import { MusicType } from "../../types";
+import type { MusicType } from "../../types";
 
 type SearchStore = {
   searchKeyWord: string;

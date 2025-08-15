@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Pages } from "../types";
+import type { Pages } from "../types";
 
 export function useCurrentPage() {
   const { pathname } = useLocation();

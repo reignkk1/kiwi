@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AlbumImg from "../../shared/AlbumImg";
 import { TitleAndSinger } from "../../shared/TitleAndSinger";
-import { MusicType } from "../../../types";
+import type { MusicType } from "../../../types";
 
 interface AlbumProps {
   music: MusicType;

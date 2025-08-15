@@ -3,7 +3,7 @@ import { TitleAndSinger } from "./TitleAndSinger";
 import AlbumImg from "./AlbumImg";
 import { markKeyword } from "../../utils";
 import usePlay from "../../hooks/usePlay";
-import { MusicType } from "../../types";
+import type { MusicType } from "../../types";
 
 interface MusicCardProps {
   music: MusicType;

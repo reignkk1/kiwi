@@ -12,7 +12,7 @@ type AlertAction = {
 type AlertStore = AlertState & AlertAction;
 
 export const useAlertStore = create<AlertStore>((set) => {
-  let timeoutId: NodeJS.Timeout;
+  let timeoutId: ReturnType<typeof setTimeout>;  
   return {
     text: "",
     show: false,

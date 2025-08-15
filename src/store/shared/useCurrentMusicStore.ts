@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { MusicType } from "./../../types";
+import type { MusicType } from "./../../types";
 
 // 현재 재생중인 음악의 상태 정보
 
