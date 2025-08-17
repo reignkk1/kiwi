@@ -1,3 +1,18 @@
+import { useEffect } from "react";
+
 export function useKeyShortCut() {
-  // 단축키를 눌렀을 때 key 컴포넌트 자식 이벤트가 실행이 되게끔 구현!!
+  const setKeyShortCut = (key: string, event: () => void) => {
+    useEffect(() => {
+      const keyUpEvent = (e: KeyboardEvent) => {
+        if (e.key.toLowerCase() === key.toLowerCase()) {
+          event();
+        }
+      };
+
+      window.addEventListener("keyup", keyUpEvent);
+      return () => window.removeEventListener("keyup", keyUpEvent);
+    }, [key, event]);
+  };
+
+  return setKeyShortCut;
 }
