@@ -19,6 +19,10 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration:none;
     }
 
+    button, a, input {
+        outline:none;
+    }
+
     body {
         height: calc(var(--vh, 1vh) * 100);
         -webkit-tap-highlight-color:rgba(0,0,0,0);
