@@ -9,6 +9,7 @@ import { useMutedStore } from "../../../store/player/useMutedStore";
 import { useShallow } from "zustand/react/shallow";
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { useVolumeStore } from "../../../store/player/useVolumeStore";
+import { useKeyShortCut } from "../../../hooks/useKeyShortCut";
 
 export default function PlayerVolume() {
   const [isMuted, setIsMuted, toggleMuted] = useMutedStore(
@@ -28,6 +29,8 @@ export default function PlayerVolume() {
   }>({});
 
   const prevVolume = useRef<number>(0);
+
+  const setKeyShortCut = useKeyShortCut();
 
   useEffect(() => {
     setIsMuted(volume === 0);
@@ -78,6 +81,8 @@ export default function PlayerVolume() {
 
   const onChangeVolumeRange = (e: ChangeEvent<HTMLInputElement>) =>
     setVolume(Number(e.currentTarget.value));
+
+  setKeyShortCut("m", onClickVolumeIcon);
 
   return (
     <Container>
