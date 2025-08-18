@@ -49,7 +49,7 @@ export default function PlayerVolume() {
     clearTimers();
     timerIds.current.hideAnimation = setTimeout(
       () => setHideAnimation(true),
-      1500
+      1000
     );
     timerIds.current.showVolumeBar = setTimeout(
       () => setIsShowVolumeBar(false),
@@ -146,10 +146,11 @@ const Input = styled.input.attrs<{ value: number; hideAnimation: boolean }>(
   cursor: pointer;
   animation: ${({ hideAnimation }) =>
       hideAnimation ? "hideVolumeBar" : "showVolumeBar"}
-    0.5s forwards;
+    0.3s forwards;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
+    display: ${({ hideAnimation }) => (hideAnimation ? "none" : "block")};
     width: 15px;
     height: 15px;
     border-radius: 50%;
