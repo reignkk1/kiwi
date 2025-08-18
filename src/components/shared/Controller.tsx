@@ -70,8 +70,9 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
         size={getSize(0)}
       />
       <ButtonIcon
-        ariaLabel="재생/일시정지"
+        ariaLabel={isPlay ? "일시정지(단축키 k)" : "재생(단축키 k)"}
         title={isPlay ? "일시정지(k)" : "재생(k)"}
+        ariaKeyShortCuts="k"
         icon={isPlay ? faPause : faPlay}
         onClick={onClickPlay}
         size={getSize(1)}
