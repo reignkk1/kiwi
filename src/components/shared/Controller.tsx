@@ -15,6 +15,7 @@ import {
   usePlayDirectionStore,
 } from "../../store/shared";
 import { useMusicDrawerStore } from "../../store/storage";
+import { useKeyShortCut } from "../../hooks/useKeyShortCut";
 
 interface ControllerProps {
   width: number;
@@ -45,31 +46,42 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
 
   const getSize = (index: number) => (is.number(size) ? size : size[index]);
 
+  const onClickPlay = () => {
+    // 만약 현재 곡이 지정되어 있지 않고 비어있을 경우
+    // 플레이 버튼은 작동하지 않음.
+    if (Object.keys(currnetMusic).length) {
+      togglePlay();
+    }
+  };
+
+  const onClickPrev = () => handleMusicDrawerCheck("prev");
+  const onClickNext = () => handleMusicDrawerCheck("next");
+
+  const setKeyShortCut = useKeyShortCut();
+  setKeyShortCut("k", onClickPlay);
+
   return (
     <Container width={width}>
       <ButtonIcon
         ariaLabel="이전"
+        title="이전"
         icon={faBackwardStep}
+        onClick={onClickPrev}
         size={getSize(0)}
-        onClick={() => handleMusicDrawerCheck("prev")}
       />
       <ButtonIcon
         ariaLabel="재생/일시정지"
+        title={isPlay ? "일시정지(k)" : "재생(k)"}
         icon={isPlay ? faPause : faPlay}
-        onClick={() => {
-          // 만약 현재 곡이 지정되어 있지 않고 비어있을 경우
-          // 플레이 버튼은 작동하지 않음.
-          if (Object.keys(currnetMusic).length) {
-            togglePlay();
-          }
-        }}
+        onClick={onClickPlay}
         size={getSize(1)}
       />
       <ButtonIcon
         ariaLabel="다음"
+        title="다음"
         icon={faForwardStep}
+        onClick={onClickNext}
         size={getSize(2)}
-        onClick={() => handleMusicDrawerCheck("next")}
       />
     </Container>
   );
