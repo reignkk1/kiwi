@@ -4,7 +4,7 @@ import type { Pages } from "../types";
 export function useCurrentPage() {
   const { pathname } = useLocation();
 
-  const pageMap: { [key: string]: string } = {
+  const pageMap: Record<string, string> = {
     "/": "home",
     "/search": "search",
     "/drawer": "drawer",
