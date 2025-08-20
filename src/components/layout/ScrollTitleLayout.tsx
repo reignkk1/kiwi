@@ -23,6 +23,7 @@ export default function ScrollTitleLayout({
       <Header $isShowTitle={isShowTitle}>
         <ButtonIcon
           ariaLabel="뒤로가기"
+          title="뒤로가기"
           icon={faChevronLeft}
           onClick={() => navigate(-1)}
         />
