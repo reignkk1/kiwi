@@ -70,7 +70,12 @@ export default function AlbumImg({
       )}
 
       {isActiveButton && (
-        <ButtonIcon ariaLabel="재생" icon={faPlay} onClick={play} />
+        <ButtonIcon
+          ariaLabel="재생"
+          title="재생"
+          icon={faPlay}
+          onClick={play}
+        />
       )}
     </Container>
   );
