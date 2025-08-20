@@ -46,7 +46,17 @@ function Player() {
 
   return (
     <PlayerContainer>
-      {title ? <Link to="/player">{info}</Link> : info}
+      {title ? (
+        <Link
+          to="/player"
+          aria-label="player 이동버튼"
+          title={`${singer} - ${title}`}
+        >
+          {info}
+        </Link>
+      ) : (
+        info
+      )}
       <Controller width={130} />
     </PlayerContainer>
   );
