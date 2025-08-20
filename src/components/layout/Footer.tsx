@@ -50,7 +50,7 @@ function Player() {
         <Link
           to="/player"
           aria-label="player 이동버튼"
-          title={`${singer} - ${title}`}
+          title="player 페이지 이동"
         >
           {info}
         </Link>
