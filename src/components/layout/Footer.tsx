@@ -67,18 +67,21 @@ function NavBar() {
     <NavBarContainer>
       <ButtonIcon
         ariaLabel="홈"
+        title="홈"
         icon={faHome}
         href="/"
         active={activePage.home}
       />
       <ButtonIcon
         ariaLabel="검색"
+        title="검색"
         icon={faSearch}
         href="/search"
         active={activePage.search}
       />
       <ButtonIcon
         ariaLabel="음악서랍"
+        title="음악서랍"
         icon={faBars}
         href="/drawer"
         active={activePage.drawer}
