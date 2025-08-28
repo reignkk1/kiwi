@@ -9,7 +9,7 @@ import { TitleAndSinger } from "../shared/TitleAndSinger";
 import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
-import { useSelectedMusicIdsStore } from "../../store/storage/useSelectedMusicIdsStore";
+import { useSelectedMusicIdsStore } from "../../store/drawer/useSelectedMusicIdsStore";
 import SelectMenu from "../pages/drawer/DrawerSelectMenu";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
 

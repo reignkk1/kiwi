@@ -6,7 +6,7 @@ import { useShallow } from "zustand/react/shallow";
 import {
   useMusicDrawerStore,
   useSelectedMusicIdsStore,
-} from "../../store/storage";
+} from "../../store/drawer";
 
 // 일단은 삭제 모달로 구현
 // 추후에 여러 안내 모달창이 구현될 때는 재사용 가능하게끔 구현

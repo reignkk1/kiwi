@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import music from "../../musicData.json";
 import { useCurrentMusicStore } from "../../store/shared";
-import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
+import { useMusicDrawerStore } from "../../store/drawer/useMusicDrawerStore";
 
 // 오디오 초기음악 설정 hook
 

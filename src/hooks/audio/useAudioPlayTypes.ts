@@ -3,7 +3,7 @@ import { selectRandomWithinArray } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
-import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
+import { useMusicDrawerStore } from "../../store/drawer/useMusicDrawerStore";
 
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생

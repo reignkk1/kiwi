@@ -4,7 +4,7 @@ import useAudioPlayTypes from "./useAudioPlayTypes";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
-import { useMusicDrawerStore } from "../../store/storage/useMusicDrawerStore";
+import { useMusicDrawerStore } from "../../store/drawer/useMusicDrawerStore";
 
 export default function useAudioDirectionHandler(audio: HTMLAudioElement) {
   const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);

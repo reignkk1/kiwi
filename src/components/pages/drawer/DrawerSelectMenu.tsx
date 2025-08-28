@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { palette } from "../../../constant";
 import { useInformModalStore } from "../../../store/layout/useInfoModalStore";
-import { useSelectedMusicIdsStore } from "../../../store/storage";
+import { useSelectedMusicIdsStore } from "../../../store/drawer";
 
 // 선택을 했을 때 나오는 메뉴에는 삭제, 선택반복, 담기
 
