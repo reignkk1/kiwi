@@ -4,23 +4,22 @@ import SelectButton from "./DrawerSelectButton";
 import { useEffect } from "react";
 import { getMusicDataFromId } from "../../../utils";
 import { useCurrentMusicStore } from "../../../store/shared";
-import {
-  useMusicDrawerStore,
-  useSelectedMusicIdsStore,
-} from "../../../store/storage";
+import { useSelectedMusicIdsStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
+import useResolvedPlayListIds from "../../../hooks/useResolvedPlayListIds";
 
-export default function DrawerMusicDrawerList() {
+export default function DrawerMusicList() {
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
-  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
 
   const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
     useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
   );
 
-  const music = musicDrawer.map((id) => getMusicDataFromId(id));
-
   const isActive = (musicId: number) => selectedMusicIds.includes(musicId);
+
+  const { category, playListIds } = useResolvedPlayListIds();
+
+  const music = playListIds.map((id) => getMusicDataFromId(id));
 
   const onClickSelectCircle = (musicId: number) => {
     const selected = isActive(musicId)
@@ -31,8 +30,9 @@ export default function DrawerMusicDrawerList() {
   };
 
   useEffect(() => {
+    setSelectedMusicIds([]);
     return () => setSelectedMusicIds([]);
-  }, [setSelectedMusicIds]);
+  }, [setSelectedMusicIds, playListIds]);
 
   return (
     <Container>
@@ -56,7 +56,7 @@ export default function DrawerMusicDrawerList() {
         })
       ) : (
         <Wrapper>
-          <span>음악서랍이 비어있습니다.</span>
+          <span>{`${category}이 비어있습니다. `}</span>
         </Wrapper>
       )}
     </Container>
