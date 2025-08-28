@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import TitleContent from "../../layout/TitleContent";
 import Skeleton from "../../shared/Skeleton";
@@ -10,8 +10,12 @@ export default function MusicVideo() {
   const [isLoading, setIsLoading] = useState(true);
 
   const music = useMusicDataFromId((state) => state.music);
+  const prevMusic = useRef(music);
+
+  console.log(prevMusic.current);
 
   useEffect(() => {
+    if (prevMusic.current?.title === music?.title) return;
     const filterWords = ["TJ노래방"];
 
     const fetchData = async () => {
@@ -42,7 +46,7 @@ export default function MusicVideo() {
     };
 
     fetchData();
-  }, [music?.singer, music?.title]);
+  }, [music?.title]);
 
   return (
     <TitleContent title="이 곡의 비디오">
