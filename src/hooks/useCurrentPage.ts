@@ -9,6 +9,7 @@ export function useCurrentPage() {
     "/search": "search",
     "/drawer": "drawer",
     "/player": "player",
+    "/playlist": "playlist",
   };
 
   if (pathname.startsWith("/music")) {
