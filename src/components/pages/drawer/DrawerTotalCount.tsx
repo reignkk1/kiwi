@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import SelectCircle from "./DrawerSelectButton";
-import {
-  useMusicDrawerStore,
-  useSelectedMusicIdsStore,
-} from "../../../store/storage";
+import { useSelectedMusicIdsStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
+import useResolvedPlayListIds from "../../../hooks/useResolvedPlayListIds";
 
 export default function DrawerTotalCount() {
-  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
+  const { playListIds } = useResolvedPlayListIds();
   const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIdsStore(
     useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
   );
@@ -16,7 +14,7 @@ export default function DrawerTotalCount() {
     if (selectedMusicIds.length) {
       setSeletedMusicIds([]);
     } else {
-      setSeletedMusicIds([...musicDrawer]);
+      setSeletedMusicIds([...playListIds]);
     }
   };
 
@@ -26,7 +24,7 @@ export default function DrawerTotalCount() {
     <Container>
       <SelectCircle onClick={onClickSelectCircle} $active={isActive} />
       <span onClick={onClickSelectCircle}>
-        {isActive ? "선택해제" : `${musicDrawer.length}곡`}
+        {isActive ? "선택해제" : `${playListIds.length}곡`}
       </span>
     </Container>
   );
