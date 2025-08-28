@@ -1,11 +1,11 @@
-import Header from "../components/layout/Header";
+import DrawerHeaderNav from "../components/pages/drawer/DrawerHeaderNav";
 import DrawerMusicList from "../components/pages/drawer/DrawerMusicList";
 import DrawerTotalCount from "../components/pages/drawer/DrawerTotalCount";
 
 export default function Drawer() {
   return (
     <div>
-      <Header title="음악서랍" />
+      <DrawerHeaderNav />
       <DrawerTotalCount />
       <DrawerMusicList />
     </div>
