@@ -14,8 +14,8 @@ import {
   useCurrentMusicStore,
   usePlayDirectionStore,
 } from "../../store/shared";
-import { useMusicDrawerStore } from "../../store/storage";
 import { useKeyShortCut } from "../../hooks/useKeyShortCut";
+import useResolvedPlayListIds from "../../hooks/useResolvedPlayListIds";
 
 interface ControllerProps {
   width: number;
@@ -32,14 +32,15 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
   const toggleFadeAlertMessage = useAlertStore(
     (state) => state.toggleFadeAlertMessage
   );
-  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
+
+  const { category, playListIds } = useResolvedPlayListIds();
   const currnetMusic = useCurrentMusicStore((state) => state.currentMusic);
 
-  const isMusicDrawer = musicDrawer.length > 0;
+  const isPlayListIds = playListIds.length > 0;
 
   const handleMusicDrawerCheck = (direction: "next" | "prev") => {
-    if (!isMusicDrawer) {
-      return toggleFadeAlertMessage("음악서랍에 곡이 없습니다.");
+    if (!isPlayListIds) {
+      return toggleFadeAlertMessage(`${category}에 곡이 없습니다.`);
     }
     setPlayDirection(direction);
   };
