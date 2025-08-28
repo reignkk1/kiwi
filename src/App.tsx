@@ -14,6 +14,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/player" element={<Player />} />
           <Route path="/drawer" element={<Drawer />} />
+          <Route path="/playlist" element={<Drawer />} />
           <Route path="/music/:id" element={<Music />} />
           <Route path="/album/:id" element={<AlbumIntro />} />
         </Routes>
