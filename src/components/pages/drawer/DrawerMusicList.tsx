@@ -1,7 +1,7 @@
 import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
 import SelectButton from "./DrawerSelectButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getMusicDataFromId } from "../../../utils";
 import { useCurrentMusicStore } from "../../../store/shared";
 import { useSelectedMusicIdsStore } from "../../../store/drawer";
@@ -21,6 +21,8 @@ export default function DrawerMusicList() {
 
   const music = playListIds.map((id) => getMusicDataFromId(id));
 
+  const [playingIndex, setPlayingIndex] = useState<number>();
+
   const onClickSelectCircle = (musicId: number) => {
     const selected = isActive(musicId)
       ? selectedMusicIds.filter((id) => id !== musicId)
@@ -28,6 +30,8 @@ export default function DrawerMusicList() {
 
     setSelectedMusicIds(selected);
   };
+
+  console.log(playListIds);
 
   useEffect(() => {
     setSelectedMusicIds([]);
@@ -37,18 +41,21 @@ export default function DrawerMusicList() {
   return (
     <Container>
       {music.length ? (
-        music.map((musicData) => {
+        music.map((musicData, i) => {
           const { id, title } = musicData;
           return (
-            <List key={id}>
+            <List key={i}>
               <SelectButton
                 onClick={() => onClickSelectCircle(id)}
                 $active={isActive(id)}
               />
               <MusicCard
                 music={musicData}
-                mark={currentMusic.title}
-                $isMusicBar={title === currentMusic.title}
+                mark={i === playingIndex ? currentMusic.title : undefined}
+                onClick={() => setPlayingIndex(i)}
+                $isMusicBar={
+                  i === playingIndex ? title === currentMusic.title : undefined
+                }
                 $isAnimation={isActive(id) && (title.length || 0) > 20}
               />
             </List>
@@ -74,7 +81,7 @@ const Container = styled.ul`
   }
 `;
 
-const List = styled.div`
+const List = styled.li`
   width: 250px;
   display: flex;
   align-items: center;
