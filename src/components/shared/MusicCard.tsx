@@ -8,6 +8,7 @@ import type { MusicType } from "../../types";
 interface MusicCardProps {
   music: MusicType;
   mark?: string;
+  onClick?: () => void;
   $isMusicBar?: boolean;
   $isAnimation?: boolean;
 }
@@ -15,6 +16,7 @@ interface MusicCardProps {
 export default function MusicCard({
   music,
   mark = "",
+  onClick,
   $isMusicBar = false,
   $isAnimation = false,
 }: MusicCardProps) {
@@ -29,7 +31,10 @@ export default function MusicCard({
           singer={markKeyword(music.singer, mark)}
           size="middle"
           width="250px"
-          onClick={play}
+          onClick={() => {
+            onClick?.();
+            play();
+          }}
           $isAnimation={$isAnimation}
         />
       </Info>
