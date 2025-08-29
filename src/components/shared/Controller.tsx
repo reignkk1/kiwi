@@ -15,7 +15,7 @@ import {
   usePlayDirectionStore,
 } from "../../store/shared";
 import { useKeyShortCut } from "../../hooks/useKeyShortCut";
-import useResolvedPlayListIds from "../../hooks/useResolvedPlayListIds";
+import usePlaylistContext from "../../hooks/usePlaylistContext";
 
 interface ControllerProps {
   width: number;
@@ -33,7 +33,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
     (state) => state.toggleFadeAlertMessage
   );
 
-  const { category, playListIds } = useResolvedPlayListIds();
+  const { category, playListIds } = usePlaylistContext();
   const currnetMusic = useCurrentMusicStore((state) => state.currentMusic);
 
   const isPlayListIds = playListIds.length > 0;

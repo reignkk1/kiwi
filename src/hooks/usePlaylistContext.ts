@@ -2,16 +2,17 @@ import { useMusicDrawerStore } from "../store/drawer";
 import { usePlayListStore } from "../store/drawer/usePlayListStore";
 import { useCurrentPage } from "./useCurrentPage";
 
-export default function useResolvedPlayListIds() {
+export default function usePlaylistContext() {
+  const currentPage = useCurrentPage();
   const category =
-    useCurrentPage() === "drawer"
+    currentPage === "drawer"
       ? "음악서랍"
-      : useCurrentPage() === "playlist"
+      : currentPage === "playlist"
         ? "재생목록"
-        : "unkwon";
+        : "unknown";
 
   const playListIds =
-    useCurrentPage() === "drawer"
+    currentPage === "drawer"
       ? useMusicDrawerStore((state) => state.musicDrawer)
       : usePlayListStore((state) => state.playList);
 
