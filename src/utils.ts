@@ -22,10 +22,10 @@ export function formatTime(time: number) {
 
 // 타입 확인 is 객체 => boolean 값 리턴
 export const is = {
-  boolean: (data: any) => typeof data === "boolean",
-  number: (data: any) => typeof data === "number",
-  object: (data: any) => typeof data === "object",
-  string: (data: any) => typeof data === "string",
+  boolean: (data: unknown) => typeof data === "boolean",
+  number: (data: unknown) => typeof data === "number",
+  object: (data: unknown) => typeof data === "object",
+  string: (data: unknown) => typeof data === "string",
 };
 
 // 어레이 안에 있는 값들을 랜덤으로 뽑는 함수
