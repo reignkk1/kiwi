@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import TitleContent from "../../layout/TitleContent";
-import Skeleton from "../../shared/Skeleton";
 import { useMusicDataFromId } from "../../../store/music/useMusicDataFromId";
+import SkeletonBox from "../../shared/SkeletonBox";
 
 export default function MusicVideo() {
   const [video, setVideo] = useState<Array<object>>();
@@ -11,8 +11,6 @@ export default function MusicVideo() {
 
   const music = useMusicDataFromId((state) => state.music);
   const prevMusic = useRef(music);
-
-  console.log(prevMusic.current);
 
   useEffect(() => {
     if (prevMusic.current?.title === music?.title) return;
@@ -50,7 +48,7 @@ export default function MusicVideo() {
 
   return (
     <TitleContent title="이 곡의 비디오">
-      {!isLoading ? (
+      <SkeletonBox isLoading={isLoading}>
         <Container>
           {video?.map((data: any) => (
             <iframe
@@ -62,9 +60,7 @@ export default function MusicVideo() {
             />
           ))}
         </Container>
-      ) : (
-        <Skeleton width="340" height="200" />
-      )}
+      </SkeletonBox>
     </TitleContent>
   );
 }
