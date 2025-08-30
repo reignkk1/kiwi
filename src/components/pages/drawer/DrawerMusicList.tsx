@@ -1,12 +1,13 @@
 import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
 import SelectButton from "./DrawerSelectButton";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getMusicDataFromId } from "../../../utils";
 import { useCurrentMusicStore } from "../../../store/shared";
 import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistContext from "../../../hooks/usePlaylistContext";
+import { usePlayingIndexStore } from "../../../store/drawer/usePlayingIndexStore";
 
 export default function DrawerMusicList() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -17,13 +18,15 @@ export default function DrawerMusicList() {
       ])
     );
 
+  const [playingIndex, setPlayingIndex] = usePlayingIndexStore(
+    useShallow((state) => [state.playingIndex, state.setPlayingIndex])
+  );
+
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
   const { category, playListIds } = usePlaylistContext();
-  const [playingIndex, setPlayingIndex] = useState<number>();
-
-  const isActive = (index: number) => selectedMusicIndex.includes(index);
 
   const music = playListIds.map((id) => getMusicDataFromId(id));
+  const isActive = (index: number) => selectedMusicIndex.includes(index);
 
   const onClickSelectCircle = (index: number) => {
     const selected = isActive(index)
