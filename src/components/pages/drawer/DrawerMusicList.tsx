@@ -9,8 +9,6 @@ import { useShallow } from "zustand/react/shallow";
 import usePlaylistContext from "../../../hooks/usePlaylistContext";
 
 export default function DrawerMusicList() {
-  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
-
   const [selectedMusicIndex, setSelectedMusicIndex] =
     useSelectedMusicIndexStore(
       useShallow((state) => [
@@ -19,11 +17,12 @@ export default function DrawerMusicList() {
       ])
     );
 
+  const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
   const { category, playListIds } = usePlaylistContext();
-
   const [playingIndex, setPlayingIndex] = useState<number>();
 
   const isActive = (index: number) => selectedMusicIndex.includes(index);
+
   const music = playListIds.map((id) => getMusicDataFromId(id));
 
   const onClickSelectCircle = (index: number) => {
@@ -37,13 +36,13 @@ export default function DrawerMusicList() {
   useEffect(() => {
     setSelectedMusicIndex([]);
     return () => setSelectedMusicIndex([]);
-  }, [setSelectedMusicIndex, playListIds]);
+  }, [setSelectedMusicIndex, category]);
 
   return (
     <Container>
       {music.length ? (
         music.map((musicData, i) => {
-          const { id, title } = musicData;
+          const { title } = musicData;
           return (
             <List key={i}>
               <SelectButton
@@ -57,7 +56,7 @@ export default function DrawerMusicList() {
                 $isMusicBar={
                   i === playingIndex ? title === currentMusic.title : undefined
                 }
-                $isAnimation={isActive(id) && (title.length || 0) > 20}
+                $isAnimation={isActive(i) && (title.length || 0) > 20}
               />
             </List>
           );
