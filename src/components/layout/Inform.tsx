@@ -3,16 +3,25 @@ import { palette } from "../../constant";
 import { ModalContainer } from "./ModalContainer";
 import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
-import { useSelectedMusicIdsStore } from "../../store/drawer";
+import { useSelectedMusicIndexStore } from "../../store/drawer";
 import usePlaylistContext from "../../hooks/usePlaylistContext";
+import { usePlayingIndexStore } from "../../store/drawer/usePlayingIndexStore";
 
 export default function Inform() {
   const [setIsShowInformModal] = useInformModalStore(
     useShallow((state) => [state.setIsShowInformModal])
   );
 
-  const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
-    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
+  const [selectedMusicIndex, setSelectedMusicIndex] =
+    useSelectedMusicIndexStore(
+      useShallow((state) => [
+        state.selectedMusicIndex,
+        state.setSelectedMusicIndex,
+      ])
+    );
+
+  const [playingIndex, setPlayingIndex] = usePlayingIndexStore(
+    useShallow((state) => [state.playingIndex, state.setPlayingIndex])
   );
 
   const { category, playListIds, setPlaylistIds } = usePlaylistContext();
@@ -20,8 +29,13 @@ export default function Inform() {
   const onClickCancle = () => setIsShowInformModal(false);
 
   const onClickSubmit = () => {
-    setPlaylistIds(playListIds.filter((id) => !selectedMusicIds.includes(id)));
-    setSelectedMusicIds([]);
+    setPlaylistIds(
+      playListIds.filter((_, i) => !selectedMusicIndex.includes(i))
+    );
+    setPlayingIndex(
+      playingIndex - selectedMusicIndex.filter((i) => i < playingIndex).length
+    );
+    setSelectedMusicIndex([]);
     setIsShowInformModal(false);
   };
 
@@ -31,7 +45,7 @@ export default function Inform() {
         <Content>
           <Title>안내</Title>
           <Text>
-            {selectedMusicIds.length} 곡을 {category}에서 삭제하시겠습니까?
+            {selectedMusicIndex.length} 곡을 {category}에서 삭제하시겠습니까?
           </Text>
         </Content>
         <Buttons>
