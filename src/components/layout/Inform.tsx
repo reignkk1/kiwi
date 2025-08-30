@@ -3,13 +3,8 @@ import { palette } from "../../constant";
 import { ModalContainer } from "./ModalContainer";
 import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
-import {
-  useMusicDrawerStore,
-  useSelectedMusicIdsStore,
-} from "../../store/drawer";
-
-// 일단은 삭제 모달로 구현
-// 추후에 여러 안내 모달창이 구현될 때는 재사용 가능하게끔 구현
+import { useSelectedMusicIdsStore } from "../../store/drawer";
+import usePlaylistContext from "../../hooks/usePlaylistContext";
 
 export default function Inform() {
   const [setIsShowInformModal] = useInformModalStore(
@@ -20,14 +15,12 @@ export default function Inform() {
     useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
   );
 
-  const [musicDrawer, setMusicDrawer] = useMusicDrawerStore(
-    useShallow((state) => [state.musicDrawer, state.setMusicDrawer])
-  );
+  const { category, playListIds, setPlaylistIds } = usePlaylistContext();
 
   const onClickCancle = () => setIsShowInformModal(false);
 
   const onClickSubmit = () => {
-    setMusicDrawer(musicDrawer.filter((id) => !selectedMusicIds.includes(id)));
+    setPlaylistIds(playListIds.filter((id) => !selectedMusicIds.includes(id)));
     setSelectedMusicIds([]);
     setIsShowInformModal(false);
   };
@@ -38,7 +31,7 @@ export default function Inform() {
         <Content>
           <Title>안내</Title>
           <Text>
-            {selectedMusicIds.length} 곡을 음악서랍에서 삭제하시겠습니까?
+            {selectedMusicIds.length} 곡을 {category}에서 삭제하시겠습니까?
           </Text>
         </Content>
         <Buttons>

@@ -1,27 +1,27 @@
 import styled from "styled-components";
 import { palette } from "../../../constant";
 import { useInformModalStore } from "../../../store/layout/useInfoModalStore";
-import { useSelectedMusicIdsStore } from "../../../store/drawer";
+import { useSelectedMusicIndexStore } from "../../../store/drawer";
 
 // 선택을 했을 때 나오는 메뉴에는 삭제, 선택반복, 담기
 
 export default function DrawerSelectMenu() {
-  const selectedMusicIds = useSelectedMusicIdsStore(
-    (state) => state.selectedMusicIds
+  const selectedMusicIndex = useSelectedMusicIndexStore(
+    (state) => state.selectedMusicIndex
   );
 
   const setIsShowInformModal = useInformModalStore(
     (state) => state.setIsShowInformModal
   );
 
-  const isSelected = selectedMusicIds.length > 0;
+  const isSelected = selectedMusicIndex.length > 0;
 
   const onClick = () => setIsShowInformModal(true);
 
   return (
     <Container onClick={onClick} $isSelected={isSelected}>
       <Text>🗑️ 삭제</Text>
-      <Count>{selectedMusicIds.length}</Count>
+      <Count>{selectedMusicIndex.length}</Count>
     </Container>
   );
 }

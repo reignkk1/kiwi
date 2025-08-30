@@ -1,4 +1,4 @@
 import { useMusicDrawerStore } from "./useMusicDrawerStore";
-import { useSelectedMusicIdsStore } from "./useSelectedMusicIdsStore";
+import { useSelectedMusicIndexStore } from "./useSelectedMusicIndexStore";
 
-export { useMusicDrawerStore, useSelectedMusicIdsStore };
+export { useMusicDrawerStore, useSelectedMusicIndexStore };

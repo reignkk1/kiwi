@@ -9,7 +9,7 @@ import { TitleAndSinger } from "../shared/TitleAndSinger";
 import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
-import { useSelectedMusicIdsStore } from "../../store/drawer/useSelectedMusicIdsStore";
+import { useSelectedMusicIndexStore } from "../../store/drawer/useSelectedMusicIndexStore";
 import SelectMenu from "../pages/drawer/DrawerSelectMenu";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
 
@@ -17,11 +17,11 @@ export function Footer() {
   const currentPage = useCurrentPage();
   const isPlayerPage = currentPage === "player";
 
-  const selectedMusicIds = useSelectedMusicIdsStore(
-    (state) => state.selectedMusicIds
+  const selectedMusicIndex = useSelectedMusicIndexStore(
+    (state) => state.selectedMusicIndex
   );
 
-  const isSelected = selectedMusicIds.length > 0;
+  const isSelected = selectedMusicIndex.length > 0;
 
   return (
     <FooterContainer>

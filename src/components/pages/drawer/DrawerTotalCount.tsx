@@ -1,20 +1,23 @@
 import styled from "styled-components";
 import SelectCircle from "./DrawerSelectButton";
-import { useSelectedMusicIdsStore } from "../../../store/drawer";
+import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistContext from "../../../hooks/usePlaylistContext";
 
 export default function DrawerTotalCount() {
   const { playListIds } = usePlaylistContext();
-  const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIdsStore(
-    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
+  const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIndexStore(
+    useShallow((state) => [
+      state.selectedMusicIndex,
+      state.setSelectedMusicIndex,
+    ])
   );
 
   const onClickSelectCircle = () => {
     if (selectedMusicIds.length) {
       setSeletedMusicIds([]);
     } else {
-      setSeletedMusicIds([...playListIds]);
+      setSeletedMusicIds(playListIds.map((_, i) => i));
     }
   };
 

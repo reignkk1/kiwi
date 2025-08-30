@@ -4,39 +4,40 @@ import SelectButton from "./DrawerSelectButton";
 import { useEffect, useState } from "react";
 import { getMusicDataFromId } from "../../../utils";
 import { useCurrentMusicStore } from "../../../store/shared";
-import { useSelectedMusicIdsStore } from "../../../store/drawer";
+import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistContext from "../../../hooks/usePlaylistContext";
 
 export default function DrawerMusicList() {
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
 
-  const [selectedMusicIds, setSelectedMusicIds] = useSelectedMusicIdsStore(
-    useShallow((state) => [state.selectedMusicIds, state.setSelectedMusicIds])
-  );
-
-  const isActive = (musicId: number) => selectedMusicIds.includes(musicId);
+  const [selectedMusicIndex, setSelectedMusicIndex] =
+    useSelectedMusicIndexStore(
+      useShallow((state) => [
+        state.selectedMusicIndex,
+        state.setSelectedMusicIndex,
+      ])
+    );
 
   const { category, playListIds } = usePlaylistContext();
 
-  const music = playListIds.map((id) => getMusicDataFromId(id));
-
   const [playingIndex, setPlayingIndex] = useState<number>();
 
-  const onClickSelectCircle = (musicId: number) => {
-    const selected = isActive(musicId)
-      ? selectedMusicIds.filter((id) => id !== musicId)
-      : [...selectedMusicIds, musicId];
+  const isActive = (index: number) => selectedMusicIndex.includes(index);
+  const music = playListIds.map((id) => getMusicDataFromId(id));
 
-    setSelectedMusicIds(selected);
+  const onClickSelectCircle = (index: number) => {
+    const selected = isActive(index)
+      ? selectedMusicIndex.filter((id) => id !== index)
+      : [...selectedMusicIndex, index];
+
+    setSelectedMusicIndex(selected);
   };
 
-  console.log(playListIds);
-
   useEffect(() => {
-    setSelectedMusicIds([]);
-    return () => setSelectedMusicIds([]);
-  }, [setSelectedMusicIds, playListIds]);
+    setSelectedMusicIndex([]);
+    return () => setSelectedMusicIndex([]);
+  }, [setSelectedMusicIndex, playListIds]);
 
   return (
     <Container>
@@ -46,8 +47,8 @@ export default function DrawerMusicList() {
           return (
             <List key={i}>
               <SelectButton
-                onClick={() => onClickSelectCircle(id)}
-                $active={isActive(id)}
+                onClick={() => onClickSelectCircle(i)}
+                $active={isActive(i)}
               />
               <MusicCard
                 music={musicData}

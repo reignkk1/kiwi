@@ -16,5 +16,10 @@ export default function usePlaylistContext() {
       ? useMusicDrawerStore((state) => state.musicDrawer)
       : usePlayListStore((state) => state.playList);
 
-  return { category, playListIds };
+  const setPlaylistIds =
+    currentPage === "drawer"
+      ? useMusicDrawerStore((state) => state.setMusicDrawer)
+      : usePlayListStore((state) => state.setPlayList);
+
+  return { category, playListIds, setPlaylistIds };
 }
