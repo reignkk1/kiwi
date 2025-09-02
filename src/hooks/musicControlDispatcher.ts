@@ -4,8 +4,6 @@ import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../store/shared";
 import useAudioPlayTypes from "./audio/useAudioPlayTypes";
 
-// next 클릭하면 nextStack에 없으면 노래 뽑아서 재생하고 있으면 해당곡 재생..
-
 const nextHistory: { current: Array<MusicType> } = { current: [] };
 const prevHistory: { current: Array<MusicType> } = { current: [] };
 
@@ -18,54 +16,31 @@ export function useShuffleOnDispatcher() {
 
   const { playRandom } = useAudioPlayTypes();
 
-  const next = () => {
-    if (nextHistory.current.length === 0) {
-      prevHistory.current.push(currentMusic);
-      playRandom();
-    }
-  };
+  const handleDirection = (direction: "next" | "prev") => {
+    const playHistory = direction === "next" ? nextHistory : prevHistory;
+    const playedHistory = direction === "next" ? prevHistory : nextHistory;
 
-  const prev = () => {
-    if (prevHistory.current.length === 0) {
-      nextHistory.current.push(currentMusic);
+    if (playHistory.current.length === 0) {
+      playedHistory.current.push(currentMusic);
       playRandom();
     } else {
-      const popMusic = prevHistory.current.pop()!;
+      const popMusic = playHistory.current.pop()!;
       setCurrentMusic(popMusic);
       setIsPlay(true);
     }
   };
+
+  const next = () => handleDirection("next");
+  const prev = () => handleDirection("prev");
 
   return { next, prev };
 }
 
 export function useShuffleOffDispather() {
-  const setIsPlay = useAudioStore((state) => state.setIsPlay);
+  const { playInOrder } = useAudioPlayTypes();
 
-  const [currentMusic, setCurrentMusic] = useCurrentMusicStore(
-    useShallow((state) => [state.currentMusic, state.setCurrentMusic])
-  );
-
-  const { playInOrder, playRandom } = useAudioPlayTypes();
-
-  const next = () => {
-    if (nextHistory.current.length === 0) {
-      prevHistory.current.push(currentMusic);
-      playRandom();
-    } else {
-    }
-  };
-
-  const prev = () => {
-    if (prevHistory.current.length === 0) {
-      nextHistory.current.push(currentMusic);
-      playRandom();
-    } else {
-      const popMusic = prevHistory.current.pop()!;
-      setCurrentMusic(popMusic);
-      setIsPlay(true);
-    }
-  };
+  const next = () => playInOrder("next");
+  const prev = () => playInOrder("prev");
 
   return { next, prev };
 }
