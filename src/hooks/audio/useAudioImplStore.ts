@@ -7,7 +7,7 @@ import {
 import { useSeekStore } from "../../store/audio/useSeekStore";
 
 export function useAudioImplStore() {
-  const [isPlay, isLoop, src, setDuration, setSrc, setCurrentTime] =
+  const [isPlay, isLoop, src, setDuration, setSrc, setCurrentTime, setIsPlay] =
     useAudioStore(
       useShallow((state) => [
         state.isPlay,
@@ -16,6 +16,7 @@ export function useAudioImplStore() {
         state.setDuration,
         state.setSrc,
         state.setCurrentTime,
+        state.setIsPlay,
       ])
     );
 
@@ -45,6 +46,7 @@ export function useAudioImplStore() {
       setSrc,
       setSeekTo,
       setSeeking,
+      setIsPlay,
     },
   };
 }
