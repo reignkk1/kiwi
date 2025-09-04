@@ -3,7 +3,7 @@ import { selectRandomWithinArray } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
-import { useMusicDrawerStore } from "../../store/drawer/useMusicDrawerStore";
+import usePlaylistResolver from "../usePlaylistResolver";
 
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생
@@ -11,8 +11,7 @@ import { useMusicDrawerStore } from "../../store/drawer/useMusicDrawerStore";
 // 3. 순차재생
 
 export default function useAudioPlayTypes() {
-  const musicDrawer = useMusicDrawerStore((state) => state.musicDrawer);
-
+  const { playListIds } = usePlaylistResolver();
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
 
   const [currentMusic, setCurrentMusic] = useCurrentMusicStore(
@@ -30,14 +29,14 @@ export default function useAudioPlayTypes() {
   // 랜덤 재생
   const playRandom = () => {
     // 음악서랍에 담긴 musicId 배열 값 안에서 랜덤으로 musicId 값을 뽑는다.
-    let nextMusicId = selectRandomWithinArray(musicDrawer);
+    let nextMusicId = selectRandomWithinArray(playListIds);
 
     // 현재 재생 중인 음악 id값
     let currentMusicId = currentMusic.id;
 
     // 랜덤으로 뽑은 음악이 현재 재생 중인 음악과 같다면 다를 때까지 다시 뽑는다.
     while (nextMusicId === currentMusicId) {
-      nextMusicId = selectRandomWithinArray(musicDrawer);
+      nextMusicId = selectRandomWithinArray(playListIds);
     }
 
     playMusicId(nextMusicId);
@@ -47,17 +46,17 @@ export default function useAudioPlayTypes() {
   const playInOrder = (direction: "next" | "prev") => {
     // 현재 재생 중인 음악의 다음 곡 인덱스 값을 가져온다.
     let nextMusicIndex =
-      musicDrawer.findIndex((musicId) => musicId === currentMusic.id) +
+      playListIds.findIndex((musicId) => musicId === currentMusic.id) +
       (direction === "next" ? 1 : -1);
 
     // 이전 곡이 없으면 마지막 곡으로
-    if (nextMusicIndex === -1) nextMusicIndex = musicDrawer.length - 1;
+    if (nextMusicIndex === -1) nextMusicIndex = playListIds.length - 1;
 
     // 다음 곡이 없으면 첫번째 곡으로
-    if (nextMusicIndex === musicDrawer.length) nextMusicIndex = 0;
+    if (nextMusicIndex === playListIds.length) nextMusicIndex = 0;
 
     // 다음 곡의 id 값
-    const nextMusicId = musicDrawer[nextMusicIndex];
+    const nextMusicId = playListIds[nextMusicIndex];
 
     playMusicId(nextMusicId);
   };
