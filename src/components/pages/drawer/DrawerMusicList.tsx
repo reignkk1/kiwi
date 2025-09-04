@@ -6,8 +6,7 @@ import { getMusicDataFromId } from "../../../utils";
 import { useCurrentMusicStore } from "../../../store/shared";
 import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
-import usePlaylistContext from "../../../hooks/usePlaylistContext";
-import { usePlayingIndexStore } from "../../../store/drawer/usePlayingIndexStore";
+import usePlaylistResolver from "../../../hooks/usePlaylistResolver";
 
 export default function DrawerMusicList() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -18,12 +17,9 @@ export default function DrawerMusicList() {
       ])
     );
 
-  const [playingIndex, setPlayingIndex] = usePlayingIndexStore(
-    useShallow((state) => [state.playingIndex, state.setPlayingIndex])
-  );
-
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
-  const { category, playListIds } = usePlaylistContext();
+  const { category, playListIds, playingIndex, setPlayingIndex } =
+    usePlaylistResolver();
 
   const music = playListIds.map((id) => getMusicDataFromId(id));
   const isActive = (index: number) => selectedMusicIndex.includes(index);
