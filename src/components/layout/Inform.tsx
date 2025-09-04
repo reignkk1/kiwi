@@ -4,12 +4,11 @@ import { ModalContainer } from "./ModalContainer";
 import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
-import usePlaylistContext from "../../hooks/usePlaylistContext";
-import { usePlayingIndexStore } from "../../store/drawer/usePlayingIndexStore";
+import usePlaylistResolver from "../../hooks/usePlaylistResolver";
 
 export default function Inform() {
-  const [setIsShowInformModal] = useInformModalStore(
-    useShallow((state) => [state.setIsShowInformModal])
+  const setIsShowInformModal = useInformModalStore(
+    (state) => state.setIsShowInformModal
   );
 
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -20,21 +19,27 @@ export default function Inform() {
       ])
     );
 
-  const [playingIndex, setPlayingIndex] = usePlayingIndexStore(
-    useShallow((state) => [state.playingIndex, state.setPlayingIndex])
-  );
-
-  const { category, playListIds, setPlaylistIds } = usePlaylistContext();
+  const {
+    category,
+    playListIds,
+    setPlayListIds,
+    playingIndex,
+    setPlayingIndex,
+  } = usePlaylistResolver();
 
   const onClickCancle = () => setIsShowInformModal(false);
 
   const onClickSubmit = () => {
-    setPlaylistIds(
+    setPlayListIds(
       playListIds.filter((_, i) => !selectedMusicIndex.includes(i))
     );
-    setPlayingIndex(
-      playingIndex - selectedMusicIndex.filter((i) => i < playingIndex).length
-    );
+
+    if (playingIndex) {
+      setPlayingIndex(
+        playingIndex - selectedMusicIndex.filter((i) => i < playingIndex).length
+      );
+    }
+
     setSelectedMusicIndex([]);
     setIsShowInformModal(false);
   };
