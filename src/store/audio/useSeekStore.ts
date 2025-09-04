@@ -10,7 +10,7 @@ type SeekStore = {
 };
 
 export const useSeekStore = create<SeekStore>((set) => ({
-  seekTo: null,
+  seekTo: 0,
   seeking: false,
   seekingValue: 0,
   setSeekTo: (seekTo) => set({ seekTo }),
