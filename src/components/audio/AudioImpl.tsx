@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useAudioImplStore } from "../../hooks/audio/useAudioImplStore";
 import useAudioInitialize from "../../hooks/audio/useAudioInitialize";
-import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
 import { addBasePath } from "../../utils";
 import { useMutedStore } from "../../store/player/useMutedStore";
 import { useVolumeStore } from "../../store/player/useVolumeStore";
@@ -10,7 +9,7 @@ export default function AudioImpl() {
   useAudioInitialize();
 
   const {
-    state: { isPlay, src, playDirection, currentMusic, isLoop, seekTo },
+    state: { isPlay, src, currentMusic, isLoop, seekTo },
     action: {
       setPlayDirection,
       setCurrentTime,
@@ -26,17 +25,6 @@ export default function AudioImpl() {
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const audio = audioRef.current;
-
-  const handlePlayDirection = useAudioDirectionHandler(audio);
-
-  // 사용자의 액션에 따른 로직 수행
-  useEffect(() => {
-    if (playDirection === "next") handlePlayDirection("next");
-    if (playDirection === "prev") handlePlayDirection("prev");
-
-    // 액션 초기화
-    setPlayDirection(null);
-  }, [playDirection, handlePlayDirection, setPlayDirection]);
 
   useEffect(() => {
     isPlay ? audio.play().catch(() => audio.play()) : audio.pause();
@@ -56,9 +44,9 @@ export default function AudioImpl() {
   useEffect(() => {
     if (seekTo) {
       audio.currentTime = seekTo;
-      setSeekTo(null);
+      setSeekTo(0);
     }
-  }, [seekTo, audio, setSeekTo]);
+  }, [seekTo, audio]);
 
   useEffect(() => {
     audio.muted = isMuted;
