@@ -9,13 +9,11 @@ import styled from "styled-components";
 import { is } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";
-import {
-  useAlertStore,
-  useCurrentMusicStore,
-  usePlayDirectionStore,
-} from "../../store/shared";
+import { useAlertStore, useCurrentMusicStore } from "../../store/shared";
 import { useKeyShortCut } from "../../hooks/useKeyShortCut";
-import usePlaylistContext from "../../hooks/usePlaylistContext";
+import usePlaylistResolver from "../../hooks/usePlaylistResolver";
+import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
+import { useSeekStore } from "../../store/audio/useSeekStore";
 
 interface ControllerProps {
   width: number;
@@ -26,23 +24,29 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
   const [isPlay, togglePlay] = useAudioStore(
     useShallow((state) => [state.isPlay, state.togglePlay])
   );
-  const setPlayDirection = usePlayDirectionStore(
-    (state) => state.setPlayDirection
-  );
+
+  const setSeekTo = useSeekStore((state) => state.setSeekTo);
+
   const toggleFadeAlertMessage = useAlertStore(
     (state) => state.toggleFadeAlertMessage
   );
 
-  const { category, playListIds } = usePlaylistContext();
+  const { category, playListIds } = usePlaylistResolver();
   const currnetMusic = useCurrentMusicStore((state) => state.currentMusic);
 
   const isPlayListIds = playListIds.length > 0;
 
+  const handlePlayDirection = useAudioDirectionHandler();
+
   const handleMusicDrawerCheck = (direction: "next" | "prev") => {
-    if (!isPlayListIds) {
+    if (!Object.keys(currnetMusic).length) return;
+
+    if (playListIds.length === 1) return setSeekTo(0.1);
+
+    if (!isPlayListIds)
       return toggleFadeAlertMessage(`${category}에 곡이 없습니다.`);
-    }
-    setPlayDirection(direction);
+
+    handlePlayDirection(direction);
   };
 
   const getSize = (index: number) => (is.number(size) ? size : size[index]);
