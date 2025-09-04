@@ -1,25 +1,25 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-type PlayListStore = {
+type DrawerStore = {
   category: string;
   playListIds: Array<number>;
   playingIndex: number | null;
-  setPlayListIds: (playList: PlayListStore["playListIds"]) => void;
-  setPlayingIndex: (playingIndex: PlayListStore["playingIndex"]) => void;
+  setPlayListIds: (playList: DrawerStore["playListIds"]) => void;
+  setPlayingIndex: (playingIndex: DrawerStore["playingIndex"]) => void;
 };
 
-export const usePlayListStore = create(
-  persist<PlayListStore>(
+export const useDrawerStore = create(
+  persist<DrawerStore>(
     (set) => ({
-      category: "재생목록",
+      category: "음악서랍",
       playListIds: [],
       playingIndex: null,
       setPlayListIds: (playListIds) => set({ playListIds }),
       setPlayingIndex: (playingIndex) => set({ playingIndex }),
     }),
     {
-      name: "playList",
+      name: "musicDrawer",
       storage: createJSONStorage(() => localStorage),
     }
   )
