@@ -38,7 +38,7 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
 
   const handlePlayDirection = useAudioDirectionHandler();
 
-  const handleMusicDrawerCheck = (direction: "next" | "prev") => {
+  const onClickDirection = (direction: "next" | "prev") => {
     if (!Object.keys(currnetMusic).length) return;
 
     if (playListIds.length === 1) return setSeekTo(0.1);
@@ -59,8 +59,8 @@ export default function Controller({ width, size = 18 }: ControllerProps) {
     }
   };
 
-  const onClickPrev = () => handleMusicDrawerCheck("prev");
-  const onClickNext = () => handleMusicDrawerCheck("next");
+  const onClickPrev = () => onClickDirection("prev");
+  const onClickNext = () => onClickDirection("next");
 
   const setKeyShortCut = useKeyShortCut();
   setKeyShortCut("k", onClickPlay);
