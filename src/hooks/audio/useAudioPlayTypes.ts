@@ -48,9 +48,7 @@ export default function useAudioPlayTypes() {
   // 순차 재생
   const playInOrder = (direction: "next" | "prev") => {
     // 현재 재생 중인 음악의 다음 곡 인덱스 값을 가져온다.
-    let nextMusicIndex =
-      playListIds.findIndex((musicId) => musicId === currentMusic.id) +
-      (direction === "next" ? 1 : -1);
+    let nextMusicIndex = playingIndex! + (direction === "next" ? 1 : -1);
 
     // 이전 곡이 없으면 마지막 곡으로
     if (nextMusicIndex === -1) nextMusicIndex = playListIds.length - 1;
