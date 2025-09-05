@@ -5,12 +5,17 @@ import type { MusicType } from "../types";
 import { useCurrentPage } from "./useCurrentPage";
 import { usePlayListStore } from "../store/drawer/usePlayListStore";
 import { useShallow } from "zustand/react/shallow";
+import { useDrawerStore } from "../store/drawer";
 
 export default function usePlay(music?: MusicType | null) {
   const currentPage = useCurrentPage();
 
-  const [setCategory, setCurrentMusic] = useCurrentMusicStore(
-    useShallow((state) => [state.setCategory, state.setCurrentMusic])
+  const [category, setCategory, setCurrentMusic] = useCurrentMusicStore(
+    useShallow((state) => [
+      state.category,
+      state.setCategory,
+      state.setCurrentMusic,
+    ])
   );
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
@@ -22,16 +27,25 @@ export default function usePlay(music?: MusicType | null) {
     ])
   );
 
+  const setDrawerPlayingIndex = useDrawerStore(
+    (state) => state.setPlayingIndex
+  );
+
   useEffect(() => {
-    if (currentPage !== "drawer" && currentPage !== "playlist") {
-      setPlayingIndex(playListIds.length - 1);
+    if (category === "drawer") {
+      setPlayingIndex(null);
+    } else if (category === "playList") {
+      setDrawerPlayingIndex(null);
     }
-  }, [playListIds.length]);
+  }, [category]);
 
   return () => {
     if (!music) throw new Error("music not found");
     if (currentPage !== "drawer" && currentPage !== "playlist") {
       setPlayListIds([...playListIds, music.id]);
+      const newPLayListIds = usePlayListStore.getState().playListIds;
+      setPlayingIndex(newPLayListIds.length - 1);
+      setCategory("playList");
     }
 
     if (currentPage === "drawer") {
