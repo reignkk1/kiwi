@@ -8,8 +8,9 @@ import { useShallow } from "zustand/react/shallow";
 
 export default function usePlay(music?: MusicType | null) {
   const currentPage = useCurrentPage();
-  const setCurrentMusic = useCurrentMusicStore(
-    (state) => state.setCurrentMusic
+
+  const [setCategory, setCurrentMusic] = useCurrentMusicStore(
+    useShallow((state) => [state.setCategory, state.setCurrentMusic])
   );
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
@@ -31,6 +32,12 @@ export default function usePlay(music?: MusicType | null) {
     if (!music) throw new Error("music not found");
     if (currentPage !== "drawer" && currentPage !== "playlist") {
       setPlayListIds([...playListIds, music.id]);
+    }
+
+    if (currentPage === "drawer") {
+      setCategory("drawer");
+    } else if (currentPage === "playlist") {
+      setCategory("playList");
     }
 
     setCurrentMusic({ ...music });

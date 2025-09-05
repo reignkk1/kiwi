@@ -5,15 +5,19 @@ import type { MusicType } from "./../../types";
 
 type CurrentMusicState = {
   currentMusic: MusicType;
+  category: "playList" | "drawer" | null;
 };
 
 type CurrentMusicAction = {
   setCurrentMusic: (music: CurrentMusicState["currentMusic"]) => void;
+  setCategory: (category: CurrentMusicState["category"]) => void;
 };
 
 type CurrentMusicStore = CurrentMusicState & CurrentMusicAction;
 
 export const useCurrentMusicStore = create<CurrentMusicStore>((set) => ({
   currentMusic: {} as MusicType,
+  category: null,
   setCurrentMusic: (music) => set({ currentMusic: music }),
+  setCategory: (category) => set({ category }),
 }));

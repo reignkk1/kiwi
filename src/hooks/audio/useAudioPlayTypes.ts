@@ -1,9 +1,9 @@
 import music from "../../musicData.json";
-import { selectRandomWithinArray } from "../../utils";
+import { getRandomItem } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
-import usePlaylistResolver from "../usePlaylistResolver";
+import usePlayinglistResolver from "../usePlayinglistResolver";
 
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생
@@ -11,7 +11,9 @@ import usePlaylistResolver from "../usePlaylistResolver";
 // 3. 순차재생
 
 export default function useAudioPlayTypes() {
-  const { playListIds } = usePlaylistResolver();
+  const { playListIds, playingIndex, setPlayingIndex } =
+    usePlayinglistResolver();
+
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
 
   const [currentMusic, setCurrentMusic] = useCurrentMusicStore(
@@ -29,17 +31,18 @@ export default function useAudioPlayTypes() {
   // 랜덤 재생
   const playRandom = () => {
     // 음악서랍에 담긴 musicId 배열 값 안에서 랜덤으로 musicId 값을 뽑는다.
-    let nextMusicId = selectRandomWithinArray(playListIds);
+    let item = getRandomItem(playListIds);
 
     // 현재 재생 중인 음악 id값
     let currentMusicId = currentMusic.id;
 
     // 랜덤으로 뽑은 음악이 현재 재생 중인 음악과 같다면 다를 때까지 다시 뽑는다.
-    while (nextMusicId === currentMusicId) {
-      nextMusicId = selectRandomWithinArray(playListIds);
+    while (item.value === currentMusicId) {
+      item = getRandomItem(playListIds);
     }
 
-    playMusicId(nextMusicId);
+    setPlayingIndex(item.index);
+    playMusicId(item.value);
   };
 
   // 순차 재생
@@ -57,6 +60,16 @@ export default function useAudioPlayTypes() {
 
     // 다음 곡의 id 값
     const nextMusicId = playListIds[nextMusicIndex];
+
+    if (playingIndex !== null) {
+      if (direction === "next") {
+        setPlayingIndex((playingIndex + 1) % playListIds.length);
+      } else if (direction === "prev") {
+        setPlayingIndex(
+          (playingIndex - 1 + playListIds.length) % playListIds.length
+        );
+      }
+    }
 
     playMusicId(nextMusicId);
   };

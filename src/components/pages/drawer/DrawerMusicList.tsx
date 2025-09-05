@@ -7,6 +7,7 @@ import { useCurrentMusicStore } from "../../../store/shared";
 import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistResolver from "../../../hooks/usePlaylistResolver";
+import usePlayinglistResolver from "../../../hooks/usePlayinglistResolver";
 
 export default function DrawerMusicList() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -20,6 +21,8 @@ export default function DrawerMusicList() {
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
   const { category, playListIds, playingIndex, setPlayingIndex } =
     usePlaylistResolver();
+
+  const { setPlayingIndex: setCurrentPlayingIndex } = usePlayinglistResolver();
 
   const music = playListIds.map((id) => getMusicDataFromId(id));
   const isActive = (index: number) => selectedMusicIndex.includes(index);
@@ -37,6 +40,8 @@ export default function DrawerMusicList() {
     return () => setSelectedMusicIndex([]);
   }, [setSelectedMusicIndex, category]);
 
+  console.log(playingIndex);
+
   return (
     <Container>
       {music.length ? (
@@ -51,7 +56,10 @@ export default function DrawerMusicList() {
               <MusicCard
                 music={musicData}
                 mark={i === playingIndex ? currentMusic.title : undefined}
-                onClick={() => setPlayingIndex(i)}
+                onClick={() => {
+                  setPlayingIndex(i);
+                  setCurrentPlayingIndex(i);
+                }}
                 $isMusicBar={
                   i === playingIndex ? title === currentMusic.title : undefined
                 }
@@ -68,6 +76,8 @@ export default function DrawerMusicList() {
     </Container>
   );
 }
+
+// 설계 다시하기 이거 상태설계부터 해야할듯
 
 const Container = styled.ul`
   height: 560px;

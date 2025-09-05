@@ -28,9 +28,17 @@ export const is = {
   string: (data: unknown) => typeof data === "string",
 };
 
-// 어레이 안에 있는 값들을 랜덤으로 뽑는 함수
-export function selectRandomWithinArray(array: Array<number>) {
-  return array[Math.floor(Math.random() * array.length)];
+// 어레이 안에서 랜덤으로 뽑은 값과 인덱스를 리턴
+export function getRandomItem(array: Array<number>) {
+  if (array.length === 0) {
+    throw new Error("배열이 비어있습니다.");
+  }
+
+  const index = Math.floor(Math.random() * array.length);
+  return {
+    value: array[index],
+    index,
+  };
 }
 
 // 기본 베이스 주소를 더하다.
