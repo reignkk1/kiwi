@@ -40,8 +40,6 @@ export default function DrawerMusicList() {
     return () => setSelectedMusicIndex([]);
   }, [setSelectedMusicIndex, category]);
 
-  console.log(playingIndex);
-
   return (
     <Container>
       {music.length ? (
@@ -60,9 +58,7 @@ export default function DrawerMusicList() {
                   setPlayingIndex(i);
                   setCurrentPlayingIndex(i);
                 }}
-                $isMusicBar={
-                  i === playingIndex ? title === currentMusic.title : undefined
-                }
+                $isMusicBar={i === playingIndex}
                 $isAnimation={isActive(i) && (title.length || 0) > 20}
               />
             </List>
