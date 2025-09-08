@@ -3,7 +3,7 @@ import { getRandomItem } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
-import usePlayinglistResolver from "../usePlayinglistResolver";
+import resolverDispatch from "../resolverDispatch";
 
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생
@@ -11,8 +11,9 @@ import usePlayinglistResolver from "../usePlayinglistResolver";
 // 3. 순차재생
 
 export default function useAudioPlayTypes() {
-  const { playListIds, playingIndex, setPlayingIndex } =
-    usePlayinglistResolver();
+  const { playListIds, setPlayingIndex, playingIndex } = resolverDispatch(
+    "GET_PLAYLIST_BY_CURRENT_CATEGORY"
+  );
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
 
