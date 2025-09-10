@@ -102,3 +102,13 @@ export function convertToGenreKorea(letter?: string | GenreType) {
   };
   return convertMap[letter];
 }
+
+export function convertCategoryToKorean(
+  cateogry: "playList" | "drawer" | null
+) {
+  return cateogry === "drawer"
+    ? "음악서랍"
+    : cateogry === "playList"
+      ? "재생목록"
+      : "null";
+}
