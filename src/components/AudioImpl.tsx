@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import { useAudioImplStore } from "../../hooks/audio/useAudioImplStore";
-import useAudioInitialize from "../../hooks/audio/useAudioInitialize";
-import { addBasePath } from "../../utils";
-import { useMutedStore } from "../../store/player/useMutedStore";
-import { useVolumeStore } from "../../store/player/useVolumeStore";
+import { useAudioImplStore } from "../hooks/audio/useAudioImplStore";
+import useAudioInitialize from "../hooks/audio/useAudioInitialize";
+import { addBasePath } from "../utils";
+import { useMutedStore } from "../store/player/useMutedStore";
+import { useVolumeStore } from "../store/player/useVolumeStore";
 
 export default function AudioImpl() {
   useAudioInitialize();
@@ -67,7 +67,3 @@ export default function AudioImpl() {
     />
   );
 }
-
-// 오디오 재생관련된 로직들을 각각 추상화 해보기
-// 기능별로 현재는 너무 복잡함. 렌더링 최적화 진행
-// 각각의 로직별로 써보면서 정리해보기
