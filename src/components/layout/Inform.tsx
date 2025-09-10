@@ -4,7 +4,7 @@ import { ModalContainer } from "./ModalContainer";
 import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
-import usePlaylistResolver from "../../hooks/usePlaylistResolver";
+import usePlaylistResolver from "../../hooks/usePlaylistStoreByPage";
 
 export default function Inform() {
   const setIsShowInformModal = useInformModalStore(

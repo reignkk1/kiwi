@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SelectCircle from "./DrawerSelectButton";
 import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
-import usePlaylistResolver from "../../../hooks/usePlaylistResolver";
+import usePlaylistResolver from "../../../hooks/usePlaylistStoreByPage";
 
 export default function DrawerTotalCount() {
   const { playListIds } = usePlaylistResolver();

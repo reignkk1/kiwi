@@ -3,7 +3,7 @@ import { useDrawerStore } from "../store/drawer";
 import { usePlayListStore } from "../store/drawer/usePlayListStore";
 import { useCurrentMusicStore } from "../store/shared";
 
-export default function usePlayinglistResolver() {
+export default function usePlaylistStoreByCategory() {
   const category = useCurrentMusicStore((state) => state.category);
 
   const resolveStore =

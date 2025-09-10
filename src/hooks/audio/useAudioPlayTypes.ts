@@ -3,17 +3,15 @@ import { getRandomItem } from "../../utils";
 import { useAudioStore } from "../../store/audio";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useShallow } from "zustand/react/shallow";
-import resolverDispatch from "../resolverDispatch";
-
+import usePlaylistStoreByCategory from "../usePlaylistStoreByCategory";
 // 오디오 플레이 방식들을 리턴하는 Hook
 // 1. 선택재생
 // 2. 랜덤재생
 // 3. 순차재생
 
 export default function useAudioPlayTypes() {
-  const { playListIds, setPlayingIndex, playingIndex } = resolverDispatch(
-    "GET_PLAYLIST_BY_CURRENT_CATEGORY"
-  );
+  const { playListIds, setPlayingIndex, playingIndex } =
+    usePlaylistStoreByCategory();
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
 

@@ -13,7 +13,7 @@ import { useAlertStore, useCurrentMusicStore } from "../../store/shared";
 import { useKeyShortCut } from "../../hooks/useKeyShortCut";
 import useAudioDirectionHandler from "../../hooks/audio/useAudioDirectionHandler";
 import { useSeekStore } from "../../store/audio/useSeekStore";
-import usePlayinglistResolver from "../../hooks/usePlayinglistResolver";
+import usePlayinglistResolver from "../../hooks/usePlaylistStoreByCategory";
 
 interface ControllerProps {
   width: number;

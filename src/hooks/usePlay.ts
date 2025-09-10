@@ -19,6 +19,7 @@ export default function usePlay(music?: MusicType | null) {
   );
 
   const setIsPlay = useAudioStore((state) => state.setIsPlay);
+
   const [playListIds, setPlayListIds, setPlayingIndex] = usePlayListStore(
     useShallow((state) => [
       state.playListIds,
@@ -41,6 +42,7 @@ export default function usePlay(music?: MusicType | null) {
 
   return () => {
     if (!music) throw new Error("music not found");
+
     if (currentPage !== "drawer" && currentPage !== "playlist") {
       setPlayListIds([...playListIds, music.id]);
       const newPLayListIds = usePlayListStore.getState().playListIds;

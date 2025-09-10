@@ -4,7 +4,7 @@ import useAudioPlayTypes from "./useAudioPlayTypes";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
-import usePlayinglistResolver from "../usePlayinglistResolver";
+import usePlayinglistResolver from "../usePlaylistStoreByCategory";
 
 type HistoryType = Array<{ music: MusicType; index: number | null }>;
 

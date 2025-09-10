@@ -3,7 +3,7 @@ import { useDrawerStore } from "../store/drawer";
 import { usePlayListStore } from "../store/drawer/usePlayListStore";
 import { useCurrentPage } from "./useCurrentPage";
 
-export default function usePlaylistResolver() {
+export default function usePlaylistStoreByPage() {
   const currentPage = useCurrentPage();
 
   const resolveStore =
