@@ -5,6 +5,7 @@ import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
 import usePlaylistResolver from "../../hooks/usePlaylistStoreByPage";
+import { convertCategoryToKorean } from "../../utils";
 
 export default function Inform() {
   const setIsShowInformModal = useInformModalStore(
@@ -50,7 +51,8 @@ export default function Inform() {
         <Content>
           <Title>안내</Title>
           <Text>
-            {selectedMusicIndex.length} 곡을 {category}에서 삭제하시겠습니까?
+            {selectedMusicIndex.length} 곡을 {convertCategoryToKorean(category)}
+            에서 삭제하시겠습니까?
           </Text>
         </Content>
         <Buttons>

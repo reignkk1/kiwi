@@ -6,7 +6,7 @@ import { useSelectedMusicIndexStore } from "../../store/drawer";
 import { useCurrentMusicStore } from "../../store/shared";
 import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import usePlaylistStoreByCategory from "../../hooks/usePlaylistStoreByCategory";
-import { getMusicDataFromId } from "../../utils";
+import { convertCategoryToKorean, getMusicDataFromId } from "../../utils";
 import MusicCard from "./MusicCard";
 
 export default function PlaylistMusic() {
@@ -68,7 +68,7 @@ export default function PlaylistMusic() {
         })
       ) : (
         <Wrapper>
-          <span>{`${category}이 비어있습니다. `}</span>
+          <span>{`${convertCategoryToKorean(category)}이 비어있습니다. `}</span>
         </Wrapper>
       )}
     </Container>
