@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { palette } from "../../../constant";
-import { useInformModalStore } from "../../../store/layout/useInfoModalStore";
-import { useSelectedMusicIndexStore } from "../../../store/drawer";
+import { useSelectedMusicIndexStore } from "../../store/drawer";
+import { useInformModalStore } from "../../store/layout/useInfoModalStore";
+import { palette } from "../../constant";
 
 // 선택을 했을 때 나오는 메뉴에는 삭제, 선택반복, 담기
 
-export default function DrawerSelectMenu() {
+export default function PlaylistSelectMenu() {
   const selectedMusicIndex = useSelectedMusicIndexStore(
     (state) => state.selectedMusicIndex
   );

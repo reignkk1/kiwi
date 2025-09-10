@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import SelectCircle from "./DrawerSelectButton";
-import { useSelectedMusicIndexStore } from "../../../store/drawer";
+import SelectCircle from "./PlaylistSelectButton";
 import { useShallow } from "zustand/react/shallow";
-import usePlaylistResolver from "../../../hooks/usePlaylistStoreByPage";
+import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
+import { useSelectedMusicIndexStore } from "../../store/drawer";
 
-export default function DrawerTotalCount() {
-  const { playListIds } = usePlaylistResolver();
+export default function PlaylistTotalCount() {
+  const { playListIds } = usePlaylistStoreByPage();
   const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIndexStore(
     useShallow((state) => [
       state.selectedMusicIndex,

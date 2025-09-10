@@ -5,7 +5,7 @@ interface SelectCircleProps {
   $active: boolean;
 }
 
-export default function DrawerSelectButton({
+export default function PlaylistSelectButton({
   onClick,
   $active,
 }: SelectCircleProps) {

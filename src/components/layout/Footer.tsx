@@ -10,8 +10,8 @@ import { useActivePageStore } from "../../store/layout";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
 import { useSelectedMusicIndexStore } from "../../store/drawer/useSelectedMusicIndexStore";
-import SelectMenu from "../pages/drawer/DrawerSelectMenu";
 import { useCurrentPage } from "../../hooks/useCurrentPage";
+import PlaylistSelectMenu from "../shared/PlaylistSelectMenu";
 
 export function Footer() {
   const currentPage = useCurrentPage();
@@ -31,7 +31,7 @@ export function Footer() {
           <Player />
         </MiniPlayer>
       )}
-      {isSelected && <SelectMenu />}
+      {isSelected && <PlaylistSelectMenu />}
       <NavBar />
     </FooterContainer>
   );

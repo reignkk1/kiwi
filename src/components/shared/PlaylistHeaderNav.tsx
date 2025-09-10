@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useCurrentPage } from "../../../hooks/useCurrentPage";
+import { useCurrentPage } from "../../hooks/useCurrentPage";
 
-export default function DrawerHeaderNav() {
+export default function PlaylistHeaderNav() {
   const currentPage = useCurrentPage();
 
   return (

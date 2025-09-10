@@ -1,15 +1,15 @@
-import MusicCard from "../../shared/MusicCard";
 import styled from "styled-components";
-import SelectButton from "./DrawerSelectButton";
+import SelectButton from "./PlaylistSelectButton";
 import { useEffect } from "react";
-import { getMusicDataFromId } from "../../../utils";
-import { useCurrentMusicStore } from "../../../store/shared";
-import { useSelectedMusicIndexStore } from "../../../store/drawer";
 import { useShallow } from "zustand/react/shallow";
-import usePlayinglistResolver from "../../../hooks/usePlaylistStoreByCategory";
-import usePlaylistResolver from "../../../hooks/usePlaylistStoreByPage";
+import { useSelectedMusicIndexStore } from "../../store/drawer";
+import { useCurrentMusicStore } from "../../store/shared";
+import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
+import usePlaylistStoreByCategory from "../../hooks/usePlaylistStoreByCategory";
+import { getMusicDataFromId } from "../../utils";
+import MusicCard from "./MusicCard";
 
-export default function DrawerMusicList() {
+export default function PlaylistMusic() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
     useSelectedMusicIndexStore(
       useShallow((state) => [
@@ -21,9 +21,10 @@ export default function DrawerMusicList() {
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
 
   const { playListIds, playingIndex, setPlayingIndex, category } =
-    usePlaylistResolver();
+    usePlaylistStoreByPage();
 
-  const { setPlayingIndex: setCurrentPlayingIndex } = usePlayinglistResolver();
+  const { setPlayingIndex: setCurrentPlayingIndex } =
+    usePlaylistStoreByCategory();
 
   const music = playListIds.map((id) => getMusicDataFromId(id));
   const isActive = (index: number) => selectedMusicIndex.includes(index);
