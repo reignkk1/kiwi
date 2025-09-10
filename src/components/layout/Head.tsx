@@ -11,6 +11,7 @@ export default function Head() {
     home: "Kiwi - 노래가 필요한 순간, 키위",
     search: "Kiwi - 검색",
     drawer: "Kiwi - 음악서랍",
+    playlist: "Kiwi - 재생목록",
     player: currentMusic
       ? `${currentMusic.title} - ${currentMusic.singer}`
       : "Kiwi - 플레이어",
