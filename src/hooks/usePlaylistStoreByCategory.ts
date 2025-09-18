@@ -6,14 +6,21 @@ import { useCurrentMusicStore } from "../store/shared";
 export default function usePlaylistStoreByCategory() {
   const category = useCurrentMusicStore((state) => state.category);
 
-  const resolveStore =
-    category === "drawer" ? useDrawerStore : usePlayListStore;
-
-  return resolveStore(
+  const drawerState = useDrawerStore(
     useShallow((state) => ({
       playListIds: state.playListIds,
       playingIndex: state.playingIndex,
       setPlayingIndex: state.setPlayingIndex,
     }))
   );
+
+  const playListState = usePlayListStore(
+    useShallow((state) => ({
+      playListIds: state.playListIds,
+      playingIndex: state.playingIndex,
+      setPlayingIndex: state.setPlayingIndex,
+    }))
+  );
+
+  return category === "drawer" ? drawerState : playListState;
 }
