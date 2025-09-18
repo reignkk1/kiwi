@@ -1,22 +1,26 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-type DrawerStore = {
-  category: "playList" | "drawer" | null;
-  playListIds: Array<number>;
+export type DrawerStore = {
+  category: "drawer";
+  playListIds: Record<string, Array<number>>;
   playingIndex: number | null;
+  currentPlaylist: string;
   setPlayListIds: (playList: DrawerStore["playListIds"]) => void;
   setPlayingIndex: (playingIndex: DrawerStore["playingIndex"]) => void;
+  setCurrentPlaylist: (playingIndex: DrawerStore["currentPlaylist"]) => void;
 };
 
 export const useDrawerStore = create(
   persist<DrawerStore>(
     (set) => ({
       category: "drawer",
-      playListIds: [],
+      playListIds: {},
+      currentPlaylist: "",
       playingIndex: null,
       setPlayListIds: (playListIds) => set({ playListIds }),
       setPlayingIndex: (playingIndex) => set({ playingIndex }),
+      setCurrentPlaylist: (currentPlaylist) => set({ currentPlaylist }),
     }),
     {
       name: "musicDrawer",
