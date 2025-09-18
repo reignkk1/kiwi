@@ -6,16 +6,25 @@ import { useCurrentPage } from "./useCurrentPage";
 export default function usePlaylistStoreByPage() {
   const currentPage = useCurrentPage();
 
-  const resolveStore =
-    currentPage === "drawer" ? useDrawerStore : usePlayListStore;
-
-  return resolveStore(
+  const drawerState = useDrawerStore(
     useShallow((state) => ({
       category: state.category,
       playListIds: state.playListIds,
       playingIndex: state.playingIndex,
-      setPlayListIds: state.setPlayListIds,
+      setPlaylistIds: state.playListIds,
       setPlayingIndex: state.setPlayingIndex,
     }))
   );
+
+  const playListState = usePlayListStore(
+    useShallow((state) => ({
+      category: state.category,
+      playListIds: state.playListIds,
+      playingIndex: state.playingIndex,
+      setPlaylistIds: state.playListIds,
+      setPlayingIndex: state.setPlayingIndex,
+    }))
+  );
+
+  return currentPage === "drawer" ? drawerState : playListState;
 }
