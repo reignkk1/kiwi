@@ -8,6 +8,7 @@ import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import usePlaylistStoreByCategory from "../../hooks/usePlaylistStoreByCategory";
 import { convertCategoryToKorean, getMusicDataFromId } from "../../utils";
 import MusicCard from "./MusicCard";
+import { useCurrentPlaylist } from "../../store/drawer/useCurrentPlaylist";
 
 export default function PlaylistMusic() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -20,13 +21,18 @@ export default function PlaylistMusic() {
 
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
 
-  const { playListIds, playingIndex, setPlayingIndex, category } =
-    usePlaylistStoreByPage();
+  const storeByPage = usePlaylistStoreByPage();
 
-  const { setPlayingIndex: setCurrentPlayingIndex } =
-    usePlaylistStoreByCategory();
+  const storeByCategory = usePlaylistStoreByCategory();
 
-  const music = playListIds.map((id) => getMusicDataFromId(id));
+  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
+
+  const music = (
+    storeByPage.category === "playList"
+      ? storeByPage.playListIds
+      : (storeByPage.playListIds[currentPlaylist] ?? [])
+  ).map((id) => getMusicDataFromId(id));
+
   const isActive = (index: number) => selectedMusicIndex.includes(index);
 
   const onClickSelectCircle = (index: number) => {
@@ -40,7 +46,7 @@ export default function PlaylistMusic() {
   useEffect(() => {
     setSelectedMusicIndex([]);
     return () => setSelectedMusicIndex([]);
-  }, [setSelectedMusicIndex, category]);
+  }, [setSelectedMusicIndex, storeByPage.category]);
 
   return (
     <Container>
@@ -55,12 +61,16 @@ export default function PlaylistMusic() {
               />
               <MusicCard
                 music={musicData}
-                mark={i === playingIndex ? currentMusic.title : undefined}
+                mark={
+                  i === storeByPage.playingIndex
+                    ? currentMusic.title
+                    : undefined
+                }
                 onClick={() => {
-                  setPlayingIndex(i);
-                  setCurrentPlayingIndex(i);
+                  storeByPage.setPlayingIndex(i);
+                  storeByCategory.setPlayingIndex(i);
                 }}
-                $isMusicBar={i === playingIndex}
+                $isMusicBar={i === storeByPage.playingIndex}
                 $isAnimation={isActive(i) && (title.length || 0) > 20}
               />
             </List>
@@ -68,7 +78,7 @@ export default function PlaylistMusic() {
         })
       ) : (
         <Wrapper>
-          <span>{`${convertCategoryToKorean(category)}이 비어있습니다. `}</span>
+          <span>{`${convertCategoryToKorean(storeByPage.category)}이 비어있습니다. `}</span>
         </Wrapper>
       )}
     </Container>

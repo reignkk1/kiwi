@@ -2,6 +2,7 @@ import { resolveMusicId } from "./../utils";
 import { useDrawerStore } from "../store/drawer";
 import { useShallow } from "zustand/react/shallow";
 import { useAlertStore } from "../store/shared";
+import { useCurrentPlaylist } from "../store/drawer/useCurrentPlaylist";
 
 export default function usePutInMusicDrawer(musicId?: number | string) {
   const id = resolveMusicId(musicId);
@@ -9,11 +10,16 @@ export default function usePutInMusicDrawer(musicId?: number | string) {
   const [playListIds, setPlayListIds] = useDrawerStore(
     useShallow((state) => [state.playListIds, state.setPlayListIds])
   );
+
+  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
+
   const toggleFadeAlertMessage = useAlertStore(
     (state) => state.toggleFadeAlertMessage
   );
 
-  const isIncluded = playListIds.includes(id);
+  const resolvedPlaylistIds = playListIds[currentPlaylist];
+
+  const isIncluded = resolvedPlaylistIds.includes(id);
 
   const putInMusicDrawer = () => {
     const message = isIncluded
@@ -23,7 +29,10 @@ export default function usePutInMusicDrawer(musicId?: number | string) {
     toggleFadeAlertMessage(message);
 
     if (!isIncluded) {
-      setPlayListIds([...playListIds, id]);
+      setPlayListIds({
+        ...playListIds,
+        [currentPlaylist]: [...resolvedPlaylistIds, id],
+      });
     }
   };
 

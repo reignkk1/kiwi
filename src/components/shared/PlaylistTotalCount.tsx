@@ -3,9 +3,11 @@ import SelectCircle from "./PlaylistSelectButton";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
+import { useCurrentPlaylist } from "../../store/drawer/useCurrentPlaylist";
 
 export default function PlaylistTotalCount() {
-  const { playListIds } = usePlaylistStoreByPage();
+  const storeByPage = usePlaylistStoreByPage();
+  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
   const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIndexStore(
     useShallow((state) => [
       state.selectedMusicIndex,
@@ -17,7 +19,11 @@ export default function PlaylistTotalCount() {
     if (selectedMusicIds.length) {
       setSeletedMusicIds([]);
     } else {
-      setSeletedMusicIds(playListIds.map((_, i) => i));
+      setSeletedMusicIds(
+        storeByPage.category === "drawer"
+          ? storeByPage.playListIds[currentPlaylist].map((_, i) => i)
+          : storeByPage.playListIds.map((_, i) => i)
+      );
     }
   };
 
@@ -27,7 +33,14 @@ export default function PlaylistTotalCount() {
     <Container>
       <SelectCircle onClick={onClickSelectCircle} $active={isActive} />
       <span onClick={onClickSelectCircle}>
-        {isActive ? "선택해제" : `${playListIds.length}곡`}
+        {isActive
+          ? "선택해제"
+          : `${
+              (storeByPage.category === "drawer"
+                ? storeByPage.playListIds[currentPlaylist]
+                : storeByPage.playListIds
+              ).length
+            }곡`}
       </span>
     </Container>
   );
