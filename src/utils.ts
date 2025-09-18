@@ -26,6 +26,7 @@ export const is = {
   number: (data: unknown) => typeof data === "number",
   object: (data: unknown) => typeof data === "object",
   string: (data: unknown) => typeof data === "string",
+  array: (data: unknown) => Array.isArray(data),
 };
 
 // 어레이 안에서 랜덤으로 뽑은 값과 인덱스를 리턴
