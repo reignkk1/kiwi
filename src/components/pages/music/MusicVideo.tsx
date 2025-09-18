@@ -12,8 +12,6 @@ export default function MusicVideo() {
   const music = useMusicDataFromId((state) => state.music);
   const prevMusic = useRef(music);
 
-  console.log(prevMusic.current);
-
   useEffect(() => {
     if (prevMusic.current?.title === music?.title) return;
     const filterWords = ["TJ노래방"];
