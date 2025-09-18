@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-type PlayListStore = {
-  category: "playList" | "drawer" | null;
+export type PlayListStore = {
+  category: "playList";
   playListIds: Array<number>;
   playingIndex: number | null;
   setPlayListIds: (playList: PlayListStore["playListIds"]) => void;
