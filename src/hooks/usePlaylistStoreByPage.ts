@@ -2,6 +2,7 @@ import { useShallow } from "zustand/react/shallow";
 import { useDrawerStore } from "../store/drawer";
 import { usePlayListStore } from "../store/drawer/usePlayListStore";
 import { useCurrentPage } from "./useCurrentPage";
+import { useCurrentPlaylist } from "../store/drawer/useCurrentPlaylist";
 
 export default function usePlaylistStoreByPage() {
   const currentPage = useCurrentPage();
@@ -11,7 +12,7 @@ export default function usePlaylistStoreByPage() {
       category: state.category,
       playListIds: state.playListIds,
       playingIndex: state.playingIndex,
-      setPlaylistIds: state.playListIds,
+      setPlaylistIds: state.setPlaylistIds,
       setPlayingIndex: state.setPlayingIndex,
     }))
   );
@@ -21,10 +22,22 @@ export default function usePlaylistStoreByPage() {
       category: state.category,
       playListIds: state.playListIds,
       playingIndex: state.playingIndex,
-      setPlaylistIds: state.playListIds,
+      setPlaylistIds: state.setPlaylistIds,
       setPlayingIndex: state.setPlayingIndex,
     }))
   );
 
-  return currentPage === "drawer" ? drawerState : playListState;
+  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
+
+  return currentPage === "drawer"
+    ? {
+        ...drawerState,
+        playListIds: drawerState.playListIds[currentPlaylist],
+        setPlaylistIds: (playlist: number[]) =>
+          drawerState.setPlaylistIds({
+            ...drawerState.playListIds,
+            [currentPlaylist]: playlist,
+          }),
+      }
+    : playListState;
 }
