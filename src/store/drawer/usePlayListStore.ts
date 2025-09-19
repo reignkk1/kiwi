@@ -5,7 +5,7 @@ export type PlayListStore = {
   category: "playList";
   playListIds: Array<number>;
   playingIndex: number | null;
-  setPlayListIds: (playList: PlayListStore["playListIds"]) => void;
+  setPlaylistIds: (playListIds: PlayListStore["playListIds"]) => void;
   setPlayingIndex: (playingIndex: PlayListStore["playingIndex"]) => void;
 };
 
@@ -15,7 +15,7 @@ export const usePlayListStore = create(
       category: "playList",
       playListIds: [],
       playingIndex: null,
-      setPlayListIds: (playListIds) => set({ playListIds }),
+      setPlaylistIds: (playListIds) => set({ playListIds }),
       setPlayingIndex: (playingIndex) => set({ playingIndex }),
     }),
     {
