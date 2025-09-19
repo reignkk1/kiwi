@@ -8,7 +8,6 @@ import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import usePlaylistStoreByCategory from "../../hooks/usePlaylistStoreByCategory";
 import { convertCategoryToKorean, getMusicDataFromId } from "../../utils";
 import MusicCard from "./MusicCard";
-import { useCurrentPlaylist } from "../../store/drawer/useCurrentPlaylist";
 
 export default function PlaylistMusic() {
   const [selectedMusicIndex, setSelectedMusicIndex] =
@@ -21,17 +20,12 @@ export default function PlaylistMusic() {
 
   const currentMusic = useCurrentMusicStore((state) => state.currentMusic);
 
-  const storeByPage = usePlaylistStoreByPage();
+  const { playListIds, playingIndex, setPlayingIndex, category } =
+    usePlaylistStoreByPage();
 
   const storeByCategory = usePlaylistStoreByCategory();
 
-  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
-
-  const music = (
-    storeByPage.category === "playList"
-      ? storeByPage.playListIds
-      : (storeByPage.playListIds[currentPlaylist] ?? [])
-  ).map((id) => getMusicDataFromId(id));
+  const music = playListIds.map((id) => getMusicDataFromId(id));
 
   const isActive = (index: number) => selectedMusicIndex.includes(index);
 
@@ -46,7 +40,7 @@ export default function PlaylistMusic() {
   useEffect(() => {
     setSelectedMusicIndex([]);
     return () => setSelectedMusicIndex([]);
-  }, [setSelectedMusicIndex, storeByPage.category]);
+  }, [setSelectedMusicIndex, category]);
 
   return (
     <Container>
@@ -61,16 +55,12 @@ export default function PlaylistMusic() {
               />
               <MusicCard
                 music={musicData}
-                mark={
-                  i === storeByPage.playingIndex
-                    ? currentMusic.title
-                    : undefined
-                }
+                mark={i === playingIndex ? currentMusic.title : undefined}
                 onClick={() => {
-                  storeByPage.setPlayingIndex(i);
+                  setPlayingIndex(i);
                   storeByCategory.setPlayingIndex(i);
                 }}
-                $isMusicBar={i === storeByPage.playingIndex}
+                $isMusicBar={i === playingIndex}
                 $isAnimation={isActive(i) && (title.length || 0) > 20}
               />
             </List>
@@ -78,7 +68,7 @@ export default function PlaylistMusic() {
         })
       ) : (
         <Wrapper>
-          <span>{`${convertCategoryToKorean(storeByPage.category)}이 비어있습니다. `}</span>
+          <span>{`${convertCategoryToKorean(category)}이 비어있습니다. `}</span>
         </Wrapper>
       )}
     </Container>

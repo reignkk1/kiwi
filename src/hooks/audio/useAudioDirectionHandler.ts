@@ -4,7 +4,7 @@ import useAudioPlayTypes from "./useAudioPlayTypes";
 import { useAudioStore } from "../../store/audio";
 import { useShallow } from "zustand/react/shallow";
 import { useCurrentMusicStore } from "../../store/shared";
-import usePlayinglistResolver from "../usePlaylistStoreByCategory";
+import usePlaylistStoreByCategory from "../usePlaylistStoreByCategory";
 
 type HistoryType = Array<{ music: MusicType; index: number | null }>;
 
@@ -23,7 +23,7 @@ export default function useAudioDirectionHandler() {
     ])
   );
 
-  const { playingIndex, setPlayingIndex } = usePlayinglistResolver();
+  const { playingIndex, setPlayingIndex } = usePlaylistStoreByCategory();
 
   //  음악 히스토리 스택
   const nextPlayedMusicHistory = useRef<HistoryType>([]).current;

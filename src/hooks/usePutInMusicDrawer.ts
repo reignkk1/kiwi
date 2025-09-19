@@ -7,8 +7,8 @@ import { useCurrentPlaylist } from "../store/drawer/useCurrentPlaylist";
 export default function usePutInMusicDrawer(musicId?: number | string) {
   const id = resolveMusicId(musicId);
 
-  const [playListIds, setPlayListIds] = useDrawerStore(
-    useShallow((state) => [state.playListIds, state.setPlayListIds])
+  const [playListIds, setPlaylistIds] = useDrawerStore(
+    useShallow((state) => [state.playListIds, state.setPlaylistIds])
   );
 
   const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
@@ -29,7 +29,7 @@ export default function usePutInMusicDrawer(musicId?: number | string) {
     toggleFadeAlertMessage(message);
 
     if (!isIncluded) {
-      setPlayListIds({
+      setPlaylistIds({
         ...playListIds,
         [currentPlaylist]: [...resolvedPlaylistIds, id],
       });

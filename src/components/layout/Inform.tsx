@@ -4,7 +4,7 @@ import { ModalContainer } from "./ModalContainer";
 import { useInformModalStore } from "../../store/layout/useInfoModalStore";
 import { useShallow } from "zustand/react/shallow";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
-import usePlaylistResolver from "../../hooks/usePlaylistStoreByPage";
+import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import { convertCategoryToKorean } from "../../utils";
 
 export default function Inform() {
@@ -23,15 +23,15 @@ export default function Inform() {
   const {
     category,
     playListIds,
-    setPlayListIds,
+    setPlaylistIds,
     playingIndex,
     setPlayingIndex,
-  } = usePlaylistResolver();
+  } = usePlaylistStoreByPage();
 
   const onClickCancle = () => setIsShowInformModal(false);
 
   const onClickSubmit = () => {
-    setPlayListIds(
+    setPlaylistIds(
       playListIds.filter((_, i) => !selectedMusicIndex.includes(i))
     );
 

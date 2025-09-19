@@ -3,11 +3,9 @@ import SelectCircle from "./PlaylistSelectButton";
 import { useShallow } from "zustand/react/shallow";
 import usePlaylistStoreByPage from "../../hooks/usePlaylistStoreByPage";
 import { useSelectedMusicIndexStore } from "../../store/drawer";
-import { useCurrentPlaylist } from "../../store/drawer/useCurrentPlaylist";
 
 export default function PlaylistTotalCount() {
-  const storeByPage = usePlaylistStoreByPage();
-  const currentPlaylist = useCurrentPlaylist((state) => state.currentPlaylist);
+  const { playListIds } = usePlaylistStoreByPage();
   const [selectedMusicIds, setSeletedMusicIds] = useSelectedMusicIndexStore(
     useShallow((state) => [
       state.selectedMusicIndex,
@@ -19,11 +17,7 @@ export default function PlaylistTotalCount() {
     if (selectedMusicIds.length) {
       setSeletedMusicIds([]);
     } else {
-      setSeletedMusicIds(
-        storeByPage.category === "drawer"
-          ? storeByPage.playListIds[currentPlaylist].map((_, i) => i)
-          : storeByPage.playListIds.map((_, i) => i)
-      );
+      setSeletedMusicIds(playListIds.map((_, i) => i));
     }
   };
 
@@ -33,18 +27,13 @@ export default function PlaylistTotalCount() {
     <Container>
       <SelectCircle onClick={onClickSelectCircle} $active={isActive} />
       <span onClick={onClickSelectCircle}>
-        {isActive
-          ? "선택해제"
-          : `${
-              (storeByPage.category === "drawer"
-                ? storeByPage.playListIds[currentPlaylist]
-                : storeByPage.playListIds
-              ).length
-            }곡`}
+        {isActive ? "선택해제" : `${playListIds.length}곡`}
       </span>
     </Container>
   );
 }
+
+// 각 플레이리스트 삭제 기능 fix하기
 
 const Container = styled.div`
   display: flex;
